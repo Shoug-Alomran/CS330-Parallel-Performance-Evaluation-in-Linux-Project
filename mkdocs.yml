@@ -1,0 +1,72 @@
+site_name: CS330 Course Project
+site_url: https://operating-systems.shoug-tech.com/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.prune
+    - navigation.instant
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: purple
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    logo: material/server
+  font:
+    text: Inter
+    code: Fira Code
+
+nav:
+  - Home: index.md
+  - Project:
+      - Overview: project/overview.md
+      - Requirements: project/requirements.md
+      - Team: project/team.md
+      - Repository Structure: project/repo-structure.md
+  - Phase I:
+      - Overview: phase1/index.md
+      - VM & Linux Setup: phase1/setup.md
+      - Build & Run: phase1/build-run.md
+      - Experiment Plan: phase1/experiments.md
+      - Results: phase1/results.md
+      - Report: phase1/report.md
+  - Phase II:
+      - Overview: phase2/index.md
+      - Plan: phase2/plan.md
+      - Work Log: phase2/work-log.md
+      - Results: phase2/results.md
+      - Report: phase2/report.md
+  - Reference:
+      - Commands: reference/commands.md
+      - Glossary: reference/glossary.md
+  - Links: links.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+extra_css:
+  - styles/extra.css
