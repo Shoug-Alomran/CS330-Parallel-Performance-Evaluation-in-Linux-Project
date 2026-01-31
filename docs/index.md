@@ -24,7 +24,7 @@ Phase II will extend the project based on the instructor’s specifications once
 - **Shoug Alomran**
 - **Layan Bin Bindayal**
 - **Aryam Yahya Almansour**
-- **Dana**
+- **Dana Altuwaijri**
 
 ## Quick Links
 

@@ -61,8 +61,11 @@ The `src/` directory contains the C source code used for the project.
 ## Purpose of the Structure
 
 This structure separates:
+
 - **Source code** from documentation
+
 - **Phase-specific content** from general project information
+
 - **Setup and execution details** from results and analysis
 
 Such separation improves clarity, maintainability, and alignment with academic documentation standards.

@@ -24,9 +24,13 @@ All experiments are conducted in a Linux environment to ensure consistency and r
 
 ### Phase I
 Phase I focuses on:
+
 - Setting up a Linux environment using a virtual machine
+
 - Compiling and running the provided C program
+
 - Executing the program with different parameters
+
 - Collecting and analyzing performance data
 
 ### Phase II
