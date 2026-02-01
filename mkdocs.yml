@@ -1,5 +1,6 @@
 site_name: CS330 Course Project
 site_url: https://operating-systems.shoug-tech.com/
+copyright: © 2026 Shoug Fawaz Alomran · All rights reserved
 
 theme:
   name: material
