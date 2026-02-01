@@ -56,6 +56,7 @@ nav:
       - Commands: reference/commands.md
       - Glossary: reference/glossary.md
   - Links: links.md
+  - Copyright: copyright.md
 
 markdown_extensions:
   - admonition
