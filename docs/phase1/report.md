@@ -9,6 +9,7 @@ The goal of Phase I is to establish a controlled experimental environment, execu
 
 ## 2. Objectives
 The objectives of this phase are as follows:
+
 - Set up a Linux execution environment using virtualization
 - Compile and execute the provided C program successfully
 - Evaluate the effect of varying the number of processes on execution time

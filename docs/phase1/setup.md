@@ -25,6 +25,7 @@ System verification commands (e.g., `uname -a`, `free -h`, `lsb_release -a`) wer
 
 ## Software Tools
 The following tools were installed inside the Linux environment:
+
 - **GCC compiler** (version 11.4.0)
 - **Standard Linux development utilities** (`build-essential`)
 - **Linux terminal environment**

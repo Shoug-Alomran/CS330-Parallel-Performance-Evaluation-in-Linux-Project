@@ -49,6 +49,7 @@ For each configuration, the following procedure is followed:
 ```
 
 4. Data Collection:
+
     - Record execution time from each run
     - Calculate average execution time
     - Note any anomalies or system behavior during execution
@@ -75,19 +76,23 @@ All experimental data is recorded in the following format:
 Once data collection is complete, the following analyses will be performed:
 
 ### 1. Performance Scaling Analysis
+
 - **Execution Time vs. PROCS:** Plot execution time against number of processes for each N value
 - **Execution Time vs. N:** Plot execution time against matrix size for each PROCS value
 
 ### 2. Overhead Analysis
+
 - **Process Creation Overhead:** Calculate the additional time cost per process created
 - **Synchronization Overhead:** Measure the impact of `wait()` calls on total execution time
 
 ### 3. Efficiency Metrics
+
 - **Speedup:** Calculate speedup relative to single-process execution
 - **Efficiency:** Determine how effectively additional processes are utilized
 - **Scalability:** Assess performance scaling as both N and PROCS increase
 
 ### 4. Statistical Analysis
+
 - **Variability Assessment:** Calculate standard deviation across multiple runs
 - **Confidence Intervals:** Determine statistical significance of observed differences
 
@@ -107,6 +112,7 @@ Data collection in progress
 Analysis pending  
 
 ## Next Steps
+
 1. Complete all experimental runs for the 6 configurations
 2. Calculate averages and statistical measures
 3. Generate performance graphs and visualizations
@@ -114,11 +120,13 @@ Analysis pending
 5. Document findings in the final report
 
 ## Tools and Resources
+
 - **Scripting:** Bash scripts for automated testing (optional)
 - **Data Analysis:** Python/Excel for statistical analysis and graphing
 - **Documentation:** Markdown for reporting, LaTeX for formal documentation
 
 ## Team Coordination
+
 - **Layan:** Responsible for executing experiments and collecting data
 - **Danah:** Responsible for creating graphs and visualizations
 - **Shoug:** Responsible for integrating all components into final report
