@@ -1,10 +1,6 @@
-Below is the **pure Markdown** version, ready to drop directly into your `.md` file (MkDocs-compatible, no extra formatting).
+# Repository Structure
 
----
-
-## Repository Structure
-
-### Root Directory
+## Root Directory
 
 | Path / File          | Description                                                 |
 | -------------------- | ----------------------------------------------------------- |
@@ -13,13 +9,13 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-### Documentation (`docs/`)
+## Documentation (`docs/`)
 
 | Path            | Description                        |
 | --------------- | ---------------------------------- |
 | `docs/index.md` | Homepage of the documentation site |
 
-#### Project Information (`docs/project/`)
+### Project Information (`docs/project/`)
 
 | File                | Description                            |
 | ------------------- | -------------------------------------- |
@@ -30,7 +26,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-#### Phase I (`docs/phase1/`)
+### Phase I (`docs/phase1/`)
 
 | File             | Description                     |
 | ---------------- | ------------------------------- |
@@ -43,7 +39,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-#### Phase II (`docs/phase2/`)
+### Phase II (`docs/phase2/`)
 
 | File          | Description             |
 | ------------- | ----------------------- |
@@ -55,7 +51,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-#### Reference (`docs/reference/`)
+### Reference (`docs/reference/`)
 
 | File          | Description                     |
 | ------------- | ------------------------------- |
@@ -64,7 +60,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-#### Styles (`docs/styles/`)
+### Styles (`docs/styles/`)
 
 | Path      | Description                       |
 | --------- | --------------------------------- |
@@ -72,7 +68,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-### Source Code (`src/`)
+## Source Code (`src/`)
 
 | File        | Description                                                                  |
 | ----------- | ---------------------------------------------------------------------------- |
@@ -80,7 +76,7 @@ Below is the **pure Markdown** version, ready to drop directly into your `.md` f
 
 ---
 
-### Purpose of the Structure
+## Purpose of the Structure
 
 | Goal                   | Explanation                                       |
 | ---------------------- | ------------------------------------------------- |
