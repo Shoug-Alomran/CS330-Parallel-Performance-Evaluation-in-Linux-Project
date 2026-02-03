@@ -121,6 +121,7 @@ nano matrix_fork.c
 #define PROCS 2      // Change number of processes
 ```
 3. Save (Ctrl+O) and exit (Ctrl+X)
+
 4. Recompile and run again
 
 ## Verification Steps
