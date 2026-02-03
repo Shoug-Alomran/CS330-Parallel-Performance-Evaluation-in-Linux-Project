@@ -108,22 +108,22 @@ Execution Time: 0.001 seconds
 ## Modifying Parameters
 To test different configurations, modify the #define directives at the top of the source code:
 
-1. Open the file in nano:
+	1. Open the file in nano:
 
 ```bash
 nano matrix_fork.c
 ```
 
-2. Change the values:
+	2. Change the values:
 
 ```bash
 #define N 800        // Change matrix size
 #define PROCS 2      // Change number of processes
 ```
 
-3. Save (Ctrl+O) and exit (Ctrl+X)
+	3. Save (Ctrl+O) and exit (Ctrl+X)
 
-4. Recompile and run again
+	4. Recompile and run again
 
 ## Verification Steps
 
