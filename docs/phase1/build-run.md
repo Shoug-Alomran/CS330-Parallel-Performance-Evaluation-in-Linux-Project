@@ -110,9 +110,9 @@ To test different configurations, modify the #define directives at the top of th
 
  1. Open the file in nano:
 
-```bash
-nano matrix_fork.c
-```
+	```bash
+	nano matrix_fork.c
+	```
 
  2. Change the values:
 
