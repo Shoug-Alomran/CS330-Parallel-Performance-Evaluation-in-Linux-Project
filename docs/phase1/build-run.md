@@ -108,7 +108,7 @@ Execution Time: 0.001 seconds
 ## Modifying Parameters
 To test different configurations, modify the #define directives at the top of the source code:
 
-	1. Open the file in nano:
+ 1. Open the file in nano:
 
 ```bash
 nano matrix_fork.c
