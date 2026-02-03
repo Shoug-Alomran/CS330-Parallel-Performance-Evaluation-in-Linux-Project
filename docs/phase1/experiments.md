@@ -29,32 +29,32 @@ The complete experimental design consists of 6 unique configurations:
 ## Experimental Procedure
 For each configuration, the following procedure is followed:
 
- 1. **Source Code Modification:**
+1. **Source Code Modification:**
 
     - Edit the `#define` directives in `matrix_fork.c` to set the desired N and PROCS values
     - Example: Change `#define N 600` to `#define N 800`
 
- 2. **Compilation:**
+2. **Compilation:**
 
-   ```bash
-   gcc -Wall matrix_fork.c -o matrix_fork
-   ```
+   	```bash
+   	gcc -Wall matrix_fork.c -o matrix_fork
+   	```
 
- 3. **Execution:**
+3. **Execution:**
 
     - Run the program 3 times to account for system variability
 
-	```bash
-	./matrix_fork
-	```
+		```bash
+		./matrix_fork
+		```
 
- 4. Data Collection:
+4. Data Collection:
 
     - Record execution time from each run
     - Calculate average execution time
     - Note any anomalies or system behavior during execution
 
- 5. Environment Consistency:
+5. Environment Consistency:
 
     - Ensure no other CPU-intensive processes are running
     - Maintain identical system configuration across all runs
