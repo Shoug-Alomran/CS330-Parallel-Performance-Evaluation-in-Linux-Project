@@ -21,5 +21,7 @@ This project is completed as a group effort for the **CS330: Introduction to Ope
 The team collaborates on planning, execution, and documentation to ensure consistency across all project phases. Responsibilities are distributed to maintain a balanced workload while meeting the technical and academic requirements of the course.
 
 ---
+**Project Plan Dashboard (Roles & Tasks):** [Open the Roles Dashboard](./Project Plan.html)
+
 
 This page serves as the official record of team membership for the project.

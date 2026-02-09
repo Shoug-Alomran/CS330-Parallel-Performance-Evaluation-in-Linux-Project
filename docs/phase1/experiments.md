@@ -7,10 +7,12 @@ This page outlines the experimental methodology for evaluating process-based par
 Two key parameters are varied in these experiments:
 
 1. **Matrix Size (N):** Controls the computational workload
+
    - **Purpose:** To observe how performance scales with problem size
    - **Values Tested:** 600, 800
 
 2. **Number of Processes (PROCS):** Controls the level of parallelism
+
    - **Purpose:** To evaluate the impact of parallelization
    - **Values Tested:** 1, 2, 4
 
@@ -35,11 +37,17 @@ For each configuration, the following procedure is followed:
     - Example: Change `#define N 600` to `#define N 800`
 
 2. **Compilation:**
+<<<<<<< Updated upstream
 
    	```bash
    	gcc -Wall matrix_fork.c -o matrix_fork
    	```
 
+=======
+   ```bash
+   gcc -Wall matrix_fork.c -o matrix_fork
+   ```
+>>>>>>> Stashed changes
 3. **Execution:**
 
     - Run the program 3 times to account for system variability
