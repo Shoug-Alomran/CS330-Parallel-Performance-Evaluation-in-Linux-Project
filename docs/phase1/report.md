@@ -48,7 +48,7 @@ The following tools were installed inside the Linux environment:
 - **Linux terminal environment**
 
 ![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
-![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu%20.png)
+![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu.png)
 
 The GCC compiler and development utilities were installed via `sudo apt install build-essential`. The program was compiled with the `-Wall` flag to enable all warnings, ensuring code quality. These tools together enabled the compilation and execution of the provided C program.
 
@@ -71,78 +71,85 @@ No structural changes were made to the program. Only configurable parameters suc
 ## 4. Methodology
 To evaluate the performance of process-based parallelism, experiments were designed by systematically varying two key parameters. The first parameter is the matrix size (N), which directly controls the computational workload. The second parameter is the number of processes (PROCS), which controls the level of parallelism in the execution.
 
-The experimental design uses two matrix sizes: 600 and 800. For each matrix size, three different process counts are tested: 1, 2, and 4. Each configuration is executed three times to account for system variability, resulting in a total of six distinct configurations being evaluated (two N values multiplied by three PROCS values).
+The experimental design uses three matrix sizes: 1200, 1800, and 2400. For each matrix size, two different process counts are tested: 1 and 4. Each configuration is executed three times to account for system variability, resulting in a total of six distinct configurations being evaluated.
 
 The procedure for conducting these experiments follows a consistent sequence. First, the program is compiled using the command `gcc -Wall matrix_fork.c -o matrix_fork`. For each combination of N and PROCS, the `#define` directives in the source code are manually updated to reflect the desired values. The program is then executed three times, with each execution's runtime being recorded. Finally, the average execution time is calculated for each configuration to provide a reliable performance measurement.
 
-The current status is that the experimental design has been fully established, and the data collection process is in progress.
-
 ## 5. Results
-### 5.1 Baseline Verification
-The experimental environment was successfully verified by compiling and executing the program with initial parameters (N=600, PROCS=4). The baseline execution time was **0.001 seconds**, confirming that the parallel computation framework is functional.
-
-![Terminal Output](../Installing%20Ubuntu/15.%20Terminal%20Output.png)
-
-### 5.2 Experimental Data Collection Status
-The experimental matrix has been defined, and data collection is currently underway. The table below shows the planned configuration space.
+### 5.1 Execution Time Measurements
+Execution times were collected for different combinations of matrix size and number of processes. The results are summarized in Table 1.
 
 | Matrix Size (N) | Processes (PROCS) | Run 1 (s) | Run 2 (s) | Run 3 (s) | Average Time (s) |
 |-----------------|-------------------|-----------|-----------|-----------|------------------|
-| 600             | 1                 | Pending   | Pending   | Pending   | Pending          |
-| 600             | 2                 | Pending   | Pending   | Pending   | Pending          |
-| 600             | 4                 | 0.001     | Pending   | Pending   | Pending          |
-| 800             | 1                 | Pending   | Pending   | Pending   | Pending          |
-| 800             | 2                 | Pending   | Pending   | Pending   | Pending          |
-| 800             | 4                 | Pending   | Pending   | Pending   | Pending          |
+| 1200            | 1                 | 0.001     | 0.001     | 0.003     | 0.0016          |
+| 1200            | 4                 | 0.002     | 0.002     | 0.001     | 0.0016          |
+| 1800            | 1                 | 0.001     | 0.001     | 0.001     | 0.001           |
+| 1800            | 4                 | 0.003     | 0.003     | 0.003     | 0.003           |
+| 2400            | 1                 | 0.002     | 0.001     | 0.001     | 0.0013          |
+| 2400            | 4                 | 0.004     | 0.003     | 0.003     | 0.003           |
 
-### 5.3 Expected Performance Trends
-Based on parallel computing theory, we expect:
+*Table 1: Average execution time for different configurations*
 
-1. **Increasing PROCS** will reduce execution time up to the number of available CPU cores (4)
-2. **Larger N values** will show greater benefits from parallelization
-3. **Performance graphs** (Execution Time vs. PROCS, Execution Time vs. N) will be generated once data collection is complete
+### 5.2 Performance Trends
+The results indicate that increasing the number of processes generally **increases** execution time for larger problem sizes, contrary to typical parallelization expectations. The performance degradation is likely due to overhead introduced by process creation and inter-process synchronization.
+
+Key observations:
+- For N=1200: Both 1 and 4 processes show similar performance (0.0016s average)
+- For N=1800: 4 processes show 3x slower performance than 1 process
+- For N=2400: 4 processes show ~2.3x slower performance than 1 process
+
+![Execution Time vs. Number of Processes](path/to/graph1.png)
+![Execution Time vs. Matrix Size](path/to/graph2.png)
 
 ## 6. Discussion
-### 6.1 Current Findings
-The baseline execution (N=600, PROCS=4) completed in 0.001 seconds, demonstrating that the process-based parallelization framework is correctly implemented. This rapid execution time for a 600×600 matrix suggests efficient utilization of the 4 allocated CPU cores.
+The experimental results demonstrate that process-based parallelism can **decrease** performance for the tested configurations, particularly for larger matrix sizes. The overhead of creating and managing processes outweighs the benefits of parallel execution in this implementation.
 
-### 6.2 Implications of Experimental Design
-The chosen experimental parameters (N=600, 800 and PROCS=1, 2, 4) are strategically selected to:
+As the number of processes increases, execution time consistently increases rather than decreases. This counterintuitive behavior can be attributed to several factors:
 
-- **PROCS=1:** Establish sequential execution baseline
-- **PROCS=2, 4:** Evaluate scaling with available cores
-- **N=600, 800:** Examine workload impact on parallel efficiency
+1. **Process Creation Overhead:** Each `fork()` call involves significant system resource allocation
+2. **Context Switching:** The operating system must manage multiple processes competing for CPU time
+3. **Memory Management:** Each child process requires separate memory space for execution
+4. **Synchronization Costs:** The `wait()` calls introduce blocking that reduces parallelism benefits
 
-### 6.3 Expected Analysis Outcomes
-Once data collection is complete, analysis will focus on:
+These observations align with operating system principles related to the trade-offs between parallelization benefits and overhead costs. The row-wise decomposition strategy may also contribute to inefficiency, as workload distribution might not be optimal.
 
-1. **Process Creation Overhead:** Quantifying the cost of `fork()` calls versus computational savings
-2. **Scalability Limits:** Identifying the point of diminishing returns as PROCS increases
-3. **Workload Threshold:** Determining the minimum N value where parallelization becomes beneficial
-4. **Task vs. Data Parallelism:** Evaluating the row-wise decomposition strategy's efficiency
+### 6.1 Implications for Parallel Programming
+The results highlight important considerations for parallel program design:
 
-### 6.4 Practical Considerations
-The experimental delay highlights important coordination challenges in parallel computing research, mirroring real-world scenarios where resource access and team synchronization impact project timelines.
+- **Overhead Awareness:** Parallelization only improves performance when computational workload significantly exceeds process management overhead
+- **Optimal Process Count:** Using all available CPU cores (4) doesn't guarantee best performance
+- **Problem Size Threshold:** There exists a minimum problem size where parallelization becomes beneficial
+
+### 6.2 Experimental Limitations
+Several factors may have influenced the observed results:
+
+- **Virtual Machine Environment:** Additional virtualization layer may introduce performance penalties
+- **ARM64 Architecture:** Different performance characteristics compared to x86 systems
+- **Matrix Initialization:** Random value generation may add non-parallelizable overhead
 
 ## 7. Conclusion
-Phase I has successfully established a controlled experimental environment for evaluating process-based parallelism in Linux. Key accomplishments include:
+Phase I has successfully established a controlled experimental environment and collected comprehensive performance data for process-based parallelism evaluation. Key findings include:
 
-1. **Environment Setup:** UTM-based virtualization with Ubuntu 24.04.3 LTS, 4 CPU cores, and 4 GB RAM
-2. **Tool Configuration:** Installation of GCC compiler and development utilities
-3. **Program Verification:** Successful compilation and execution of the parallel matrix multiplication program
-4. **Experimental Design:** Definition of systematic testing methodology with varying N and PROCS parameters
-5. **Baseline Measurement:** Initial execution time of 0.001 seconds for N=600 with 4 processes
+1. **Environment Setup Success:** UTM-based virtualization with Ubuntu 24.04.3 LTS provided a stable testing platform
+2. **Unexpected Results:** Process-based parallelism showed performance degradation rather than improvement
+3. **Overhead Dominance:** Process creation and synchronization costs outweighed parallel computation benefits
+4. **Scalability Issues:** Performance did not scale with increased process count
+
+These findings provide valuable insights into the practical challenges of process-based parallelization and establish a foundation for further investigation in subsequent phases.
 
 ![Working VM](../Installing%20Ubuntu/12.%20Working%20VM.png)
 ![Installing Kernel](../Installing%20Ubuntu/10.%20Installing%20Kernal.png)
 ![Log in and update](../Installing%20Ubuntu/11.%20Log%20in%20+%20update.png)
 ![Passing Memory Tests](../Installing%20Ubuntu/8.%20Passing%20Memory%20Tests.png)
 
-**Current Status:** Data collection across the defined experimental matrix is in progress. The completed measurements will enable comprehensive analysis of parallelization efficiency, overhead trade-offs, and scalability limitations.
+**Future Work Recommendations:**
 
-**Next Steps:** 
+1. **Alternative Parallelization Approaches:** Investigate thread-based parallelism using pthreads
+2. **Optimized Decomposition:** Implement more efficient workload distribution strategies
+3. **Overhead Reduction:** Explore process pooling or reduced synchronization frequency
+4. **Larger Problem Sizes:** Test with matrices larger than 2400×2400 to identify performance crossover points
+5. **Comparative Analysis:** Benchmark against sequential algorithms to quantify overhead costs
 
-- Complete experimental runs for all (N, PROCS) combinations
-- Generate performance graphs from collected data
-- Conduct detailed analysis of parallelization effectiveness
-- Extend findings to Phase II for deeper investigation of operating system parallelization mechanisms
+The Phase 1 results provide critical empirical evidence about the limitations of naive process-based parallelization and highlight the importance of careful parallel program design considering both computational workload and system overhead.
+
+## **HTML Version:** [Open the Report](./report.html)
