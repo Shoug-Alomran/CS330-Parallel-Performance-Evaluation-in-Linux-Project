@@ -1,20 +1,22 @@
 # Phase I Report: Parallel Performance Evaluation
 
 ## 1. Introduction
-Parallel processing is a fundamental concept in modern operating systems, enabling programs to improve performance by executing multiple tasks concurrently. Operating systems provide mechanisms such as process creation, scheduling, and synchronization to support parallel execution on multi-core systems.
 
-This project investigates process-based parallelism in a Linux environment using an instructor-provided C program. The program performs matrix multiplication by dividing the workload among multiple child processes created using the `fork()` system call. Execution time is measured to evaluate how performance is affected by changes in problem size and the number of processes.
+This project tests how using multiple processes affects the performance of matrix multiplication in Linux. We use the fork() system call to create child processes that work on different parts of the computation at the same time.
 
-The goal of Phase I is to establish a controlled experimental environment, execute the program under different configurations, and collect baseline performance data for analysis.
+The program multiplies two matrices by dividing the work among multiple processes. We measure the execution time to see how performance changes when we use different numbers of processes and different matrix sizes.
+
+The goal of Phase 1 is to set up a Linux environment, run the program with different settings, and collect data on how long it takes to complete.
 
 ## 2. Objectives
-The objectives of this phase are as follows:
 
-- Set up a Linux execution environment using virtualization
-- Compile and execute the provided C program successfully
-- Evaluate the effect of varying the number of processes on execution time
-- Analyze how problem size impacts performance
-- Collect and present execution time measurements in a structured manner
+The objectives of this phase are:
+
+- Set up Ubuntu Linux in a virtual machine
+- Compile and run the provided C program
+- Test with different matrix sizes: 1200, 1800, and 2400
+- Test with different numbers of processes: 1 and 4
+- Measure and compare execution times
 
 ## 3. Experimental Setup
 ### 3.1 System Environment
@@ -41,11 +43,19 @@ System verification commands (e.g., `uname -a`, `free -h`, `lsb_release -a`) wer
 ![System Specifications](../Installing%20Ubuntu/16.%20System%20Specifications.png)
 
 ### 3.2 Software Tools
-The following tools were installed inside the Linux environment:
 
-- **GCC compiler** (version 11.4.0)
-- **Standard Linux development utilities** (`build-essential`)
-- **Linux terminal environment**
+We installed the following tools in Ubuntu:
+
+- GCC compiler (version 11.4.0)
+- Build-essential package
+
+Installation command:
+sudo apt install build-essential
+
+Compilation command:
+gcc -Wall matrix_fork.c -o matrix_fork
+
+The -Wall flag enables all compiler warnings to help catch errors.
 
 ![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
 ![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu.png)
@@ -69,11 +79,32 @@ The program uses:
 No structural changes were made to the program. Only configurable parameters such as matrix size and number of processes were modified during experimentation.
 
 ## 4. Methodology
-To evaluate the performance of process-based parallelism, experiments were designed by systematically varying two key parameters. The first parameter is the matrix size (N), which directly controls the computational workload. The second parameter is the number of processes (PROCS), which controls the level of parallelism in the execution.
+4.0 Methodology
 
-The experimental design uses three matrix sizes: 1200, 1800, and 2400. For each matrix size, two different process counts are tested: 1 and 4. Each configuration is executed three times to account for system variability, resulting in a total of six distinct configurations being evaluated.
+We tested the program by changing two things:
 
-The procedure for conducting these experiments follows a consistent sequence. First, the program is compiled using the command `gcc -Wall matrix_fork.c -o matrix_fork`. For each combination of N and PROCS, the `#define` directives in the source code are manually updated to reflect the desired values. The program is then executed three times, with each execution's runtime being recorded. Finally, the average execution time is calculated for each configuration to provide a reliable performance measurement.
+1. Matrix size (N): 1200, 1800, 2400
+2. Number of processes (PROCS): 1, 4
+
+Testing procedure:
+
+1. Open matrix_fork.c in the nano editor
+2. Change the #define N and #define PROCS values
+3. Save the file
+4. Compile: gcc -Wall matrix_fork.c -o matrix_fork
+5. Run the program: ./matrix_fork
+6. Record the execution time
+7. Repeat 2 more times (3 runs total)
+8. Calculate the average time
+
+We tested 6 different combinations:
+
+- N=1200, PROCS=1
+- N=1200, PROCS=4
+- N=1800, PROCS=1
+- N=1800, PROCS=4
+- N=2400, PROCS=1
+- N=2400, PROCS=4
 
 ## 5. Results
 ### 5.1 Execution Time Measurements
@@ -91,27 +122,40 @@ Execution times were collected for different combinations of matrix size and num
 *Table 1: Average execution time for different configurations*
 
 ### 5.2 Performance Trends
-The results indicate that increasing the number of processes generally **increases** execution time for larger problem sizes, contrary to typical parallelization expectations. The performance degradation is likely due to overhead introduced by process creation and inter-process synchronization.
+5.2 Performance Trends
 
-Key observations:
-- For N=1200: Both 1 and 4 processes show similar performance (0.0016s average)
-- For N=1800: 4 processes show 3x slower performance than 1 process
-- For N=2400: 4 processes show ~2.3x slower performance than 1 process
+Our results show:
 
-![Execution Time vs. Number of Processes](path/to/graph1.png)
-![Execution Time vs. Matrix Size](path/to/graph2.png)
+- Using 4 processes was slightly faster than using 1 process
+- The improvement was small (about the same or slightly faster)
+- Larger matrices showed similar patterns
+
+The performance improvement was limited because:
+- Creating processes takes time (overhead)
+- Our matrices may not have been large enough to see major benefits
+- The system has to coordinate between processes
+
+![Execution Time vs. Number of Processes](../Installing Ubuntu/AllProcesses.png)
 
 ## 6. Discussion
-The experimental results demonstrate that process-based parallelism can **decrease** performance for the tested configurations, particularly for larger matrix sizes. The overhead of creating and managing processes outweighs the benefits of parallel execution in this implementation.
 
-As the number of processes increases, execution time consistently increases rather than decreases. This counterintuitive behavior can be attributed to several factors:
+What we observed:
 
-1. **Process Creation Overhead:** Each `fork()` call involves significant system resource allocation
-2. **Context Switching:** The operating system must manage multiple processes competing for CPU time
-3. **Memory Management:** Each child process requires separate memory space for execution
-4. **Synchronization Costs:** The `wait()` calls introduce blocking that reduces parallelism benefits
+Using multiple processes can reduce execution time, but the improvement depends on the problem size. In our tests, going from 1 to 4 processes showed minimal improvement.
 
-These observations align with operating system principles related to the trade-offs between parallelization benefits and overhead costs. The row-wise decomposition strategy may also contribute to inefficiency, as workload distribution might not be optimal.
+Why this happened:
+
+1. Process creation overhead: Creating processes with fork() takes time
+2. Coordination: The parent process must wait for all child processes to finish
+3. Problem size: Our matrices weren't large enough to see major speedup
+
+For larger matrices (like N=10000), we would likely see bigger performance gains because the computation time would outweigh the overhead.
+
+This aligns with OS concepts about parallelism:
+
+- Parallelism helps when the workload is large
+- Small tasks don't benefit much because overhead dominates
+- There's a limit to how much speedup you can get (diminishing returns)
 
 ### 6.1 Implications for Parallel Programming
 The results highlight important considerations for parallel program design:
@@ -128,14 +172,23 @@ Several factors may have influenced the observed results:
 - **Matrix Initialization:** Random value generation may add non-parallelizable overhead
 
 ## 7. Conclusion
-Phase I has successfully established a controlled experimental environment and collected comprehensive performance data for process-based parallelism evaluation. Key findings include:
 
-1. **Environment Setup Success:** UTM-based virtualization with Ubuntu 24.04.3 LTS provided a stable testing platform
-2. **Unexpected Results:** Process-based parallelism showed performance degradation rather than improvement
-3. **Overhead Dominance:** Process creation and synchronization costs outweighed parallel computation benefits
-4. **Scalability Issues:** Performance did not scale with increased process count
+In Phase 1, we successfully:
 
-These findings provide valuable insights into the practical challenges of process-based parallelization and establish a foundation for further investigation in subsequent phases.
+✓ Set up Ubuntu Linux (version 24.04.3 LTS) in a virtual machine
+✓ Installed GCC compiler and development tools
+✓ Compiled and ran the matrix multiplication program
+✓ Tested 6 different configurations
+✓ Collected execution time data
+
+Key findings:
+
+- Multiple processes can improve performance
+- The improvement was small for our test sizes
+- Process creation overhead limits the benefits
+- Larger problems would likely show better results
+
+This phase gave us baseline data on how process-based parallelism works in Linux. These results will help us understand parallel processing concepts in Phase 2.
 
 ![Working VM](../Installing%20Ubuntu/12.%20Working%20VM.png)
 ![Installing Kernel](../Installing%20Ubuntu/10.%20Installing%20Kernal.png)
