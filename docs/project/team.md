@@ -13,14 +13,11 @@ This project is completed as a group effort for the **CS330: Introduction to Ope
 - **Aryam Yahya Almansour**  
   Student ID: 223410070
 
-- **Danah Altuwaijri**
+- **Danah Altuwaijri**  
+  Student ID: 223410151
 
-  Student ID:223410151
-
-- **Rana Alfaris**
-
-  Student ID:223410567
-
+- **Rana Alfaris**  
+  Student ID: 223410567
 
 ## Collaboration
 
