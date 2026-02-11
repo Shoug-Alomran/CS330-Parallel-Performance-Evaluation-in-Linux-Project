@@ -29,9 +29,10 @@ Phase II will extend the project based on the instructor’s specifications once
 
 ## Quick Links
 
-- Project Overview: `Project → Overview`
-- Requirements: `Project → Requirements`
-- Phase I Setup: `Phase I → VM & Linux Setup`
-- Commands Reference: `Reference → Commands`
+- Project Overview: [Project → Overview](project/overview.md)
+- Requirements: [Project → Requirements](project/requirements.md)
+- Phase I Setup: [Phase I → VM & Linux Setup](phase1/setup.md)
+- Commands Reference: [Reference → Commands](reference/index.md)
+
 
 ---
