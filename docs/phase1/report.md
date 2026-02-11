@@ -131,6 +131,7 @@ Our results show:
 - Larger matrices showed similar patterns
 
 The performance improvement was limited because:
+
 - Creating processes takes time (overhead)
 - Our matrices may not have been large enough to see major benefits
 - The system has to coordinate between processes
@@ -176,9 +177,13 @@ Several factors may have influenced the observed results:
 In Phase 1, we successfully:
 
 ✓ Set up Ubuntu Linux (version 24.04.3 LTS) in a virtual machine
+
 ✓ Installed GCC compiler and development tools
+
 ✓ Compiled and ran the matrix multiplication program
+
 ✓ Tested 6 different configurations
+
 ✓ Collected execution time data
 
 Key findings:
