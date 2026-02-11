@@ -1401,32 +1401,24 @@ int main() {
                     </div>
 
                     <div class="viz-container">
-                        <div class="viz-card">
-                            <h4 class="viz-title"><i class="fas fa-chart-bar"></i> Average Time Comparison</h4>
-                            <div class="image-container">
-                                <div
-                                    style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
-                                    <i class="fas fa-chart-column"
-                                        style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
-                                    <p>Graph Placeholder</p>
-                                    <p><small>Average execution time for PROCS=1 vs PROCS=4 (for each N)</small></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="viz-card">
-                            <h4 class="viz-title"><i class="fas fa-chart-line"></i> Execution Time Trend</h4>
-                            <div class="image-container">
-                                <div
-                                    style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
-                                    <i class="fas fa-wave-square"
-                                        style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
-                                    <p>Graph Placeholder</p>
-                                    <p><small>Execution time trend as N increases (separate lines for PROCS=1 and
-                                            PROCS=4)</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="viz-card">
+        <h4 class="viz-title">
+            <i class="fas fa-chart-bar"></i> Average Time Comparison
+        </h4>
+
+        <div class="image-container" style="text-align:center; padding:20px;">
+            <img src="../Installing Ubuntu/AllProcesses.png" 
+                 alt="Execution time comparison graph"
+                 style="max-width:100%; height:auto; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+            
+            <p style="margin-top:15px; font-size:0.95rem; color:var(--text-light);">
+                Average execution time comparison between PROCS = 1 and PROCS = 4 
+                for different matrix sizes (N).
+            </p>
+        </div>
+    </div>
+</div>
+
 
                     <h3>Summary of Observations From the Table</h3>
                     <div class="card-grid">
