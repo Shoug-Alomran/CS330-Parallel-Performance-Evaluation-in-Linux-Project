@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         :root {
             --primary-dark: #0d1b2a;
             --primary: #1b263b;
@@ -31,30 +32,30 @@
             --gradient-primary: linear-gradient(135deg, #0d1b2a, #1b263b);
             --gradient-accent: linear-gradient(90deg, #4361ee, #4cc9f0);
         }
-        
+
         html {
             scroll-behavior: smooth;
         }
-        
+
         body {
             background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
             color: var(--dark-text);
             line-height: 1.6;
             min-height: 100vh;
         }
-        
+
         .full-width-container {
             width: 100%;
             max-width: 100%;
             padding: 0;
         }
-        
+
         .content-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
         }
-        
+
         /* Header */
         header {
             background: var(--gradient-primary);
@@ -64,7 +65,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: "";
             position: absolute;
@@ -74,46 +75,46 @@
             height: 5px;
             background: var(--gradient-accent);
         }
-        
+
         .header-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 40px;
             align-items: center;
         }
-        
+
         .header-main h1 {
             font-size: 3.2rem;
             margin-bottom: 15px;
             font-weight: 800;
             line-height: 1.2;
         }
-        
+
         .header-subtitle {
             font-size: 1.4rem;
             opacity: 0.9;
             margin-bottom: 25px;
             max-width: 800px;
         }
-        
+
         .course-meta {
             display: flex;
             gap: 30px;
             margin-top: 25px;
             flex-wrap: wrap;
         }
-        
+
         .meta-item {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         .meta-item i {
             color: var(--accent);
             font-size: 1.2rem;
         }
-        
+
         .team-display {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -121,7 +122,7 @@
             padding: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .team-display h3 {
             font-size: 1.4rem;
             margin-bottom: 20px;
@@ -129,13 +130,13 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .team-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 12px;
         }
-        
+
         .team-member {
             display: flex;
             align-items: center;
@@ -145,12 +146,12 @@
             border-radius: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .team-member:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateX(5px);
         }
-        
+
         .member-avatar {
             width: 45px;
             height: 45px;
@@ -162,7 +163,7 @@
             font-weight: bold;
             font-size: 1.2rem;
         }
-        
+
         /* Navigation */
         .nav-tabs {
             background: rgba(255, 255, 255, 0.95);
@@ -173,7 +174,7 @@
             top: 0;
             z-index: 100;
         }
-        
+
         .nav-container {
             display: flex;
             justify-content: center;
@@ -181,7 +182,7 @@
             gap: 5px;
             padding: 15px 0;
         }
-        
+
         .nav-tab {
             padding: 12px 24px;
             background: transparent;
@@ -195,29 +196,29 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .nav-tab:hover {
             background: rgba(67, 97, 238, 0.1);
             color: var(--accent-alt);
         }
-        
+
         .nav-tab.active {
             background: var(--gradient-accent);
             color: white;
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
-        
+
         /* Main Content */
         .main-content {
             padding: 60px 0;
         }
-        
+
         .content-grid {
             display: grid;
             grid-template-columns: 2.5fr 1fr;
             gap: 40px;
         }
-        
+
         /* Sections */
         .section {
             background: var(--card-bg);
@@ -228,12 +229,12 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
+
         .section:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
-        
+
         .section-header {
             display: flex;
             align-items: center;
@@ -241,7 +242,7 @@
             padding-bottom: 15px;
             border-bottom: 3px solid var(--accent);
         }
-        
+
         .section-icon {
             width: 70px;
             height: 70px;
@@ -255,19 +256,19 @@
             font-size: 1.8rem;
             box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
         }
-        
+
         .section-title {
             font-size: 2.2rem;
             color: var(--primary);
             font-weight: 700;
         }
-        
+
         .section-subtitle {
             color: var(--secondary);
             font-size: 1.1rem;
             margin-top: 5px;
         }
-        
+
         /* Cards */
         .card-grid {
             display: grid;
@@ -275,7 +276,7 @@
             gap: 30px;
             margin-top: 25px;
         }
-        
+
         .card {
             background: var(--light-bg);
             border-radius: 15px;
@@ -284,12 +285,12 @@
             transition: all 0.3s ease;
             height: 100%;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .card-title {
             font-size: 1.4rem;
             color: var(--primary);
@@ -298,11 +299,11 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .card-title i {
             color: var(--accent-alt);
         }
-        
+
         /* Highlights */
         .highlight-box {
             background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(67, 97, 238, 0.1));
@@ -311,7 +312,7 @@
             margin: 30px 0;
             border-left: 5px solid var(--accent);
         }
-        
+
         .highlight-title {
             font-size: 1.6rem;
             color: var(--primary);
@@ -320,7 +321,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         /* Tables */
         .table-container {
             overflow-x: auto;
@@ -328,13 +329,13 @@
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             min-width: 800px;
         }
-        
+
         th {
             background: var(--gradient-primary);
             color: white;
@@ -343,20 +344,20 @@
             font-weight: 600;
             font-size: 1.1rem;
         }
-        
+
         td {
             padding: 18px 15px;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         tr:hover {
             background-color: #f0f7ff;
         }
-        
+
         .performance-badge {
             display: inline-block;
             padding: 5px 15px;
@@ -364,22 +365,22 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
-        
+
         .badge-good {
             background: rgba(76, 175, 80, 0.15);
             color: #2e7d32;
         }
-        
+
         .badge-warning {
             background: rgba(255, 152, 0, 0.15);
             color: #ef6c00;
         }
-        
+
         .badge-info {
             background: rgba(33, 150, 243, 0.15);
             color: #1565c0;
         }
-        
+
         /* Images and Visualizations */
         .image-gallery {
             display: grid;
@@ -387,7 +388,7 @@
             gap: 20px;
             margin: 30px 0;
         }
-        
+
         .gallery-item {
             border-radius: 12px;
             overflow: hidden;
@@ -396,12 +397,12 @@
             background: white;
             cursor: pointer;
         }
-        
+
         .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .gallery-item img {
             width: 100%;
             height: 200px;
@@ -409,11 +410,11 @@
             border-bottom: 1px solid #eee;
             transition: transform 0.3s ease;
         }
-        
+
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-        
+
         .gallery-caption {
             padding: 15px;
             font-size: 0.9rem;
@@ -421,7 +422,7 @@
             text-align: center;
             background: white;
         }
-        
+
         .large-image {
             width: 100%;
             border-radius: 12px;
@@ -431,17 +432,17 @@
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .large-image:hover {
             transform: scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
-        
+
         .image-container {
             margin: 25px 0;
             text-align: center;
         }
-        
+
         .image-container img {
             max-width: 100%;
             border-radius: 10px;
@@ -449,32 +450,32 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        
+
         .image-container img:hover {
             transform: scale(1.02);
         }
-        
+
         .image-caption {
             margin-top: 10px;
             font-style: italic;
             color: var(--secondary);
             font-size: 0.95rem;
         }
-        
+
         .viz-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
-        
+
         .viz-card {
             background: white;
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
-        
+
         .viz-title {
             font-size: 1.4rem;
             margin-bottom: 20px;
@@ -483,7 +484,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         /* Image Modal/Lightbox */
         .image-modal {
             display: none;
@@ -498,12 +499,17 @@
             background-color: rgba(0, 0, 0, 0.9);
             animation: fadeIn 0.3s ease;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         .modal-content {
             margin: auto;
             display: block;
@@ -513,12 +519,19 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             animation: zoomIn 0.3s ease;
         }
-        
+
         @keyframes zoomIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        
+
         .modal-caption {
             margin: 15px auto;
             text-align: center;
@@ -527,7 +540,7 @@
             max-width: 700px;
             padding: 0 20px;
         }
-        
+
         .close-modal {
             position: absolute;
             top: 20px;
@@ -546,12 +559,12 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .close-modal:hover {
             color: var(--accent);
             transform: rotate(90deg);
         }
-        
+
         .modal-nav {
             position: absolute;
             top: 50%;
@@ -570,20 +583,20 @@
             justify-content: center;
             transition: all 0.3s ease;
         }
-        
+
         .modal-nav:hover {
             background: rgba(0, 0, 0, 0.8);
             color: var(--accent);
         }
-        
+
         .prev-modal {
             left: 25px;
         }
-        
+
         .next-modal {
             right: 25px;
         }
-        
+
         /* Code */
         .code-container {
             background: #1e1e1e;
@@ -592,7 +605,7 @@
             margin: 30px 0;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
-        
+
         .code-header {
             background: #252526;
             padding: 15px 25px;
@@ -601,7 +614,7 @@
             align-items: center;
             border-bottom: 1px solid #3e3e42;
         }
-        
+
         .code-title {
             color: #cccccc;
             font-weight: 600;
@@ -609,12 +622,12 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .code-content {
             padding: 25px;
             overflow-x: auto;
         }
-        
+
         pre {
             color: #d4d4d4;
             font-family: 'Consolas', 'Monaco', monospace;
@@ -622,14 +635,14 @@
             line-height: 1.5;
             margin: 0;
         }
-        
+
         /* Sidebar */
         .sidebar {
             position: sticky;
             top: 100px;
             height: fit-content;
         }
-        
+
         .sidebar-section {
             background: var(--card-bg);
             border-radius: 15px;
@@ -637,7 +650,7 @@
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
         }
-        
+
         .sidebar-title {
             font-size: 1.3rem;
             color: var(--primary);
@@ -648,11 +661,11 @@
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent);
         }
-        
+
         .progress-container {
             margin: 20px 0;
         }
-        
+
         .progress-bar {
             height: 10px;
             background: #e9ecef;
@@ -660,24 +673,24 @@
             overflow: hidden;
             margin-bottom: 8px;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: var(--gradient-accent);
             border-radius: 5px;
         }
-        
+
         .progress-label {
             display: flex;
             justify-content: space-between;
             font-size: 0.9rem;
             color: var(--secondary);
         }
-        
+
         .key-findings {
             list-style-type: none;
         }
-        
+
         .key-findings li {
             padding: 12px 0;
             border-bottom: 1px solid #eee;
@@ -685,16 +698,16 @@
             align-items: flex-start;
             gap: 12px;
         }
-        
+
         .key-findings li:last-child {
             border-bottom: none;
         }
-        
+
         .key-findings i {
             color: var(--accent);
             margin-top: 3px;
         }
-        
+
         /* Footer */
         footer {
             background: var(--gradient-primary);
@@ -702,25 +715,25 @@
             padding: 60px 0 30px;
             margin-top: 60px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
-        
+
         .footer-section h3 {
             font-size: 1.4rem;
             margin-bottom: 20px;
             color: var(--accent);
         }
-        
+
         .footer-section p {
             opacity: 0.8;
             line-height: 1.8;
         }
-        
+
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
@@ -728,96 +741,97 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
-        
+
         /* Responsive */
         @media (max-width: 1200px) {
             .content-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .sidebar {
                 position: static;
                 order: 2;
             }
         }
-        
+
         @media (max-width: 992px) {
             .header-content {
                 grid-template-columns: 1fr;
             }
-            
+
             .content-container {
                 padding: 0 25px;
             }
-            
+
             .viz-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .image-gallery {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            
+
             .modal-content {
                 max-width: 95%;
                 max-height: 80vh;
             }
-            
+
             .modal-nav {
                 width: 40px;
                 height: 40px;
                 font-size: 24px;
             }
-            
+
             .close-modal {
                 font-size: 35px;
                 width: 45px;
                 height: 45px;
             }
         }
-        
+
         @media (max-width: 768px) {
             .header-main h1 {
                 font-size: 2.5rem;
             }
-            
+
             .section {
                 padding: 30px;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
-            
+
             .card-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .nav-container {
                 justify-content: flex-start;
                 overflow-x: auto;
                 padding-bottom: 10px;
             }
-            
+
             .image-gallery {
                 grid-template-columns: 1fr;
             }
-            
+
             .modal-content {
                 max-width: 98%;
                 max-height: 75vh;
             }
-            
+
             .prev-modal {
                 left: 10px;
             }
-            
+
             .next-modal {
                 right: 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Image Modal/Lightbox -->
     <div id="imageModal" class="image-modal">
@@ -835,9 +849,9 @@
                 <div class="header-main">
                     <h1>CS330: Operating Systems Project Phase I</h1>
                     <div class="header-subtitle">
-                        Comprehensive Analysis of Process-Based Parallelism in Matrix Multiplication
+                        Process-Based Parallelism in Matrix Multiplication (fork) and Performance Measurement
                     </div>
-                    
+
                     <div class="course-meta">
                         <div class="meta-item">
                             <i class="fas fa-user-tie"></i>
@@ -853,11 +867,11 @@
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-microchip"></i>
-                            <span><strong>Focus:</strong> Process Parallelism & Performance</span>
+                            <span><strong>Focus:</strong> fork() + process parallelism</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="team-display">
                     <h3><i class="fas fa-users"></i> Project Team</h3>
                     <div class="team-grid">
@@ -894,7 +908,7 @@
             </div>
         </div>
     </header>
-    
+
     <!-- Navigation Tabs -->
     <div class="nav-tabs full-width-container">
         <div class="content-container">
@@ -923,7 +937,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main-content content-container">
         <div class="content-grid">
@@ -937,61 +951,74 @@
                         </div>
                         <div>
                             <h2 class="section-title">Project Overview</h2>
-                            <div class="section-subtitle">Understanding Process-Based Parallelism in Operating Systems</div>
+                            <div class="section-subtitle">Phase I: VM setup, fork() processes, and execution-time
+                                measurements</div>
                         </div>
                     </div>
-                    
-                    <p>This project provides hands-on experience with fundamental operating system concepts, focusing on process creation, parallelism, and performance evaluation. Phase I involves setting up a controlled Linux environment, executing a matrix multiplication program using process-based parallelism, and analyzing performance under varying computational loads and parallelization strategies.</p>
-                    
+
+                    <p>
+                        This project provides hands-on experience with operating system concepts related to process
+                        creation, parallel execution,
+                        and performance measurement. Phase I focuses on building a Linux virtual environment, compiling
+                        and executing the provided
+                        C program, and collecting execution time results while varying the matrix size (N) and the
+                        number of processes (PROCS).
+                    </p>
+
                     <div class="highlight-box">
                         <h3 class="highlight-title"><i class="fas fa-bullseye"></i> Phase I Objectives</h3>
                         <div class="card-grid">
                             <div class="card">
                                 <h4 class="card-title"><i class="fas fa-laptop"></i> Virtual Environment Setup</h4>
-                                <p>Establish a reproducible Linux execution environment using virtualization technology to ensure consistent experimental conditions.</p>
+                                <p>Install a VM manager and create a Linux VM to run experiments in a consistent
+                                    environment.</p>
                             </div>
                             <div class="card">
-                                <h4 class="card-title"><i class="fas fa-code-branch"></i> Process Creation Mastery</h4>
-                                <p>Understand and implement process creation using the fork() system call, managing parent-child relationships and synchronization.</p>
+                                <h4 class="card-title"><i class="fas fa-code-branch"></i> Process Creation</h4>
+                                <p>Understand how <code>fork()</code> creates child processes and how the parent waits
+                                    using <code>wait()</code>.</p>
                             </div>
                             <div class="card">
-                                <h4 class="card-title"><i class="fas fa-tachometer-alt"></i> Performance Evaluation</h4>
-                                <p>Empirically measure and analyze execution time variations across multiple runs with different parallelization configurations.</p>
+                                <h4 class="card-title"><i class="fas fa-tachometer-alt"></i> Performance Measurement
+                                </h4>
+                                <p>Run experiments multiple times and record execution times for different parameter
+                                    settings.</p>
                             </div>
                             <div class="card">
-                                <h4 class="card-title"><i class="fas fa-chart-bar"></i> Parallelism Analysis</h4>
-                                <p>Compare and contrast task vs. data parallelism approaches and their impact on computational efficiency.</p>
+                                <h4 class="card-title"><i class="fas fa-chart-bar"></i> Parallelism Discussion</h4>
+                                <p>Discuss how work is split across processes and how results change as N and PROCS
+                                    change.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <h3>Project Significance</h3>
-                    <p>Parallel processing is fundamental to modern computing, enabling programs to leverage multi-core systems for improved performance. Operating systems provide critical mechanisms such as process creation, scheduling, and synchronization to support parallel execution. This project investigates these concepts through practical implementation and measurement, bridging theoretical knowledge with real-world application.</p>
-                    
+
+                    <h3>Deliverables (Phase I)</h3>
                     <div class="card-grid">
                         <div class="card">
-                            <h4 class="card-title"><i class="fas fa-cogs"></i> Technical Components</h4>
+                            <h4 class="card-title"><i class="fas fa-cogs"></i> Required Items</h4>
                             <ul>
-                                <li>Virtual Machine Management (UTM/VirtualBox)</li>
-                                <li>Linux System Configuration</li>
-                                <li>C Programming with System Calls</li>
-                                <li>Process Creation & Synchronization</li>
-                                <li>Performance Measurement & Analysis</li>
+                                <li>VM installation screenshots</li>
+                                <li>Linux installation screenshots</li>
+                                <li>System specifications (CPU, RAM, OS)</li>
+                                <li>Compilation + execution proof</li>
+                                <li>Execution time table(s) and graph(s)</li>
+                                <li>Discussion of observations</li>
+                                <li>Code included in appendix</li>
                             </ul>
                         </div>
                         <div class="card">
-                            <h4 class="card-title"><i class="fas fa-tasks"></i> Deliverables</h4>
+                            <h4 class="card-title"><i class="fas fa-tasks"></i> What This Report Contains</h4>
                             <ul>
-                                <li>Functional Linux Virtual Environment</li>
-                                <li>Compiled & Executable C Program</li>
-                                <li>Performance Data Tables & Graphs</li>
-                                <li>Comprehensive Analysis Report (5-7 pages)</li>
-                                <li>Source Code Documentation</li>
+                                <li>Environment setup documentation</li>
+                                <li>Program explanation (in simple terms)</li>
+                                <li>Experimental methodology (N, PROCS, 3 runs)</li>
+                                <li>Results table and summary findings</li>
+                                <li>Appendix with source code</li>
                             </ul>
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Environment Setup Section -->
                 <section id="environment" class="section">
                     <div class="section-header">
@@ -1000,17 +1027,17 @@
                         </div>
                         <div>
                             <h2 class="section-title">Experimental Environment</h2>
-                            <div class="section-subtitle">Controlled Virtualized Setup for Reproducible Results</div>
+                            <div class="section-subtitle">Virtual Machine Setup and Linux Configuration</div>
                         </div>
                     </div>
-                    
+
                     <div class="card-grid">
                         <div class="card">
                             <h4 class="card-title"><i class="fas fa-server"></i> Host System</h4>
                             <ul>
                                 <li><strong>Host OS:</strong> macOS</li>
-                                <li><strong>Virtualization:</strong> UTM (Utilizing Apple Virtualization Framework)</li>
-                                <li><strong>Purpose:</strong> Isolate experiments from host variability</li>
+                                <li><strong>VM Manager:</strong> UTM</li>
+                                <li><strong>Virtualization:</strong> Apple Virtualization</li>
                             </ul>
                         </div>
                         <div class="card">
@@ -1022,124 +1049,103 @@
                             </ul>
                         </div>
                         <div class="card">
-                            <h4 class="card-title"><i class="fas fa-memory"></i> Resource Allocation</h4>
+                            <h4 class="card-title"><i class="fas fa-memory"></i> VM Resource Allocation</h4>
                             <ul>
                                 <li><strong>CPU Cores:</strong> 4 virtual cores</li>
                                 <li><strong>Memory:</strong> 4 GB RAM</li>
-                                <li><strong>Storage:</strong> 25 GB virtual disk</li>
-                                <li><strong>Graphics:</strong> Default virtual graphics</li>
+                                <li><strong>Storage:</strong> 36 GB virtual disk</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <h3>Virtual Machine Setup Gallery</h3>
-                    <p>The following images document the step-by-step process of creating and configuring the Ubuntu virtual machine for our experiments:</p>
-                    
+                    <p>The following images document the creation and installation of Ubuntu inside the virtual machine:
+                    </p>
+
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this, 'Step 1: Creating a new VM in UTM')">
                             <img src="../Installing Ubuntu/1. Creating a VM with UTM.png" alt="Creating a VM with UTM">
                             <div class="gallery-caption">Step 1: Creating a new VM in UTM</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 2: Selecting virtualization mode for performance')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 2: Selecting virtualization mode')">
                             <img src="../Installing Ubuntu/2. Virtualize.png" alt="Selecting virtualization mode">
-                            <div class="gallery-caption">Step 2: Selecting virtualization mode for performance</div>
+                            <div class="gallery-caption">Step 2: Selecting virtualization mode</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 3: Selecting Linux as the guest operating system')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 3: Selecting Linux as the guest OS')">
                             <img src="../Installing Ubuntu/3. Linux.png" alt="Selecting Linux OS">
-                            <div class="gallery-caption">Step 3: Selecting Linux as the guest operating system</div>
+                            <div class="gallery-caption">Step 3: Selecting Linux as the guest OS</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 4: Allocating memory and CPU cores')">
                             <img src="../Installing Ubuntu/4. Memory+Cores.png" alt="Memory and CPU allocation">
                             <div class="gallery-caption">Step 4: Allocating memory and CPU cores</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 5: Utilizing Apple\'s virtualization framework')">
-                            <img src="../Installing Ubuntu/5. Apple Virtualization.png" alt="Apple virtualization framework">
-                            <div class="gallery-caption">Step 5: Utilizing Apple's virtualization framework</div>
+                        <div class="gallery-item"
+                            onclick="openModal(this, 'Step 5: Using Apple Virtualization framework')">
+                            <img src="../Installing Ubuntu/5. Apple Virtualization.png"
+                                alt="Apple virtualization framework">
+                            <div class="gallery-caption">Step 5: Using Apple Virtualization framework</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 6: Beginning Ubuntu installation')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 6: Starting Ubuntu installation')">
                             <img src="../Installing Ubuntu/6. Ubuntu.png" alt="Ubuntu installation">
-                            <div class="gallery-caption">Step 6: Beginning Ubuntu installation</div>
+                            <div class="gallery-caption">Step 6: Starting Ubuntu installation</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 7: Configuring virtual storage')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 7: Configuring VM storage size')">
                             <img src="../Installing Ubuntu/7. Storage.png" alt="Storage configuration">
-                            <div class="gallery-caption">Step 7: Configuring virtual storage</div>
+                            <div class="gallery-caption">Step 7: Configuring VM storage size</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 8: System passing memory tests')">
-                            <img src="../Installing Ubuntu/8. Passing Memory Tests.png" alt="Memory testing">
-                            <div class="gallery-caption">Step 8: System passing memory tests</div>
-                        </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 9: Final storage configuration')">
-                            <img src="../Installing Ubuntu/9. Storage Configuration.png" alt="Storage setup">
-                            <div class="gallery-caption">Step 9: Final storage configuration</div>
-                        </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 10: Installing Linux kernel')">
+                        <div class="gallery-item"
+                            onclick="openModal(this, 'Step 8: Installation progress (kernel/packages)')">
                             <img src="../Installing Ubuntu/10. Installing Kernal.png" alt="Kernel installation">
-                            <div class="gallery-caption">Step 10: Installing Linux kernel</div>
+                            <div class="gallery-caption">Step 8: Installation progress (kernel/packages)</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 11: Successful login and system updates')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 9: Successful login and update')">
                             <img src="../Installing Ubuntu/11. Log in + update.png" alt="Login and updates">
-                            <div class="gallery-caption">Step 11: Successful login and system updates</div>
+                            <div class="gallery-caption">Step 9: Successful login and update</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Step 12: Fully operational Ubuntu VM')">
+                        <div class="gallery-item" onclick="openModal(this, 'Step 10: Ubuntu VM working successfully')">
                             <img src="../Installing Ubuntu/12. Working VM.png" alt="Working virtual machine">
-                            <div class="gallery-caption">Step 12: Fully operational Ubuntu VM</div>
+                            <div class="gallery-caption">Step 10: Ubuntu VM working successfully</div>
                         </div>
                     </div>
-                    
-                    <h3>Software Stack Configuration</h3>
-                    <p>The experimental environment was carefully configured with specific software tools to ensure consistency and reproducibility:</p>
-                    
+
+                    <h3>Software Tools Used</h3>
                     <div class="table-container">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Component</th>
-                                    <th>Version</th>
+                                    <th>Tool</th>
                                     <th>Purpose</th>
-                                    <th>Installation Method</th>
+                                    <th>Example Command</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>GCC Compiler</td>
-                                    <td>11.4.0</td>
-                                    <td>Compiling C program with optimizations</td>
-                                    <td>sudo apt install build-essential</td>
+                                    <td>GCC</td>
+                                    <td>Compile C code</td>
+                                    <td>gcc -Wall matrix_fork.c -o matrix_fork</td>
                                 </tr>
                                 <tr>
-                                    <td>Build Essential</td>
-                                    <td>Latest</td>
-                                    <td>Development libraries & tools</td>
-                                    <td>Package manager</td>
+                                    <td>Terminal</td>
+                                    <td>Run experiments and record output</td>
+                                    <td>./matrix_fork</td>
                                 </tr>
                                 <tr>
-                                    <td>Linux Headers</td>
-                                    <td>6.x</td>
-                                    <td>System call interfaces</td>
-                                    <td>Automatic with kernel</td>
-                                </tr>
-                                <tr>
-                                    <td>Nano Editor</td>
-                                    <td>7.2</td>
-                                    <td>Code modification & viewing</td>
-                                    <td>Pre-installed</td>
-                                </tr>
-                                <tr>
-                                    <td>Time Utilities</td>
-                                    <td>Latest</td>
-                                    <td>Execution time measurement</td>
-                                    <td>Pre-installed</td>
+                                    <td>System info tools</td>
+                                    <td>Confirm CPU/RAM/OS</td>
+                                    <td>lscpu, free -h, lsb_release -a</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="image-container">
-                        <img src="../Installing Ubuntu/16. System Specifications.png" alt="System Specifications" class="large-image" onclick="openModal(this, 'Figure 1: System specifications verification using command-line tools')">
-                        <div class="image-caption">Figure 1: System specifications verification using command-line tools</div>
+                        <img src="../Installing Ubuntu/16. System Specifications.png" alt="System Specifications"
+                            class="large-image"
+                            onclick="openModal(this, 'Figure 1: System specifications verification inside Ubuntu')">
+                        <div class="image-caption">Figure 1: System specifications verification inside Ubuntu</div>
                     </div>
                 </section>
-                
+
                 <!-- Methodology Section -->
                 <section id="methodology" class="section">
                     <div class="section-header">
@@ -1148,492 +1154,26 @@
                         </div>
                         <div>
                             <h2 class="section-title">Experimental Methodology</h2>
-                            <div class="section-subtitle">Systematic Approach to Performance Measurement</div>
+                            <div class="section-subtitle">Program Description, Steps, and Variables (N and PROCS)</div>
                         </div>
                     </div>
-                    
-                    <h3>Program Overview</h3>
-                    <p>The instructor-provided C program performs matrix multiplication using process-based parallelism. Key characteristics:</p>
-                    
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-project-diagram"></i> Algorithm Design</h4>
-                            <ul>
-                                <li><strong>Operation:</strong> Dense matrix multiplication (O(n³))</li>
-                                <li><strong>Parallel Strategy:</strong> Row-wise data decomposition</li>
-                                <li><strong>Initialization:</strong> Random integer values (0-9)</li>
-                                <li><strong>Output:</strong> Result matrix C = A × B</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-microchip"></i> Parallel Implementation</h4>
-                            <ul>
-                                <li><strong>Process Creation:</strong> fork() system call</li>
-                                <li><strong>Synchronization:</strong> wait() system calls</li>
-                                <li><strong>Work Division:</strong> Equal rows per process</li>
-                                <li><strong>Measurement:</strong> clock() for wall time</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="image-container">
-                        <img src="../Installing Ubuntu/13. Code in nano editor.png" alt="Code in nano editor" class="large-image" onclick="openModal(this, 'Figure 2: Program source code viewed in nano text editor')">
-                        <div class="image-caption">Figure 2: Program source code viewed in nano text editor</div>
-                    </div>
-                    
-                    <h3>Experimental Variables</h3>
-                    <p>Two independent variables were systematically varied to study their impact on performance:</p>
-                    
-                    <div class="highlight-box">
-                        <div class="card-grid">
-                            <div class="card">
-                                <h4 class="card-title"><i class="fas fa-expand-arrows-alt"></i> Matrix Size (N)</h4>
-                                <p>Controls computational complexity (O(N³) operations). Directly affects workload magnitude and memory requirements.</p>
-                                <div class="performance-badge badge-info">Test Values: 600, 800, 1200, 1800, 2400</div>
-                            </div>
-                            <div class="card">
-                                <h4 class="card-title"><i class="fas fa-layer-group"></i> Process Count (PROCS)</h4>
-                                <p>Controls parallelism degree. Determines how many child processes divide the computation workload.</p>
-                                <div class="performance-badge badge-info">Test Values: 1, 2, 4</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3>Experimental Design Matrix</h3>
-                    <p>A full factorial design was employed, testing all combinations of parameters:</p>
-                    
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Experiment #</th>
-                                    <th>Matrix Size (N)</th>
-                                    <th>Process Count (P)</th>
-                                    <th>Total Operations</th>
-                                    <th>Memory Footprint</th>
-                                    <th>Replications</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>600</td>
-                                    <td>1 (Serial)</td>
-                                    <td>216 million</td>
-                                    <td>8.6 MB</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>600</td>
-                                    <td>2</td>
-                                    <td>216 million</td>
-                                    <td>8.6 MB</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>600</td>
-                                    <td>4</td>
-                                    <td>216 million</td>
-                                    <td>8.6 MB</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>800</td>
-                                    <td>1 (Serial)</td>
-                                    <td>512 million</td>
-                                    <td>15.3 MB</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>800</td>
-                                    <td>2</td>
-                                    <td>512 million</td>
-                                    <td>15.3 MB</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>800</td>
-                                    <td>4</td>
-                                    <td>512 million</td>
-                                    <td>15.3 MB</td>
-                                    <td>3</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h3>Execution Protocol</h3>
-                    <ol>
-                        <li><strong>Compilation:</strong> <code>gcc -Wall matrix_fork.c -o matrix_fork</code> (ensures all warnings)</li>
-                        <li><strong>Parameter Setting:</strong> Modify #define directives for N and PROCS in source code</li>
-                        <li><strong>Execution:</strong> Run program three times for each configuration</li>
-                        <li><strong>Data Collection:</strong> Record execution time from program output</li>
-                        <li><strong>Processing:</strong> Calculate average execution time across replications</li>
-                    </ol>
-                </section>
-                
-                <!-- Results Section -->
-                <section id="results" class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div>
-                            <h2 class="section-title">Experimental Results</h2>
-                            <div class="section-subtitle">Quantitative Performance Measurements</div>
-                        </div>
-                    </div>
-                    
-                    <div class="image-container">
-                        <img src="../Installing Ubuntu/15. Terminal Output.png" alt="Terminal Output" class="large-image" onclick="openModal(this, 'Figure 3: Program execution and timing output in terminal')">
-                        <div class="image-caption">Figure 3: Program execution and timing output in terminal</div>
-                    </div>
-                    
-                    <h3>Execution Time Measurements</h3>
-                    <p>The following table presents execution times (in seconds) for all experimental configurations:</p>
-                    
-                   <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Matrix Size (N)</th>
-                <th>Processes (PROCS)</th>
-                <th>Run 1 (s)</th>
-                <th>Run 2 (s)</th>
-                <th>Run 3 (s)</th>
-                <th>Average Time (s)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1200</td>
-                <td>1</td>
-                <td>0.001</td>
-                <td>0.001</td>
-                <td>0.003</td>
-                <td><strong>0.0016</strong></td>
-            </tr>
-            <tr>
-                <td>1200</td>
-                <td>4</td>
-                <td>0.002</td>
-                <td>0.002</td>
-                <td>0.001</td>
-                <td><strong>0.0016</strong></td>
-            </tr>
-            <tr>
-                <td>1800</td>
-                <td>1</td>
-                <td>0.001</td>
-                <td>0.001</td>
-                <td>0.001</td>
-                <td><strong>0.0010</strong></td>
-            </tr>
-            <tr>
-                <td>1800</td>
-                <td>4</td>
-                <td>0.003</td>
-                <td>0.003</td>
-                <td>0.003</td>
-                <td><strong>0.0030</strong></td>
-            </tr>
-            <tr>
-                <td>2400</td>
-                <td>1</td>
-                <td>0.002</td>
-                <td>0.001</td>
-                <td>0.001</td>
-                <td><strong>0.0013</strong></td>
-            </tr>
-            <tr>
-                <td>2400</td>
-                <td>4</td>
-                <td>0.004</td>
-                <td>0.003</td>
-                <td>0.003</td>
-                <td><strong>0.0033</strong></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-                    
-                    <div class="viz-container">
-                        <div class="viz-card">
-                            <h4 class="viz-title"><i class="fas fa-chart-bar"></i> Speedup vs. Process Count</h4>
-                            <div class="image-container">
-                                <div style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
-                                    <i class="fas fa-chart-line" style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
-                                    <p>Performance Analysis Chart</p>
-                                    <p><small>Placeholder for speedup vs. process count visualization</small></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="viz-card">
-                            <h4 class="viz-title"><i class="fas fa-balance-scale"></i> Overhead Analysis</h4>
-                            <div class="image-container">
-                                <div style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
-                                    <i class="fas fa-chart-pie" style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
-                                    <p>Overhead Distribution Chart</p>
-                                    <p><small>Placeholder for overhead breakdown visualization</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3>Performance Metrics Analysis</h3>
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-rocket"></i> Speedup Factor</h4>
-                            <p>Calculated as: <code>Speedup = T_serial / T_parallel</code></p>
-                            <p>For N=2400: Speedup = 0.0013 / 0.0033 = 0.39× (performance degradation)</p>
-                            <div class="performance-badge badge-warning">Sub-linear Scaling</div>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-tachometer-alt"></i> Efficiency</h4>
-                            <p>Calculated as: <code>Efficiency = Speedup / P</code></p>
-                            <p>For N=2400, P=4: Efficiency = 0.39 / 4 = 9.7%</p>
-                            <div class="performance-badge badge-warning">Low Efficiency</div>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-weight"></i> Overhead Ratio</h4>
-                            <p>Calculated as: <code>Overhead = (T_parallel - T_serial/P) / T_serial</code></p>
-                            <p>For N=2400: Overhead ≈ 300% of serial time</p>
-                            <div class="performance-badge badge-warning">High Overhead</div>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- Analysis Section -->
-                <section id="analysis" class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div>
-                            <h2 class="section-title">Performance Analysis</h2>
-                            <div class="section-subtitle">Interpreting Parallel Execution Behavior</div>
-                        </div>
-                    </div>
-                    
-                    <h3>Key Observations</h3>
-                    
-                    <div class="highlight-box">
-                        <h4><i class="fas fa-lightbulb"></i> Critical Finding</h4>
-                        <p>Process-based parallelism using fork() demonstrated <strong>performance degradation rather than improvement</strong> for the tested configurations. This counterintuitive result highlights the significant overhead associated with process creation and management for moderate-sized computational problems.</p>
-                    </div>
-                    
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-exclamation-triangle"></i> Overhead Sources</h4>
-                            <ul>
-                                <li><strong>Process Creation:</strong> fork() system call invocation and address space duplication</li>
-                                <li><strong>Context Switching:</strong> OS scheduler overhead when switching between processes</li>
-                                <li><strong>Memory Duplication:</strong> Copy-on-write mechanisms for process memory</li>
-                                <li><strong>Synchronization:</strong> wait() system calls for process coordination</li>
-                                <li><strong>Cache Invalidation:</strong> Loss of cache locality when distributing work</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-cogs"></i> System Limitations</h4>
-                            <ul>
-                                <li><strong>CPU Core Count:</strong> 4-core limit creates contention beyond 4 processes</li>
-                                <li><strong>Virtualization Layer:</strong> Additional abstraction layer adds overhead</li>
-                                <li><strong>ARM Architecture:</strong> aarch64 may have different performance characteristics</li>
-                                <li><strong>Memory Bandwidth:</strong> Shared memory access creates contention</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3>Task vs. Data Parallelism Analysis</h3>
-                    
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Characteristic</th>
-                                    <th>Task Parallelism (fork() processes)</th>
-                                    <th>Data Parallelism (Thread-based)</th>
-                                    <th>Recommendation</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Creation Overhead</strong></td>
-                                    <td><span class="performance-badge badge-warning">High</span> (Full process duplication)</td>
-                                    <td><span class="performance-badge badge-good">Low</span> (Shared address space)</td>
-                                    <td>Use threads for fine-grained parallelism</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Memory Usage</strong></td>
-                                    <td><span class="performance-badge badge-warning">High</span> (Separate address spaces)</td>
-                                    <td><span class="performance-badge badge-good">Low</span> (Shared memory)</td>
-                                    <td>Processes better for isolation, threads for efficiency</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Synchronization</strong></td>
-                                    <td><span class="performance-badge badge-warning">Complex</span> (IPC mechanisms)</td>
-                                    <td><span class="performance-badge badge-good">Simpler</span> (Shared variables)</td>
-                                    <td>Threads easier for shared data access</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Fault Isolation</strong></td>
-                                    <td><span class="performance-badge badge-good">Excellent</span> (Process boundaries)</td>
-                                    <td><span class="performance-badge badge-warning">Poor</span> (One fault affects all)</td>
-                                    <td>Processes better for reliability</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Scalability</strong></td>
-                                    <td><span class="performance-badge badge-warning">Limited</span> (High overhead)</td>
-                                    <td><span class="performance-badge badge-good">Better</span> (Lower overhead)</td>
-                                    <td>Hybrid approach for large-scale systems</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h3>Amdahl's Law Application</h3>
-                    <p>According to Amdahl's Law, the maximum speedup achievable through parallelization is limited by the sequential portion of the program:</p>
-                    <p><code>Speedup_max = 1 / (f + (1-f)/P)</code> where f is the sequential fraction</p>
-                    
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-calculator"></i> For Our Program</h4>
-                            <p>If we estimate f (sequential fraction including overhead) at 0.7:</p>
-                            <p>With P=4: <code>Speedup_max = 1 / (0.7 + 0.3/4) = 1 / 0.775 = 1.29×</code></p>
-                            <p>Actual observed: 0.39× (much lower due to additional overheads)</p>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-chart-area"></i> Theoretical vs. Actual</h4>
-                            <p>The significant discrepancy between theoretical maximum and actual speedup indicates substantial parallelization overhead not accounted for in simple models, including:</p>
-                            <ul>
-                                <li>Process creation/destruction time</li>
-                                <li>Memory allocation overhead</li>
-                                <li>Synchronization delays</li>
-                                <li>Cache coherence penalties</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- Conclusion Section -->
-                <section id="conclusion" class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-flag-checkered"></i>
-                        </div>
-                        <div>
-                            <h2 class="section-title">Conclusions & Recommendations</h2>
-                            <div class="section-subtitle">Synthesizing Experimental Findings</div>
-                        </div>
-                    </div>
-                    
-                    <div class="highlight-box">
-                        <h4><i class="fas fa-check-circle"></i> Executive Summary</h4>
-                        <p>Process-based parallelism using fork() demonstrates <strong>significant overhead penalties</strong> for moderate-sized computational problems. While theoretically capable of improving performance, practical implementation reveals that the costs of process creation, memory duplication, and synchronization often outweigh parallelization benefits for problems below a certain complexity threshold.</p>
-                    </div>
-                    
-                    <h3>Key Conclusions</h3>
-                    <div class="card-grid">
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-chart-line-down"></i> Performance Findings</h4>
-                            <ul>
-                                <li>Process creation overhead dominates for small-to-medium problem sizes</li>
-                                <li>Optimal process count depends on problem size and system resources</li>
-                                <li>Performance scaling is sub-linear and can be negative</li>
-                                <li>Overhead constitutes 200-300% of serial execution time</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title"><i class="fas fa-cogs"></i> System Insights</h4>
-                            <ul>
-                                <li>Virtualization adds measurable but consistent overhead</li>
-                                <li>ARM architecture performs comparably for this workload</li>
-                                <li>Memory bandwidth becomes bottleneck with multiple processes</li>
-                                <li>Cache locality loss significantly impacts performance</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3>Recommendations for Future Work</h3>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Improvement Area</th>
-                                    <th>Specific Recommendation</th>
-                                    <th>Expected Impact</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Parallelization Strategy</strong></td>
-                                    <td>Use POSIX threads (pthreads) instead of processes</td>
-                                    <td>Reduce overhead by 70-80%</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Workload Distribution</strong></td>
-                                    <td>Implement dynamic load balancing</td>
-                                    <td>Better core utilization, especially for uneven workloads</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Memory Management</strong></td>
-                                    <td>Use shared memory for inter-process communication</td>
-                                    <td>Reduce memory duplication overhead</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Algorithm Optimization</strong></td>
-                                    <td>Implement block matrix multiplication</td>
-                                    <td>Improve cache locality and reduce memory accesses</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Measurement Enhancement</strong></td>
-                                    <td>Use high-resolution timers (clock_gettime)</td>
-                                    <td>More accurate performance measurements</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h3>Phase II Projections</h3>
-                    <p>Based on Phase I findings, Phase II should focus on:</p>
-                    <ol>
-                        <li><strong>Comparative Analysis:</strong> Implement thread-based parallelization for direct comparison</li>
-                        <li><strong>Scalability Study:</strong> Test with larger problem sizes (N > 5000) to find break-even point</li>
-                        <li><strong>Overhead Reduction:</strong> Implement process pooling to reuse created processes</li>
-                        <li><strong>Heterogeneous Testing:</strong> Compare performance across different architectures (x86 vs ARM)</li>
-                    </ol>
-                </section>
-                
-                <!-- Appendix Section -->
-                <section id="appendix" class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-paperclip"></i>
-                        </div>
-                        <div>
-                            <h2 class="section-title">Appendix</h2>
-                            <div class="section-subtitle">Supplementary Materials & References</div>
-                        </div>
-                    </div>
-                    
-                    <div class="image-container">
-                        <img src="../Installing Ubuntu/14. Head of the file (to make sure it's saved...).png" alt="File header verification" class="large-image" onclick="openModal(this, 'Figure 4: File header verification to ensure code was properly saved')">
-                        <div class="image-caption">Figure 4: File header verification to ensure code was properly saved</div>
-                    </div>
-                    
-                    <h3>Complete Source Code</h3>
+
+                    <h3>Instructor-Provided Program</h3>
+                    <p>
+                        The program computes matrix multiplication (C = A × B). It uses <code>fork()</code> to create
+                        multiple processes,
+                        then each process multiplies a different range of rows of matrix C. The parent waits for all
+                        child processes before
+                        stopping the timer and printing the execution time.
+                    </p>
+
                     <div class="code-container">
                         <div class="code-header">
                             <div class="code-title">
-                                <i class="fas fa-file-code"></i> matrix_fork.c - Parallel Matrix Multiplication
+                                <i class="fas fa-file-code"></i> Provided C Program (Instructor Version)
                             </div>
                             <div style="color: #cccccc; font-size: 0.9rem;">
-                                Lines: 56 | Size: 2.1 KB
+                                fork() + wait() + timing
                             </div>
                         </div>
                         <div class="code-content">
@@ -1643,40 +1183,473 @@
 #include &lt;sys/wait.h&gt;
 #include &lt;time.h&gt;
 
-// ============================================================================
-// CONFIGURATION PARAMETERS
-// ============================================================================
-#define N 600          // Matrix dimension (tested: 600, 800, 1200, 1800, 2400)
-#define PROCS 4        // Number of child processes (tested: 1, 2, 4)
+#define N 600     // Matrix size (can be varied)
+#define PROCS 4   // Number of child processes
 
-// ============================================================================
-// GLOBAL MATRIX DECLARATIONS
-// ============================================================================
 double A[N][N], B[N][N], C[N][N];
 
-// ============================================================================
-// FUNCTION: initialize_matrices()
-// PURPOSE:  Populates matrices A and B with random values, zeroes matrix C
-// ============================================================================
 void initialize_matrices() {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            A[i][j] = rand() % 10;      // Random values 0-9
-            B[i][j] = rand() % 10;      // Random values 0-9
-            C[i][j] = 0;                // Initialize result matrix
+    for (int i = 0; i &lt; N; i++)
+        for (int j = 0; j &lt; N; j++) {
+            A[i][j] = rand() % 10;
+            B[i][j] = rand() % 10;
+            C[i][j] = 0;
+        }
+}
+
+void multiply(int start, int end) {
+    for (int i = start; i &lt; end; i++)
+        for (int j = 0; j &lt; N; j++)
+            for (int k = 0; k &lt; N; k++)
+                C[i][j] += A[i][k] * B[k][j];
+}
+
+int main() {
+    srand(time(NULL));
+    initialize_matrices();
+
+    clock_t start_time = clock();
+
+    int rows_per_proc = N / PROCS;
+
+    for (int p = 0; p &lt; PROCS; p++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            int start = p * rows_per_proc;
+            int end = (p == PROCS - 1) ? N : start + rows_per_proc;
+            multiply(start, end);
+            exit(0);
+        }
+    }
+
+    for (int p = 0; p &lt; PROCS; p++)
+        wait(NULL);
+
+    clock_t end_time = clock();
+    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    printf("Execution Time: %.3f seconds\\n", time_taken);
+    return 0;
+}</pre>
+                        </div>
+                    </div>
+
+                    <h3>Simple Explanation of What Each Part Does</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-th-large"></i> Matrices and Initialization</h4>
+                            <p>
+                                The program uses three global matrices: A and B are filled with random numbers, and C is
+                                initialized to 0.
+                                This guarantees the multiplication does real work each run.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-code-branch"></i> fork() and Process Creation</h4>
+                            <p>
+                                The loop creates <strong>PROCS</strong> child processes using <code>fork()</code>. The
+                                parent continues creating children,
+                                and each child performs computation then exits.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-sitemap"></i> Work Splitting (Row Ranges)</h4>
+                            <p>
+                                The total number of rows in the result matrix C is N. To distribute the work among the
+                                child processes,
+                                the program first calculates <code>rows_per_proc = N / PROCS</code>. This determines how
+                                many rows each process
+                                should compute at minimum. Each process is assigned a unique starting row using
+                                <code>start = p * rows_per_proc</code>, and normally computes rows up to
+                                <code>start + rows_per_proc</code>. This ensures that no two processes work on the same
+                                rows.
+                                If N is not exactly divisible by PROCS, the last process is assigned all remaining rows
+                                (by setting its end row to N), so that every row of matrix C is computed exactly once
+                                and no rows are skipped.
+                            </p>
+
+                        </div>
+
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-stopwatch"></i> Waiting and Timing</h4>
+                            <p>
+                                The parent waits for all processes using <code>wait(NULL)</code>.
+                                After all children finish, the program stops the timer and prints the execution time.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Compilation and Execution</h3>
+                    <ol>
+                        <li><strong>Compile:</strong> <code>gcc -Wall matrix_fork.c -o matrix_fork</code></li>
+                        <li><strong>Run:</strong> <code>./matrix_fork</code></li>
+                        <li><strong>Repeat:</strong> Run 3 times per configuration and record the output time</li>
+                    </ol>
+
+                    <h3>Experimental Variables Used in This Report</h3>
+                    <div class="highlight-box">
+                        <div class="card-grid">
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-expand-arrows-alt"></i> Matrix Size (N)</h4>
+                                <p>
+                                    N controls the matrix dimension and directly impacts the workload. Larger N means
+                                    more multiplication work.
+                                </p>
+                                <div class="performance-badge badge-info">N values tested: 1200, 1800, 2400</div>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-layer-group"></i> Number of Processes (PROCS)
+                                </h4>
+                                <p>
+                                    PROCS controls how many child processes are created and how the rows are split
+                                    across them.
+                                </p>
+                                <div class="performance-badge badge-info">PROCS values tested: 1, 4</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Experimental Results</h2>
+                            <div class="section-subtitle">Execution Time Measurements (3 runs per configuration)</div>
+                        </div>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="../Installing Ubuntu/15. Terminal Output.png" alt="Terminal Output"
+                            class="large-image"
+                            onclick="openModal(this, 'Figure 2: Program compilation and execution output in terminal')">
+                        <div class="image-caption">Figure 2: Program compilation and execution output in terminal</div>
+                    </div>
+
+                    <h3>Execution Time Table</h3>
+                    <p>The following table shows the execution time for each configuration. Each configuration was
+                        executed three times and an average time was recorded.</p>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Matrix Size (N)</th>
+                                    <th>Processes (PROCS)</th>
+                                    <th>Run 1 (s)</th>
+                                    <th>Run 2 (s)</th>
+                                    <th>Run 3 (s)</th>
+                                    <th>Average Time (s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1200</td>
+                                    <td>1</td>
+                                    <td>0.001</td>
+                                    <td>0.001</td>
+                                    <td>0.003</td>
+                                    <td><strong>0.0016</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>1200</td>
+                                    <td>4</td>
+                                    <td>0.002</td>
+                                    <td>0.002</td>
+                                    <td>0.001</td>
+                                    <td><strong>0.0016</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>1800</td>
+                                    <td>1</td>
+                                    <td>0.001</td>
+                                    <td>0.001</td>
+                                    <td>0.001</td>
+                                    <td><strong>0.0010</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>1800</td>
+                                    <td>4</td>
+                                    <td>0.003</td>
+                                    <td>0.003</td>
+                                    <td>0.003</td>
+                                    <td><strong>0.0030</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>2400</td>
+                                    <td>1</td>
+                                    <td>0.002</td>
+                                    <td>0.001</td>
+                                    <td>0.001</td>
+                                    <td><strong>0.0013</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>2400</td>
+                                    <td>4</td>
+                                    <td>0.004</td>
+                                    <td>0.003</td>
+                                    <td>0.003</td>
+                                    <td><strong>0.0033</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="viz-container">
+                        <div class="viz-card">
+                            <h4 class="viz-title"><i class="fas fa-chart-bar"></i> Average Time Comparison</h4>
+                            <div class="image-container">
+                                <div
+                                    style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
+                                    <i class="fas fa-chart-column"
+                                        style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
+                                    <p>Graph Placeholder</p>
+                                    <p><small>Average execution time for PROCS=1 vs PROCS=4 (for each N)</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="viz-card">
+                            <h4 class="viz-title"><i class="fas fa-chart-line"></i> Execution Time Trend</h4>
+                            <div class="image-container">
+                                <div
+                                    style="background: linear-gradient(135deg, #f0f2f5, #e4e7eb); border-radius: 10px; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #6c757d; border: 2px dashed #adb5bd;">
+                                    <i class="fas fa-wave-square"
+                                        style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
+                                    <p>Graph Placeholder</p>
+                                    <p><small>Execution time trend as N increases (separate lines for PROCS=1 and
+                                            PROCS=4)</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Summary of Observations From the Table</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-table"></i> Direct Table Observations</h4>
+                            <ul>
+                                <li>For N=1200, PROCS=1 and PROCS=4 had the same average time (0.0016 s).</li>
+                                <li>For N=1800 and N=2400, PROCS=4 was slower than PROCS=1 based on the measured
+                                    averages.</li>
+                                <li>Results show that increasing the number of processes did not reduce the measured
+                                    time for these configurations.</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-repeat"></i> Why Multiple Runs Matter</h4>
+                            <p>
+                                Running each configuration multiple times helps reduce random variation.
+                                Small measured times can vary due to system scheduling and timing granularity, which is
+                                why averaging is useful.
+                            </p>
+                            <div class="performance-badge badge-info">3 runs per configuration</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analysis Section -->
+                <section id="analysis" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Analysis & Discussion</h2>
+                            <div class="section-subtitle">How fork() parallelism behaved in our experiments</div>
+                        </div>
+                    </div>
+
+                    <h3>Task Parallelism vs. Data Parallelism (In This Program)</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-tasks"></i> Task Parallelism</h4>
+                            <p>
+                                Task parallelism appears because multiple processes run at the same time. Each child
+                                process performs a portion
+                                of the computation while the operating system schedules them across CPU cores.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-layer-group"></i> Data Parallelism</h4>
+                            <p>
+                                Data parallelism appears because the program splits the data (rows of the result matrix
+                                C) between processes.
+                                Each process calculates a different range of rows, so no two processes are assigned the
+                                same row range.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>What Happened in Our Results</h3>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-lightbulb"></i> Main Finding</h4>
+                        <p>
+                            For the tested configurations, using 4 processes did not improve the measured execution time
+                            compared to 1 process.
+                            In some cases, the measured time with 4 processes was higher.
+                        </p>
+                    </div>
+
+                    <h3>Why More Processes Can Be Slower (Simple Explanation)</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-code-branch"></i> fork() Overhead</h4>
+                            <p>
+                                Creating processes using <code>fork()</code> has a cost. The OS must create a child
+                                process and manage it,
+                                which adds overhead that may be noticeable if the computation time is small.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-exchange-alt"></i> Scheduling and Context Switching
+                            </h4>
+                            <p>
+                                When multiple processes run, the OS scheduler switches between them. This scheduling
+                                activity can add extra work,
+                                especially when the program is short or when the timing values are very small.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-memory"></i> Memory and Cache Effects</h4>
+                            <p>
+                                Matrix multiplication touches many memory locations. When multiple processes run, they
+                                compete for CPU cache and
+                                memory bandwidth, which can reduce performance instead of improving it.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-stopwatch"></i> Timing Resolution</h4>
+                            <p>
+                                When reported execution times are very small (in milliseconds), small variations can
+                                significantly affect the results.
+                                That is why we repeated runs and used averages.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>How the Work Was Split (Rows Per Process)</h3>
+                    <p>
+                        The program splits the matrix rows using <code>rows_per_proc = N / PROCS</code>.
+                        For example, when PROCS=4, each process gets approximately one quarter of the rows.
+                        The last process handles any remaining rows to ensure all rows are computed.
+                    </p>
+                </section>
+
+                <!-- Conclusion Section -->
+                <section id="conclusion" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Conclusion</h2>
+                            <div class="section-subtitle">Phase I Summary</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-check-circle"></i> Summary</h4>
+                        <p>
+                            In Phase I, we successfully installed a Linux virtual machine environment, compiled and
+                            executed the instructor-provided
+                            C program that uses <code>fork()</code> to create multiple processes, and collected
+                            execution time results across multiple runs
+                            while varying matrix size (N) and number of processes (PROCS).
+                        </p>
+                    </div>
+
+                    <h3>Key Conclusions (Based on Our Measurements)</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-desktop"></i> Environment and Setup</h4>
+                            <ul>
+                                <li>Ubuntu VM was installed and configured successfully</li>
+                                <li>System specifications were verified (CPU, RAM, OS)</li>
+                                <li>Program compiled and ran correctly in the VM</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-chart-line"></i> Performance Findings</h4>
+                            <ul>
+                                <li>For the tested configurations, PROCS=4 did not reduce execution time compared to
+                                    PROCS=1</li>
+                                <li>Some configurations showed higher measured time when using more processes</li>
+                                <li>Multiple runs helped capture variation and allowed averaging</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>What This Demonstrates (Operating Systems Concept)</h3>
+                    <p>
+                        This experiment demonstrates that process-based parallelism can have overhead (process creation,
+                        scheduling, and resource contention).
+                        Whether parallelism improves performance depends on the workload size and the cost of managing
+                        multiple processes.
+                    </p>
+                </section>
+
+                <!-- Appendix Section -->
+                <section id="appendix" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-paperclip"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Appendix</h2>
+                            <div class="section-subtitle">Code and Supporting Screenshots</div>
+                        </div>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="../Installing Ubuntu/14. Head of the file (to make sure it's saved).png"
+                            alt="File header verification" class="large-image"
+                            onclick="openModal(this, 'Figure 3: File header verification to ensure code was properly saved')">
+                        <div class="image-caption">Figure 3: File header verification to ensure code was properly saved
+                        </div>
+                    </div>
+
+                    <h3>Complete Source Code Used</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fas fa-file-code"></i> matrix_fork.c - Parallel Matrix Multiplication
+                            </div>
+                            <div style="color: #cccccc; font-size: 0.9rem;">
+                                Source code
+                            </div>
+                        </div>
+                        <div class="code-content">
+                            <pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;time.h&gt;
+
+#define N 600
+#define PROCS 4
+
+double A[N][N], B[N][N], C[N][N];
+
+void initialize_matrices() {
+    for (int i = 0; i &lt; N; i++) {
+        for (int j = 0; j &lt; N; j++) {
+            A[i][j] = rand() % 10;
+            B[i][j] = rand() % 10;
+            C[i][j] = 0;
         }
     }
 }
 
-// ============================================================================
-// FUNCTION: multiply(start, end)
-// PURPOSE:  Computes matrix multiplication for rows [start, end)
-// ============================================================================
 void multiply(int start, int end) {
-    for (int i = start; i < end; i++) {
-        for (int j = 0; j < N; j++) {
+    for (int i = start; i &lt; end; i++) {
+        for (int j = 0; j &lt; N; j++) {
             double sum = 0;
-            for (int k = 0; k < N; k++) {
+            for (int k = 0; k &lt; N; k++) {
                 sum += A[i][k] * B[k][j];
             }
             C[i][j] = sum;
@@ -1684,92 +1657,60 @@ void multiply(int start, int end) {
     }
 }
 
-// ============================================================================
-// FUNCTION: main()
-// PURPOSE:  Coordinates parallel execution and measures performance
-// ============================================================================
 int main() {
-    // Seed random number generator
     srand(time(NULL));
-    
-    // Initialize matrices with random values
     initialize_matrices();
-    
-    // Start timing
+
     clock_t start_time = clock();
-    
-    // Calculate rows per process (with handling for remainder)
+
     int rows_per_proc = N / PROCS;
-    
-    // Create child processes
-    for (int p = 0; p < PROCS; p++) {
+
+    for (int p = 0; p &lt; PROCS; p++) {
         pid_t pid = fork();
-        
-        if (pid == 0) {  // Child process
-            // Calculate this process's row range
+        if (pid == 0) {
             int start = p * rows_per_proc;
             int end = (p == PROCS - 1) ? N : start + rows_per_proc;
-            
-            // Perform assigned computation
             multiply(start, end);
-            
-            // Child process exits after completing its work
             exit(0);
         }
-        // Parent continues to create more processes
     }
-    
-    // Parent waits for all child processes to complete
-    for (int p = 0; p < PROCS; p++) {
+
+    for (int p = 0; p &lt; PROCS; p++) {
         wait(NULL);
     }
-    
-    // Stop timing and calculate elapsed time
+
     clock_t end_time = clock();
     double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-    
-    // Output execution time
+
     printf("Execution Time: %.3f seconds\n", time_taken);
-    
+
     return 0;
 }</pre>
                         </div>
                     </div>
-                    
+
                     <h3>Additional System Screenshots</h3>
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this, 'Fully operational Ubuntu virtual machine')">
                             <img src="../Installing Ubuntu/12. Working VM.png" alt="Working VM">
                             <div class="gallery-caption">Fully operational Ubuntu virtual machine</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Successful login and system updates completion')">
+                        <div class="gallery-item" onclick="openModal(this, 'Successful login and system update')">
                             <img src="../Installing Ubuntu/11. Log in + update.png" alt="Login and updates">
-                            <div class="gallery-caption">Successful login and system updates completion</div>
+                            <div class="gallery-caption">Successful login and system update</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this, 'Virtual disk storage allocation configuration')">
+                        <div class="gallery-item" onclick="openModal(this, 'VM disk storage configuration')">
                             <img src="../Installing Ubuntu/9. Storage Configuration.png" alt="Storage configuration">
-                            <div class="gallery-caption">Virtual disk storage allocation configuration</div>
+                            <div class="gallery-caption">VM disk storage configuration</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Apple virtualization framework selection')">
                             <img src="../Installing Ubuntu/5. Apple Virtualization.png" alt="Apple virtualization">
                             <div class="gallery-caption">Apple virtualization framework selection</div>
                         </div>
                     </div>
-                    
-                    <h3>References & Resources</h3>
-                    <div class="card">
-                        <h4 class="card-title"><i class="fas fa-book"></i> Technical References</h4>
-                        <ul>
-                            <li>Operating System Concepts, 10th Edition - Silberschatz, Galvin, Gagne</li>
-                            <li>Linux System Programming - Robert Love</li>
-                            <li>POSIX.1-2017 Standard - IEEE and The Open Group</li>
-                            <li>GCC Compiler Documentation - GNU Project</li>
-                            <li>UTM Virtualization Documentation - macOS Virtualization</li>
-                        </ul>
-                    </div>
                 </section>
             </div>
-            
+
             <!-- Sidebar Column -->
             <div class="sidebar">
                 <div class="sidebar-section">
@@ -1783,7 +1724,7 @@ int main() {
                             <div class="progress-fill" style="width: 100%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="progress-container">
                         <div class="progress-label">
                             <span>Environment Setup</span>
@@ -1793,20 +1734,20 @@ int main() {
                             <div class="progress-fill" style="width: 100%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="progress-container">
                         <div class="progress-label">
-                            <span>Data Collection</span>
+                            <span>Compilation & Execution</span>
                             <span>100%</span>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 100%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="progress-container">
                         <div class="progress-label">
-                            <span>Analysis & Reporting</span>
+                            <span>Experimental Runs</span>
                             <span>100%</span>
                         </div>
                         <div class="progress-bar">
@@ -1814,57 +1755,55 @@ int main() {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <h3 class="sidebar-title"><i class="fas fa-key"></i> Key Findings</h3>
                     <ul class="key-findings">
                         <li>
                             <i class="fas fa-exclamation-circle"></i>
                             <div>
-                                <strong>Negative Speedup:</strong> Parallel execution was slower than serial for tested configurations
+                                <strong>No observed speedup:</strong> For the tested configurations, more processes did
+                                not reduce measured time
                             </div>
                         </li>
                         <li>
-                            <i class="fas fa-balance-scale"></i>
+                            <i class="fas fa-code-branch"></i>
                             <div>
-                                <strong>High Overhead:</strong> Process creation overhead dominated computation time
+                                <strong>fork() overhead matters:</strong> Creating processes can add noticeable overhead
+                                when timing values are small
                             </div>
                         </li>
                         <li>
-                            <i class="fas fa-microchip"></i>
+                            <i class="fas fa-memory"></i>
                             <div>
-                                <strong>Core Limitation:</strong> 4-core system created contention beyond optimal parallelization
+                                <strong>Memory/cache contention:</strong> Multiple processes can compete for cache and
+                                memory bandwidth in matrix multiplication
                             </div>
                         </li>
                         <li>
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-repeat"></i>
                             <div>
-                                <strong>Non-linear Scaling:</strong> Performance did not scale linearly with process count
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-cube"></i>
-                            <div>
-                                <strong>Problem Size Sensitivity:</strong> Parallel benefits only appear above certain problem sizes
+                                <strong>Multiple runs help:</strong> Repeating runs and averaging helps handle
+                                variability and timing noise
                             </div>
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <h3 class="sidebar-title"><i class="fas fa-download"></i> Quick Stats</h3>
                     <div class="card">
-                        <h4 class="card-title"><i class="fas fa-calculator"></i> Performance Metrics</h4>
+                        <h4 class="card-title"><i class="fas fa-calculator"></i> From Our Table</h4>
                         <ul>
-                            <li><strong>Best Speedup:</strong> 1.00× (No improvement)</li>
-                            <li><strong>Worst Slowdown:</strong> 0.33× (3x slower)</li>
-                            <li><strong>Avg Efficiency:</strong> 23.5%</li>
-                            <li><strong>Overhead %:</strong> 250% avg</li>
-                            <li><strong>Data Points:</strong> 18 executions</li>
+                            <li><strong>Data points:</strong> 18 executions (6 configurations × 3 runs)</li>
+                            <li><strong>Compared settings:</strong> PROCS=1 vs PROCS=4</li>
+                            <li><strong>N values:</strong> 1200, 1800, 2400</li>
+                            <li><strong>Fastest average:</strong> 0.0010 s (N=1800, PROCS=1)</li>
+                            <li><strong>Slowest average:</strong> 0.0033 s (N=2400, PROCS=4)</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <h3 class="sidebar-title"><i class="fas fa-file-pdf"></i> Report Info</h3>
                     <div class="card">
@@ -1872,23 +1811,23 @@ int main() {
                         <ul>
                             <li><strong>Format:</strong> PDF Document</li>
                             <li><strong>Length:</strong> 5-7 pages</li>
-                            <li><strong>Due Date:</strong> As per course schedule</li>
-                            <li><strong>Weight:</strong> 5% of final grade</li>
-                            <li><strong>Grading:</strong> See rubric in project description</li>
+                            <li><strong>Weight:</strong> 5% (Phase I)</li>
+                            <li><strong>Includes:</strong> VM + Linux + runs + table + discussion + code</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="full-width-container">
         <div class="content-container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>CS330 Course Project</h3>
-                    <p>Introduction to Operating Systems - Phase I: Parallel Performance Evaluation. This project provides practical experience with process creation, parallelism concepts, and systematic performance analysis in a controlled Linux environment.</p>
+                    <p>Introduction to Operating Systems - Phase I: Parallel Performance Evaluation using fork()
+                        processes in a Linux VM.</p>
                 </div>
                 <div class="footer-section">
                     <h3>College of Computer and Information Sciences</h3>
@@ -1898,29 +1837,29 @@ int main() {
                 </div>
                 <div class="footer-section">
                     <h3>Academic Integrity</h3>
-                    <p>All submissions must be original work. Any form of plagiarism or academic dishonesty will result in strict disciplinary action as per university policy. Code adaptation must be properly cited and explained.</p>
+                    <p>All submissions must be original work and follow university academic integrity policies.</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 CS330 Project Team | Phase I Report | Generated: February 2026</p>
+                <p>© 2026 CS330 Project Team | Phase I Report</p>
             </div>
         </div>
     </footer>
-    
+
     <script>
         // Tab navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelectorAll('.nav-tab');
             const sections = document.querySelectorAll('.section');
-            
+
             tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
+                tab.addEventListener('click', function () {
                     const targetId = this.getAttribute('data-target');
-                    
+
                     // Update active tab
                     tabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
+
                     // Show target section
                     sections.forEach(section => {
                         section.classList.remove('active-section');
@@ -1928,7 +1867,7 @@ int main() {
                             section.classList.add('active-section');
                         }
                     });
-                    
+
                     // Smooth scroll to section
                     document.getElementById(targetId).scrollIntoView({
                         behavior: 'smooth',
@@ -1936,7 +1875,7 @@ int main() {
                     });
                 });
             });
-            
+
             // Set first section as active by default
             if (sections.length > 0) {
                 sections[0].classList.add('active-section');
@@ -1958,7 +1897,7 @@ int main() {
             modal.style.display = "block";
             let imgSrc;
             let imgAlt;
-            
+
             if (element.tagName === 'IMG') {
                 imgSrc = element.src;
                 imgAlt = element.alt;
@@ -1966,10 +1905,10 @@ int main() {
                 imgSrc = element.querySelector('img').src;
                 imgAlt = element.querySelector('img').alt;
             }
-            
+
             modalImg.src = imgSrc;
             captionText.innerHTML = caption || imgAlt;
-            
+
             // Find the index of the clicked image
             for (let i = 0; i < images.length; i++) {
                 if (images[i].src === imgSrc) {
@@ -1994,11 +1933,11 @@ int main() {
         // Function to update modal with current image
         function updateModalImage() {
             modalImg.src = images[currentImageIndex].src;
-            
+
             // Try to find the caption
             let caption = images[currentImageIndex].alt;
             const parent = images[currentImageIndex].parentElement;
-            
+
             if (parent.classList.contains('gallery-item')) {
                 const captionElement = parent.querySelector('.gallery-caption');
                 if (captionElement) {
@@ -2010,12 +1949,12 @@ int main() {
                     caption = captionElement.textContent;
                 }
             }
-            
+
             captionText.innerHTML = caption || images[currentImageIndex].alt;
         }
 
         // Close modal when clicking X
-        closeBtn.onclick = function() {
+        closeBtn.onclick = function () {
             modal.style.display = "none";
         }
 
@@ -2024,14 +1963,14 @@ int main() {
         nextBtn.onclick = showNextImage;
 
         // Close modal when clicking outside the image
-        modal.onclick = function(event) {
+        modal.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
             }
         }
 
         // Keyboard navigation support
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (modal.style.display === "block") {
                 if (event.key === "Escape") {
                     modal.style.display = "none";
@@ -2044,21 +1983,21 @@ int main() {
         });
 
         // Add click handlers to all images
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Gallery items
             document.querySelectorAll('.gallery-item').forEach(item => {
                 const img = item.querySelector('img');
                 const caption = item.querySelector('.gallery-caption').textContent;
                 item.addEventListener('click', () => openModal(item, caption));
             });
-            
+
             // Large images
             document.querySelectorAll('.large-image').forEach(img => {
                 const container = img.parentElement;
                 const caption = container.querySelector('.image-caption').textContent;
                 img.addEventListener('click', () => openModal(img, caption));
             });
-            
+
             // Regular images in image containers
             document.querySelectorAll('.image-container img:not(.large-image)').forEach(img => {
                 const container = img.parentElement;
@@ -2068,4 +2007,5 @@ int main() {
         });
     </script>
 </body>
+
 </html>
