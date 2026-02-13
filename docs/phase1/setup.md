@@ -31,6 +31,6 @@ The following tools were installed inside the Linux environment:
 - **Linux terminal environment**
 
 ![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
-![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu%20.png)
+![Ubuntu](../Installing Ubuntu/6. Ubuntu.png)
 
 The GCC compiler and development utilities were installed via `sudo apt install build-essential`. The program was compiled with the `-Wall` flag to enable all warnings, ensuring code quality. These tools together enabled the compilation and execution of the provided C program.
