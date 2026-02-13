@@ -22,25 +22,34 @@ The objectives of this phase are:
 ### 3.1 System Environment
 All experiments were conducted inside a Linux virtual machine to ensure a consistent and reproducible execution environment. The virtual machine was created using UTM on macOS and configured to use Apple's virtualization framework.
 
-![Creating a VM with UTM](../Installing%20Ubuntu/1.%20Creating%20a%20VM%20with%20UTM.png)
-![Virtualize](../Installing%20Ubuntu/2.%20Virtualize.png)
+??? note "Creating a VM with UTM"
+    ![Creating a VM with UTM](../Installing%20Ubuntu/1.%20Creating%20a%20VM%20with%20UTM.png)
+
+??? note "Virtualize"
+    ![Virtualize](../Installing%20Ubuntu/2.%20Virtualize.png)
 
 The guest operating system used was Ubuntu 24.04.3 LTS (ARM64). 
 
-![Linux](../Installing%20Ubuntu/3.%20Linux.png)
+??? note "Linux"
+    ![Linux](../Installing%20Ubuntu/3.%20Linux.png)
 
 The virtual machine was allocated 4 GB of memory and 4 CPU cores, which provided sufficient resources for parallel execution. 
 
-![Memory and Cores](../Installing%20Ubuntu/4.%20Memory+Cores.png)
+??? note "Memory and Cores"
+    ![Memory and Cores](../Installing%20Ubuntu/4.%20Memory+Cores.png)
 
 Storage capacity was configured to ensure sufficient disk space for the operating system, source code, and experimental outputs.
 
-![Storage](../Installing%20Ubuntu/7.%20Storage.png)
-![Storage Configuration](../Installing%20Ubuntu/9.%20Storage%20Configuration.png)
+??? note "Storage"
+    ![Storage](../Installing%20Ubuntu/7.%20Storage.png)
+
+??? note "Storage Configuration"
+    ![Storage Configuration](../Installing%20Ubuntu/9.%20Storage%20Configuration.png)
 
 System verification commands (e.g., `uname -a`, `free -h`, `lsb_release -a`) were used to confirm the CPU architecture (aarch64), available memory, core count, and OS version, ensuring a stable and controlled environment.
 
-![System Specifications](../Installing%20Ubuntu/16.%20System%20Specifications.png)
+??? note "System Specifications"
+    ![System Specifications](../Installing%20Ubuntu/16.%20System%20Specifications.png)
 
 ### 3.2 Software Tools
 
@@ -56,9 +65,11 @@ Compilation command:
 gcc -Wall matrix_fork.c -o matrix_fork
 
 The -Wall flag enables all compiler warnings to help catch errors.
+??? note "Apple Virtualization"
+    ![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
 
-![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
-![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu.png)
+??? note "Ubuntu"
+    ![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu.png)
 
 The GCC compiler and development utilities were installed via `sudo apt install build-essential`. The program was compiled with the `-Wall` flag to enable all warnings, ensuring code quality. These tools together enabled the compilation and execution of the provided C program.
 
@@ -66,9 +77,11 @@ The GCC compiler and development utilities were installed via `sudo apt install 
 The provided C program performs matrix multiplication using process-based parallelism. Two input matrices are initialized with random values, and the computation of the result matrix is divided among multiple child processes.
 
 Each child process is responsible for computing a subset of matrix rows. The parent process waits for all child processes to complete before measuring the total execution time.
+??? note "Code in nano editor"
+    ![Code in nano editor](../Installing%20Ubuntu/13.%20Code%20in%20nano%20editor.png)
 
-![Code in nano editor](../Installing%20Ubuntu/13.%20Code%20in%20nano%20editor.png)
-![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
+??? note "Head of the file"
+    ![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
 
 The program uses:
 
@@ -136,7 +149,8 @@ The performance improvement was limited because:
 - Our matrices may not have been large enough to see major benefits
 - The system has to coordinate between processes
 
-![Execution Time vs. Number of Processes](../Installing Ubuntu/AllProcesses.png)
+??? note "Execution Time vs. Number of Processes"
+    ![Execution Time vs. Number of Processes](../Installing Ubuntu/AllProcesses.png)
 
 ## 6. Discussion
 
@@ -195,10 +209,16 @@ Key findings:
 
 This phase gave us baseline data on how process-based parallelism works in Linux. These results will help us understand parallel processing concepts in Phase 2.
 
-![Working VM](../Installing%20Ubuntu/12.%20Working%20VM.png)
-![Installing Kernel](../Installing%20Ubuntu/10.%20Installing%20Kernal.png)
-![Log in and update](../Installing%20Ubuntu/11.%20Log%20in%20+%20update.png)
-![Passing Memory Tests](../Installing%20Ubuntu/8.%20Passing%20Memory%20Tests.png)
+??? note "Working VM"
+    ![Working VM](../Installing%20Ubuntu/12.%20Working%20VM.png)
+??? note "Installing Kernel"
+    ![Installing Kernel](../Installing%20Ubuntu/10.%20Installing%20Kernal.png)
+
+??? note "Log in and update"
+    ![Log in and update](../Installing%20Ubuntu/11.%20Log%20in%20+%20update.png)
+
+??? note "Passing Memory Tests"
+    ![Passing Memory Tests](../Installing%20Ubuntu/8.%20Passing%20Memory%20Tests.png)
 
 **Future Work Recommendations:**
 

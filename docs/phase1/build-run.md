@@ -5,8 +5,11 @@ The provided C program performs matrix multiplication using process-based parall
 
 Each child process is responsible for computing a subset of matrix rows. The parent process waits for all child processes to complete before measuring the total execution time.
 
-![Code in nano editor](../Installing%20Ubuntu/13.%20Code%20in%20nano%20editor.png)
-![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
+??? note "Code in nano editor"
+    ![Code in nano editor](../Installing%20Ubuntu/13.%20Code%20in%20nano%20editor.png)
+
+??? note "Head of the file (to make sure it's saved)"
+    ![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
 
 The program uses:
 
@@ -87,60 +90,60 @@ To compile the program, use:
 
 ```bash
 gcc -Wall matrix_fork.c -o matrix_fork
-```
-The -Wall flag enables all compiler warnings to ensure code quality.
+````
+
+The `-Wall` flag enables all compiler warnings to ensure code quality.
 
 ## Execution
+
 To run the program with default parameters (N=600, PROCS=4):
 
 ```bash
 ./matrix_fork
 ```
+
 ## Expected Output
 
 When successfully executed, the program outputs the execution time:
 
 ```bash
-Execution Time: 0.001 seconds
-```
-![Execution Time](../Installing%20Ubuntu/15.%20Terminal%20Output.png)
+    Execution Time: 0.001 seconds
+``` 
+
+??? note "Execution Time (Terminal Output)"
+    ![Execution Time](../Installing%20Ubuntu/15.%20Terminal%20Output.png)
+
+
 
 ## Modifying Parameters
-To test different configurations, modify the #define directives at the top of the source code:
 
- 1. Open the file in nano:
+To test different configurations, modify the `#define` directives at the top of the source code:
 
-	```bash
-	nano matrix_fork.c
-	```
+1. Open the file in nano:
 
- 2. Change the values:
+    ```bash
+    nano matrix_fork.c
+    ```
 
-	```bash
-	#define N 800        // Change matrix size
-	#define PROCS 2      // Change number of processes
-	```
+2. Change the values:
+   ```c
+   #define N 800        // Change matrix size
+   #define PROCS 2      // Change number of processes
+   ```
+3. Save (Ctrl+O) and exit (Ctrl+X)
 
- 3. Save (Ctrl+O) and exit (Ctrl+X)
-
- 4. Recompile and run again
+4. Recompile and run again
 
 ## Verification Steps
 
-1. Compilation Check: No warnings or errors should appear during compilation
-
-2. Execution Check: Program should run without segmentation faults
-
-3. Output Check: Execution time should be displayed in seconds with 3 decimal places
-
-4. Process Check: Use top or htop to verify multiple processes are created during execution
+1. **Compilation Check:** No warnings or errors should appear during compilation
+2. **Execution Check:** Program should run without segmentation faults
+3. **Output Check:** Execution time should be displayed in seconds with 3 decimal places
+4. **Process Check:** Use `top` or `htop` to verify multiple processes are created during execution
 
 ## Troubleshooting
 
-- Permission denied: Run chmod +x matrix_fork after compilation
-
-- Segmentation fault: Check matrix bounds and process creation logic
-
-- Long execution time: Consider reducing N for initial testing
-
-- Compiler not found: Install build-essential: sudo apt install build-essential
+* **Permission denied:** Run `chmod +x matrix_fork` after compilation
+* **Segmentation fault:** Check matrix bounds and process creation logic
+* **Long execution time:** Consider reducing `N` for initial testing
+* **Compiler not found:** Install build tools: `sudo apt install build-essential`
