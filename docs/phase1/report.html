@@ -1187,58 +1187,82 @@
                         </div>
                         <div class="code-content">
                             <pre>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/wait.h&gt;
-#include &lt;time.h&gt;
+#include <stdlib.h>     // For rand(), srand(), exit()
+#include <unistd.h>     // For fork()
+#include <sys/wait.h>   // For wait()
+#include <time.h>       // For time()
+#include <stdio.h>      // For printf()
 
-#define N 600     // Matrix size (can be varied)
-#define PROCS 4   // Number of child processes
+#define N 600     // Matrix size (600 x 600)
+#define PROCS 4   // Number of child processes to create
 
+// Declare three global matrices A, B, and C
 double A[N][N], B[N][N], C[N][N];
 
+
+// Function to fill matrices A and B with random numbers
+// and initialize matrix C with zeros
 void initialize_matrices() {
-    for (int i = 0; i &lt; N; i++)
-        for (int j = 0; j &lt; N; j++) {
-            A[i][j] = rand() % 10;
-            B[i][j] = rand() % 10;
-            C[i][j] = 0;
+    for (int i = 0; i < N; i++)               // Loop through rows
+        for (int j = 0; j < N; j++) {         // Loop through columns
+            A[i][j] = rand() % 10;            // Random number (0–9) for A
+            B[i][j] = rand() % 10;            // Random number (0–9) for B
+            C[i][j] = 0;                      // Initialize C with 0
         }
 }
 
+
+// Function that multiplies part of the matrices
+// It multiplies rows from "start" to "end"
 void multiply(int start, int end) {
-    for (int i = start; i &lt; end; i++)
-        for (int j = 0; j &lt; N; j++)
-            for (int k = 0; k &lt; N; k++)
-                C[i][j] += A[i][k] * B[k][j];
+
+    for (int i = start; i < end; i++)         // Loop through assigned rows
+        for (int j = 0; j < N; j++)           // Loop through columns
+            for (int k = 0; k < N; k++)       // Multiply row by column
+                C[i][j] += A[i][k] * B[k][j]; // Matrix multiplication formula
 }
 
+
 int main() {
-    srand(time(NULL));
-    initialize_matrices();
 
-    clock_t start_time = clock();
+    srand(time(NULL));        // Seed random number generator
+    initialize_matrices();    // Fill matrices A and B
 
-    int rows_per_proc = N / PROCS;
+    clock_t start_time = clock();   // Start measuring time
 
-    for (int p = 0; p &lt; PROCS; p++) {
-        pid_t pid = fork();
-        if (pid == 0) {
-            int start = p * rows_per_proc;
+    int rows_per_proc = N / PROCS;  // Divide rows equally among processes
+
+    // Create child processes
+    for (int p = 0; p < PROCS; p++) {
+
+        pid_t pid = fork();         // Create new process
+
+        if (pid == 0) {             // If this is the child process
+
+            int start = p * rows_per_proc;   // Starting row for this process
+
+            // Last process takes remaining rows (in case N not divisible)
             int end = (p == PROCS - 1) ? N : start + rows_per_proc;
-            multiply(start, end);
-            exit(0);
+
+            multiply(start, end);   // Perform multiplication on assigned rows
+
+            exit(0);                // Child finishes and exits
         }
     }
 
-    for (int p = 0; p &lt; PROCS; p++)
+    // Parent waits for all child processes to finish
+    for (int p = 0; p < PROCS; p++)
         wait(NULL);
 
-    clock_t end_time = clock();
+    clock_t end_time = clock();     // Stop measuring time
+
+    // Calculate execution time in seconds
     double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-    printf("Execution Time: %.3f seconds\\n", time_taken);
-    return 0;
+    printf("Execution Time: %.3f seconds\n", time_taken);  // Print result
+
+    return 0;   // End of program
+}
 }</pre>
                         </div>
                     </div>
