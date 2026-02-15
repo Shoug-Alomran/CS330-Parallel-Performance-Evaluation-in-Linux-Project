@@ -134,7 +134,6 @@ Execution times were collected for different combinations of matrix size and num
 *Table 1: Average execution time for different configurations*
 
 ### 5.2 Performance Trends
-5.2 Performance Trends
 
 **Our results show:**
 
