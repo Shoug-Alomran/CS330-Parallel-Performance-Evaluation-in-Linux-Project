@@ -19,7 +19,9 @@ The goal of Phase 1 is to set up a Linux environment, run the program with diffe
 - Measure and compare execution times
 
 ## 3. Experimental Setup
+
 ### 3.1 System Environment
+
 All experiments were conducted inside a Linux virtual machine to ensure a consistent and reproducible execution environment. The virtual machine was created using UTM on macOS and configured to use Apple's virtualization framework.
 
 ??? note "Creating a VM with UTM"
@@ -74,6 +76,7 @@ The -Wall flag enables all compiler warnings to help catch errors.
 The GCC compiler and development utilities were installed via `sudo apt install build-essential`. The program was compiled with the `-Wall` flag to enable all warnings, ensuring code quality. These tools together enabled the compilation and execution of the provided C program.
 
 ### 3.3 Program Description
+
 The provided C program performs matrix multiplication using process-based parallelism. Two input matrices are initialized with random values, and the computation of the result matrix is divided among multiple child processes.
 
 Each child process is responsible for computing a subset of matrix rows. The parent process waits for all child processes to complete before measuring the total execution time.
@@ -119,6 +122,7 @@ No structural changes were made to the program. Only configurable parameters suc
 - N=2400, PROCS=4
 
 ## 5. Results
+
 ### 5.1 Execution Time Measurements
 Execution times were collected for different combinations of matrix size and number of processes. The results are summarized in Table 1.
 
@@ -171,14 +175,16 @@ For larger matrices (like N=10000), we would likely see bigger performance gains
 - There's a limit to how much speedup you can get (diminishing returns)
 
 ### 6.1 Implications for Parallel Programming
-The results highlight important considerations for parallel program design:
+
+**The results highlight important considerations for parallel program design:**
 
 - **Overhead Awareness:** Parallelization only improves performance when computational workload significantly exceeds process management overhead
 - **Optimal Process Count:** Using all available CPU cores (4) doesn't guarantee best performance
 - **Problem Size Threshold:** There exists a minimum problem size where parallelization becomes beneficial
 
 ### 6.2 Experimental Limitations
-Several factors may have influenced the observed results:
+
+**Several factors may have influenced the observed results:**
 
 - **Virtual Machine Environment:** Additional virtualization layer may introduce performance penalties
 - **ARM64 Architecture:** Different performance characteristics compared to x86 systems
