@@ -1,6 +1,6 @@
-# Phase I Report: Parallel Performance Evaluation
+# **Phase I Report: Parallel Performance Evaluation**
 
-## 1. Introduction
+## **1. Introduction**
 
 This project tests how using multiple processes affects the performance of matrix multiplication in Linux. We use the fork() system call to create child processes that work on different parts of the computation at the same time.
 
@@ -8,7 +8,7 @@ The program multiplies two matrices by dividing the work among multiple processe
 
 The goal of Phase 1 is to set up a Linux environment, run the program with different settings, and collect data on how long it takes to complete.
 
-## 2. Objectives
+## **2. Objectives**
 
 **The objectives of this phase are:**
 
@@ -18,9 +18,9 @@ The goal of Phase 1 is to set up a Linux environment, run the program with diffe
 - Test with different numbers of processes: 1 and 4
 - Measure and compare execution times
 
-## 3. Experimental Setup
+## **3. Experimental Setup**
 
-### 3.1 System Environment
+### **3.1 System Environment**
 
 All experiments were conducted inside a Linux virtual machine to ensure a consistent and reproducible execution environment. The virtual machine was created using UTM on macOS and configured to use Apple's virtualization framework.
 
@@ -53,7 +53,7 @@ System verification commands (e.g., `uname -a`, `free -h`, `lsb_release -a`) wer
 ??? note "System Specifications"
     ![System Specifications](../Installing%20Ubuntu/16.%20System%20Specifications.png)
 
-### 3.2 Software Tools
+### **3.2 Software Tools**
 
 **We installed the following tools in Ubuntu:**
 
@@ -75,7 +75,7 @@ The -Wall flag enables all compiler warnings to help catch errors.
 
 The GCC compiler and development utilities were installed via `sudo apt install build-essential`. The program was compiled with the `-Wall` flag to enable all warnings, ensuring code quality. These tools together enabled the compilation and execution of the provided C program.
 
-### 3.3 Program Description
+### **3.3 Program Description**
 
 The provided C program performs matrix multiplication using process-based parallelism. Two input matrices are initialized with random values, and the computation of the result matrix is divided among multiple child processes.
 
@@ -94,7 +94,7 @@ Each child process is responsible for computing a subset of matrix rows. The par
 
 No structural changes were made to the program. Only configurable parameters such as matrix size and number of processes were modified during experimentation.
 
-## 4. Methodology
+## **4. Methodology**
 
 **We tested the program by changing two things:**
 
@@ -121,9 +121,9 @@ No structural changes were made to the program. Only configurable parameters suc
 - N=2400, PROCS=1
 - N=2400, PROCS=4
 
-## 5. Results
+## **5. Results**
 
-### 5.1 Execution Time Measurements
+### **5.1 Execution Time Measurements**
 Execution times were collected for different combinations of matrix size and number of processes. The results are summarized in Table 1.
 
 | Matrix Size (N) | Processes (PROCS) | Run 1 (s) | Run 2 (s) | Run 3 (s) | Average Time (s) |
@@ -137,7 +137,7 @@ Execution times were collected for different combinations of matrix size and num
 
 *Table 1: Average execution time for different configurations*
 
-### 5.2 Performance Trends
+### **5.2 Performance Trends**
 
 **Our results show:**
 
@@ -154,7 +154,7 @@ Execution times were collected for different combinations of matrix size and num
 ??? note "Execution Time vs. Number of Processes"
     ![Execution Time vs. Number of Processes](../Installing Ubuntu/AllProcesses.png)
 
-## 6. Discussion
+## **6. Discussion**
 
 **What we observed:**
 
@@ -174,7 +174,7 @@ For larger matrices (like N=10000), we would likely see bigger performance gains
 - Small tasks don't benefit much because overhead dominates
 - There's a limit to how much speedup you can get (diminishing returns)
 
-### 6.1 Implications for Parallel Programming
+### **6.1 Implications for Parallel Programming**
 
 **The results highlight important considerations for parallel program design:**
 
@@ -182,7 +182,7 @@ For larger matrices (like N=10000), we would likely see bigger performance gains
 - **Optimal Process Count:** Using all available CPU cores (4) doesn't guarantee best performance
 - **Problem Size Threshold:** There exists a minimum problem size where parallelization becomes beneficial
 
-### 6.2 Experimental Limitations
+### **6.2 Experimental Limitations**
 
 **Several factors may have influenced the observed results:**
 
@@ -190,7 +190,7 @@ For larger matrices (like N=10000), we would likely see bigger performance gains
 - **ARM64 Architecture:** Different performance characteristics compared to x86 systems
 - **Matrix Initialization:** Random value generation may add non-parallelizable overhead
 
-## 7. Conclusion
+## **7. Conclusion**
 
 **In Phase 1, we successfully:**
 
