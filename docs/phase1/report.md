@@ -10,7 +10,7 @@ The goal of Phase 1 is to set up a Linux environment, run the program with diffe
 
 ## 2. Objectives
 
-The objectives of this phase are:
+**The objectives of this phase are:**
 
 - Set up Ubuntu Linux in a virtual machine
 - Compile and run the provided C program
@@ -53,15 +53,15 @@ System verification commands (e.g., `uname -a`, `free -h`, `lsb_release -a`) wer
 
 ### 3.2 Software Tools
 
-We installed the following tools in Ubuntu:
+**We installed the following tools in Ubuntu:**
 
 - GCC compiler (version 11.4.0)
 - Build-essential package
 
-Installation command:
+**Installation command:**
 sudo apt install build-essential
 
-Compilation command:
+**Compilation command:**
 gcc -Wall matrix_fork.c -o matrix_fork
 
 The -Wall flag enables all compiler warnings to help catch errors.
@@ -83,7 +83,7 @@ Each child process is responsible for computing a subset of matrix rows. The par
 ??? note "Head of the file"
     ![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
 
-The program uses:
+**The program uses:**
 
 - `fork()` for process creation
 - `wait()` for synchronization
@@ -92,14 +92,13 @@ The program uses:
 No structural changes were made to the program. Only configurable parameters such as matrix size and number of processes were modified during experimentation.
 
 ## 4. Methodology
-4.0 Methodology
 
-We tested the program by changing two things:
+**We tested the program by changing two things:**
 
 1. Matrix size (N): 1200, 1800, 2400
 2. Number of processes (PROCS): 1, 4
 
-Testing procedure:
+**Testing procedure:**
 
 1. Open matrix_fork.c in the nano editor
 2. Change the #define N and #define PROCS values
@@ -110,7 +109,7 @@ Testing procedure:
 7. Repeat 2 more times (3 runs total)
 8. Calculate the average time
 
-We tested 6 different combinations:
+**We tested 6 different combinations:**
 
 - N=1200, PROCS=1
 - N=1200, PROCS=4
@@ -137,13 +136,13 @@ Execution times were collected for different combinations of matrix size and num
 ### 5.2 Performance Trends
 5.2 Performance Trends
 
-Our results show:
+**Our results show:**
 
 - Using 4 processes was slightly faster than using 1 process
 - The improvement was small (about the same or slightly faster)
 - Larger matrices showed similar patterns
 
-The performance improvement was limited because:
+**The performance improvement was limited because:**
 
 - Creating processes takes time (overhead)
 - Our matrices may not have been large enough to see major benefits
@@ -154,19 +153,19 @@ The performance improvement was limited because:
 
 ## 6. Discussion
 
-What we observed:
+**What we observed:**
 
 Using multiple processes can reduce execution time, but the improvement depends on the problem size. In our tests, going from 1 to 4 processes showed minimal improvement.
 
-Why this happened:
+**Why this happened:**
 
-1. Process creation overhead: Creating processes with fork() takes time
-2. Coordination: The parent process must wait for all child processes to finish
-3. Problem size: Our matrices weren't large enough to see major speedup
+1. **Process creation overhead:** Creating processes with fork() takes time
+2. **Coordination:** The parent process must wait for all child processes to finish
+3. **Problem size:** Our matrices weren't large enough to see major speedup
 
 For larger matrices (like N=10000), we would likely see bigger performance gains because the computation time would outweigh the overhead.
 
-This aligns with OS concepts about parallelism:
+**This aligns with OS concepts about parallelism:**
 
 - Parallelism helps when the workload is large
 - Small tasks don't benefit much because overhead dominates
@@ -188,7 +187,7 @@ Several factors may have influenced the observed results:
 
 ## 7. Conclusion
 
-In Phase 1, we successfully:
+**In Phase 1, we successfully:**
 
 ✓ Set up Ubuntu Linux (version 24.04.3 LTS) in a virtual machine
 
@@ -200,7 +199,7 @@ In Phase 1, we successfully:
 
 ✓ Collected execution time data
 
-Key findings:
+**Key findings:**
 
 - Multiple processes can improve performance
 - The improvement was small for our test sizes
