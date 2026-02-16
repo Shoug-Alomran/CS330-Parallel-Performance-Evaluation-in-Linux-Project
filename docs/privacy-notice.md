@@ -2,7 +2,7 @@
 
 _Last updated: 2026_
 
-This website was created as part of the **CS 340 – Database Web Application** course project.
+This website was created as part of the **CS 330 – Introduction to Operating Systems** course project.
 
 ## Information Collection
 

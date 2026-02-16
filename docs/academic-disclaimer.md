@@ -2,7 +2,7 @@
 
 This website is an academic project developed for:
 
-**CS 340 – Database Web Application**
+**CS 330: Introduction to Operating Systems**
 
 The purpose of this site is to demonstrate:
 
