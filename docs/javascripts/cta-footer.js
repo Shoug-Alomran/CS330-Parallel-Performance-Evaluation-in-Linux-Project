@@ -48,7 +48,7 @@
     block.innerHTML = `
       <div class="custom-footer__inner">
         <div class="custom-footer__left">
-          <div class="custom-footer__brand">CS 340</div>
+          <div class="custom-footer__brand">CS 330</div>
           <div class="custom-footer__title">Get updates in your inbox</div>
 
           <form class="custom-footer__form" action="mailto:${EMAIL}" method="get">
