@@ -26,18 +26,22 @@ This project was created to demonstrate understanding of:
 <div class="grid cards" markdown>
 
 -   :material-sitemap: **Process Management**
+
     ---
     Linux process creation using `fork()` and synchronization using `wait()`.
 
 -   :material-view-parallel: **Parallel Execution**
+
     ---
     Process-based workload decomposition for matrix multiplication.
 
 -   :material-timer-outline: **Performance Measurement**
+
     ---
     Execution-time evaluation under varying configurations.
 
 -   :material-file-document-outline: **Technical Documentation**
+
     ---
     Structured reporting, reproducibility, and academic presentation.
 
