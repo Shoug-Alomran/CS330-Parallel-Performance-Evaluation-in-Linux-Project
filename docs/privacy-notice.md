@@ -25,18 +25,22 @@ This website does **not** collect, store, or process personal data.
 <div class="grid cards" markdown>
 
 -   :material-account-off-outline: **No User Accounts**
+
     ---
     Visitors cannot create accounts or submit login credentials.
 
 -   :material-cookie-off-outline: **No Tracking Cookies**
+
     ---
     The site does not use cookies for analytics or behavioral tracking.
 
 -   :material-chart-line-variant: **No Analytics Services**
+
     ---
     No third-party analytics platforms are integrated.
 
 -   :material-database-off-outline: **No Stored Submissions**
+
     ---
     The website does not store form submissions or user-generated data.
 
