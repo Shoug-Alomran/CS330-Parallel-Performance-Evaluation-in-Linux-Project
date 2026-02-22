@@ -1,69 +1,64 @@
+---
+hide:
+  - toc
+---
+
+<div class="home-hero" markdown>
+<div class="home-hero__text" markdown>
+
 # Commands Reference
 
-This page documents essential commands used throughout the CS330 project for environment setup, compilation, execution, monitoring, and system management.
+Essential Linux commands used throughout the CS330 project  
+for environment setup, compilation, execution, monitoring, and system management.
+
+</div>
+</div>
 
 ---
 
-??? example "System Verification – System Information"
+## System Verification
+
+### System Information
+
+??? example "Kernel & OS Information"
     ```bash
-    # Display all system information
-    uname -a
+    uname -a              # Full system information
+    uname -s              # Kernel name
+    uname -m              # Architecture
+    lsb_release -a        # Ubuntu version
+    cat /etc/os-release   # OS details
+    ```
 
-    # Show only kernel name
-    uname -s
+### Hardware Resources
 
-    # Show machine hardware name (architecture)
-    uname -m
-
-    # Check Ubuntu version
-    lsb_release -a
-    cat /etc/os-release
+??? example "Memory, CPU & Disk"
+    ```bash
+    free -h               # Memory usage
+    lscpu                 # CPU details
+    df -h                 # Disk usage
+    cat /proc/meminfo     # Detailed memory info
     ```
 
 ---
 
-??? example "System Verification – Hardware Resources"
+## Package Management (APT)
+
+??? example "Installing & Managing Packages"
     ```bash
-    # Display memory usage in human-readable format
-    free -h
-
-    # Show CPU information
-    lscpu
-
-    # Display disk usage
-    df -h
-
-    # Check available memory and swap
-    cat /proc/meminfo
-    ```
-
----
-
-??? example "Package Management"
-    ```bash
-    # Update package lists
     sudo apt update
-
-    # Upgrade installed packages
     sudo apt upgrade
-
-    # Install build essentials (GCC, make, etc.)
     sudo apt install build-essential
-
-    # Install specific packages
     sudo apt install nano htop git
-
-    # Remove packages
     sudo apt remove package-name
-
-    # Clean up package cache
     sudo apt autoremove
     sudo apt clean
     ```
 
 ---
 
-??? example "File Operations – Basic Commands"
+## File Operations
+
+??? example "Navigation & File Management"
     ```bash
     ls -la
     mkdir project-name
@@ -74,7 +69,6 @@ This page documents essential commands used throughout the CS330 project for env
     cp -r source_dir/ destination_dir/
 
     mv oldname.txt newname.txt
-
     rm filename.txt
     rm -r directory_name/
 
@@ -85,23 +79,27 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Text Editing (nano)"
+## Text Editing
+
+??? example "Using nano"
     ```bash
     nano filename.c
 
-    # Ctrl+O: Save
-    # Ctrl+X: Exit
-    # Ctrl+K: Cut line
-    # Ctrl+U: Paste
-    # Ctrl+W: Search
-    # Ctrl+\: Replace
+    # Ctrl+O  Save
+    # Ctrl+X  Exit
+    # Ctrl+K  Cut line
+    # Ctrl+U  Paste
+    # Ctrl+W  Search
+    # Ctrl+\  Replace
 
     less filename.c
     ```
 
 ---
 
-??? example "Compilation Commands (GCC)"
+## Compilation (GCC)
+
+??? example "Common GCC Flags"
     ```bash
     gcc program.c -o program
     gcc -Wall program.c -o program
@@ -113,7 +111,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Program Execution"
+## Program Execution
+
+??? example "Running Programs"
     ```bash
     ./program
     chmod +x program
@@ -122,13 +122,14 @@ This page documents essential commands used throughout the CS330 project for env
     ./program > output.txt
     ./program 2> error.txt
     ./program > output.txt 2>&1
-
     ./program &
     ```
 
 ---
 
-??? example "Matrix Multiplication Program"
+## CS330 Matrix Program
+
+??? example "Build & Run matrix_fork.c"
     ```bash
     gcc -Wall matrix_fork.c -o matrix_fork
     ./matrix_fork
@@ -137,15 +138,15 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Process Monitoring"
+## Process Monitoring
+
+??? example "Inspect Running Processes"
     ```bash
     ps
     ps aux
     ps -ef
-
     top
     htop
-
     pstree
     ps -u $USER
     pgrep program_name
@@ -154,7 +155,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Process Control"
+## Process Control
+
+??? example "Signals & Termination"
     ```bash
     kill -SIGINT process_id
     kill process_id
@@ -170,7 +173,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Background & Foreground Jobs"
+## Background & Job Control
+
+??? example "Managing Jobs"
     ```bash
     ./program &
     jobs
@@ -181,19 +186,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Network & SSH"
-    ```bash
-    ip addr show
-    ifconfig
-    ping google.com
-    netstat -tulpn
-    nslookup google.com
-    dig google.com
-    ```
+## Performance Monitoring
 
----
-
-??? example "System Monitoring & Performance"
+??? example "CPU & System Performance"
     ```bash
     top
     htop
@@ -205,7 +200,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Logs and System Information"
+## Logs & System Status
+
+??? example "System Logs"
     ```bash
     dmesg | tail -50
     journalctl -xe
@@ -217,7 +214,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Git Version Control"
+## Git Version Control
+
+??? example "Basic Git Workflow"
     ```bash
     git clone https://github.com/username/repo.git
     git status
@@ -231,7 +230,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Virtual Machine Management (UTM / Virtualization)"
+## Virtualization (UTM / VM Diagnostics)
+
+??? example "Virtual Machine Checks"
     ```bash
     ps aux | grep -i utm
     systemctl status libvirtd
@@ -241,7 +242,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Terminal Shortcuts"
+## Terminal Shortcuts
+
+??? example "Keyboard Shortcuts"
     ```
     Ctrl+C   Interrupt process
     Ctrl+Z   Suspend process
@@ -257,7 +260,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Command Combinations"
+## Command Operators
+
+??? example "Chaining & Redirection"
     ```bash
     command1 && command2
     command1 ; command2
@@ -269,7 +274,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Complete Build–Run Workflow"
+## Complete Build–Run Workflow
+
+??? example "Full Project Cycle"
     ```bash
     cd ~/os-project/src
     nano matrix_fork.c
@@ -280,7 +287,9 @@ This page documents essential commands used throughout the CS330 project for env
 
 ---
 
-??? example "Quick Testing Workflow"
+## Quick Testing Loops
+
+??? example "Automated Test Runs"
     ```bash
     nano matrix_fork.c && gcc -Wall matrix_fork.c -o matrix_fork && ./matrix_fork
 

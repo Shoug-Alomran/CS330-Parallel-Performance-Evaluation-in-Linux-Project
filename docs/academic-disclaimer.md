@@ -1,29 +1,84 @@
+---
+hide:
+  - toc
+---
+
+<div class="home-hero" markdown>
+<div class="home-hero__text" markdown>
+
 # Academic Disclaimer
 
-This website is an academic project developed for:
+This website documents coursework developed for:
 
-**CS 330: Introduction to Operating Systems**
+**CS330 · Introduction to Operating Systems**
 
-The purpose of this site is to demonstrate:
+It is published for academic demonstration and structured documentation purposes.
 
-- Database design principles  
-- Conceptual and logical modeling  
-- SQL implementation  
-- Application integration  
-- System documentation  
+</div>
+</div>
 
-## Educational Purpose Only
+---
 
-This project is intended solely for educational and evaluation purposes.
+## Educational Purpose
 
-It is **not** a production system and should not be used for real-world data management or decision-making.
+This project was created to demonstrate understanding of:
 
-## Data Usage
+<div class="grid cards" markdown>
 
-All data presented within this project is fictional or generated for demonstration purposes.
+-   :material-sitemap: **Process Management**
+    ---
+    Linux process creation using `fork()` and synchronization using `wait()`.
 
-No real individuals, medical records, or confidential information are used.
+-   :material-view-parallel: **Parallel Execution**
+    ---
+    Process-based workload decomposition for matrix multiplication.
 
-## Intellectual Ownership
+-   :material-timer-outline: **Performance Measurement**
+    ---
+    Execution-time evaluation under varying configurations.
 
-All content, documentation, and implementation work presented here are part of a university coursework submission.
+-   :material-file-document-outline: **Technical Documentation**
+    ---
+    Structured reporting, reproducibility, and academic presentation.
+
+</div>
+
+---
+
+## Intended Use
+
+This project is intended **solely for educational and evaluation purposes**.
+
+It is:
+
+- Not a production system  
+- Not optimized for commercial deployment  
+- Not intended for real-world performance benchmarking  
+
+The implementation prioritizes conceptual clarity over production-level optimization.
+
+---
+
+## Data & Experimental Context
+
+All experiments were conducted in a controlled virtualized Linux environment.
+
+The matrix data used during execution:
+
+- Is randomly generated at runtime  
+- Contains no real-world or personal information  
+- Is used strictly for computational performance testing  
+
+---
+
+## Academic Integrity
+
+All content, documentation, and experimental results presented on this site:
+
+- Are part of a university coursework submission  
+- Reflect original academic work unless otherwise cited  
+- Comply with institutional academic integrity policies  
+
+---
+
+This site serves as a documented record of coursework and experimental findings within the scope of CS330.

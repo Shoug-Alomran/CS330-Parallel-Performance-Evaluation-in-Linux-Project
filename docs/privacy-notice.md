@@ -1,31 +1,76 @@
+---
+hide:
+  - toc
+---
+
+<div class="home-hero" markdown>
+<div class="home-hero__text" markdown>
+
 # Privacy Notice
 
 _Last updated: 2026_
 
-This website was created as part of the **CS 330 – Introduction to Operating Systems** course project.
+This website is part of the **CS330 · Introduction to Operating Systems**
+course project and is published for academic documentation purposes.
 
-## Information Collection
+</div>
+</div>
+
+---
+
+## Data Collection Policy
 
 This website does **not** collect, store, or process personal data.
 
-- No user accounts are created.
-- No cookies are used for tracking.
-- No analytics services are integrated.
-- No form submissions are stored in a database.
+<div class="grid cards" markdown>
 
-If you choose to contact the project author via email, your message is handled through your own email provider and is not stored by this website.
+-   :material-account-off-outline: **No User Accounts**
+    ---
+    Visitors cannot create accounts or submit login credentials.
+
+-   :material-cookie-off-outline: **No Tracking Cookies**
+    ---
+    The site does not use cookies for analytics or behavioral tracking.
+
+-   :material-chart-line-variant: **No Analytics Services**
+    ---
+    No third-party analytics platforms are integrated.
+
+-   :material-database-off-outline: **No Stored Submissions**
+    ---
+    The website does not store form submissions or user-generated data.
+
+</div>
+
+---
+
+## Email Communication
+
+If you contact the project author via email:
+
+- Your message is handled through your own email provider  
+- The website itself does not store or process email data  
+
+---
 
 ## Academic Context
 
-Any data displayed within this project is either:
+All data used within this project is:
 
-- Sample data created for demonstration purposes, or  
-- Mock data used strictly for academic evaluation.
+- Randomly generated or sample data  
+- Created strictly for academic experimentation  
+- Not associated with real individuals  
 
-No real patient, medical, or personal records are used.
+No personal, medical, or confidential information is used.
+
+---
 
 ## Contact
 
-For questions regarding this notice, please contact:
+For questions regarding this Privacy Notice:
 
 **inquiry@shoug-tech.com**
+
+---
+
+This notice reflects the academic and non-commercial nature of this project.
