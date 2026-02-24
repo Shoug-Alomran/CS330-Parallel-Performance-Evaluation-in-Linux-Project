@@ -6,15 +6,14 @@ hide:
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
-# **Parallel Performance Evaluation in Linux (Process-based Matrix Multiplication)**
+# **Parallel Performance Evaluation in Linux**
 
+This project provides hands-on experimentation with Linux process creation and parallel execution using C and Java.
 
-This project provides hands-on experimentation with Linux process creation and parallel execution using C.
+You will compile and execute system-level programs, vary configuration parameters, measure execution time, and analyze performance behavior across different parallel configurations.
 
-You will compile and run a provided matrix multiplication program, vary configuration parameters (matrix size `N` and number of processes `PROCS`), and analyze execution-time behavior across different setups.
-
-[Build & Run](../Phase-1/build-run.md){ .md-button .md-button--primary }
-[Go to Phase I](../Phase-1/index.md){ .md-button }
+[Go to Phase I](../Phase-1/index.md){ .md-button .md-button--primary }
+[Go to Phase II](../Phase-2/index.md){ .md-button }
 
 </div>
 </div>
@@ -25,25 +24,25 @@ You will compile and run a provided matrix multiplication program, vary configur
 
 <div class="grid cards" markdown>
 
--   :material-source-fork: **Process Creation**
+-   :material-source-fork: **Process-Based Parallelism**
 
     ---
-    Understand how Linux creates child processes using `fork()`, how work is split across processes, and how the parent synchronizes using `wait()`.
+    Use `fork()` and `wait()` in Linux to divide matrix multiplication work across multiple processes.
 
--   :material-view-parallel: **Parallel Execution**
-
-    ---
-    Execute matrix multiplication with different `PROCS` values and observe how parallelism impacts runtime and CPU utilization.
-
--   :material-timer-outline: **Timing & Analysis**
+-   :material-vector-polyline: **Thread-Based Parallelism**
 
     ---
-    Measure execution time using `clock()` and compare results across configurations to evaluate scaling behavior.
+    Implement Java multithreading to compute the sum of cubes and analyze scalability using different thread counts.
+
+-   :material-timer-outline: **Timing & Performance Analysis**
+
+    ---
+    Measure execution time using `clock()` in C and `System.nanoTime()` in Java. Evaluate speedup and efficiency.
 
 -   :material-file-document-outline: **Structured Documentation**
 
     ---
-    Provide reproducible build/run steps, verification checks, troubleshooting notes, and clean reporting for Phase I and Phase II.
+    Provide reproducible setup steps, controlled experiments, formatted results, and structured reporting across both phases.
 
 </div>
 
@@ -51,21 +50,24 @@ You will compile and run a provided matrix multiplication program, vary configur
 
 ## Objectives
 
-- Understand process creation and management in Linux  
-- Explore parallel execution using multiple processes  
-- Measure and analyze execution time under different configurations  
-- Evaluate performance and scalability behavior  
+- Understand Linux process creation and synchronization  
+- Explore multithreading using Java  
+- Measure execution time under different parallel configurations  
+- Analyze scalability and overhead behavior  
+- Compare process-based and thread-based parallelism  
 - Practice structured technical documentation  
 
 ---
 
 ## Scope
 
-This project emphasizes **experimental evaluation** rather than algorithm design.
+This project emphasizes experimental evaluation and performance analysis.
 
-A provided C program is used as the baseline for experimentation. Modifications are limited to configurable parameters (e.g., `N`, `PROCS`) to ensure consistent and comparable results.
+Phase I focuses on process-based matrix multiplication in Linux using C.
 
-All work is performed in a Linux environment (Ubuntu) to ensure reproducibility.
+Phase II focuses on thread-based parallel computation in Java and formal performance evaluation using speedup metrics.
+
+All experiments are conducted in controlled environments to ensure reproducibility and valid comparison.
 
 ---
 
@@ -73,19 +75,19 @@ All work is performed in a Linux environment (Ubuntu) to ensure reproducibility.
 
 <div class="grid cards" markdown>
 
--   :material-numeric-1-circle: **Phase I — Setup + Experimentation**
+-   :material-numeric-1-circle: **Phase I · Process-Based Matrix Multiplication**
 
     ---
-    Set up the Linux environment, compile and execute the program, run multiple configurations, and collect performance measurements.
+    Set up Linux, compile the C program, vary matrix size and number of processes, and collect execution-time measurements.
 
-    [Phase I Overview](../Phase%201/)
+    [Phase I Overview](../Phase-1/index.md)
 
--   :material-numeric-2-circle: **Phase II — Extension + Reporting**
+-   :material-numeric-2-circle: **Phase II · Multithreaded Performance Evaluation**
 
     ---
-    Phase II builds on Phase I according to instructor-provided requirements (additional experiments, deeper analysis, final report).
+    Implement configurable thread counts, perform controlled benchmarks on a single machine, compute speedup, and analyze scalability limits.
 
-    [Phase II Overview](../Phase%202/)
+    [Phase II Overview](../Phase-2/index.md)
 
 </div>
 
@@ -98,17 +100,27 @@ All work is performed in a Linux environment (Ubuntu) to ensure reproducibility.
 -   :material-linux: **Linux (Ubuntu)**
 
     ---
-    Primary runtime environment for process creation, execution, and measurement.
+    Runtime environment for process creation and benchmarking in Phase I.
 
 -   :material-language-c: **C + GCC**
 
     ---
-    System-level programming in C compiled using `gcc`.
+    System-level programming for process-based parallel matrix multiplication.
+
+-   :material-language-java: **Java**
+
+    ---
+    Multithreaded implementation and performance measurement in Phase II.
 
 -   :material-source-fork: **fork() / wait()**
 
     ---
-    Process creation and synchronization primitives used to parallelize computation.
+    Process management primitives used in Phase I.
+
+-   :material-vector-polyline: **Java Threads**
+
+    ---
+    Thread-based workload division and synchronization in Phase II.
 
 -   :material-book-open-variant: **MkDocs (Material)**
 
@@ -116,5 +128,3 @@ All work is performed in a Linux environment (Ubuntu) to ensure reproducibility.
     Documentation framework used to publish a clean, structured, and reproducible project site.
 
 </div>
-
----
