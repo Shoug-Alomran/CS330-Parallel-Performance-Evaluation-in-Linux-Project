@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://operating-systems.shoug-tech.com/sitemap.xml
