@@ -82,9 +82,10 @@ Each team member contributes to environment setup, experimentation, performance 
     ---
     View task assignments, responsibilities, and progress tracking.
 
-- [Phase 1](./Phase-1.html)
-- [Phase 2](./Phase-2.html)
+    **Project Phases**
 
+    - [Phase 1](./Phase-1.md)
+    - [Phase 2](./Phase-2.md)
 
 </div>
 
