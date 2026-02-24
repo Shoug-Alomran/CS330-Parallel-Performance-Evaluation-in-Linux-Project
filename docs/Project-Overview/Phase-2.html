@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 330 Project Plan Dashboard – Phase 2</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Arabic:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-bg: #eef2ff;
+            --blue: #2563eb;
+            --blue-bg: #eff6ff;
+            --green: #16a34a;
+            --green-bg: #f0fdf4;
+            --orange: #ea580c;
+            --orange-bg: #fff7ed;
+            --pink: #db2777;
+            --pink-bg: #fdf2f8;
+            --teal: #0d9488;
+            --teal-bg: #f0fdfa;
+            --gray: #6b7280;
+            --gray-light: #f3f4f6;
+            --border: #e5e7eb;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        [lang="ar"] body,
+        body.rtl {
+            font-family: 'IBM Plex Arabic', sans-serif;
+            direction: rtl;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 16px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gray-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+            min-width: 220px;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 13px;
+            color: var(--text);
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .lang-btn {
+            padding: 7px 14px;
+            cursor: pointer;
+            background: var(--white);
+            border: none;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--gray-light);
+        }
+
+        /* ── TABS ── */
+        .tabs-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 18px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.18s;
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* ── PERSON HEADER CARD ── */
+        .person-header {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .person-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .person-info h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .person-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .person-meta {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ── PHASE CARDS ── */
+        .phase-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border-left: 4px solid var(--primary);
+        }
+
+        .phase-header {
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .phase-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .phase-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.03em;
+        }
+
+        .phase-body {
+            padding: 0 24px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .phase-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            padding: 14px 0 12px;
+            line-height: 1.6;
+        }
+
+        .step-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        .step-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-bg);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .deliverable-box {
+            margin-top: 16px;
+            background: var(--gray-light);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+        }
+
+        .deliverable-box strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+
+        /* ── SHARED / NOTES / TOOLS ── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .person-meta {
+                display: none;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 15px;
+            }
+        }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .info-card ul li {
+            font-size: 13.5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+
+        .bullet-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            gap: 4px;
+        }
+
+        .flow-person {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--primary-bg);
+            color: var(--primary);
+        }
+
+        .flow-arrow-icon {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .warning-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #9a3412;
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        /* Color themes per person */
+        .theme-aryam {
+            --accent: #4f46e5;
+            --accent-bg: #eef2ff;
+        }
+
+        .theme-layan {
+            --accent: #2563eb;
+            --accent-bg: #eff6ff;
+        }
+
+        .theme-danah {
+            --accent: #16a34a;
+            --accent-bg: #f0fdf4;
+        }
+
+        .theme-shoug {
+            --accent: #ea580c;
+            --accent-bg: #fff7ed;
+        }
+
+        .theme-rana {
+            --accent: #db2777;
+            --accent-bg: #fdf2f8;
+        }
+
+        .theme-aryam .phase-card {
+            border-left-color: #4f46e5;
+        }
+
+        .theme-layan .phase-card {
+            border-left-color: #2563eb;
+        }
+
+        .theme-danah .phase-card {
+            border-left-color: #16a34a;
+        }
+
+        .theme-shoug .phase-card {
+            border-left-color: #ea580c;
+        }
+
+        .theme-rana .phase-card {
+            border-left-color: #db2777;
+        }
+
+        .theme-aryam .step-check,
+        .theme-aryam .step-num {
+            background: #4f46e5;
+        }
+
+        .theme-aryam .step-num {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .theme-layan .step-check {
+            background: #2563eb;
+        }
+
+        .theme-layan .step-num {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .theme-danah .step-check {
+            background: #16a34a;
+        }
+
+        .theme-danah .step-num {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .theme-shoug .step-check {
+            background: #ea580c;
+        }
+
+        .theme-shoug .step-num {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .theme-rana .step-check {
+            background: #db2777;
+        }
+
+        .theme-rana .step-num {
+            background: #fdf2f8;
+            color: #db2777;
+        }
+
+        .ar-text {
+            display: none;
+        }
+
+        body.arabic .en-text {
+            display: none;
+        }
+
+        body.arabic .ar-text {
+            display: inline;
+        }
+
+        body.arabic {
+            font-family: 'IBM Plex Arabic', sans-serif;
+            direction: rtl;
+        }
+
+        body.arabic .header,
+        body.arabic .tabs-bar {
+            direction: rtl;
+        }
+
+        body.arabic .person-meta {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        body.arabic .phase-card {
+            border-left: none;
+            border-right: 4px solid var(--primary);
+        }
+
+        body.arabic .theme-aryam .phase-card {
+            border-right-color: #4f46e5;
+        }
+
+        body.arabic .theme-layan .phase-card {
+            border-right-color: #2563eb;
+        }
+
+        body.arabic .theme-danah .phase-card {
+            border-right-color: #16a34a;
+        }
+
+        body.arabic .theme-shoug .phase-card {
+            border-right-color: #ea580c;
+        }
+
+        body.arabic .theme-rana .phase-card {
+            border-right-color: #db2777;
+        }
+
+        body.arabic .flow-arrow {
+            direction: rtl;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-icon">🎓</div>
+            <h1>CS 330 Project Plan Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" placeholder="Search for tasks, phases, deliverables…" />
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn active" id="btn-en" onclick="setLang('en')">
+                    🌐 <span>English</span>
+                </button>
+                <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">
+                    🌐 <span>العربية</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- TABS -->
+    <div class="tabs-bar">
+        <button class="tab-btn active" onclick="showTab('aryam', this)">
+            <span class="tab-icon" style="background:#eef2ff; color:#4f46e5;">🖥</span>
+            <span class="en-text">Aryam</span><span class="ar-text">أريم</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('layan', this)">
+            <span class="tab-icon" style="background:#eff6ff; color:#2563eb;">✏️</span>
+            <span class="en-text">Layan</span><span class="ar-text">ليان</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('danah', this)">
+            <span class="tab-icon" style="background:#f0fdf4; color:#16a34a;">📋</span>
+            <span class="en-text">Danah</span><span class="ar-text">دانه</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('shoug', this)">
+            <span class="tab-icon" style="background:#fff7ed; color:#ea580c;">👥</span>
+            <span class="en-text">Shoug</span><span class="ar-text">شوق</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('rana', this)">
+            <span class="tab-icon" style="background:#fdf2f8; color:#db2777;">📄</span>
+            <span class="en-text">Rana</span><span class="ar-text">رنا</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('shared', this)">
+            <span class="tab-icon" style="background:#f0fdf4; color:#0d9488;">🤝</span>
+            <span class="en-text">Shared Work</span><span class="ar-text">العمل المشترك</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('notes', this)">
+            <span class="tab-icon" style="background:#fefce8; color:#b45309;">📝</span>
+            <span class="en-text">Notes</span><span class="ar-text">ملاحظات</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('tools', this)">
+            <span class="tab-icon" style="background:#f5f3ff; color:#7c3aed;">🔧</span>
+            <span class="en-text">Tools</span><span class="ar-text">الأدوات</span>
+        </button>
+    </div>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- ── ARYAM TAB ── -->
+        <div id="tab-aryam" class="tab-panel active theme-aryam">
+            <div class="person-header">
+                <div class="person-avatar" style="background:#eef2ff;">🖥️</div>
+                <div class="person-info">
+                    <h2>
+                        <span class="en-text">Aryam — Metrics & Tables Owner</span>
+                        <span class="ar-text">أريم — مالكة المقاييس والجداول</span>
+                    </h2>
+                    <p style="color:var(--text-muted);font-size:13px;">
+                        <span class="en-text">Works only from measurement data. Computes speedup, % improvement, and
+                            creates formatted results tables.</span>
+                        <span class="ar-text">تعمل فقط من بيانات القياس. تحسب التسريع ونسبة التحسين وتنشئ جداول النتائج
+                            المنسقة.</span>
+                    </p>
+                    <div class="person-tags">
+                        <span class="tag" style="background:#eef2ff;color:#4f46e5;">
+                            <span class="en-text">Metrics</span><span class="ar-text">المقاييس</span>
+                        </span>
+                        <span class="tag" style="background:#eef2ff;color:#4f46e5;">
+                            <span class="en-text">Tables</span><span class="ar-text">الجداول</span>
+                        </span>
+                        <span class="tag" style="background:#eef2ff;color:#4f46e5;">
+                            <span class="en-text">Speedup Calculations</span><span class="ar-text">حسابات التسريع</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="person-meta">
+                    <div class="meta-item">📊 <span class="en-text">Phase 1-7</span><span class="ar-text">المراحل
+                            ١-٧</span></div>
+                    <div class="meta-item">🛠️ <span class="en-text">Excel / Sheets</span><span class="ar-text">إكسل /
+                            شيتس</span></div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Responsibilities</span><span class="ar-text">المسؤوليات</span></h3>
+                    <span class="phase-badge" style="background:#eef2ff;color:#4f46e5;">
+                        <span class="en-text">Metrics</span><span class="ar-text">مقاييس</span>
+                    </span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-check">✓</div><span class="en-text">Compute speedup</span><span
+                                class="ar-text">حساب التسريع</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check">✓</div><span class="en-text">Compute % improvement</span><span
+                                class="ar-text">حساب نسبة التحسين</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check">✓</div><span class="en-text">Create formatted results
+                                tables</span><span class="ar-text">إنشاء جداول النتائج المنسقة</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check">✓</div><span class="en-text">Prepare tables for report
+                                insertion</span><span class="ar-text">تحضير الجداول لإدراجها في التقرير</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Step-by-Step Process</span><span class="ar-text">الخطوات التفصيلية</span>
+                    </h3>
+                    <span class="phase-badge" style="background:#eef2ff;color:#4f46e5;">
+                        <span class="en-text">Process</span><span class="ar-text">العملية</span>
+                    </span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-num">1</div><span class="en-text">Import dataset from Shoug (Person
+                                2).</span><span class="ar-text">استيراد مجموعة البيانات من شوق.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">2</div><span class="en-text">Verify averages (if not already
+                                done).</span><span class="ar-text">التحقق من المتوسطات إذا لم تُحسب مسبقاً.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">3</div><span class="en-text">Create main table: Threads | Avg Time |
+                                Speedup | % Improvement</span><span class="ar-text">إنشاء الجدول الرئيسي: الخيوط | متوسط
+                                الوقت | التسريع | نسبة التحسين</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">4</div><span class="en-text">Compute: Speedup = T(1)/T(n) and %
+                                Improvement = ((T1−Tn)/T1)×100</span><span class="ar-text">الحساب: التسريع = T(1)/T(n)
+                                ونسبة التحسين = ((T1−Tn)/T1)×100</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">5</div><span class="en-text">Create additional supporting table if
+                                needed (raw vs average).</span><span class="ar-text">إنشاء جدول دعم إضافي عند الحاجة
+                                (خام مقابل متوسط).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">6</div><span class="en-text">Format tables professionally.</span><span
+                                class="ar-text">تنسيق الجداول باحترافية.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">7</div><span class="en-text">Export final tables
+                                (Excel/PDF).</span><span class="ar-text">تصدير الجداول النهائية (Excel/PDF).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num">8</div><span class="en-text">Deliver tables to Layan and
+                                Rana.</span><span class="ar-text">تسليم الجداول لليان ورنا.</span>
+                        </li>
+                    </ul>
+                    <div class="deliverable-box">
+                        <strong><span class="en-text">📦 Deliverable</span><span class="ar-text">📦
+                                المُخرَج</span></strong>
+                        <span class="en-text">Final formatted results tables (Excel/PDF)</span>
+                        <span class="ar-text">جداول النتائج المنسقة النهائية (Excel/PDF)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── LAYAN TAB ── -->
+        <div id="tab-layan" class="tab-panel theme-layan">
+            <div class="person-header">
+                <div class="person-avatar" style="background:#eff6ff;">✏️</div>
+                <div class="person-info">
+                    <h2>
+                        <span class="en-text">Layan — Graphs & Performance Analysis Owner</span>
+                        <span class="ar-text">ليان — مالكة الرسوم البيانية وتحليل الأداء</span>
+                    </h2>
+                    <p style="color:var(--text-muted);font-size:13px;">
+                        <span class="en-text">Works from final results table. Creates graphs, identifies performance
+                            decrease point, and writes technical interpretation.</span>
+                        <span class="ar-text">تعمل من جدول النتائج النهائي. تُنشئ الرسوم البيانية وتُحدد نقطة انخفاض
+                            الأداء وتكتب التفسير التقني.</span>
+                    </p>
+                    <div class="person-tags">
+                        <span class="tag" style="background:#eff6ff;color:#2563eb;"><span
+                                class="en-text">Graphs</span><span class="ar-text">رسوم بيانية</span></span>
+                        <span class="tag" style="background:#eff6ff;color:#2563eb;"><span class="en-text">Performance
+                                Analysis</span><span class="ar-text">تحليل الأداء</span></span>
+                        <span class="tag" style="background:#eff6ff;color:#2563eb;"><span class="en-text">Technical
+                                Writing</span><span class="ar-text">كتابة تقنية</span></span>
+                    </div>
+                </div>
+                <div class="person-meta">
+                    <div class="meta-item">📈 <span class="en-text">Charts & Analysis</span><span class="ar-text">مخططات
+                            وتحليل</span></div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Responsibilities</span><span class="ar-text">المسؤوليات</span></h3>
+                    <span class="phase-badge" style="background:#eff6ff;color:#2563eb;"><span
+                            class="en-text">Analysis</span><span class="ar-text">تحليل</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-check" style="background:#2563eb;">✓</div><span class="en-text">Create
+                                required graphs</span><span class="ar-text">إنشاء الرسوم البيانية المطلوبة</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#2563eb;">✓</div><span class="en-text">Identify
+                                performance decrease point</span><span class="ar-text">تحديد نقطة انخفاض الأداء</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#2563eb;">✓</div><span class="en-text">Write short
+                                technical interpretation</span><span class="ar-text">كتابة تفسير تقني مختصر</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Step-by-Step Process</span><span class="ar-text">الخطوات التفصيلية</span>
+                    </h3>
+                    <span class="phase-badge" style="background:#eff6ff;color:#2563eb;"><span
+                            class="en-text">Process</span><span class="ar-text">العملية</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">1</div><span
+                                class="en-text">Import final table from Aryam.</span><span class="ar-text">استيراد
+                                الجدول النهائي من أريم.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">2</div><span
+                                class="en-text">Create graph: Threads vs Avg Execution Time.</span><span
+                                class="ar-text">إنشاء رسم بياني: الخيوط مقابل متوسط وقت التنفيذ.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">3</div><span
+                                class="en-text">Create graph: Threads vs Speedup.</span><span class="ar-text">إنشاء رسم
+                                بياني: الخيوط مقابل التسريع.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">4</div><span
+                                class="en-text">Label axes clearly.</span><span class="ar-text">وضع تسميات واضحة
+                                للمحاور.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">5</div><span
+                                class="en-text">Identify thread count where Avg Time increases compared to previous
+                                count.</span><span class="ar-text">تحديد عدد الخيوط التي يرتفع عندها متوسط الوقت.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">6</div><span
+                                class="en-text">Write short explanation: speedup trend, overhead causes, decrease
+                                point.</span><span class="ar-text">كتابة شرح مختصر: اتجاه التسريع وأسباب الحمل الزائد
+                                ونقطة الانخفاض.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">7</div><span
+                                class="en-text">Export graphs as PNG.</span><span class="ar-text">تصدير الرسوم البيانية
+                                بصيغة PNG.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#eff6ff;color:#2563eb;">8</div><span
+                                class="en-text">Deliver graphs + explanation to Rana.</span><span class="ar-text">تسليم
+                                الرسوم البيانية والشرح لرنا.</span>
+                        </li>
+                    </ul>
+                    <div class="deliverable-box">
+                        <strong><span class="en-text">📦 Deliverables</span><span class="ar-text">📦
+                                المُخرَجات</span></strong>
+                        <span class="en-text">Graph images (PNG) + Performance interpretation paragraph</span>
+                        <span class="ar-text">صور الرسوم البيانية (PNG) + فقرة تفسير الأداء</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── DANAH TAB ── -->
+        <div id="tab-danah" class="tab-panel theme-danah">
+            <div class="person-header">
+                <div class="person-avatar" style="background:#f0fdf4;">📋</div>
+                <div class="person-info">
+                    <h2>
+                        <span class="en-text">Danah — Code Modification Owner</span>
+                        <span class="ar-text">دانه — مالكة تعديل الكود</span>
+                    </h2>
+                    <p style="color:var(--text-muted);font-size:13px;">
+                        <span class="en-text">Fully independent. Modifies the Java program, ensures correctness, and
+                            freezes the final version before benchmarking.</span>
+                        <span class="ar-text">مستقلة تماماً. تُعدّل برنامج Java وتضمن صحته وتُجمّد النسخة النهائية قبل
+                            القياس.</span>
+                    </p>
+                    <div class="person-tags">
+                        <span class="tag" style="background:#f0fdf4;color:#16a34a;"><span
+                                class="en-text">Java</span><span class="ar-text">Java</span></span>
+                        <span class="tag" style="background:#f0fdf4;color:#16a34a;"><span class="en-text">Code
+                                Modification</span><span class="ar-text">تعديل الكود</span></span>
+                        <span class="tag" style="background:#f0fdf4;color:#16a34a;"><span
+                                class="en-text">Multithreading</span><span class="ar-text">تعدد الخيوط</span></span>
+                    </div>
+                </div>
+                <div class="person-meta">
+                    <div class="meta-item">☕ <span class="en-text">Java JDK</span></div>
+                    <div class="meta-item">🔒 <span class="en-text">Fully Independent</span><span class="ar-text">مستقلة
+                            تماماً</span></div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Responsibilities</span><span class="ar-text">المسؤوليات</span></h3>
+                    <span class="phase-badge" style="background:#f0fdf4;color:#16a34a;"><span
+                            class="en-text">Development</span><span class="ar-text">تطوير</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Modify
+                                program to compute sum of cubes</span><span class="ar-text">تعديل البرنامج لحساب مجموع
+                                المكعبات</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Ensure
+                                array values are &lt; 100</span><span class="ar-text">التأكد من أن قيم المصفوفة أقل من
+                                100</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Make thread
+                                count configurable (1, 2, 4, 6, 8)</span><span class="ar-text">جعل عدد الخيوط قابلاً
+                                للضبط (1، 2، 4، 6، 8)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Verify
+                                correctness (parallel == single-thread result)</span><span class="ar-text">التحقق من
+                                الصحة (النتيجة الموازية == نتيجة الخيط الواحد)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Clean and
+                                comment the code</span><span class="ar-text">تنظيف الكود وإضافة التعليقات</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#16a34a;">✓</div><span class="en-text">Freeze
+                                final version before benchmarking</span><span class="ar-text">تجميد النسخة النهائية قبل
+                                القياس</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Step-by-Step Process</span><span class="ar-text">الخطوات التفصيلية</span>
+                    </h3>
+                    <span class="phase-badge" style="background:#f0fdf4;color:#16a34a;"><span
+                            class="en-text">Process</span><span class="ar-text">العملية</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">1</div><span
+                                class="en-text">Open existing Java program.</span><span class="ar-text">فتح برنامج Java
+                                الموجود.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">2</div><span
+                                class="en-text">Modify computation logic to calculate x³.</span><span
+                                class="ar-text">تعديل منطق الحساب لحساب x³.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">3</div><span
+                                class="en-text">Ensure random/generated values are strictly &lt; 100.</span><span
+                                class="ar-text">التأكد من أن القيم العشوائية/المولّدة أقل من 100 بالتأكيد.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">4</div><span
+                                class="en-text">Implement configurable thread count parameter.</span><span
+                                class="ar-text">تطبيق معامل عدد الخيوط القابل للضبط.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">5</div><span
+                                class="en-text">Implement correctness check comparing multi-thread and single-thread
+                                result.</span><span class="ar-text">تطبيق التحقق من الصحة بمقارنة نتيجتي تعدد الخيوط
+                                والخيط الواحد.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">6</div><span
+                                class="en-text">Compile and test functionality (not performance).</span><span
+                                class="ar-text">تجميع واختبار الوظائف (وليس الأداء).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">7</div><span
+                                class="en-text">Clean and comment code clearly.</span><span class="ar-text">تنظيف الكود
+                                وإضافة تعليقات واضحة.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">8</div><span
+                                class="en-text">Freeze file.</span><span class="ar-text">تجميد الملف.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#f0fdf4;color:#16a34a;">9</div><span
+                                class="en-text">Deliver final file to Shoug.</span><span class="ar-text">تسليم الملف
+                                النهائي لشوق.</span>
+                        </li>
+                    </ul>
+                    <div class="deliverable-box">
+                        <strong><span class="en-text">📦 Deliverable</span><span class="ar-text">📦
+                                المُخرَج</span></strong>
+                        FinalParallelVersion.java
+                    </div>
+                    <div class="warning-box">
+                        ⚠️ <span class="en-text">Does NOT require: Machine specs, Performance data, Other team members'
+                            output</span>
+                        <span class="ar-text">لا يتطلب: مواصفات الجهاز، بيانات الأداء، مُخرَجات أعضاء الفريق
+                            الآخرين</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── SHOUG TAB ── -->
+        <div id="tab-shoug" class="tab-panel theme-shoug">
+            <div class="person-header">
+                <div class="person-avatar" style="background:#fff7ed;">📊</div>
+                <div class="person-info">
+                    <h2>
+                        <span class="en-text">Shoug — Measurement & System Owner</span>
+                        <span class="ar-text">شوق — مالكة القياس والنظام</span>
+                    </h2>
+                    <p style="color:var(--text-muted);font-size:13px;">
+                        <span class="en-text">The ONLY person running official performance tests. Runs all thread
+                            configurations, records raw times, and exports the dataset.</span>
+                        <span class="ar-text">الشخص الوحيد الذي يُجري اختبارات الأداء الرسمية. تُشغّل جميع تكوينات
+                            الخيوط وتُسجّل الأوقات الخام وتُصدّر مجموعة البيانات.</span>
+                    </p>
+                    <div class="person-tags">
+                        <span class="tag" style="background:#fff7ed;color:#ea580c;"><span
+                                class="en-text">Benchmarking</span><span class="ar-text">قياس الأداء</span></span>
+                        <span class="tag" style="background:#fff7ed;color:#ea580c;"><span class="en-text">System
+                                Specs</span><span class="ar-text">مواصفات النظام</span></span>
+                        <span class="tag" style="background:#fff7ed;color:#ea580c;"><span class="en-text">Data
+                                Collection</span><span class="ar-text">جمع البيانات</span></span>
+                    </div>
+                </div>
+                <div class="person-meta">
+                    <div class="meta-item">⚡ <span class="en-text">Only Official Machine</span><span
+                            class="ar-text">الجهاز الرسمي الوحيد</span></div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Responsibilities</span><span class="ar-text">المسؤوليات</span></h3>
+                    <span class="phase-badge" style="background:#fff7ed;color:#ea580c;"><span
+                            class="en-text">Measurement</span><span class="ar-text">قياس</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-check" style="background:#ea580c;">✓</div><span class="en-text">Compile and
+                                execute final Java file</span><span class="ar-text">تجميع وتنفيذ ملف Java النهائي</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#ea580c;">✓</div><span class="en-text">Run 1, 2,
+                                4, 6, 8 thread configurations</span><span class="ar-text">تشغيل تكوينات الخيوط 1، 2، 4،
+                                6، 8</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#ea580c;">✓</div><span class="en-text">Repeat runs
+                                (recommended: 5 per configuration)</span><span class="ar-text">تكرار التشغيل (موصى به: 5
+                                لكل تكوين)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#ea580c;">✓</div><span class="en-text">Record raw
+                                times & compute averages</span><span class="ar-text">تسجيل الأوقات الخام وحساب
+                                المتوسطات</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-check" style="background:#ea580c;">✓</div><span class="en-text">Record full
+                                machine specifications</span><span class="ar-text">تسجيل مواصفات الجهاز الكاملة</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Step-by-Step Process</span><span class="ar-text">الخطوات التفصيلية</span>
+                    </h3>
+                    <span class="phase-badge" style="background:#fff7ed;color:#ea580c;"><span
+                            class="en-text">Process</span><span class="ar-text">العملية</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">1</div><span
+                                class="en-text">Receive FinalParallelVersion.java from Danah.</span><span
+                                class="ar-text">استلام FinalParallelVersion.java من دانه.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">2</div><span
+                                class="en-text">Compile using javac.</span><span class="ar-text">التجميع باستخدام
+                                javac.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">3</div><span
+                                class="en-text">Run program with 1 thread (5 runs).</span><span class="ar-text">تشغيل
+                                البرنامج بخيط واحد (5 تشغيلات).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">4</div><span
+                                class="en-text">Run program with 2 threads (5 runs).</span><span class="ar-text">تشغيل
+                                البرنامج بخيطين (5 تشغيلات).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">5</div><span
+                                class="en-text">Run program with 4 threads (5 runs).</span><span class="ar-text">تشغيل
+                                البرنامج بـ 4 خيوط (5 تشغيلات).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">6</div><span
+                                class="en-text">Run program with 6 threads (5 runs).</span><span class="ar-text">تشغيل
+                                البرنامج بـ 6 خيوط (5 تشغيلات).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">7</div><span
+                                class="en-text">Run program with 8 threads (5 runs).</span><span class="ar-text">تشغيل
+                                البرنامج بـ 8 خيوط (5 تشغيلات).</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">8</div><span
+                                class="en-text">Record raw execution times.</span><span class="ar-text">تسجيل أوقات
+                                التنفيذ الخام.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">9</div><span
+                                class="en-text">Compute average execution time for each configuration.</span><span
+                                class="ar-text">حساب متوسط وقت التنفيذ لكل تكوين.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">10</div><span
+                                class="en-text">Record CPU model, Core count, RAM, OS, Java version.</span><span
+                                class="ar-text">تسجيل موديل المعالج وعدد الأنوية والذاكرة ونظام التشغيل وإصدار
+                                Java.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">11</div><span
+                                class="en-text">Export dataset to CSV or Excel.</span><span class="ar-text">تصدير مجموعة
+                                البيانات إلى CSV أو Excel.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fff7ed;color:#ea580c;">12</div><span
+                                class="en-text">Deliver dataset + machine specs to Aryam and Rana.</span><span
+                                class="ar-text">تسليم مجموعة البيانات ومواصفات الجهاز لأريم ورنا.</span>
+                        </li>
+                    </ul>
+                    <div class="deliverable-box">
+                        <strong><span class="en-text">📦 Deliverables</span><span class="ar-text">📦
+                                المُخرَجات</span></strong>
+                        <span class="en-text">Raw timing dataset • Averaged timing table • machine_specs.txt</span>
+                        <span class="ar-text">مجموعة بيانات التوقيت الخام • جدول متوسط التوقيت •
+                            machine_specs.txt</span>
+                    </div>
+                    <div class="warning-box">
+                        ⚠️ <span class="en-text">No one else runs official benchmarks.</span>
+                        <span class="ar-text">لا يُجري أي شخص آخر اختبارات الأداء الرسمية.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── RANA TAB ── -->
+        <div id="tab-rana" class="tab-panel theme-rana">
+            <div class="person-header">
+                <div class="person-avatar" style="background:#fdf2f8;">📄</div>
+                <div class="person-info">
+                    <h2>
+                        <span class="en-text">Rana — Report & Integration Owner</span>
+                        <span class="ar-text">رنا — مالكة التقرير والتكامل</span>
+                    </h2>
+                    <p style="color:var(--text-muted);font-size:13px;">
+                        <span class="en-text">Final integrator. Writes the ≤1000-word report, inserts all tables and
+                            graphs, organizes the final submission, and creates the ZIP.</span>
+                        <span class="ar-text">المُكاملة النهائية. تكتب التقرير (≤1000 كلمة) وتُدرج الجداول والرسوم
+                            البيانية وتُنظّم التسليم النهائي وتُنشئ ملف ZIP.</span>
+                    </p>
+                    <div class="person-tags">
+                        <span class="tag" style="background:#fdf2f8;color:#db2777;"><span class="en-text">Report
+                                Writing</span><span class="ar-text">كتابة التقرير</span></span>
+                        <span class="tag" style="background:#fdf2f8;color:#db2777;"><span
+                                class="en-text">Integration</span><span class="ar-text">التكامل</span></span>
+                        <span class="tag" style="background:#fdf2f8;color:#db2777;"><span class="en-text">Final
+                                Submission</span><span class="ar-text">التسليم النهائي</span></span>
+                    </div>
+                </div>
+                <div class="person-meta">
+                    <div class="meta-item">📝 <span class="en-text">≤1000 words</span><span class="ar-text">≤1000
+                            كلمة</span></div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <h3><span class="en-text">Step-by-Step Process</span><span class="ar-text">الخطوات التفصيلية</span>
+                    </h3>
+                    <span class="phase-badge" style="background:#fdf2f8;color:#db2777;"><span
+                            class="en-text">Integration</span><span class="ar-text">تكامل</span></span>
+                </div>
+                <div class="phase-body">
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">1</div>
+                            <div>
+                                <span class="en-text"><strong>Draft report structure:</strong> Objective, Methodology,
+                                    Experimental Setup, Results, Discussion, Conclusion</span>
+                                <span class="ar-text"><strong>صياغة هيكل التقرير:</strong> الهدف، المنهجية، الإعداد
+                                    التجريبي، النتائج، النقاش، الخاتمة</span>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">2</div>
+                            <span class="en-text">Insert: Tables (Aryam), Graphs (Layan), Machine specs (Shoug)</span>
+                            <span class="ar-text">إدراج: الجداول (أريم)، الرسوم البيانية (ليان)، مواصفات الجهاز
+                                (شوق)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">3</div>
+                            <span class="en-text">Write explanation: thread division logic, synchronization, scalability
+                                behavior, performance decrease</span>
+                            <span class="ar-text">كتابة الشرح: منطق تقسيم الخيوط، المزامنة، سلوك قابلية التوسع، انخفاض
+                                الأداء</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">4</div>
+                            <span class="en-text">Ensure report ≤ 1000 words.</span>
+                            <span class="ar-text">التأكد من أن التقرير ≤ 1000 كلمة.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">5</div>
+                            <div>
+                                <span class="en-text"><strong>Organize submission folder:</strong></span>
+                                <span class="ar-text"><strong>تنظيم مجلد التسليم:</strong></span>
+                                <br>
+                                <code
+                                    style="font-size:12px;color:#db2777;background:#fdf2f8;padding:6px 10px;border-radius:6px;display:inline-block;margin-top:6px;">Phase2_Submission/ → code/ tables/ graphs/ report.pdf machine_specs.txt</code>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">6</div><span
+                                class="en-text">Verify all files open correctly.</span><span class="ar-text">التحقق من
+                                فتح جميع الملفات بشكل صحيح.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">7</div><span
+                                class="en-text">Create final ZIP.</span><span class="ar-text">إنشاء ملف ZIP
+                                النهائي.</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="step-num" style="background:#fdf2f8;color:#db2777;">8</div><span
+                                class="en-text">Perform final validation check.</span><span class="ar-text">إجراء فحص
+                                التحقق النهائي.</span>
+                        </li>
+                    </ul>
+                    <div class="deliverable-box">
+                        <strong><span class="en-text">📦 Deliverable</span><span class="ar-text">📦
+                                المُخرَج</span></strong>
+                        <span class="en-text">Final ZIP submission</span>
+                        <span class="ar-text">ملف ZIP النهائي للتسليم</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── SHARED WORK TAB ── -->
+        <div id="tab-shared" class="tab-panel">
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3 style="color:#0d9488;">🤝 <span class="en-text">Shared Agreements</span><span
+                            class="ar-text">الاتفاقيات المشتركة</span></h3>
+                    <ul>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Agree on
+                                fixed array size</span><span class="ar-text">الاتفاق على حجم المصفوفة الثابت</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Agree on
+                                thread set (1, 2, 4, 6, 8 only)</span><span class="ar-text">الاتفاق على مجموعة الخيوط
+                                (1، 2، 4، 6، 8 فقط)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Agree on
+                                repetition count</span><span class="ar-text">الاتفاق على عدد مرات التكرار</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Standardize
+                                time unit (milliseconds)</span><span class="ar-text">توحيد وحدة الوقت (ميلي
+                                ثانية)</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Maintain
+                                consistent file naming</span><span class="ar-text">الحفاظ على تسمية ملفات متسقة</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Conduct
+                                final peer review</span><span class="ar-text">إجراء مراجعة الزملاء النهائية</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 style="color:#7c3aed;">🔗 <span class="en-text">Dependency Flow</span><span class="ar-text">تدفق
+                            التبعيات</span></h3>
+                    <div class="flow-arrow">
+                        <span class="flow-person" style="background:#f0fdf4;color:#16a34a;"><span
+                                class="en-text">Danah</span><span class="ar-text">دانه</span></span>
+                        <span class="flow-arrow-icon">→</span>
+                        <span class="flow-person" style="background:#fff7ed;color:#ea580c;"><span
+                                class="en-text">Shoug</span><span class="ar-text">شوق</span></span>
+                        <span class="flow-arrow-icon">→</span>
+                        <span class="flow-person" style="background:#eef2ff;color:#4f46e5;"><span
+                                class="en-text">Aryam</span><span class="ar-text">أريم</span></span>
+                        <span class="flow-arrow-icon">→</span>
+                        <span class="flow-person" style="background:#eff6ff;color:#2563eb;"><span
+                                class="en-text">Layan</span><span class="ar-text">ليان</span></span>
+                        <span class="flow-arrow-icon">→</span>
+                        <span class="flow-person" style="background:#fdf2f8;color:#db2777;"><span
+                                class="en-text">Rana</span><span class="ar-text">رنا</span></span>
+                    </div>
+                    <p style="font-size:13px;color:var(--text-muted);margin-top:14px;">
+                        <span class="en-text">Templates and report structure can be drafted early. Only performance data
+                            must wait.</span>
+                        <span class="ar-text">يمكن إعداد القوالب وهيكل التقرير مبكراً. بيانات الأداء فقط هي التي
+                            تنتظر.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── NOTES TAB ── -->
+        <div id="tab-notes" class="tab-panel">
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3 style="color:#b45309;">📝 <span class="en-text">Important Notes</span><span
+                            class="ar-text">ملاحظات مهمة</span></h3>
+                    <ul>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#b45309;"></div><span class="en-text">Only one
+                                machine used for official timing</span><span class="ar-text">جهاز واحد فقط يُستخدم
+                                للتوقيت الرسمي</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#b45309;"></div><span class="en-text">Close
+                                background applications during benchmarking</span><span class="ar-text">إغلاق التطبيقات
+                                الخلفية أثناء قياس الأداء</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#b45309;"></div><span class="en-text">Use
+                                consistent Java version</span><span class="ar-text">استخدام إصدار Java متسق</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#b45309;"></div><span class="en-text">Increase
+                                repetitions if fluctuations occur</span><span class="ar-text">زيادة مرات التكرار إذا
+                                حدثت تذبذبات</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#b45309;"></div><span class="en-text">Identify
+                                decrease point using average time trend</span><span class="ar-text">تحديد نقطة الانخفاض
+                                باستخدام اتجاه متوسط الوقت</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 style="color:#dc2626;">⚠️ <span class="en-text">Overhead Sources</span><span
+                            class="ar-text">مصادر الحمل الزائد</span></h3>
+                    <ul>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#dc2626;"></div><span class="en-text">Thread
+                                management</span><span class="ar-text">إدارة الخيوط</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#dc2626;"></div><span
+                                class="en-text">Synchronization</span><span class="ar-text">المزامنة</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#dc2626;"></div><span class="en-text">Context
+                                switching</span><span class="ar-text">تبديل السياق</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#dc2626;"></div><span class="en-text">Cache
+                                contention</span><span class="ar-text">تنافس ذاكرة التخزين المؤقت</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── TOOLS TAB ── -->
+        <div id="tab-tools" class="tab-panel">
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3 style="color:#7c3aed;">🔧 <span class="en-text">Tools by Category</span><span
+                            class="ar-text">الأدوات حسب الفئة</span></h3>
+                    <ul>
+                        <li class="step-item">
+                            <div class="bullet-dot"></div><strong><span class="en-text">Code:</span><span
+                                    class="ar-text">الكود:</span></strong> &nbsp;Java JDK, IDE / text editor
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot"></div><strong><span class="en-text">Measurement:</span><span
+                                    class="ar-text">القياس:</span></strong> &nbsp;System.nanoTime(), system info tools,
+                            Excel / Google Sheets
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot"></div><strong><span class="en-text">Tables:</span><span
+                                    class="ar-text">الجداول:</span></strong> &nbsp;<span class="en-text">Spreadsheet
+                                formulas</span><span class="ar-text">صيغ جداول البيانات</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot"></div><strong><span class="en-text">Graphs:</span><span
+                                    class="ar-text">الرسوم البيانية:</span></strong> &nbsp;Excel / Sheets charts
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot"></div><strong><span class="en-text">Report:</span><span
+                                    class="ar-text">التقرير:</span></strong> &nbsp;Word / Google Docs, PDF export, ZIP
+                            tool
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 style="color:#0d9488;">✅ <span class="en-text">Why This Model Is Optimal</span><span
+                            class="ar-text">لماذا هذا النموذج هو الأمثل</span></h3>
+                    <ul>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span
+                                class="en-text">Scientifically valid speedup</span><span class="ar-text">تسريع صحيح
+                                علمياً</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Clear task
+                                ownership</span><span class="ar-text">ملكية واضحة للمهام</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Minimal
+                                overlap</span><span class="ar-text">تداخل أدنى</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Linear
+                                workflow</span><span class="ar-text">سير عمل خطي</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Clean
+                                submission</span><span class="ar-text">تسليم نظيف</span>
+                        </li>
+                        <li class="step-item">
+                            <div class="bullet-dot" style="background:#0d9488;"></div><span class="en-text">Professional
+                                structure</span><span class="ar-text">هيكل احترافي</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function showTab(name, btn) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function setLang(lang) {
+            if (lang === 'ar') {
+                document.body.classList.add('arabic');
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.getElementById('btn-ar').classList.add('active');
+                document.getElementById('btn-en').classList.remove('active');
+            } else {
+                document.body.classList.remove('arabic');
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.getElementById('btn-en').classList.add('active');
+                document.getElementById('btn-ar').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

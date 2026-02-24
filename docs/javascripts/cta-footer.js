@@ -8,7 +8,7 @@
       if (typeof __md_get === "function") {
         return __md_get("__base") || "";
       }
-    } catch (e) {}
+    } catch (e) { }
     return ""; // fallback
   }
 

@@ -82,7 +82,9 @@ Each team member contributes to environment setup, experimentation, performance 
     ---
     View task assignments, responsibilities, and progress tracking.
 
-    [Open the Roles Dashboard](./Project Plan.html)
+- [Phase 1](./Phase-1.html)
+- [Phase 2](./Phase-2.html)
+
 
 </div>
 
