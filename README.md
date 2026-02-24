@@ -55,9 +55,12 @@ Phase II will build upon Phase I and further explore operating system concepts a
 
 ---
 
-## Team
+## Team Members
 
-- **Shoug Alomran**
-- **Layan Bindayal**
-- **Aryam**
-- **Dana**
+| Name | Student ID |
+|------|------------|
+| Shoug Alomran | 223410392 |
+| Layan Bin Dayel | 223410104 |
+| Aryam Yahya Almansour | 223410070 |
+| Danah Altuwaijri | 223410151 |
+| Rana Alfaris | 223410567 |
