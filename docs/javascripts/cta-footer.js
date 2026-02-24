@@ -1,28 +1,24 @@
 (function () {
   const EMAIL = "inquiry@shoug-tech.com";
+  const MAIN_WEBSITE = "https://shoug-tech.com/";
 
   function getBase() {
-    // MkDocs Material exposes base path in many setups:
-    // - __md_get("__base") returns "" or "/repo-name" (GitHub Pages)
     try {
       if (typeof __md_get === "function") {
         return __md_get("__base") || "";
       }
     } catch (e) { }
-    return ""; // fallback
+    return "";
   }
 
   function url(path) {
     const base = getBase();
-    // Ensure exactly one slash between base and path
     return `${base}${path.startsWith("/") ? "" : "/"}${path}`;
   }
 
   function addHeaderCTA() {
     const headerInner = document.querySelector(".md-header__inner");
     if (!headerInner) return;
-
-    // Prevent duplicates (instant navigation)
     if (headerInner.querySelector("a.header-cta")) return;
 
     const cta = document.createElement("a");
@@ -37,8 +33,6 @@
   function addFooterBlock() {
     const footer = document.querySelector(".md-footer");
     if (!footer) return;
-
-    // Prevent duplicates (instant navigation)
     if (footer.querySelector(".custom-footer")) return;
 
     const meta = footer.querySelector(".md-footer-meta");
@@ -83,11 +77,17 @@
             <a class="footer-link" href="${url("Phase%201/report.pdf")}">Phase 1 PDF</a>
             <a class="footer-link" href="${url("Phase%202/report.pdf")}">Phase 2 PDF</a>
           </div>
+
+          <div class="footer-col">
+            <div class="footer-col__title">Website</div>
+            <a class="footer-link" href="${MAIN_WEBSITE}" target="_blank" rel="noopener">
+              shoug-tech.com
+            </a>
+          </div>
         </div>
       </div>
     `;
 
-    // Insert above the default Material footer meta
     if (meta) footer.insertBefore(block, meta);
     else footer.prepend(block);
   }
@@ -97,7 +97,6 @@
     addFooterBlock();
   }
 
-  // Material instant navigation support
   if (typeof document$ !== "undefined" && document$.subscribe) {
     document$.subscribe(run);
   } else {
