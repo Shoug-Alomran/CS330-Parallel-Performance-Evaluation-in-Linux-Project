@@ -503,9 +503,9 @@
         <div class="branch-banner">
             <span class="icon">🌿</span>
             <div>
-                <div data-lang="en">Your branch is <strong>Dana-Phase2</strong> — always make sure you're on this branch
+                <div data-lang="en">Your branch is <strong>Dana-Phase2</strong>. Always make sure you're on this branch
                     before editing anything.</div>
-                <div data-lang="ar">فرعك هو <strong>Dana-Phase2</strong> — تأكدي دائمًا إنك على هذا الفرع قبل ما تعدّلي
+                <div data-lang="ar">فرعك هو <strong>Dana-Phase2</strong>. تأكدي دائمًا إنك على هذا الفرع قبل ما تعدّلي
                     أي شيء.</div>
             </div>
         </div>
@@ -576,8 +576,8 @@
                 </div>
                 <details class="screenshot-section">
                     <summary class="screenshot-toggle">
-                        <span data-lang="en">Screenshots: VS Code Welcome + Clone Git Repository
-                            button</span><span data-lang="ar">لقطات</span>
+                        <span data-lang="en">Screenshots: VS Code Welcome + Clone Git Repository button</span>
+                        <span data-lang="ar">لقطات</span>
                         <em class="arrow">▾</em>
                     </summary>
                     <div class="screenshot-content">
@@ -590,10 +590,51 @@
             </div>
         </div>
 
-        <!-- STEP 3 -->
+        <!-- STEP 3 (NEW) -->
         <div class="step">
             <div class="step-header">
                 <span class="step-num">STEP 03</span>
+                <span class="step-title">
+                    <span data-lang="en">Install the GitHub Pull Requests Extension</span>
+                    <span data-lang="ar">ثبتي إضافة GitHub Pull Requests</span>
+                </span>
+            </div>
+            <div class="step-body">
+                <div data-lang="en">
+                    <ol>
+                        <li>In VS Code, click the <strong>Extensions</strong> icon (left sidebar).</li>
+                        <li>Search for: <code>GitHub Pull Requests</code>.</li>
+                        <li>Install the extension named <strong>GitHub Pull Requests</strong> (publisher: GitHub).</li>
+                        <li>If VS Code asks, click <strong>Sign in to GitHub</strong> and complete the browser login.</li>
+                    </ol>
+                    <div class="note note-success">✅ This makes creating and managing pull requests much easier directly inside VS Code.</div>
+                </div>
+                <div data-lang="ar">
+                    <ol>
+                        <li>في VS Code اضغطي أيقونة <strong>Extensions</strong> (في الشريط الجانبي).</li>
+                        <li>ابحثي عن: <code>GitHub Pull Requests</code>.</li>
+                        <li>ثبتي الإضافة باسم <strong>GitHub Pull Requests</strong> (الناشر: GitHub).</li>
+                        <li>إذا طلب منك VS Code، اضغطي <strong>Sign in to GitHub</strong> وكمّلي تسجيل الدخول من المتصفح.</li>
+                    </ol>
+                    <div class="note note-success">✅ هذه الإضافة تسهّل عليك إنشاء Pull Request من داخل VS Code.</div>
+                </div>
+                <details class="screenshot-section">
+                    <summary class="screenshot-toggle">
+                        <span data-lang="en">Screenshot: Install GitHub Pull Requests</span>
+                        <span data-lang="ar">لقطة شاشة: تثبيت الإضافة</span>
+                        <em class="arrow">▾</em>
+                    </summary>
+                    <div class="screenshot-content">
+                        <img src="Git-Workflow-Guide-Pics/Step-8.png" alt="Step 8 - Install GitHub Pull Requests extension">
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">STEP 04</span>
                 <span class="step-title">
                     <span data-lang="en">Set Your Git Name &amp; Email <em
                             style="font-weight:400;font-size:0.8rem;color:var(--text-muted)">(one-time only)</em></span>
@@ -603,7 +644,7 @@
             </div>
             <div class="step-body">
                 <div data-lang="en">
-                    <p>Open the terminal inside VS Code with <code>Ctrl + `</code> (the backtick — above Tab), then run:
+                    <p>Open the terminal inside VS Code with <code>Ctrl + `</code> (the backtick above Tab), then run:
                     </p>
                     <pre>git config --global user.name "Dana Altuwaijri"
 git config --global user.email "YOUR_GITHUB_EMAIL_HERE"</pre>
@@ -626,25 +667,24 @@ git config --global user.email</pre>
                 </div>
                 <details class="screenshot-section">
                     <summary class="screenshot-toggle">
-                        <span data-lang="en">Screenshots: Terminal git config commands +
-                            verification</span><span data-lang="ar">لقطات </span>
+                        <span data-lang="en">Screenshots: Terminal git config commands + verification</span>
+                        <span data-lang="ar">لقطات</span>
                         <em class="arrow">▾</em>
                     </summary>
                     <div class="screenshot-content">
                         <div class="img-row">
                             <img src="Git-Workflow-Guide-Pics/Step-5.png" alt="Step 5 - Terminal git config">
-                            <img src="Git-Workflow-Guide-Pics/Step-6.png" alt="Step 6 - Verify git config"
-                                style="width:100%;border-radius:10px;margin-top:12px;box-shadow:var(--shadow);">
+                            <img src="Git-Workflow-Guide-Pics/Step-6.png" alt="Step 6 - Verify git config">
                         </div>
                     </div>
                 </details>
             </div>
         </div>
 
-        <!-- STEP 4 -->
+        <!-- STEP 5 -->
         <div class="step">
             <div class="step-header">
-                <span class="step-num">STEP 04</span>
+                <span class="step-num">STEP 05</span>
                 <span class="step-title">
                     <span data-lang="en">Switch to Your Branch</span>
                     <span data-lang="ar">انتقلي لفرعك</span>
@@ -653,7 +693,7 @@ git config --global user.email</pre>
             <div class="step-body">
                 <div data-lang="en">
                     <ol>
-                        <li>Look at the <strong>bottom-left corner</strong> of VS Code — you'll see a branch name.</li>
+                        <li>Look at the <strong>bottom-left corner</strong> of VS Code. You will see a branch name.</li>
                         <li>Click it to open the branch picker.</li>
                         <li>Select <code>Dana-Phase2</code>.</li>
                     </ol>
@@ -664,7 +704,7 @@ git config --global user.email</pre>
                 </div>
                 <div data-lang="ar">
                     <ol>
-                        <li>شوفي <strong>الزاوية اليسرى السفلية</strong> في VS Code — راح تشوفين اسم فرع.</li>
+                        <li>شوفي <strong>الزاوية اليسرى السفلية</strong> في VS Code. راح تشوفين اسم فرع.</li>
                         <li>اضغطيه لتفتحي قائمة الفروع.</li>
                         <li>اختاري <code>Dana-Phase2</code>.</li>
                     </ol>
@@ -673,8 +713,8 @@ git config --global user.email</pre>
                 </div>
                 <details class="screenshot-section">
                     <summary class="screenshot-toggle">
-                         <span data-lang="en">Screenshot: Branch picker</span><span data-lang="ar">لقطة شاشة: قائمة
-                            الفروع</span>
+                        <span data-lang="en">Screenshot: Branch picker</span>
+                        <span data-lang="ar">لقطة شاشة: قائمة الفروع</span>
                         <em class="arrow">▾</em>
                     </summary>
                     <div class="screenshot-content">
@@ -684,10 +724,10 @@ git config --global user.email</pre>
             </div>
         </div>
 
-        <!-- STEP 5 -->
+        <!-- STEP 6 -->
         <div class="step">
             <div class="step-header">
-                <span class="step-num">STEP 05</span>
+                <span class="step-num">STEP 06</span>
                 <span class="step-title">
                     <span data-lang="en">Make Your Changes</span>
                     <span data-lang="ar">اعدّلي ملفاتك</span>
@@ -705,10 +745,10 @@ git config --global user.email</pre>
             </div>
         </div>
 
-        <!-- STEP 6 -->
+        <!-- STEP 7 -->
         <div class="step">
             <div class="step-header">
-                <span class="step-num">STEP 06</span>
+                <span class="step-num">STEP 07</span>
                 <span class="step-title">
                     <span data-lang="en">Commit &amp; Push Your Changes</span>
                     <span data-lang="ar">احفظي وارفعي تغييراتك</span>
@@ -718,17 +758,16 @@ git config --global user.email</pre>
                 <div data-lang="en">
                     <ol>
                         <li>Click the <strong>Source Control</strong> icon in the left sidebar (branch icon).</li>
-                        <li>Write a short commit message — e.g. <em>"Update phase 2 analysis"</em>.</li>
+                        <li>Write a short commit message. Example: <em>"Update phase 2 analysis"</em>.</li>
                         <li>Click <strong>Commit</strong>.</li>
                         <li>Click <strong>Push</strong> or <strong>Sync Changes</strong>.</li>
                     </ol>
-                    <div class="note note-success">✅ Done! Your changes are now on GitHub in the Dana-Phase2 branch.
-                    </div>
+                    <div class="note note-success">✅ Done! Your changes are now on GitHub in the Dana-Phase2 branch.</div>
                 </div>
                 <div data-lang="ar">
                     <ol>
                         <li>اضغطي أيقونة <strong>Source Control</strong> في الشريط الجانبي.</li>
-                        <li>اكتبي رسالة قصيرة — مثلاً: <em>"تحديث تحليل المرحلة 2"</em>.</li>
+                        <li>اكتبي رسالة قصيرة. مثال: <em>"تحديث تحليل المرحلة 2"</em>.</li>
                         <li>اضغطي <strong>Commit</strong>.</li>
                         <li>اضغطي <strong>Push</strong> أو <strong>Sync Changes</strong>.</li>
                     </ol>
@@ -736,12 +775,12 @@ git config --global user.email</pre>
                 </div>
                 <details class="screenshot-section">
                     <summary class="screenshot-toggle">
-                        <span data-lang="en">Screenshot: Source Control commit panel</span><span data-lang="ar">لقطة
-                            شاشة: لوحة Commit</span>
+                        <span data-lang="en">Screenshot: Source Control commit panel</span>
+                        <span data-lang="ar">لقطة شاشة: لوحة Commit</span>
                         <em class="arrow">▾</em>
                     </summary>
                     <div class="screenshot-content">
-                        <img src="Git-Workflow-Guide-Pics/Step-5.png" alt="Step 7 - Commit and Push">
+                        <img src="Git-Workflow-Guide-Pics/Step-7.png" alt="Step 7 - Commit and Push">
                     </div>
                 </details>
             </div>
@@ -755,17 +794,16 @@ git config --global user.email</pre>
             </div>
             <div data-lang="en">
                 <ol style="padding-left:1.6em;display:flex;flex-direction:column;gap:10px;font-size:0.97rem;">
-                    <li>Check the bottom-left — it must say <code>Dana-Phase2</code>. If not, switch back to it.</li>
-                    <li>Open <strong>Source Control</strong> and click <strong>Pull</strong> to get the latest changes.
-                    </li>
-                    <li>Then start editing!</li>
+                    <li>Check the bottom-left. It must say <code>Dana-Phase2</code>. If not, switch back to it.</li>
+                    <li>Open <strong>Source Control</strong> and click <strong>Pull</strong> to get the latest changes.</li>
+                    <li>Then start editing.</li>
                 </ol>
             </div>
             <div data-lang="ar">
                 <ol style="padding-right:1.6em;display:flex;flex-direction:column;gap:10px;font-size:0.97rem;">
-                    <li>راجعي الزاوية اليسرى السفلية — لازم تقول <code>Dana-Phase2</code>. لو لا، ارجعي له.</li>
+                    <li>راجعي الزاوية اليسرى السفلية. لازم تقول <code>Dana-Phase2</code>. لو لا، ارجعي له.</li>
                     <li>افتحي <strong>Source Control</strong> واضغطي <strong>Pull</strong> لتنزّلي آخر التغييرات.</li>
-                    <li>وبعدين ابدأي التعديل!</li>
+                    <li>وبعدين ابدأي التعديل.</li>
                 </ol>
             </div>
         </div>

@@ -1,4 +1,3 @@
-
 public class Summer implements Runnable {
 	private int[] a;
 	private int min, max;
