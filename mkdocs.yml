@@ -61,6 +61,7 @@ nav:
   - Reference:
       - Commands: reference/commands.md
       - Glossary: reference/glossary.md
+      - Git Workflow Guide: reference/Git-Workflow-Guide.md
   - Copyright: copyright.md
 
 markdown_extensions:
