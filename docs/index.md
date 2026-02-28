@@ -1,8 +1,3 @@
----
-hide:
-  - toc
----
-
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
@@ -11,7 +6,7 @@ hide:
 Welcome to the official documentation site for our  
 **CS330: Introduction to Operating Systems** course project.
 
-This site organizes all project work across two phases, including environment setup, experimentation, analysis, and reporting.
+This site organizes all project work across two phases: Linux process-based benchmarking (Phase I) and Java multithreaded optimization (Phase II).
 
 </div>
 </div>
@@ -55,14 +50,43 @@ This site organizes all project work across two phases, including environment se
     ---
     Virtual machine configuration, Linux environment setup, program compilation, and controlled performance experiments.
 
-    [Explore Phase I](Phase-1/)
+    [Explore Phase I](Phase-1/index.md)
 
 -   :material-numeric-2-circle: **Phase II — Extension & Analysis**
 
     ---
-    Expanded experimentation and deeper analysis based on instructor-defined requirements.
+    Multithreaded performance optimization based on the official Phase 2 requirements (1, 2, 4, 6, 8 threads).
 
-    [Explore Phase II](Phase-2/)
+    [Explore Phase II](Phase-2/index.md)
+
+</div>
+
+---
+
+## Deliverables
+
+<div class="grid cards" markdown>
+
+-   :material-file-document: **Phase I Report**
+
+    ---
+    Full setup, experiment design, timing results, and analysis from the process-based implementation.
+
+    [Open Phase I Report](Phase-1/report.md)
+
+-   :material-file-document-check: **Phase II Work Package**
+
+    ---
+    Requirements, implementation plan, measurement template, and analysis framework for multithreading.
+
+    [Open Phase II Overview](Phase-2/index.md)
+
+-   :material-source-repository: **Project Repository**
+
+    ---
+    Source code, documentation, and reproducible project structure.
+
+    [View Repository Structure](Project-Overview/repo-structure.md)
 
 </div>
 
@@ -112,7 +136,7 @@ This site organizes all project work across two phases, including environment se
 
     [VM & Linux Setup](Phase-1/setup.md)
 
--   :material-terminal: **Commands Reference**
+-   :material-console: **Commands Reference**
 
     ---
     Frequently used Linux and build commands.

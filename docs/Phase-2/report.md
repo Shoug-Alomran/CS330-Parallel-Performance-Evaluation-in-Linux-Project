@@ -1,39 +1,47 @@
----
-hide:
-  - toc
----
-
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
-# Performance Analysis Report
+# Phase 2 Performance Analysis Report
 
-This report analyzes how increasing the number of threads affects execution time and scalability.
+Use this structure to produce the final written analysis for submission.
 
 </div>
 </div>
 
-## Parallel Work Division
+---
 
-The array is divided into equal segments.  
-Each thread processes a portion independently.  
-Partial sums are combined at the end.
+## 1. Program Understanding
 
-## Synchronization
+- Briefly explain the provided baseline code.
+- Describe the original thread model and how work is partitioned.
 
-Threads operate independently during computation.  
-Synchronization occurs only when combining results.  
-This minimizes contention.
+## 2. Modification Summary
 
-## Expected Performance Behavior
+- Explain the change to **sum of cubes of array elements**.
+- Confirm array value constraint (integers `< 100`).
+- Describe how thread counts `1,2,4,6,8` are configured.
 
-Increasing thread count reduces execution time initially due to parallel workload distribution.
+## 3. Measurement Methodology
 
-After a certain number of threads, performance gains decrease due to:
+- Hardware and software environment.
+- Timing method (`System.nanoTime()`).
+- Number of runs per configuration and averaging policy.
 
-- Thread creation overhead  
-- Context switching  
-- Cache contention  
-- CPU core limitations  
+## 4. Results
 
-Final numerical analysis will be inserted after measurement.
+- Insert main results table.
+- Insert raw trial table (recommended).
+- Insert performance graphs.
+
+## 5. Performance Discussion
+
+- Compare speedup trend as thread count increases.
+- Explain the best-performing thread count.
+- Identify where performance starts to decrease.
+- Discuss overhead causes: thread creation, scheduling, synchronization, and CPU core limits.
+
+## 6. Conclusion
+
+- Summarize key findings.
+- State whether multithreading improved performance for this workload.
+- Provide one improvement idea for future testing.

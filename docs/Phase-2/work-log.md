@@ -1,62 +1,33 @@
----
-hide:
-  - toc
----
-
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
 # Phase 2 Work Log
 
-This section records task distribution and milestone completion.
+Task tracking for implementation, benchmarking, analysis, and final packaging.
 
 </div>
-</div>
-
-## Responsibilities
-
-<div class="grid cards" markdown>
-
--   :material-code-tags: **Code Owner**
-
-    ---
-    Modify program  
-    Implement configurable threads  
-    Verify correctness  
-
--   :material-speedometer: **Measurement Owner**
-
-    ---
-    Run official benchmarks  
-    Record system specifications  
-    Compute averages  
-
--   :material-table: **Metrics & Tables**
-
-    ---
-    Compute speedup  
-    Create formatted tables  
-
--   :material-chart-areaspline: **Graphs**
-
-    ---
-    Generate performance charts  
-    Identify performance drop point  
-
--   :material-file-document: **Report Integration**
-
-    ---
-    Compile final report  
-    Insert tables and graphs  
-    Prepare ZIP submission  
-
 </div>
 
 ---
 
-## Progress Tracking
+## Responsibility Matrix
 
-- Code modification in progress  
-- Measurement setup prepared  
-- Tables template created  
-- Graph templates prepared  
+| Work Item | Owner | Status | Notes |
+|---|---|---|---|
+| Verify original Java program behavior |  | In progress | Baseline checks |
+| Implement sum-of-cubes modification |  | In progress | Values < 100 |
+| Add support for thread counts 1,2,4,6,8 |  | In progress | Runtime args/config |
+| Collect benchmark trials (5 runs each) |  | Pending | Single machine only |
+| Compute averages, speedup, and % improvement |  | Pending | Based on baseline T(1) |
+| Prepare graphs and identify performance drop point |  | Pending | Time + speedup charts |
+| Final report assembly (<=1000 words analysis) |  | Pending | Include machine specs |
+| ZIP packaging for LMS submission |  | Pending | Source + report artifacts |
+
+---
+
+## Milestones
+
+- `M1` Code modification complete
+- `M2` Benchmark dataset complete
+- `M3` Analysis and graphs complete
+- `M4` Final ZIP ready for submission

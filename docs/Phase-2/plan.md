@@ -1,73 +1,50 @@
----
-hide:
-  - toc
----
-
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
-# Experimental Plan
+# Phase 2 Experimental Plan
 
-This experiment measures execution time using different thread counts to evaluate scalability and parallel efficiency.
-
-All tests will be performed under identical conditions.
+This plan defines a reproducible benchmark process for evaluating multithreaded performance.
 
 </div>
 </div>
 
 ---
 
-## Configuration
+## Objective
 
-<div class="grid cards" markdown>
-
--   :material-code-braces: **Program Task**
-
-    ---
-    Compute the sum of cubes of array elements using multithreading.
-
--   :material-format-list-numbered: **Thread Counts**
-
-    ---
-    1, 2, 4, 6, 8 threads
-
--   :material-database-outline: **Input Control**
-
-    ---
-    Fixed array size  
-    Values less than 100  
-    Same dataset for all runs
-
--   :material-timer-outline: **Timing Method**
-
-    ---
-    Use `System.nanoTime()`  
-    Measure computation time only  
-    Exclude initialization
-
-</div>
+Evaluate how execution time changes when the Java program computes the **sum of cubes** using `1`, `2`, `4`, `6`, and `8` threads.
 
 ---
 
-## Execution Policy
+## Controlled Test Conditions
 
-<div class="grid cards" markdown>
+- Use the same machine for all official runs.
+- Use the same input array size for all thread counts.
+- Ensure all array values are integers less than `100`.
+- Measure only computation time (exclude setup and logging).
 
--   :material-repeat: **Repetitions**
+---
 
-    ---
-    Each thread configuration will run 5 times.
+## Measurement Method
 
--   :material-calculator-variant: **Metrics**
+- Use `System.nanoTime()` before and after computation.
+- Convert elapsed time to milliseconds.
+- Execute each thread configuration at least `5` times.
+- Compute average time for each configuration.
 
-    ---
-    Execution Time  
-    Speedup = T(1) / T(n)  
-    Percentage Improvement
+---
 
--   :material-desktop-classic: **Hardware Control**
+## Metrics
 
-    ---
-    All official benchmarks will run on one single machine to ensure consistency.
+- `Execution Time (ms)`
+- `Speedup = T(1) / T(n)`
+- `% Improvement = ((T(1) - T(n)) / T(1)) * 100`
 
-</div>
+---
+
+## Analysis Questions
+
+- Where does performance improve the most?
+- At which thread count do gains flatten?
+- Does performance decrease at higher thread counts?
+- What overhead factors explain the trend (thread creation, scheduling, context switching, core limits)?

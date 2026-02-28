@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 330 Project Plan Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light mode colors */
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary: #f0f9ff;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --card: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --aryam: #8b5cf6;
+            --layan: #10b981;
+            --danah: #f59e0b;
+            --shoug: #ef4444;
+            --shared: #3b82f6;
+            --notes: #8b5cf6;
+            --tools: #06b6d4;
+        }
+
+        .dark-mode {
+            /* Dark mode colors */
+            --primary: #60a5fa;
+            --primary-light: #93c5fd;
+            --secondary: #1e3a8a;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-light: #cbd5e1;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.25);
+            --card: #1e293b;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.2s;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 i {
+            font-size: 32px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .search-input {
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            border: 2px solid var(--border);
+            background-color: var(--surface);
+            color: var(--text);
+            width: 300px;
+            font-size: 16px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            background-color: var(--surface);
+            border-radius: 50px;
+            padding: 5px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 14px 24px;
+            background-color: var(--surface);
+            border: none;
+            border-radius: 12px;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .tab-btn.active {
+            color: white;
+        }
+
+        .tab-btn.aryam.active { background-color: var(--aryam); }
+        .tab-btn.layan.active { background-color: var(--layan); }
+        .tab-btn.danah.active { background-color: var(--danah); }
+        .tab-btn.shoug.active { background-color: var(--shoug); }
+        .tab-btn.shared.active { background-color: var(--shared); }
+        .tab-btn.notes.active { background-color: var(--notes); }
+        .tab-btn.tools.active { background-color: var(--tools); }
+
+        /* Tab content */
+        .tab-content {
+            display: none;
+            background-color: var(--card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            min-height: 600px;
+            animation: fadeIn 0.5s;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .tab-title {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tab-title i {
+            font-size: 32px;
+        }
+
+        .module-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-chip {
+            background-color: var(--surface);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Content sections - Single column for expanded view */
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .content-card {
+            background-color: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .content-card.expanded {
+            border-left: 5px solid var(--warning);
+            max-height: none;
+            z-index: 10;
+        }
+
+        /* When expanded, take most of the screen */
+        .content-card.expanded {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .phase-badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: var(--text-light);
+            transition: transform 0.3s;
+            font-size: 20px;
+        }
+
+        .content-card.expanded .expand-icon {
+            transform: rotate(180deg);
+            color: var(--warning);
+        }
+
+        .card-summary {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            max-height: 150px;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            font-size: 16px;
+        }
+
+        .content-card.expanded .card-summary {
+            max-height: none;
+        }
+
+        .card-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+
+        .card-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+        }
+
+        .card-list li:last-child {
+            border-bottom: none;
+        }
+
+        .card-list li i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        /* Phase Details - Much larger when expanded */
+        .phase-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 0;
+            border-top: 1px solid transparent;
+        }
+
+        .content-card.expanded .phase-details {
+            max-height: 5000px;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            margin-top: 20px;
+        }
+
+        .details-section {
+            margin-bottom: 35px;
+            width: 100%;
+        }
+
+        .details-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .details-title i {
+            font-size: 22px;
+        }
+
+        .steps-list {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-left: 0;
+            width: 100%;
+        }
+
+        .steps-list li {
+            padding: 18px 0 18px 60px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            margin-bottom: 10px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .steps-list li:before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tools-list {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .tools-list li {
+            background-color: var(--background);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .tools-list li i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        /* Shared Work Tab - Fixed collaboration points */
+        .shared-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .collaboration-section {
+            background-color: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .collab-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .collab-list {
+            list-style-type: none;
+        }
+
+        .collab-list li {
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 17px;
+        }
+
+        .collab-list li:last-child {
+            border-bottom: none;
+        }
+
+        .collab-list li i {
+            color: var(--success);
+            margin-top: 3px;
+        }
+
+        /* Notes tab */
+        .notes-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .note-card {
+            background-color: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--warning);
+        }
+
+        .note-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .note-content {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
+        /* Arabic font */
+        .arabic {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .shared-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .controls {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .tab-btn {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            
+            .card-title {
+                font-size: 20px;
+            }
+            
+            .steps-list li {
+                padding-left: 50px;
+                font-size: 16px;
+            }
+            
+            .steps-list li:before {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-project-diagram"></i> CS 330 Project Plan Dashboard</h1>
+            <div class="controls">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for tasks, phases, deliverables...">
+                </div>
+                <div class="language-toggle">
+                    <button class="lang-btn active" id="lang-en">
+                        <i class="fas fa-language"></i> English
+                    </button>
+                    <button class="lang-btn" id="lang-ar">
+                        <i class="fas fa-language"></i> العربية
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn aryam active" data-tab="aryam">
+                <i class="fas fa-desktop"></i> <span class="en-text">Aryam</span><span class="ar-text arabic" style="display: none;">أريام</span>
+            </button>
+            <button class="tab-btn layan" data-tab="layan">
+                <i class="fas fa-vial"></i> <span class="en-text">Layan</span><span class="ar-text arabic" style="display: none;">ليان</span>
+            </button>
+            <button class="tab-btn danah" data-tab="danah">
+                <i class="fas fa-chart-bar"></i> <span class="en-text">Danah</span><span class="ar-text arabic" style="display: none">دانه</span>
+            </button>
+            <button class="tab-btn shoug" data-tab="shoug">
+                <i class="fas fa-file-alt"></i> <span class="en-text">Shoug</span><span class="ar-text arabic" style="display: none">شوق</span>
+            </button>
+            <button class="tab-btn shared" data-tab="shared">
+                <i class="fas fa-users"></i> <span class="en-text">Shared Work</span><span class="ar-text arabic" style="display: none">العمل المشترك</span>
+            </button>
+            <button class="tab-btn notes" data-tab="notes">
+                <i class="fas fa-sticky-note"></i> <span class="en-text">Notes</span><span class="ar-text arabic" style="display: none">الملاحظات</span>
+            </button>
+            <button class="tab-btn tools" data-tab="tools">
+                <i class="fas fa-tools"></i> <span class="en-text">Tools</span><span class="ar-text arabic" style="display: none">الأدوات</span>
+            </button>
+        </div>
+
+        <!-- Tab Contents -->
+        
+        <!-- Aryam Tab -->
+        <div class="tab-content active" id="aryam">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-desktop" style="color: var(--aryam);"></i>
+                    <div>
+                        <div class="en-text">Aryam - Setup & Environment Preparation</div>
+                        <div class="ar-text arabic" style="display: none;">أريام - الإعداد والبيئة</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="en-text">VirtualBox, Ubuntu VM, Build Tools, C Program Compilation</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="ar-text arabic" style="display: none;">VirtualBox، Ubuntu VM، أدوات البناء، تجميع برنامج C</div>
+                    </div>
+                </div>
+                <div class="module-info">
+                    <div class="info-chip">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="en-text">Phase 1-7</span>
+                        <span class="ar-text arabic" style="display: none">المرحلة 1-7</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-desktop"></i>
+                        <span class="en-text">VirtualBox, Ubuntu</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-code"></i>
+                        <span class="en-text">C, gcc</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <!-- Phase 1-2 Card -->
+                <div class="content-card" data-phase="1-2">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 1-2 - VirtualBox & Ubuntu Setup</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 1-2 - إعداد VirtualBox و Ubuntu</div>
+                        <div class="phase-badge">Setup</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Install VirtualBox and create Ubuntu virtual machine with proper configuration.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            تثبيت VirtualBox وإنشاء جهاز افتراضي Ubuntu مع التكوين المناسب.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Download and install VirtualBox from official website</li>
+                            <li><i class="fas fa-check-circle"></i> Create new Linux VM with allocated CPU cores and RAM</li>
+                            <li><i class="fas fa-check-circle"></i> Install Ubuntu fully with default settings</li>
+                            <li><i class="fas fa-check-circle"></i> Do not change VM settings after installation</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تنزيل وتثبيت VirtualBox من الموقع الرسمي</li>
+                            <li><i class="fas fa-check-circle"></i> إنشاء جهاز افتراضي Linux جديد مع تخصيص نوى CPU و RAM</li>
+                            <li><i class="fas fa-check-circle"></i> تثبيت Ubuntu بالكامل مع الإعدادات الافتراضية</li>
+                            <li><i class="fas fa-check-circle"></i> عدم تغيير إعدادات الجهاز الافتراضي بعد التثبيت</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-download"></i> VirtualBox installer from official website</li>
+                                <li><i class="fas fa-compact-disc"></i> Ubuntu ISO file</li>
+                                <li><i class="fas fa-microchip"></i> System with virtualization support enabled</li>
+                                <li><i class="fas fa-hdd"></i> Sufficient disk space for VM (min. 20GB)</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-download"></i> مثبت VirtualBox من الموقع الرسمي</li>
+                                <li><i class="fas fa-compact-disc"></i> ملف Ubuntu ISO</li>
+                                <li><i class="fas fa-microchip"></i> نظام مع دعم المحاكاة الافتراضية مفعل</li>
+                                <li><i class="fas fa-hdd"></i> مساحة قرص كافية للجهاز الافتراضي (20 جيجابايت على الأقل)</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Download VirtualBox from the official website (virtualbox.org)</li>
+                                <li>Install using default settings - do not customize installation</li>
+                                <li>Open VirtualBox to confirm it runs correctly without errors</li>
+                                <li>Create a new virtual machine with Type: Linux, Version: Ubuntu (64-bit)</li>
+                                <li>Allocate CPU cores and RAM as agreed by the group (recommended: 2 cores, 4GB RAM)</li>
+                                <li>Install Ubuntu fully using the ISO file - complete all installation steps</li>
+                                <li>Once installed, open Ubuntu VM to verify it works properly</li>
+                                <li>Take screenshot of VirtualBox showing Ubuntu running successfully</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>تنزيل VirtualBox من الموقع الرسمي (virtualbox.org)</li>
+                                <li>التثبيت باستخدام الإعدادات الافتراضية - عدم تخصيص التثبيت</li>
+                                <li>فتح VirtualBox للتأكد من أنه يعمل بشكل صحيح دون أخطاء</li>
+                                <li>إنشاء جهاز افتراضي جديد مع النوع: Linux، الإصدار: Ubuntu (64-bit)</li>
+                                <li>تخصيص نوى CPU و RAM كما وافق عليه المجموعة (موصى به: 2 نواة، 4 جيجابايت RAM)</li>
+                                <li>تثبيت Ubuntu بالكامل باستخدام ملف ISO - إكمال جميع خطوات التثبيت</li>
+                                <li>بمجرد التثبيت، افتح جهاز Ubuntu الافتراضي للتحقق من أنه يعمل بشكل صحيح</li>
+                                <li>التقاط لقطة شاشة لـ VirtualBox تظهر Ubuntu يعمل بنجاح</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 3-4 Card -->
+                <div class="content-card" data-phase="3-4">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 3-4 - Build Tools & C Program</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 3-4 - أدوات البناء وبرنامج C</div>
+                        <div class="phase-badge">Development</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Install build tools, compile the provided C program, and verify successful compilation.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            تثبيت أدوات البناء، تجميع برنامج C المقدم، والتحقق من التجميع الناجح.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Update Ubuntu package list and install build-essential</li>
+                            <li><i class="fas fa-check-circle"></i> Verify gcc installation with version check</li>
+                            <li><i class="fas fa-check-circle"></i> Navigate to directory containing C program file</li>
+                            <li><i class="fas fa-check-circle"></i> Compile using gcc and verify no errors</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تحديث قائمة حزم Ubuntu وتثبيت build-essential</li>
+                            <li><i class="fas fa-check-circle"></i> التحقق من تثبيت gcc بفحص الإصدار</li>
+                            <li><i class="fas fa-check-circle"></i> الانتقال إلى الدليل الذي يحتوي على ملف برنامج C</li>
+                            <li><i class="fas fa-check-circle"></i> التجميع باستخدام gcc والتحقق من عدم وجود أخطاء</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal</li>
+                                <li><i class="fas fa-wrench"></i> build-essential package (includes gcc, make, etc.)</li>
+                                <li><i class="fas fa-file-code"></i> Provided C program file</li>
+                                <li><i class="fas fa-check-circle"></i> gcc compiler</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal</li>
+                                <li><i class="fas fa-wrench"></i> حزمة build-essential (تشمل gcc، make، إلخ)</li>
+                                <li><i class="fas fa-file-code"></i> ملف برنامج C المقدم</li>
+                                <li><i class="fas fa-check-circle"></i> مترجم gcc</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Open Ubuntu Terminal from the applications menu or using Ctrl+Alt+T</li>
+                                <li>Update package list: <code>sudo apt update</code></li>
+                                <li>Install build tools: <code>sudo apt install build-essential</code></li>
+                                <li>Verify gcc installation: <code>gcc --version</code> (should show version number)</li>
+                                <li>Navigate to directory containing the C program file using <code>cd</code> command</li>
+                                <li>Compile the C program: <code>gcc -o program program.c</code> (adjust filenames as needed)</li>
+                                <li>Verify compilation was successful (no error messages)</li>
+                                <li>Take screenshot of terminal showing successful compilation</li>
+                                <li>Run the compiled program once with default values to verify it works</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>فتح Ubuntu Terminal من قائمة التطبيقات أو باستخدام Ctrl+Alt+T</li>
+                                <li>تحديث قائمة الحزم: <code>sudo apt update</code></li>
+                                <li>تثبيت أدوات البناء: <code>sudo apt install build-essential</code></li>
+                                <li>التحقق من تثبيت gcc: <code>gcc --version</code> (يجب أن يظهر رقم الإصدار)</li>
+                                <li>الانتقال إلى الدليل الذي يحتوي على ملف برنامج C باستخدام أمر <code>cd</code></li>
+                                <li>تجميع برنامج C: <code>gcc -o program program.c</code> (تعديل أسماء الملفات حسب الحاجة)</li>
+                                <li>التحقق من نجاح التجميع (لا تظهر رسائل خطأ)</li>
+                                <li>التقاط لقطة شاشة للمحطة الطرفية تظهر التجميع الناجح</li>
+                                <li>تشغيل البرنامج المترجم مرة واحدة بالقيم الافتراضية للتحقق من أنه يعمل</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 5-7 Card -->
+                <div class="content-card" data-phase="5-7">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 5-7 - Documentation & Handoff</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 5-7 - التوثيق والتسليم</div>
+                        <div class="phase-badge">Documentation</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Run base execution, document system specifications, and prepare VM access for Layan.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            تشغيل التنفيذ الأساسي، توثيق مواصفات النظام، وإعداد وصول الجهاز الافتراضي لليان.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Run program with default values and capture output</li>
+                            <li><i class="fas fa-check-circle"></i> Document CPU model, cores, RAM, Ubuntu version</li>
+                            <li><i class="fas fa-check-circle"></i> Prepare VM access via .ova export or in-person session</li>
+                            <li><i class="fas fa-check-circle"></i> Do not modify VM after handoff preparation</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تشغيل البرنامج بالقيم الافتراضية وتسجيل المخرجات</li>
+                            <li><i class="fas fa-check-circle"></i> توثيق نموذج CPU، النوى، RAM، إصدار Ubuntu</li>
+                            <li><i class="fas fa-check-circle"></i> إعداد وصول الجهاز الافتراضي عبر تصدير .ova أو جلسة مباشرة</li>
+                            <li><i class="fas fa-check-circle"></i> عدم تعديل الجهاز الافتراضي بعد إعداد التسليم</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-screenshot"></i> Screenshot tool</li>
+                                <li><i class="fas fa-file-text"></i> Text editor for documentation</li>
+                                <li><i class="fas fa-archive"></i> VirtualBox export feature (.ova)</li>
+                                <li><i class="fas fa-info-circle"></i> System information commands</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-screenshot"></i> أداة لقطة الشاشة</li>
+                                <li><i class="fas fa-file-text"></i> محرر نصوص للتوثيق</li>
+                                <li><i class="fas fa-archive"></i> ميزة تصدير VirtualBox (.ova)</li>
+                                <li><i class="fas fa-info-circle"></i> أوامر معلومات النظام</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Run the compiled program once using default values: <code>./program</code></li>
+                                <li>Capture terminal output showing program execution</li>
+                                <li>Record execution time if program displays it</li>
+                                <li>Take screenshot of program execution output</li>
+                                <li>Document system specifications: CPU model, number of cores allocated to VM, RAM allocated to VM, Ubuntu version</li>
+                                <li>Save this information in a text file for Shoug (report writer)</li>
+                                <li>Prepare VM access for Layan using one method: In-person session on Aryam's laptop, OR Export the VM as an .ova file and share it via cloud storage</li>
+                                <li>If exporting as .ova: In VirtualBox, select VM → File → Export Appliance → Choose .ova format</li>
+                                <li>Do not modify the VM after this point to ensure consistency for Layan's experiments</li>
+                                <li>Deliverables: Screenshots (VirtualBox running Ubuntu, successful compilation, program output), written system specifications, VM access for Layan</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>تشغيل البرنامج المترجم مرة واحدة باستخدام القيم الافتراضية: <code>./program</code></li>
+                                <li>التقاط مخرجات المحطة الطرفية التي تظهر تنفيذ البرنامج</li>
+                                <li>تسجيل وقت التنفيذ إذا كان البرنامج يعرضه</li>
+                                <li>التقاط لقطة شاشة لمخرجات تنفيذ البرنامج</li>
+                                <li>توثيق مواصفات النظام: نموذج CPU، عدد النوى المخصصة للجهاز الافتراضي، RAM المخصص للجهاز الافتراضي، إصدار Ubuntu</li>
+                                <li>حفظ هذه المعلومات في ملف نصي لشوق (كاتب التقرير)</li>
+                                <li>إعداد وصول الجهاز الافتراضي لليان باستخدام طريقة واحدة: جلسة مباشرة على كمبيوتر أريام المحمول، أو تصدير الجهاز الافتراضي كملف .ova ومشاركته عبر التخزين السحابي</li>
+                                <li>إذا تم التصدير كـ .ova: في VirtualBox، حدد الجهاز الافتراضي → ملف → تصدير الجهاز → اختر تنسيق .ova</li>
+                                <li>عدم تعديل الجهاز الافتراضي بعد هذه النقطة لضمان الاتساق لتجارب ليان</li>
+                                <li>المخرجات: لقطات الشاشة (VirtualBox يعمل عليه Ubuntu، التجميع الناجح، مخرجات البرنامج)، مواصفات النظام المكتوبة، وصول الجهاز الافتراضي لليان</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layan Tab -->
+        <div class="tab-content" id="layan">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-vial" style="color: var(--layan);"></i>
+                    <div>
+                        <div class="en-text">Layan - Experiment Runner</div>
+                        <div class="ar-text arabic" style="display: none;">ليان - منفذ التجارب</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="en-text">Uses Aryam's VM setup, runs timing experiments, collects data</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="ar-text arabic" style="display: none;">يستخدم إعداد جهاز أريام الافتراضي، يجري تجارب التوقيت، يجمع البيانات</div>
+                    </div>
+                </div>
+                <div class="module-info">
+                    <div class="info-chip">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="en-text">Phase 1-7</span>
+                        <span class="ar-text arabic" style="display: none">المرحلة 1-7</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-desktop"></i>
+                        <span class="en-text">Uses Aryam's VM</span>
+                        <span class="ar-text arabic" style="display: none">يستخدم جهاز أريام</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="en-text">Data Collection</span>
+                        <span class="ar-text arabic" style="display: none">جمع البيانات</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <!-- Phase 1-3 Card -->
+                <div class="content-card" data-phase="1-3">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 1-3 - VM Access & Environment Verification</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 1-3 - الوصول للجهاز الافتراضي والتحقق من البيئة</div>
+                        <div class="phase-badge">Setup</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Access Aryam's VM, verify environment consistency, and ensure no modifications to settings.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            الوصول إلى جهاز أريام الافتراضي، التحقق من اتساق البيئة، وضمان عدم إجراء تعديلات على الإعدادات.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Access VM via .ova import or in-person session</li>
+                            <li><i class="fas fa-check-circle"></i> Verify same Ubuntu version, CPU & RAM allocation</li>
+                            <li><i class="fas fa-check-circle"></i> Confirm same compiled program is present</li>
+                            <li><i class="fas fa-check-circle"></i> Do not alter VM settings or install anything</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> الوصول إلى الجهاز الافتراضي عبر استيراد .ova أو جلسة مباشرة</li>
+                            <li><i class="fas fa-check-circle"></i> التحقق من نفس إصدار Ubuntu، تخصيص CPU و RAM</li>
+                            <li><i class="fas fa-check-circle"></i> التأكد من وجود نفس البرنامج المترجم</li>
+                            <li><i class="fas fa-check-circle"></i> عدم تغيير إعدادات الجهاز الافتراضي أو تثبيت أي شيء</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-file-import"></i> VirtualBox .ova import capability</li>
+                                <li><i class="fas fa-laptop"></i> Access to Aryam's laptop (if in-person)</li>
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal for verification</li>
+                                <li><i class="fas fa-info-circle"></i> System information commands</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-file-import"></i> قدرة استيراد VirtualBox .ova</li>
+                                <li><i class="fas fa-laptop"></i> الوصول إلى كمبيوتر أريام المحمول (إذا كان مباشرًا)</li>
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal للتحقق</li>
+                                <li><i class="fas fa-info-circle"></i> أوامر معلومات النظام</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Access Aryam's VM using one approved method: In-person session on Aryam's laptop, OR Import the exported .ova file into your own VirtualBox, OR Use shared VM folder (only if compatible and previously agreed)</li>
+                                <li>Do not alter VM settings - keep everything exactly as Aryam configured it</li>
+                                <li>Verify environment consistency: Check Ubuntu version matches Aryam's (<code>lsb_release -a</code>)</li>
+                                <li>Confirm same CPU & RAM allocation (check VirtualBox settings or use <code>lscpu</code> and <code>free -h</code>)</li>
+                                <li>Confirm same compiled program is present and executable</li>
+                                <li>If anything differs from Aryam's setup, stop immediately and inform Aryam</li>
+                                <li>Important rule: Layan does NOT install VirtualBox, Ubuntu, or build tools - use Aryam's setup only</li>
+                                <li>Once verified, the environment is ready for experiments</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>الوصول إلى جهاز أريام الافتراضي باستخدام طريقة معتمدة: جلسة مباشرة على كمبيوتر أريام المحمول، أو استيراد ملف .ova المصدر إلى VirtualBox الخاص بك، أو استخدام مجلد الجهاز الافتراضي المشترك (فقط إذا كان متوافقًا ومتفقًا عليه مسبقًا)</li>
+                                <li>عدم تغيير إعدادات الجهاز الافتراضي - ابقَ كل شيء كما قام أريام بتكوينه بالضبط</li>
+                                <li>التحقق من اتساق البيئة: التحقق من مطابقة إصدار Ubuntu لإصدار أريام (<code>lsb_release -a</code>)</li>
+                                <li>تأكيد نفس تخصيص CPU و RAM (التحقق من إعدادات VirtualBox أو استخدام <code>lscpu</code> و <code>free -h</code>)</li>
+                                <li>التأكد من وجود نفس البرنامج المترجم وقابل للتنفيذ</li>
+                                <li>إذا اختلف أي شيء عن إعداد أريام، توقف فورًا وأبلغ أريام</li>
+                                <li>قاعدة مهمة: ليان لا تثبت VirtualBox أو Ubuntu أو أدوات البناء - استخدام إعداد أريام فقط</li>
+                                <li>بمجرد التحقق، تكون البيئة جاهزة للتجارب</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 4-5 Card -->
+                <div class="content-card" data-phase="4-5">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 4-5 - Experiment Execution</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 4-5 - تنفيذ التجارب</div>
+                        <div class="phase-badge">Experimentation</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Run experiments with different N and PROCS values, record execution times, and maintain clean data.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            إجراء تجارب بقيم مختلفة لـ N و PROCS، تسجيل أوقات التنفيذ، والحفاظ على بيانات نظيفة.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Change ONLY N and PROCS variables</li>
+                            <li><i class="fas fa-check-circle"></i> Run each (N, PROCS) combination at least 3 times</li>
+                            <li><i class="fas fa-check-circle"></i> Record execution time for each run</li>
+                            <li><i class="fas fa-check-circle"></i> Do not discard slow or fast runs - keep all data</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تغيير متغيرات N و PROCS فقط</li>
+                            <li><i class="fas fa-check-circle"></i> تشغيل كل تركيبة (N, PROCS) 3 مرات على الأقل</li>
+                            <li><i class="fas fa-check-circle"></i> تسجيل وقت التنفيذ لكل تشغيل</li>
+                            <li><i class="fas fa-check-circle"></i> عدم تجاهل التشغيلات البطيئة أو السريعة - الاحتفاظ بجميع البيانات</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal</li>
+                                <li><i class="fas fa-stopwatch"></i> Time measurement (program output or <code>time</code> command)</li>
+                                <li><i class="fas fa-table"></i> Spreadsheet or text editor for data recording</li>
+                                <li><i class="fas fa-calculator"></i> Calculator for averages</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-terminal"></i> Ubuntu Terminal</li>
+                                <li><i class="fas fa-stopwatch"></i> قياس الوقت (مخرجات البرنامج أو أمر <code>time</code>)</li>
+                                <li><i class="fas fa-table"></i> جدول بيانات أو محرر نصوص لتسجيل البيانات</li>
+                                <li><i class="fas fa-calculator"></i> آلة حاسبة للمتوسطات</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Modify ONLY allowed variables: N (problem size) and PROCS (number of processors/threads)</li>
+                                <li>Do NOT modify: Code logic, compiler flags, environment settings, VM configuration</li>
+                                <li>For each (N, PROCS) combination: Run the program at least 3 times to account for variability</li>
+                                <li>Record execution time for each run (use consistent units - seconds recommended)</li>
+                                <li>Do not discard slow or fast runs - all data points are valuable for analysis</li>
+                                <li>Maintain a single table with columns: N, PROCS, Run 1, Run 2, Run 3, Average execution time</li>
+                                <li>Calculate average execution time for each (N, PROCS) combination</li>
+                                <li>Use consistent formatting: same decimal places, same units throughout</li>
+                                <li>Example table structure:
+                                  N | PROCS | Run 1 | Run 2 | Run 3 | Average
+                                  1000 | 2 | 1.23 | 1.25 | 1.22 | 1.233
+                                  1000 | 4 | 0.65 | 0.67 | 0.66 | 0.660</li>
+                                <li>Ensure data is clean and organized before proceeding to validation</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>تعديل المتغيرات المسموح بها فقط: N (حجم المشكلة) و PROCS (عدد المعالجات/الخيوط)</li>
+                                <li>عدم تعديل: منطق الكود، إشارات المترجم، إعدادات البيئة، تكوين الجهاز الافتراضي</li>
+                                <li>لكل تركيبة (N, PROCS): تشغيل البرنامج 3 مرات على الأقل لحساب التباين</li>
+                                <li>تسجيل وقت التنفيذ لكل تشغيل (استخدام وحدات متسقة - يوصى بالثواني)</li>
+                                <li>عدم تجاهل التشغيلات البطيئة أو السريعة - جميع نقاط البيانات قيمة للتحليل</li>
+                                <li>الحفاظ على جدول واحد بأعمدة: N، PROCS، التشغيل 1، التشغيل 2، التشغيل 3، متوسط وقت التنفيذ</li>
+                                <li>حساب متوسط وقت التنفيذ لكل تركيبة (N, PROCS)</li>
+                                <li>استخدام تنسيق متسق: نفس المنازل العشرية، نفس الوحدات في جميع أنحاء</li>
+                                <li>مثال على هيكل الجدول:
+                                  N | PROCS | التشغيل 1 | التشغيل 2 | التشغيل 3 | المتوسط
+                                  1000 | 2 | 1.23 | 1.25 | 1.22 | 1.233
+                                  1000 | 4 | 0.65 | 0.67 | 0.66 | 0.660</li>
+                                <li>التأكد من أن البيانات نظيفة ومنظمة قبل المتابعة إلى التحقق</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 6-7 Card -->
+                <div class="content-card" data-phase="6-7">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 6-7 - Data Validation & Handoff</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 6-7 - التحقق من البيانات والتسليم</div>
+                        <div class="phase-badge">Validation</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Validate dataset for completeness and errors, then send final dataset to Danah and Shoug.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            التحقق من مجموعة البيانات للاكتمال والأخطاء، ثم إرسال مجموعة البيانات النهائية لدانه وشوق.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Check for missing values or obvious errors</li>
+                            <li><i class="fas fa-check-circle"></i> Repeat runs if needed for consistency</li>
+                            <li><i class="fas fa-check-circle"></i> Confirm dataset is final before handoff</li>
+                            <li><i class="fas fa-check-circle"></i> Send to Danah (graphs) and Shoug (report)</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> التحقق من القيم المفقودة أو الأخطاء الواضحة</li>
+                            <li><i class="fas fa-check-circle"></i> تكرار التشغيلات إذا لزم الأمر للاتساق</li>
+                            <li><i class="fas fa-check-circle"></i> تأكيد أن مجموعة البيانات نهائية قبل التسليم</li>
+                            <li><i class="fas fa-check-circle"></i> الإرسال لدانه (الرسوم البيانية) وشوق (التقرير)</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-check-double"></i> Data validation checklist</li>
+                                <li><i class="fas fa-share-alt"></i> File sharing method (Google Drive, email, etc.)</li>
+                                <li><i class="fas fa-file-excel"></i> CSV or spreadsheet format for data</li>
+                                <li><i class="fas fa-comments"></i> Communication with team members</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-check-double"></i> قائمة التحقق من صحة البيانات</li>
+                                <li><i class="fas fa-share-alt"></i> طريقة مشاركة الملفات (Google Drive، البريد الإلكتروني، إلخ)</li>
+                                <li><i class="fas fa-file-excel"></i> تنسيق CSV أو جدول البيانات للبيانات</li>
+                                <li><i class="fas fa-comments"></i> التواصل مع أعضاء الفريق</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Validate dataset: Check for missing values in any cell</li>
+                                <li>Look for obvious errors: Negative times, times that are orders of magnitude different from others</li>
+                                <li>Verify calculations: Ensure averages are correctly computed</li>
+                                <li>Check consistency: Same number of runs for each (N, PROCS) combination</li>
+                                <li>If inconsistencies found: Repeat runs for affected combinations to ensure data reliability</li>
+                                <li>Document any anomalies or observations about the data</li>
+                                <li>Once validation is complete, confirm dataset is final and ready for handoff</li>
+                                <li>Send final timing dataset table to Danah (for graphs) and Shoug (for report integration)</li>
+                                <li>Use appropriate format: CSV recommended for compatibility, or share Google Sheets link</li>
+                                <li>Include metadata: Brief description of experiment parameters, date conducted, any special notes</li>
+                                <li>Deliverables: Final timing dataset table (clean & complete), Notes on any data anomalies</li>
+                                <li>Important: Maintain only one shared dataset file to avoid confusion</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>التحقق من مجموعة البيانات: التحقق من القيم المفقودة في أي خلية</li>
+                                <li>البحث عن أخطاء واضحة: أوقات سالبة، أوقات تختلف بشكل كبير عن غيرها</li>
+                                <li>التحقق من الحسابات: التأكد من حساب المتوسطات بشكل صحيح</li>
+                                <li>التحقق من الاتساق: نفس عدد التشغيلات لكل تركيبة (N, PROCS)</li>
+                                <li>إذا تم العثور على عدم اتساق: تكرار التشغيلات للتركيبات المتأثرة لضمان موثوقية البيانات</li>
+                                <li>توثيق أي شذوذ أو ملاحظات حول البيانات</li>
+                                <li>بمجرد اكتمال التحقق، تأكيد أن مجموعة البيانات نهائية وجاهزة للتسليم</li>
+                                <li>إرسال جدول مجموعة بيانات التوقيت النهائي لدانه (للرسوم البيانية) وشوق (لتكامل التقرير)</li>
+                                <li>استخدام التنسيق المناسب: يوصى بـ CSV للتطابق، أو مشاركة رابط Google Sheets</li>
+                                <li>تضمين البيانات الوصفية: وصف موجز لمعاملات التجربة، تاريخ الإجراء، أي ملاحظات خاصة</li>
+                                <li>المخرجات: جدول مجموعة بيانات التوقيت النهائي (نظيف ومكتمل)، ملاحظات عن أي شذوذ في البيانات</li>
+                                <li>مهم: الحفاظ على ملف مجموعة بيانات مشتركة واحدة فقط لتجنب الالتباس</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danah Tab -->
+        <div class="tab-content" id="danah">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-chart-bar" style="color: var(--danah);"></i>
+                    <div>
+                        <div class="en-text">Danah - Graphs & Visuals</div>
+                        <div class="ar-text arabic" style="display: none;">دانه - الرسوم البيانية والمرئيات</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="en-text">Creates graphs from Layan's data, ensures clarity and labeling</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="ar-text arabic" style="display: none">تنشئ رسومًا بيانية من بيانات ليان، تضمن الوضوح والتوسيم</div>
+                    </div>
+                </div>
+                <div class="module-info">
+                    <div class="info-chip">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="en-text">Phase 1-7</span>
+                        <span class="ar-text arabic" style="display: none">المرحلة 1-7</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="en-text">Data Visualization</span>
+                        <span class="ar-text arabic" style="display: none">تصور البيانات</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-file-image"></i>
+                        <span class="en-text">PNG/PDF Export</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <!-- Phase 1-3 Card -->
+                <div class="content-card" data-phase="1-3">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 1-3 - Data Preparation & Graph Selection</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 1-3 - إعداد البيانات واختيار الرسوم البيانية</div>
+                        <div class="phase-badge">Preparation</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Wait for final dataset from Layan, select appropriate graph types, and prepare data for visualization.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            الانتظار لمجموعة البيانات النهائية من ليان، اختيار أنواع الرسوم البيانية المناسبة، وإعداد البيانات للتصور.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Wait until Layan confirms dataset is final</li>
+                            <li><i class="fas fa-check-circle"></i> Select minimum graph types required</li>
+                            <li><i class="fas fa-check-circle"></i> Choose appropriate visualization tool</li>
+                            <li><i class="fas fa-check-circle"></i> Verify data format and completeness</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> الانتظار حتى تؤكد ليان أن مجموعة البيانات نهائية</li>
+                            <li><i class="fas fa-check-circle"></i> اختيار الحد الأدنى من أنواع الرسوم البيانية المطلوبة</li>
+                            <li><i class="fas fa-check-circle"></i> اختيار أداة التصور المناسبة</li>
+                            <li><i class="fas fa-check-circle"></i> التحقق من تنسيق البيانات واكتمالها</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-file-csv"></i> CSV/Excel data file from Layan</li>
+                                <li><i class="fas fa-chart-bar"></i> Visualization tool (Excel, Python/matplotlib, etc.)</li>
+                                <li><i class="fas fa-comments"></i> Communication with Layan for confirmation</li>
+                                <li><i class="fas fa-clipboard-check"></i> Graph requirements checklist</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-file-csv"></i> ملف بيانات CSV/Excel من ليان</li>
+                                <li><i class="fas fa-chart-bar"></i> أداة التصور (Excel، Python/matplotlib، إلخ)</li>
+                                <li><i class="fas fa-comments"></i> التواصل مع ليان للتأكيد</li>
+                                <li><i class="fas fa-clipboard-check"></i> قائمة متطلبات الرسم البياني</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Wait for final dataset from Layan - do NOT begin until Layan confirms the dataset is final and complete</li>
+                                <li>Once received, verify dataset: Check file format, ensure all required columns are present, verify no obvious data errors</li>
+                                <li>Select graph types - at minimum include: Execution Time vs. PROCS (for fixed N values), Execution Time vs. N (for selected PROCS values)</li>
+                                <li>Consider additional helpful graphs: Speedup vs. PROCS, Efficiency vs. PROCS, 3D surface plot of Time vs. N vs. PROCS (if appropriate)</li>
+                                <li>Choose appropriate tool based on team agreement and personal comfort: Excel (easiest for basic graphs), Python with matplotlib/seaborn (more flexible), Other (Google Sheets, R, etc.)</li>
+                                <li>Prepare data for visualization: Organize data by N and PROCS values, Calculate averages if not already provided, Identify key trends to highlight</li>
+                                <li>Ensure you have clear understanding of what each graph should show before creating it</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>الانتظار لمجموعة البيانات النهائية من ليان - عدم البدء حتى تؤكد ليان أن مجموعة البيانات نهائية ومكتملة</li>
+                                <li>بمجرد الاستلام، التحقق من مجموعة البيانات: التحقق من تنسيق الملف، التأكد من وجود جميع الأعمدة المطلوبة، التحقق من عدم وجود أخطاء واضحة في البيانات</li>
+                                <li>اختيار أنواع الرسوم البيانية - على الأقل تضمين: وقت التنفيذ مقابل PROCS (لقيم N ثابتة)، وقت التنفيذ مقابل N (لقيم PROCS مختارة)</li>
+                                <li>النظر في رسوم بيانية إضافية مفيدة: التسريع مقابل PROCS، الكفاءة مقابل PROCS، مخطط سطح ثلاثي الأبعاد للوقت مقابل N مقابل PROCS (إذا كان مناسبًا)</li>
+                                <li>اختيار الأداة المناسبة بناءً على اتفاق الفريق والراحة الشخصية: Excel (أسهل للرسوم البيانية الأساسية)، Python مع matplotlib/seaborn (أكثر مرونة)، أخرى (Google Sheets، R، إلخ)</li>
+                                <li>إعداد البيانات للتصور: تنظيم البيانات حسب قيم N و PROCS، حساب المتوسطات إذا لم تكن مرفقة بالفعل، تحديد الاتجاهات الرئيسية لتسليط الضوء عليها</li>
+                                <li>التأكد من فهم واضح لما يجب أن يظهره كل رسم بياني قبل إنشائه</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 4-6 Card -->
+                <div class="content-card" data-phase="4-6">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 4-6 - Graph Creation & Export</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 4-6 - إنشاء الرسم البياني والتصدير</div>
+                        <div class="phase-badge">Visualization</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Create clear, labeled graphs with proper formatting and export as high-quality images.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            إنشاء رسوم بيانية واضحة وموسومة بتنسيق مناسب وتصديرها كصور عالية الجودة.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Create graphs with visual clarity and consistency</li>
+                            <li><i class="fas fa-check-circle"></i> Label each graph properly with title and axis labels</li>
+                            <li><i class="fas fa-check-circle"></i> Export as high-quality PNG or PDF images</li>
+                            <li><i class="fas fa-check-circle"></i> Write 1-2 sentence figure captions</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> إنشاء رسوم بيانية بوضوح مرئي واتساق</li>
+                            <li><i class="fas fa-check-circle"></i> تسمية كل رسم بياني بشكل صحيح بعنوان وتسميات المحاور</li>
+                            <li><i class="fas fa-check-circle"></i> التصدير كصور PNG أو PDF عالية الجودة</li>
+                            <li><i class="fas fa-check-circle"></i> كتابة تعليقات صور مكونة من 1-2 جملة</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-chart-line"></i> Chosen graphing software (Excel, Python, etc.)</li>
+                                <li><i class="fas fa-save"></i> Export/save functionality for high-res images</li>
+                                <li><i class="fas fa-edit"></i> Text editor for captions</li>
+                                <li><i class="fas fa-palette"></i> Color scheme guidelines</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-chart-line"></i> برنامج الرسم البياني المختار (Excel، Python، إلخ)</li>
+                                <li><i class="fas fa-save"></i> وظيفة التصدير/الحفظ للصور عالية الدقة</li>
+                                <li><i class="fas fa-edit"></i> محرر نصوص للتعليقات</li>
+                                <li><i class="fas fa-palette"></i> إرشادات نظام الألوان</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Create graphs using chosen tool: Start with basic required graphs, Ensure visual clarity: readable fonts, appropriate colors, good contrast</li>
+                                <li>Maintain consistency: Same color scheme across all graphs, Same font styles and sizes, Similar layout and formatting</li>
+                                <li>Label graphs properly - EACH graph must include: Descriptive title (e.g., "Execution Time vs. Number of Processors for N=1000"), X-axis label with units (e.g., "Number of Processors (PROCS)"), Y-axis label with units (e.g., "Execution Time (seconds)"), Legend if showing multiple data series</li>
+                                <li>Choose appropriate graph types: Line graphs for trends over PROCS or N, Bar charts for comparing discrete values, Scatter plots if showing individual data points</li>
+                                <li>Export graphs as high-quality images: Use PNG format for clarity, Or PDF for vector quality (better for printing), Minimum 300 DPI resolution for report quality</li>
+                                <li>Use consistent file naming: e.g., "Time_vs_PROCS_N1000.png", "Time_vs_N_PROCS4.png"</li>
+                                <li>Write figure captions (1-2 sentences each): Describe what the graph shows, Highlight main trend observed (e.g., "Execution time decreases as PROCS increases up to 8 processors, then plateaus"), Keep captions concise but informative</li>
+                                <li>Example caption: "Figure 1: Execution time versus number of processors for problem size N=1000. Shows strong scaling up to 8 processors with diminishing returns beyond."</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>إنشاء الرسوم البيانية باستخدام الأداة المختارة: البدء بالرسوم البيانية الأساسية المطلوبة، ضمان الوضوح المرئي: خطوط مقروءة، ألوان مناسبة، تباين جيد</li>
+                                <li>الحفاظ على الاتساق: نفس نظام الألوان عبر جميع الرسوم البيانية، نفس أنماط وأحجام الخطوط، تخطيط وتنسيق متشابه</li>
+                                <li>تسمية الرسوم البيانية بشكل صحيح - يجب أن يتضمن كل رسم بياني: عنوان وصفي (مثال: "وقت التنفيذ مقابل عدد المعالجات لـ N=1000")، تسمية المحور X مع الوحدات (مثال: "عدد المعالجات (PROCS)")، تسمية المحور Y مع الوحدات (مثال: "وقت التنفيذ (ثواني)")، وسيلة إيضاح إذا تم عرض سلسلة بيانات متعددة</li>
+                                <li>اختيار أنواع الرسوم البيانية المناسبة: رسوم خطية للاتجاهات عبر PROCS أو N، مخططات شريطية لمقارنة القيم المنفصلة، مخططات مبعثرة إذا تم عرض نقاط بيانات فردية</li>
+                                <li>تصدير الرسوم البيانية كصور عالية الجودة: استخدام تنسيق PNG للوضوح، أو PDF لجودة المتجهات (أفضل للطباعة)، دقة 300 DPI كحد أدنى لجودة التقرير</li>
+                                <li>استخدام تسمية ملفات متسقة: مثال: "Time_vs_PROCS_N1000.png"، "Time_vs_N_PROCS4.png"</li>
+                                <li>كتابة تعليقات الصور (1-2 جملة لكل منها): وصف ما يظهره الرسم البياني، تسليط الضوء على الاتجاه الرئيسي الملاحظ (مثال: "ينخفض وقت التنفيذ مع زيادة PROCS حتى 8 معالجات، ثم يستقر")، الحفاظ على التعليقات موجزة ولكن غنية بالمعلومات</li>
+                                <li>مثال على التعليق: "الشكل 1: وقت التنفيذ مقابل عدد المعالجات لحجم المشكلة N=1000. يظهر تحجيم قوي حتى 8 معالجات مع عوائد متناقصة بعد ذلك."</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 7 Card -->
+                <div class="content-card" data-phase="7">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 7 - Final Delivery to Shoug</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 7 - التسليم النهائي لشوق</div>
+                        <div class="phase-badge">Delivery</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Send completed graphs and captions to Shoug for report integration.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            إرسال الرسوم البيانية والتعليقات المكتملة لشوق لتكامل التقرير.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Package all graph files together</li>
+                            <li><i class="fas fa-check-circle"></i> Include caption text in separate document</li>
+                            <li><i class="fas fa-check-circle"></i> Ensure consistent formatting across all figures</li>
+                            <li><i class="fas fa-check-circle"></i> Deliver to Shoug via agreed method</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تجميع جميع ملفات الرسم البياني معًا</li>
+                            <li><i class="fas fa-check-circle"></i> تضمين نص التعليق في مستند منفصل</li>
+                            <li><i class="fas fa-check-circle"></i> التأكد من التنسيق المتسق عبر جميع الأشكال</li>
+                            <li><i class="fas fa-check-circle"></i> التسليم لشوق عبر الطريقة المتفق عليها</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-folder"></i> Folder organization for graph files</li>
+                                <li><i class="fas fa-file-word"></i> Document for captions (Word, Google Docs)</li>
+                                <li><i class="fas fa-share-alt"></i> File sharing platform (Google Drive, etc.)</li>
+                                <li><i class="fas fa-check-circle"></i> Final quality check</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-folder"></i> تنظيم المجلد لملفات الرسم البياني</li>
+                                <li><i class="fas fa-file-word"></i> مستند للتعليقات (Word، Google Docs)</li>
+                                <li><i class="fas fa-share-alt"></i> منصة مشاركة الملفات (Google Drive، إلخ)</li>
+                                <li><i class="fas fa-check-circle"></i> فحص الجودة النهائي</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Perform final quality check on all graphs: Verify all labels are present and correct, Check that colors are consistent across graphs, Ensure images are high resolution and clear</li>
+                                <li>Organize graph files: Create a dedicated folder for all graph images, Use consistent naming convention, Include both PNG and PDF versions if possible</li>
+                                <li>Prepare caption document: Create a Word or Google Doc with all figure captions, Number figures sequentially (Figure 1, Figure 2, etc.), Match caption numbers to file names</li>
+                                <li>Include metadata in caption document: Brief description of data source (Layan's dataset), Date of graph creation, Any notes about graphing choices</li>
+                                <li>Package deliverables: Graph images folder, Caption document, Any source code if using Python/other programming for graphs</li>
+                                <li>Send to Shoug via agreed method: Email with attachments, Google Drive shared folder, Other team-preferred method</li>
+                                <li>Notify Shoug that graphs are ready for integration into report</li>
+                                <li>Be available for questions from Shoug about the graphs during report integration</li>
+                                <li>Deliverables: Graph images ready for report (PNG/PDF), Short figure captions document, Optional: Source code for graph generation</li>
+                                <li>Confirm with Shoug that all materials have been received and are satisfactory</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>إجراء فحص الجودة النهائي على جميع الرسوم البيانية: التحقق من وجود جميع التسميات وصحتها، التحقق من أن الألوان متسقة عبر الرسوم البيانية، التأكد من أن الصور عالية الدقة وواضحة</li>
+                                <li>تنظيم ملفات الرسم البياني: إنشاء مجلد مخصص لجميع صور الرسم البياني، استخدام اصطلاح تسمية متسق، تضمين إصدارات PNG و PDF إذا أمكن</li>
+                                <li>إعداد مستند التعليق: إنشاء مستند Word أو Google Doc يحتوي على جميع تعليقات الصور، ترقيم الأشكال بالتسلسل (الشكل 1، الشكل 2، إلخ)، مطابقة أرقام التعليقات مع أسماء الملفات</li>
+                                <li>تضمين البيانات الوصفية في مستند التعليق: وصف موجز لمصدر البيانات (مجموعة بيانات ليان)، تاريخ إنشاء الرسم البياني، أي ملاحظات حول خيارات الرسم البياني</li>
+                                <li>تجميع المخرجات: مجلد صور الرسم البياني، مستند التعليق، أي كود مصدر إذا تم استخدام Python/برمجة أخرى للرسوم البيانية</li>
+                                <li>الإرسال لشوق عبر الطريقة المتفق عليها: البريد الإلكتروني مع المرفقات، مجلد Google Drive المشترك، طريقة أخرى مفضلة للفريق</li>
+                                <li>إخطار شوق بأن الرسوم البيانية جاهزة للتكامل في التقرير</li>
+                                <li>التواجد للإجابة على أسئلة شوق حول الرسوم البيانية أثناء تكامل التقرير</li>
+                                <li>المخرجات: صور الرسم البياني الجاهزة للتقرير (PNG/PDF)، مستند تعليقات الصور القصيرة، اختياري: كود المصدر لتوليد الرسم البياني</li>
+                                <li>التأكد مع شوق من استلام جميع المواد وأنها مرضية</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shoug Tab -->
+        <div class="tab-content" id="shoug">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-file-alt" style="color: var(--shoug);"></i>
+                    <div>
+                        <div class="en-text">Shoug - Report Writer & Integrator</div>
+                        <div class="ar-text arabic" style="display: none;">شوق - كاتبة التقرير والمكاملة</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="en-text">Assembles final report, integrates all contributions, ensures consistency</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="ar-text arabic" style="display: none">تجميع التقرير النهائي، دمج جميع المساهمات، ضمان الاتساق</div>
+                    </div>
+                </div>
+                <div class="module-info">
+                    <div class="info-chip">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="en-text">Phase 1-7</span>
+                        <span class="ar-text arabic" style="display: none">المرحلة 1-7</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-book"></i>
+                        <span class="en-text">Report Assembly</span>
+                        <span class="ar-text arabic" style="display: none">تجميع التقرير</span>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fas fa-users"></i>
+                        <span class="en-text">Integrates All Work</span>
+                        <span class="ar-text arabic" style="display: none">يدمج كل العمل</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <!-- Phase 1-3 Card -->
+                <div class="content-card" data-phase="1-3">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 1-3 - Report Structure & Initial Integration</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 1-3 - هيكل التقرير والتكامل الأولي</div>
+                        <div class="phase-badge">Structure</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Create report structure early and begin integrating content from Aryam and team planning.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            إنشاء هيكل التقرير مبكرًا والبدء في دمج المحتوى من أريام وتخطيط الفريق.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Create report structure with all required sections</li>
+                            <li><i class="fas fa-check-circle"></i> Integrate Aryam's VM setup description</li>
+                            <li><i class="fas fa-check-circle"></i> Add system specifications from Aryam</li>
+                            <li><i class="fas fa-check-circle"></i> Begin writing parallel sections</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> إنشاء هيكل التقرير مع جميع الأقسام المطلوبة</li>
+                            <li><i class="fas fa-check-circle"></i> دمج وصف إعداد جهاز أريام الافتراضي</li>
+                            <li><i class="fas fa-check-circle"></i> إضافة مواصفات النظام من أريام</li>
+                            <li><i class="fas fa-check-circle"></i> البدء في كتابة أقسام متوازية</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-file-word"></i> Word processor (Word, Google Docs, LaTeX)</li>
+                                <li><i class="fas fa-folder-open"></i> Access to Aryam's documentation</li>
+                                <li><i class="fas fa-sitemap"></i> Report outline/template</li>
+                                <li><i class="fas fa-clipboard-list"></i> Requirements checklist</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-file-word"></i> معالج الكلمات (Word، Google Docs، LaTeX)</li>
+                                <li><i class="fas fa-folder-open"></i> الوصول إلى وثائق أريام</li>
+                                <li><i class="fas fa-sitemap"></i> مخطط/قالب التقرير</li>
+                                <li><i class="fas fa-clipboard-list"></i> قائمة متطلبات التحقق</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Create report structure early - don't wait for all content: Title page with project title, team members, course, date; Table of contents; Introduction & objectives; Experimental setup; Methodology; Results; Discussion; Conclusion; Appendix (code, screenshots)</li>
+                                <li>Begin writing sections that don't require others' content: Introduction (project overview, objectives), Methodology (overall approach, experimental design)</li>
+                                <li>Integrate Aryam's content: VM setup description (how VirtualBox and Ubuntu were installed), System specifications (CPU model, cores, RAM, Ubuntu version)</li>
+                                <li>Add team coordination details: How the project was divided, Communication methods used, Timeline of work</li>
+                                <li>Set up proper formatting: Page margins, Font style and size, Heading hierarchy, Figure and table numbering</li>
+                                <li>Create placeholders for content that will come later: "[Layan's data table will be inserted here]", "[Danah's graphs will be inserted here]"</li>
+                                <li>Start reference list/bibliography if citing sources</li>
+                                <li>Share draft structure with team for feedback</li>
+                                <li>Write in parallel while others complete their work - don't wait until everything is ready</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>إنشاء هيكل التقرير مبكرًا - عدم الانتظار لكل المحتوى: صفحة العنوان بعنوان المشروع، أعضاء الفريق، المقرر، التاريخ؛ جدول المحتويات؛ المقدمة والأهداف؛ الإعداد التجريبي؛ المنهجية؛ النتائج؛ المناقشة؛ الخاتمة؛ الملحق (الكود، لقطات الشاشة)</li>
+                                <li>البدء في كتابة الأقسام التي لا تتطلب محتوى الآخرين: المقدمة (نظرة عامة على المشروع، الأهداف)، المنهجية (النهج العام، التصميم التجريبي)</li>
+                                <li>دمج محتوى أريام: وصف إعداد الجهاز الافتراضي (كيف تم تثبيت VirtualBox و Ubuntu)، مواصفات النظام (نموذج CPU، النوى، RAM، إصدار Ubuntu)</li>
+                                <li>إضافة تفاصيل تنسيق الفريق: كيف تم تقسيم المشروع، طرق الاتصال المستخدمة، الجدول الزمني للعمل</li>
+                                <li>إعداد التنسيق المناسب: هوامش الصفحة، نمط وحجم الخط، تسلسل العناوين، ترقيم الأشكال والجداول</li>
+                                <li>إنشاء عناصر نائبة للمحتوى الذي سيأتي لاحقًا: "[سيتم إدراج جدول بيانات ليان هنا]"، "[سيتم إدراج رسوم دانه البيانية هنا]"</li>
+                                <li>بدء قائمة المراجع/الفهرس إذا تم الاستشهاد بمصادر</li>
+                                <li>مشاركة مسودة الهيكل مع الفريق للحصول على ملاحظات</li>
+                                <li>الكتابة بالتوازي بينما يكمل الآخرون عملهم - عدم الانتظار حتى يصبح كل شيء جاهزًا</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 4-5 Card -->
+                <div class="content-card" data-phase="4-5">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 4-5 - Data & Graph Integration</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 4-5 - تكامل البيانات والرسوم البيانية</div>
+                        <div class="phase-badge">Integration</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Integrate Layan's dataset as tables and Danah's graphs into the Results section.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            دمج مجموعة بيانات ليان كجداول ورسوم دانه البيانية في قسم النتائج.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Convert Layan's dataset into formatted tables</li>
+                            <li><i class="fas fa-check-circle"></i> Reference tables in text with analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Place Danah's graphs in Results section</li>
+                            <li><i class="fas fa-check-circle"></i> Add captions directly below each figure</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تحويل مجموعة بيانات ليان إلى جداول منسقة</li>
+                            <li><i class="fas fa-check-circle"></i> الإشارة إلى الجداول في النص مع التحليل</li>
+                            <li><i class="fas fa-check-circle"></i> وضع رسوم دانه البيانية في قسم النتائج</li>
+                            <li><i class="fas fa-check-circle"></i> إضافة تعليقات مباشرة تحت كل شكل</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-table"></i> Table formatting tools</li>
+                                <li><i class="fas fa-image"></i> Image insertion capability</li>
+                                <li><i class="fas fa-file-excel"></i> Layan's dataset file</li>
+                                <li><i class="fas fa-folder"></i> Danah's graph folder</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-table"></i> أدوات تنسيق الجداول</li>
+                                <li><i class="fas fa-image"></i> قدرة إدراج الصور</li>
+                                <li><i class="fas fa-file-excel"></i> ملف مجموعة بيانات ليان</li>
+                                <li><i class="fas fa-folder"></i> مجلد رسوم دانه البيانية</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Receive Layan's final dataset and Danah's graphs</li>
+                                <li>Integrate Layan's dataset: Convert raw data into well-formatted tables, Choose key data to highlight (not necessarily all data), Add table numbers and descriptive titles, Include units in column headers</li>
+                                <li>Reference tables in text: Introduce each table before it appears, Explain what the table shows, Highlight key findings from the table data</li>
+                                <li>Example table reference: "Table 1 shows execution times for varying N values with PROCS=4. As N increases from 1000 to 10000, execution time grows linearly..."</li>
+                                <li>Integrate Danah's graphs: Insert graph images at appropriate points in Results section, Ensure images are properly scaled (not too small or pixelated), Maintain consistent image sizing throughout report</li>
+                                <li>Add figure captions: Use Danah's captions verbatim or adapt slightly for flow, Place caption directly below each figure, Include figure number (Figure 1, Figure 2, etc.)</li>
+                                <li>Reference figures in text: Discuss each figure in the text near where it appears, Explain what the graph demonstrates, Connect visual trends to quantitative data from tables</li>
+                                <li>Example figure reference: "Figure 1 illustrates the relationship between execution time and number of processors for N=1000. The curve shows strong scaling up to 8 processors..."</li>
+                                <li>Organize Results section logically: Typically by experiment type or variable studied, Use subheadings if multiple experiment types, Flow from data presentation (tables) to visualization (graphs) to analysis</li>
+                                <li>Ensure all visuals are properly cited if from external sources</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>استلام مجموعة بيانات ليان النهائية ورسوم دانه البيانية</li>
+                                <li>دمج مجموعة بيانات ليان: تحويل البيانات الأولية إلى جداول منسقة جيدًا، اختيار البيانات الرئيسية لتسليط الضوء عليها (ليس بالضرورة جميع البيانات)، إضافة أرقام الجداول وعناوين وصفية، تضمين الوحدات في عناوين الأعمدة</li>
+                                <li>الإشارة إلى الجداول في النص: تقديم كل جدول قبل ظهوره، شرح ما يظهره الجدول، تسليط الضوء على النتائج الرئيسية من بيانات الجدول</li>
+                                <li>مثال على الإشارة للجدول: "يظهر الجدول 1 أوقات التنفيذ لقيم N مختلفة مع PROCS=4. مع زيادة N من 1000 إلى 10000، ينمو وقت التنفيذ خطيًا..."</li>
+                                <li>دمج رسوم دانه البيانية: إدراج صور الرسم البياني في نقاط مناسبة في قسم النتائج، التأكد من تحجيم الصور بشكل صحيح (ليست صغيرة جدًا أو متقطعة)، الحفاظ على حجم الصور المتسق خلال التقرير</li>
+                                <li>إضافة تعليقات الصور: استخدام تعليقات دانه حرفيًا أو التكيف قليلاً لتناسب السياق، وضع التعليق مباشرة تحت كل شكل، تضمين رقم الشكل (الشكل 1، الشكل 2، إلخ)</li>
+                                <li>الإشارة إلى الأشكال في النص: مناقشة كل شكل في النص بالقرب من مكان ظهوره، شرح ما يظهره الرسم البياني، ربط الاتجاهات المرئية بالبيانات الكمية من الجداول</li>
+                                <li>مثال على الإشارة للشكل: "يوضح الشكل 1 العلاقة بين وقت التنفيذ وعدد المعالجات لـ N=1000. يظهر المنحنى تحجيم قوي حتى 8 معالجات..."</li>
+                                <li>تنظيم قسم النتائج بشكل منطقي: عادة حسب نوع التجربة أو المتغير المدروس، استخدام عناوين فرعية إذا كان هناك أنواع متعددة من التجارب، التدفق من عرض البيانات (الجداول) إلى التصور (الرسوم البيانية) إلى التحليل</li>
+                                <li>التأكد من أن جميع المرئيات مذكورة بشكل صحيح إذا كانت من مصادر خارجية</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 6-7 Card -->
+                <div class="content-card" data-phase="6-7">
+                    <div class="card-header">
+                        <div class="card-title en-text">Phase 6-7 - Discussion & Finalization</div>
+                        <div class="card-title ar-text arabic" style="display: none">المرحلة 6-7 - المناقشة والانتهاء</div>
+                        <div class="phase-badge">Finalization</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                    <div class="card-summary">
+                        <div class="card-content en-text">
+                            Write discussion section, ensure consistent writing voice, and finalize report with appendix.
+                        </div>
+                        <div class="card-content ar-text arabic" style="display: none">
+                            كتابة قسم المناقشة، ضمان صوت كتابة متسق، وإنهاء التقرير مع الملحق.
+                        </div>
+                        <ul class="card-list en-text">
+                            <li><i class="fas fa-check-circle"></i> Analyze effects of PROCS and N on performance</li>
+                            <li><i class="fas fa-check-circle"></i> Discuss task vs. data parallelism observations</li>
+                            <li><i class="fas fa-check-circle"></i> Edit for consistent tone and style throughout</li>
+                            <li><i class="fas fa-check-circle"></i> Finalize report with appendix containing code and screenshots</li>
+                        </ul>
+                        <ul class="card-list ar-text arabic" style="display: none">
+                            <li><i class="fas fa-check-circle"></i> تحليل تأثيرات PROCS و N على الأداء</li>
+                            <li><i class="fas fa-check-circle"></i> مناقشة ملاحظات توازي المهام مقابل توازي البيانات</li>
+                            <li><i class="fas fa-check-circle"></i> التحرير لنبرة وأسلوب متسقين في جميع أنحاء</li>
+                                <li><i class="fas fa-check-circle"></i> إنهاء التقرير مع ملحق يحتوي على الكود ولقطات الشاشة</li>
+                        </ul>
+                    </div>
+                    <div class="phase-details">
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-tools"></i> Tools Needed</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-tools"></i> الأدوات المطلوبة</div>
+                            <ul class="tools-list en-text">
+                                <li><i class="fas fa-spell-check"></i> Spelling/grammar checker</li>
+                                <li><i class="fas fa-eye"></i> Proofreading tool</li>
+                                <li><i class="fas fa-file-pdf"></i> PDF export capability</li>
+                                <li><i class="fas fa-archive"></i> Appendix materials from team</li>
+                            </ul>
+                            <ul class="tools-list ar-text arabic" style="display: none">
+                                <li><i class="fas fa-spell-check"></i> مدقق إملائي/قواعدي</li>
+                                <li><i class="fas fa-eye"></i> أداة التدقيق</li>
+                                <li><i class="fas fa-file-pdf"></i> قدرة تصدير PDF</li>
+                                <li><i class="fas fa-archive"></i> مواد الملحق من الفريق</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <div class="details-title en-text"><i class="fas fa-list-ol"></i> Steps to Complete</div>
+                            <div class="details-title ar-text arabic" style="display: none"><i class="fas fa-list-ol"></i> خطوات الإكمال</div>
+                            <ol class="steps-list en-text">
+                                <li>Write the Discussion section: Analyze effect of PROCS on execution time (strong/weak scaling), Analyze effect of N on execution time (scalability), Discuss task vs. data parallelism observations from results, Identify performance trends and limitations (bottlenecks, overhead), Compare results with expected/theoretical performance, Explain any anomalies or unexpected results</li>
+                                <li>Write Conclusion section: Summarize key findings, Restate project objectives and how they were met, Suggest potential improvements or future work</li>
+                                <li>Ensure one consistent writing voice throughout: Edit all sections for consistent tone and style, Remove informal language, contractions, slang, Ensure technical terminology is used consistently, Check that verb tenses are consistent (usually past tense for methods/results, present for conclusions)</li>
+                                <li>Compile appendix: Include C code (provided program), Include screenshots from Aryam (VirtualBox, compilation, execution), Include any additional relevant materials, Label appendix sections clearly (Appendix A: Code, Appendix B: Screenshots)</li>
+                                <li>Finalize the report: Check formatting (margins, fonts, spacing), Ensure page limit compliance (5-7 pages as specified), Verify all figures and tables are properly numbered and referenced, Check that table of contents matches actual page numbers, Proofread entire document for spelling/grammar errors</li>
+                                <li>Export final PDF: Use high-quality PDF export settings, Ensure all images are embedded properly, Test PDF on different devices to ensure compatibility</li>
+                                <li>Share final report with team for final review before submission</li>
+                                <li>Make any final adjustments based on team feedback</li>
+                                <li>Deliverables: Final PDF report (5-7 pages), Appendix with C code and screenshots</li>
+                                <li>Ensure all team members have copy of final report for submission</li>
+                            </ol>
+                            <ol class="steps-list ar-text arabic" style="display: none">
+                                <li>كتابة قسم المناقشة: تحليل تأثير PROCS على وقت التنفيذ (تحجيم قوي/ضعيف)، تحليل تأثير N على وقت التنفيذ (القابلية للتوسع)، مناقشة ملاحظات توازي المهام مقابل توازي البيانات من النتائج، تحديد اتجاهات الأداء والقيود (الاختناقات، الحمولة الزائدة)، مقارنة النتائج مع الأداء المتوقع/النظري، شرح أي شذوذ أو نتائج غير متوقعة</li>
+                                <li>كتابة قسم الخاتمة: تلخيص النتائج الرئيسية، إعادة ذكر أهداف المشروع وكيف تم تحقيقها، اقتراح تحسينات محتملة أو عمل مستقبلي</li>
+                                <li>ضمان صوت كتابة متسق واحد في جميع أنحاء: تحرير جميع الأقسام لنبرة وأسلوب متسقين، إزالة اللغة غير الرسمية، الانقباضات، العامية، التأكد من استخدام المصطلحات الفنية بشكل متسق، التحقق من أن الأزمنة الفعلية متسقة (عادة الماضي للطرق/النتائج، الحاضر للاستنتاجات)</li>
+                                <li>تجميع الملحق: تضمين كود C (البرنامج المقدم)، تضمين لقطات الشاشة من أريام (VirtualBox، التجميع، التنفيذ)، تضمين أي مواد إضافية ذات صلة، تسمية أقسام الملحق بوضوح (الملحق أ: الكود، الملحق ب: لقطات الشاشة)</li>
+                                <li>إنهاء التقرير: التحقق من التنسيق (الهوامش، الخطوط، المسافات)، ضمان الامتثال لحد الصفحات (5-7 صفحات كما هو محدد)، التحقق من ترقيم جميع الأشكال والجداول والإشارة إليها بشكل صحيح، التحقق من أن جدول المحتويات يطابق أرقام الصفحات الفعلية، تدقيق المستند بالكامل لأخطاء الإملاء/القواعد</li>
+                                <li>تصدير PDF النهائي: استخدام إعدادات تصدير PDF عالية الجودة، التأكد من تضمين جميع الصور بشكل صحيح، اختبار PDF على أجهزة مختلفة لضمان التوافق</li>
+                                <li>مشاركة التقرير النهائي مع الفريق للمراجعة النهائية قبل التقديم</li>
+                                <li>إجراء أي تعديلات نهائية بناءً على ملاحظات الفريق</li>
+                                <li>المخرجات: تقرير PDF النهائي (5-7 صفحات)، الملحق مع كود C ولقطات الشاشة</li>
+                                <li>التأكد من أن جميع أعضاء الفريق لديهم نسخة من التقرير النهائي للتقديم</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shared Work Tab -->
+        <div class="tab-content" id="shared">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-users" style="color: var(--shared);"></i>
+                    <div>
+                        <div class="en-text">Shared Work & Coordination Rules</div>
+                        <div class="ar-text arabic" style="display: none;">العمل المشترك وقواعد التنسيق</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="en-text">Practical rules to ensure the project actually works</div>
+                        <div style="font-size: 16px; color: var(--text-light); margin-top: 5px;" class="ar-text arabic" style="display: none">قواعد عملية لضمان عمل المشروع بالفعل</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shared-grid">
+                <!-- Coordination Rules -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-handshake"></i> Critical Coordination Rules</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-handshake"></i> قواعد التنسيق الحرجة</div>
+                    <ul class="collab-list en-text">
+                        <li><i class="fas fa-calendar-check"></i> <strong>Aryam & Layan</strong> must schedule at least one experiment session together</li>
+                        <li><i class="fas fa-database"></i> <strong>Layan</strong> maintains only one shared dataset file to avoid confusion</li>
+                        <li><i class="fas fa-hourglass-start"></i> <strong>Danah</strong> begins work only after Layan confirms data is finalized</li>
+                        <li><i class="fas fa-paragraph"></i> <strong>Shoug</strong> writes sections in parallel and integrates final content last</li>
+                    </ul>
+                    <ul class="collab-list ar-text arabic" style="display: none">
+                        <li><i class="fas fa-calendar-check"></i> <strong>أريام وليان</strong> يجب أن يجددا جلسة تجربة واحدة على الأقل معًا</li>
+                        <li><i class="fas fa-database"></i> <strong>ليان</strong> تحافظ على ملف مجموعة بيانات مشتركة واحدة فقط لتجنب الالتباس</li>
+                        <li><i class="fas fa-hourglass-start"></i> <strong>دانه</strong> تبدأ العمل فقط بعد أن تؤكد ليان أن البيانات نهائية</li>
+                        <li><i class="fas fa-paragraph"></i> <strong>شوق</strong> تكتب الأقسام بالتوازي وتدمج المحتوى النهائي أخيرًا</li>
+                    </ul>
+                </div>
+                
+                <!-- Dependencies -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-project-diagram"></i> Work Dependencies</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-project-diagram"></i> تبعيات العمل</div>
+                    <ul class="collab-list en-text">
+                        <li><i class="fas fa-arrow-right"></i> <strong>Aryam → Layan:</strong> VM setup must be complete before experiments</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>Layan → Danah:</strong> Final dataset must be validated before graphs</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>Danah → Shoug:</strong> Graphs must be complete before report integration</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>All → Shoug:</strong> All content must be delivered before final report</li>
+                    </ul>
+                    <ul class="collab-list ar-text arabic" style="display: none">
+                        <li><i class="fas fa-arrow-right"></i> <strong>أريام → ليان:</strong> يجب أن يكتمل إعداد الجهاز الافتراضي قبل التجارب</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>ليان → دانه:</strong> يجب التحقق من مجموعة البيانات النهائية قبل الرسوم البيانية</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>دانه → شوق:</strong> يجب أن تكتمل الرسوم البيانية قبل تكامل التقرير</li>
+                        <li><i class="fas fa-arrow-right"></i> <strong>الجميع → شوق:</strong> يجب تسليم جميع المحتويات قبل التقرير النهائي</li>
+                    </ul>
+                </div>
+                
+                <!-- Communication Guidelines -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-comments"></i> Communication Guidelines</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-comments"></i> إرشادات التواصل</div>
+                    <ul class="collab-list en-text">
+                        <li><i class="fas fa-exclamation-circle"></i> Report issues immediately to the affected team member</li>
+                        <li><i class="fas fa-check-circle"></i> Confirm receipt of deliverables when sent</li>
+                        <li><i class="fas fa-clock"></i> Establish regular check-in times (weekly or as needed)</li>
+                        <li><i class="fas fa-question-circle"></i> Ask for clarification early rather than making assumptions</li>
+                    </ul>
+                    <ul class="collab-list ar-text arabic" style="display: none">
+                        <li><i class="fas fa-exclamation-circle"></i> الإبلاغ عن المشكلات فورًا لعضو الفريق المتأثر</li>
+                        <li><i class="fas fa-check-circle"></i> تأكيد استلام المخرجات عند الإرسال</li>
+                        <li><i class="fas fa-clock"></i> تحديد أوقات تسجيل منتظمة (أسبوعيًا أو حسب الحاجة)</li>
+                        <li><i class="fas fa-question-circle"></i> طلب التوضيح مبكرًا بدلاً من الافتراضات</li>
+                    </ul>
+                </div>
+                
+                <!-- Quality Standards -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-award"></i> Quality Standards</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-award"></i> معايير الجودة</div>
+                    <ul class="collab-list en-text">
+                        <li><i class="fas fa-camera"></i> Screenshots must be clear and legible</li>
+                        <li><i class="fas fa-table"></i> Data tables must include units and proper formatting</li>
+                        <li><i class="fas fa-chart-line"></i> Graphs must be properly labeled with titles and axis labels</li>
+                        <li><i class="fas fa-file-alt"></i> Report must follow specified page limit (5-7 pages)</li>
+                    </ul>
+                    <ul class="collab-list ar-text arabic" style="display: none">
+                        <li><i class="fas fa-camera"></i> يجب أن تكون لقطات الشاشة واضحة ومقروءة</li>
+                        <li><i class="fas fa-table"></i> يجب أن تتضمن جداول البيانات الوحدات والتنسيق المناسب</li>
+                        <li><i class="fas fa-chart-line"></i> يجب أن تكون الرسوم البيانية موسومة بشكل صحيح بعناوين وتسميات محاور</li>
+                        <li><i class="fas fa-file-alt"></i> يجب أن يتبع التقرير حد الصفحات المحدد (5-7 صفحات)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Tab -->
+        <div class="tab-content" id="notes">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-sticky-note" style="color: var(--notes);"></i>
+                    <div>
+                        <div class="en-text">Project Notes & Important Points</div>
+                        <div class="ar-text arabic" style="display: none;">ملاحظات المشروع والنقاط المهمة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notes-container">
+                <div class="note-card">
+                    <div class="note-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span class="en-text">Critical Success Factors</span>
+                        <span class="ar-text arabic" style="display: none">عوامل النجاح الحرجة</span>
+                    </div>
+                    <div class="note-content en-text">
+                        <strong>1. Environment Consistency:</strong> Layan must use Aryam's exact VM setup without modifications. Any changes could invalidate experiment results.<br><br>
+                        <strong>2. Data Integrity:</strong> Layan must run each (N, PROCS) combination at least 3 times and record all runs (not just averages). This accounts for system variability.<br><br>
+                        <strong>3. Sequential Workflow:</strong> The project follows a strict sequence: Aryam → Layan → Danah → Shoug. Each person must complete their work before the next can begin effectively.<br><br>
+                        <strong>4. Communication:</strong> Regular check-ins between Aryam and Layan are essential for VM handoff. Danah should not start until Layan confirms data is final.
+                    </div>
+                    <div class="note-content ar-text arabic" style="display: none">
+                        <strong>1. اتساق البيئة:</strong> يجب أن تستخدم ليان إعداد جهاز أريام الافتراضي الدقيق دون تعديلات. أي تغييرات قد تبطل نتائج التجارب.<br><br>
+                        <strong>2. سلامة البيانات:</strong> يجب أن تجري ليان كل تركيبة (N, PROCS) 3 مرات على الأقل وتسجل جميع التشغيلات (ليس فقط المتوسطات). هذا يحسب لتغير النظام.<br><br>
+                        <strong>3. سير العمل التسلسلي:</strong> يتبع المشروع تسلسلًا صارمًا: أريام → ليان → دانه → شوق. يجب أن يكمل كل شخص عمله قبل أن يبدأ التالي بشكل فعال.<br><br>
+                        <strong>4. التواصل:</strong> تسجيلات الدخول المنتظمة بين أريام وليان ضرورية لتسليم الجهاز الافتراضي. لا يجب أن تبدأ دانه حتى تؤكد ليان أن البيانات نهائية.
+                    </div>
+                </div>
+                
+                <div class="note-card">
+                    <div class="note-title">
+                        <i class="fas fa-lightbulb"></i>
+                        <span class="en-text">Pro Tips & Best Practices</span>
+                        <span class="ar-text arabic" style="display: none">نصائح احترافية وأفضل الممارسات</span>
+                    </div>
+                    <div class="note-content en-text">
+                        <strong>For Aryam:</strong> Take screenshots at each major step (VirtualBox running, Ubuntu installed, compilation successful). Document system specs accurately.<br><br>
+                        <strong>For Layan:</strong> Use a script to automate experiment runs if possible. Keep a backup of raw data before calculating averages.<br><br>
+                        <strong>For Danah:</strong> Create a consistent color scheme across all graphs. Use error bars if showing averages with standard deviation.<br><br>
+                        <strong>For Shoug:</strong> Start writing early - don't wait for all content. Use placeholder text and fill in as materials arrive. Proofread multiple times.<br><br>
+                        <strong>For All:</strong> Keep all files organized in a shared folder. Use clear file naming conventions. Communicate proactively about delays or issues.
+                    </div>
+                    <div class="note-content ar-text arabic" style="display: none">
+                        <strong>لأريام:</strong> التقاط لقطات شاشة في كل خطوة رئيسية (VirtualBox يعمل، Ubuntu مثبت، التجميع ناجح). توثيق مواصفات النظام بدقة.<br><br>
+                        <strong>لليان:</strong> استخدام نص لتشغيل التجارب تلقائيًا إذا أمكن. الاحتفاظ بنسخة احتياطية من البيانات الأولية قبل حساب المتوسطات.<br><br>
+                        <strong>لدانه:</strong> إنشاء نظام ألوان متسق عبر جميع الرسوم البيانية. استخدام أشرطة الخطأ إذا تم عرض المتوسطات مع الانحراف المعياري.<br><br>
+                        <strong>لشوق:</strong> البدء في الكتابة مبكرًا - عدم الانتظار لكل المحتوى. استخدام نص نائب وملءه مع وصول المواد. التدقيق عدة مرات.<br><br>
+                        <strong>للجميع:</strong> الحفاظ على جميع الملفات منظمة في مجلد مشترك. استخدام اصطلاحات تسمية ملفات واضحة. التواصل بشكل استباقي حول التأخيرات أو المشكلات.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div class="tab-content" id="tools">
+            <div class="tab-header">
+                <div class="tab-title">
+                    <i class="fas fa-tools" style="color: var(--tools);"></i>
+                    <div>
+                        <div class="en-text">Required Tools & Software</div>
+                        <div class="ar-text arabic" style="display: none;">الأدوات والبرامج المطلوبة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shared-grid">
+                <!-- Virtualization & OS -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-desktop"></i> Virtualization & Operating System</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-desktop"></i> المحاكاة الافتراضية ونظام التشغيل</div>
+                    <ul class="collab-list">
+                        <li><i class="fas fa-cube"></i> <strong>VirtualBox</strong> - Virtualization software for running Ubuntu VM</li>
+                        <li><i class="fab fa-ubuntu"></i> <strong>Ubuntu ISO</strong> - Linux distribution for virtual machine</li>
+                        <li><i class="fas fa-terminal"></i> <strong>Ubuntu Terminal</strong> - Command-line interface for installation and execution</li>
+                    </ul>
+                </div>
+                
+                <!-- Development Tools -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-code"></i> Development & Compilation</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-code"></i> التطوير والتجميع</div>
+                    <ul class="collab-list">
+                        <li><i class="fas fa-wrench"></i> <strong>build-essential</strong> - Package containing gcc, make, and other build tools</li>
+                        <li><i class="fas fa-cog"></i> <strong>gcc compiler</strong> - For compiling the provided C program</li>
+                        <li><i class="fas fa-file-code"></i> <strong>Text editor</strong> - For viewing/editing C code (nano, vim, gedit)</li>
+                    </ul>
+                </div>
+                
+                <!-- Data Collection & Analysis -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-chart-line"></i> Data Collection & Analysis</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-chart-line"></i> جمع البيانات والتحليل</div>
+                    <ul class="collab-list">
+                        <li><i class="fas fa-stopwatch"></i> <strong>Time measurement</strong> - Program output timing or Linux <code>time</code> command</li>
+                        <li><i class="fas fa-table"></i> <strong>Spreadsheet software</strong> - For recording and analyzing experimental data (Excel, Google Sheets)</li>
+                        <li><i class="fas fa-calculator"></i> <strong>Calculator</strong> - For computing averages and other statistics</li>
+                    </ul>
+                </div>
+                
+                <!-- Visualization & Reporting -->
+                <div class="collaboration-section">
+                    <div class="collab-title en-text"><i class="fas fa-file-alt"></i> Visualization & Reporting</div>
+                    <div class="collab-title ar-text arabic" style="display: none"><i class="fas fa-file-alt"></i> التصور وإعداد التقارير</div>
+                    <ul class="collab-list">
+                        <li><i class="fas fa-chart-bar"></i> <strong>Graphing software</strong> - For creating visualizations (Excel, Python/matplotlib, etc.)</li>
+                        <li><i class="fas fa-file-word"></i> <strong>Word processor</strong> - For report writing (Word, Google Docs, LaTeX)</li>
+                        <li><i class="fas fa-camera"></i> <strong>Screenshot tool</strong> - For capturing VM setup, compilation, execution</li>
+                        <li><i class="fas fa-file-pdf"></i> <strong>PDF exporter</strong> - For final report submission</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark mode toggle -->
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Show active tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Language switching
+            const langEnBtn = document.getElementById('lang-en');
+            const langArBtn = document.getElementById('lang-ar');
+            const enTexts = document.querySelectorAll('.en-text');
+            const arTexts = document.querySelectorAll('.ar-text');
+            
+            langEnBtn.addEventListener('click', () => {
+                langEnBtn.classList.add('active');
+                langArBtn.classList.remove('active');
+                
+                enTexts.forEach(text => text.style.display = '');
+                arTexts.forEach(text => text.style.display = 'none');
+                
+                // Update body direction
+                document.body.classList.remove('arabic');
+                document.body.style.direction = 'ltr';
+                document.body.style.textAlign = 'left';
+            });
+            
+            langArBtn.addEventListener('click', () => {
+                langArBtn.classList.add('active');
+                langEnBtn.classList.remove('active');
+                
+                enTexts.forEach(text => text.style.display = 'none');
+                arTexts.forEach(text => text.style.display = '');
+                
+                // Update body direction
+                document.body.classList.add('arabic');
+                document.body.style.direction = 'rtl';
+                document.body.style.textAlign = 'right';
+            });
+            
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme or use OS preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+            
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Phase card expansion functionality
+            const phaseCards = document.querySelectorAll('.content-card[data-phase]');
+            const expandIcons = document.querySelectorAll('.expand-icon');
+            
+            // Function to close all expanded cards
+            function closeAllExpandedCards() {
+                phaseCards.forEach(card => {
+                    card.classList.remove('expanded');
+                });
+            }
+            
+            // Add click event to expand icons
+            expandIcons.forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.content-card');
+                    const isExpanded = card.classList.contains('expanded');
+                    
+                    // Close all cards first
+                    closeAllExpandedCards();
+                    
+                    // If it wasn't expanded, expand it
+                    if (!isExpanded) {
+                        card.classList.add('expanded');
+                    }
+                });
+            });
+            
+            // Add click event to cards (but not to buttons/links inside)
+            phaseCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on expand icon (already handled)
+                    if (e.target.classList.contains('expand-icon') || e.target.closest('.expand-icon')) {
+                        return;
+                    }
+                    
+                    // Don't trigger if clicking on a link or button inside
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || 
+                        e.target.closest('a') || e.target.closest('button')) {
+                        return;
+                    }
+                    
+                    const isExpanded = this.classList.contains('expanded');
+                    
+                    // Close all cards first
+                    closeAllExpandedCards();
+                    
+                    // If it wasn't expanded, expand it
+                    if (!isExpanded) {
+                        this.classList.add('expanded');
+                    }
+                });
+            });
+            
+            // Close expanded card when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.content-card')) {
+                    closeAllExpandedCards();
+                }
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const allCards = document.querySelectorAll('.content-card');
+                
+                allCards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    if (cardText.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

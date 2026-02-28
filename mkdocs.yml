@@ -20,22 +20,22 @@ theme:
     - content.code.copy
   palette:
     - scheme: default
-      primary: indigo
-      accent: blue
+      primary: teal
+      accent: green
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: blue
+      primary: teal
+      accent: green
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
   icon:
-    logo: material/server
+    logo: material/console-network
   font:
-    text: Inter
-    code: Fira Code
+    text: IBM Plex Sans
+    code: IBM Plex Mono
 
 nav:
   - Home: index.md

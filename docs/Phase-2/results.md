@@ -1,22 +1,19 @@
----
-hide:
-  - toc
----
-
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
-# Results
+# Phase 2 Results
 
-Execution results will be inserted after official benchmarking is completed.
+Use the following tables to record official benchmark outcomes.
 
 </div>
 </div>
 
-## Results Table
+---
+
+## Main Results Table
 
 | Threads | Avg Execution Time (ms) | Speedup | % Improvement |
-|----------|--------------------------|----------|----------------|
+|---|---:|---:|---:|
 | 1 |  |  |  |
 | 2 |  |  |  |
 | 4 |  |  |  |
@@ -25,9 +22,41 @@ Execution results will be inserted after official benchmarking is completed.
 
 ---
 
-## Graphs
+## Raw Trial Table (Recommended)
 
-- Threads vs Execution Time  
-- Threads vs Speedup  
+| Threads | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average (ms) |
+|---|---:|---:|---:|---:|---:|---:|
+| 1 |  |  |  |  |  |  |
+| 2 |  |  |  |  |  |  |
+| 4 |  |  |  |  |  |  |
+| 6 |  |  |  |  |  |  |
+| 8 |  |  |  |  |  |  |
 
-Graphs will be inserted after measurement phase.
+---
+
+## Machine Specifications (Required)
+
+| Item | Value |
+|---|---|
+| Processor Model |  |
+| Physical Cores |  |
+| Logical Cores (Threads) |  |
+| RAM |  |
+| Operating System |  |
+| Java Version |  |
+
+---
+
+## Graphs to Include
+
+- Threads vs Average Execution Time (ms)
+- Threads vs Speedup
+- Optional: Threads vs % Improvement
+
+---
+
+## Interpretation Notes
+
+- Identify the best-performing thread count.
+- Identify the first point where added threads stop helping.
+- Explain any slowdown at higher thread counts.
