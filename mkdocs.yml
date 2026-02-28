@@ -81,7 +81,7 @@ plugins:
   - search
 
 extra_css:
-  - styles/extra.css
+  - styles/extra-v2.css
 
 extra_javascript:
-  - javascripts/cta-footer.js
+  - javascripts/cta-footer-v2.js
