@@ -196,11 +196,38 @@
     else footer.prepend(block);
   }
 
+  function replaceFooterGenerator() {
+    const copyright = document.querySelector(".md-copyright");
+    if (!copyright) return;
+
+    const highlight = copyright.querySelector(".md-copyright__highlight");
+    if (!highlight || !highlight.parentNode) return;
+
+    while (highlight.nextSibling) {
+      highlight.parentNode.removeChild(highlight.nextSibling);
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "md-copyright__madeby";
+
+    const text = document.createTextNode("Made by ");
+    const link = document.createElement("a");
+    link.href = "https://blueprint.shoug-tech.com/";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Blueprint";
+
+    wrapper.appendChild(text);
+    wrapper.appendChild(link);
+    highlight.parentNode.appendChild(wrapper);
+  }
+
   function run() {
     addHeaderCTA();
     addNavCollapseToggle();
     addTocCollapseToggle();
     addFooterBlock();
+    replaceFooterGenerator();
 
     let collapsed = false;
     try {
