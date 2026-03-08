@@ -342,6 +342,6 @@ In Phase I, we successfully:
 
 ---
 
-## HTML Version
+## Downloadable Version
 
-[Open the Report](./report.html)
+[Open the PDF report](./report.pdf){ .md-button }

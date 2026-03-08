@@ -1,9 +1,11 @@
 site_name: CS330 Course Project
 site_url: https://operating-systems.shoug-tech.com/
+use_directory_urls: true
 copyright: © 2026 Shoug Fawaz Alomran · All rights reserved
 
 theme:
   name: material
+  custom_dir: overrides
   favicon: CS330-logo.png
 
   features:
@@ -16,7 +18,6 @@ theme:
     - toc.follow
     - search.suggest
     - search.highlight
-    - search.share
     - content.code.copy
   palette:
     - scheme: default
@@ -51,7 +52,6 @@ nav:
       - Experiment Plan: Phase-1/experiments.md
       - Results: Phase-1/results.md
       - Report: Phase-1/report.md
-      - PDF Report: Phase-1/report.pdf
   - Phase II:
       - Overview: Phase-2/index.md
       - Plan: Phase-2/plan.md
@@ -80,8 +80,37 @@ markdown_extensions:
 plugins:
   - search
 
+hooks:
+  - hooks/seo.py
+
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: ignore
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+
 extra_css:
   - styles/extra-v2.css
 
 extra_javascript:
   - javascripts/cta-footer-v2.js
+  - javascripts/seo.js
+
+extra:
+  generator: false
+  seo:
+    robots_disallow:
+      - /search/
+      - /*?q=*
+      - /*&q=*
+      - /*?query=*
+      - /*&query=*
+      - /*.md$
+    legacy_redirects:
+      Project-Overview/Phase-1.html: /Phase-1/
+      Project-Overview/Phase-2.html: /Phase-2/
+      Phase-1/report.html: /Phase-1/report/

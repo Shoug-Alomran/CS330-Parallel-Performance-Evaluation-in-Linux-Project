@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /search/
+Disallow: /*?q=*
+Disallow: /*&q=*
+Disallow: /*?query=*
+Disallow: /*&query=*
+Disallow: /*.md$
 
 Sitemap: https://operating-systems.shoug-tech.com/sitemap.xml
