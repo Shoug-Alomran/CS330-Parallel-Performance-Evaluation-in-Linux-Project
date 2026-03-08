@@ -1,13 +1,12 @@
 import java.util.Random;
 
 public class ArraySumMinimal {
-
     // create random array
     static int[] createArray(int size) {
         Random rand = new Random();
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = rand.nextInt(50);   // values 0–49
+            arr[i] = rand.nextInt(100);   // values 0–99
         }
         return arr;
     }
@@ -15,7 +14,7 @@ public class ArraySumMinimal {
     // single-thread sum (reference)
     static int singleSum(int[] arr) {
         int sum = 0;
-        for (int v : arr) sum += v;
+        for (int v : arr) sum += v*v*v;
         return sum;
     }
 
@@ -33,7 +32,7 @@ public class ArraySumMinimal {
 
         public void run() {
             for (int i = start; i < end; i++) {
-                partialSum += arr[i];
+                partialSum += arr[i]*arr[i]*arr[i];
             }
         }
     }
@@ -86,3 +85,4 @@ public class ArraySumMinimal {
         }
     }
 }
+            
