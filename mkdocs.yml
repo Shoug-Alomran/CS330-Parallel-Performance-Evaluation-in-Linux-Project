@@ -111,8 +111,10 @@ extra:
       - /*&query=*
       - /*.md$
     legacy_redirects:
-      Project-Overview/Phase-1.html: /Phase-1/
-      Project-Overview/Phase-2.html: /Phase-2/
-      Project-Overview/Phase-1/index.html: /Project-Overview/Phase-1.html
-      Project-Overview/Phase-2/index.html: /Project-Overview/Phase-2.html
+      Project-Overview/Phase-1.html: /Project-Overview/phase-1-plan.html
+      Project-Overview/Phase-2.html: /Project-Overview/phase-2-plan.html
+      Project-Overview/Phase-1/index.html: /Project-Overview/phase-1-plan.html
+      Project-Overview/Phase-2/index.html: /Project-Overview/phase-2-plan.html
+      Project-Overview/phase-1-plan/index.html: /Project-Overview/phase-1-plan.html
+      Project-Overview/phase-2-plan/index.html: /Project-Overview/phase-2-plan.html
       Phase-1/report.html: /Phase-1/report/

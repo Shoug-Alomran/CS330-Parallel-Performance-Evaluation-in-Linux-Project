@@ -79,8 +79,8 @@ Each team member contributes to environment setup, experimentation, performance 
 
     **Project Phases**
 
-    - <a href="/Project-Overview/Phase-1.html">Phase 1</a>
-    - <a href="/Project-Overview/Phase-2.html">Phase 2</a>
+    - <a href="/Project-Overview/phase-1-plan.html">Phase 1</a>
+    - <a href="/Project-Overview/phase-2-plan.html">Phase 2</a>
 
 </div>
 
