@@ -34,7 +34,7 @@ Use the following tables to record official benchmark outcomes.
 
 ---
 
-## Machine Specifications (Required)
+## Machine Specifications
 
 | Item | Value |
 |---|---|
