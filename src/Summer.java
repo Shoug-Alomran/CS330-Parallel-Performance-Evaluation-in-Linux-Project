@@ -1,7 +1,7 @@
 public class Summer implements Runnable {
 	private int[] a;
 	private int min, max;
-	private int sum;
+	private long sum;
 	
 	public Summer(int[] a, int min, int max) {
 		this.a = a;
@@ -9,7 +9,7 @@ public class Summer implements Runnable {
 		this.max = max;
 	}
 	
-	public int getSum() {
+	public long getSum() {
 		return sum;
 	}
 	
