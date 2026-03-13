@@ -34,6 +34,49 @@ Use the following tables to record official benchmark outcomes.
 
 ---
 
+## Run Evidence
+
+??? note "Excel Summary Screenshot"
+    ![Excel benchmark summary](result-pictures/excel-run.png)
+
+??? note "Run 1"
+    ![Run 1 output](result-pictures/run-1.png)
+
+??? note "Run 2"
+    ![Run 2 output](result-pictures/run-2.png)
+
+??? note "Run 3"
+    ![Run 3 output](result-pictures/run-3.png)
+
+??? note "Run 4"
+    ![Run 4 output](result-pictures/run-4.png)
+
+??? note "Run 5"
+    ![Run 5 output](result-pictures/run-5.png)
+
+??? note "Run 6"
+    ![Run 6 output](result-pictures/run-6.png)
+
+??? note "Run 7"
+    ![Run 7 output](result-pictures/run-7.png)
+
+??? note "Run 8"
+    ![Run 8 output](result-pictures/run-8.png)
+
+??? note "Run 9"
+    ![Run 9 output](result-pictures/run-9.png)
+
+??? note "Run 10"
+    ![Run 10 output](result-pictures/run-10.png)
+
+??? note "Run 11"
+    ![Run 11 output](result-pictures/run-11.png)
+
+??? note "Run 12"
+    ![Run 12 output](result-pictures/run-12.png)
+
+---
+
 ## Machine Specifications
 
 | Item | Value |
