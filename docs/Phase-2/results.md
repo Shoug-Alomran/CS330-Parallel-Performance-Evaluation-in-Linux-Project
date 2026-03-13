@@ -42,8 +42,8 @@ Use the following tables to record official benchmark outcomes.
 | Physical Cores | 8 (4 performance + 4 efficiency) |
 | Logical Cores (Threads) | 8 |
 | RAM | 8 GB |
-| Operating System | macOS |
-| Java Version | OpenJDK 25 LTS (Temurin 25+36, build 25+36-LTS) |
+| Operating System | macOS Tahoe 26.3.1 |
+| Java Version | OpenJDK 25 LTS (Temurin) |
 
 ---
 
@@ -57,6 +57,7 @@ Use the following tables to record official benchmark outcomes.
 
 ## Interpretation Notes
 
-- Identify the best-performing thread count.
-- Identify the first point where added threads stop helping.
-- Explain any slowdown at higher thread counts.
+- Best-performing thread count: **8 threads** with an average runtime of **0.649 ms**.
+- First clear improvement beyond baseline appears at **4 threads**, but the major gain begins at **6 threads**.
+- `2` threads performed worse than `1` thread, which suggests that thread-management overhead outweighed any parallel benefit for that configuration.
+- `8` threads produced the best mean result, but the raw runs show some variability, so synchronization cost, scheduling behavior, and mixed performance/efficiency cores likely influenced the spread.

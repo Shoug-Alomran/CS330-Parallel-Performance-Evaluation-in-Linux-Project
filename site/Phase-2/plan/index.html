@@ -968,6 +968,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Controlled Test Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -997,6 +1014,17 @@
     <span class="md-ellipsis">
       
         Analysis Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observed-outcome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observed Outcome
       
     </span>
   </a>
@@ -1327,6 +1355,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Controlled Test Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1356,6 +1401,17 @@
     <span class="md-ellipsis">
       
         Analysis Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observed-outcome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observed Outcome
       
     </span>
   </a>
@@ -1430,7 +1486,7 @@
 <div class="home-hero">
 <div class="home-hero__text">
 <h1 id="phase-2-experimental-plan">Phase 2 Experimental Plan<a class="headerlink" href="#phase-2-experimental-plan" title="Permanent link">&para;</a></h1>
-<p>This plan defines a reproducible benchmark process for evaluating multithreaded performance.</p>
+<p>This plan defines the benchmark process used to evaluate multithreaded performance and records the completed execution setup.</p>
 </div>
 </div>
 <hr />
@@ -1444,12 +1500,22 @@
 <li>Ensure all array values are integers less than <code>100</code>.</li>
 <li>Measure only computation time (exclude setup and logging).</li>
 </ul>
+<h3 id="execution-environment">Execution Environment<a class="headerlink" href="#execution-environment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Machine: <strong>MacBook Air</strong></li>
+<li>Processor: <strong>Apple M2</strong></li>
+<li>Cores: <strong>8 total (4 performance + 4 efficiency)</strong></li>
+<li>RAM: <strong>8 GB</strong></li>
+<li>Operating system: <strong>macOS Tahoe 26.3.1</strong></li>
+<li>Java runtime: <strong>OpenJDK 25 LTS (Temurin)</strong></li>
+</ul>
 <hr />
 <h2 id="measurement-method">Measurement Method<a class="headerlink" href="#measurement-method" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>System.nanoTime()</code> before and after computation.</li>
 <li>Convert elapsed time to milliseconds.</li>
-<li>Execute each thread configuration at least <code>5</code> times.</li>
+<li>Execute each thread configuration repeatedly under the same setup.</li>
+<li>The final recorded dataset contains <strong>12 runs per configuration</strong>.</li>
 <li>Compute average time for each configuration.</li>
 </ul>
 <hr />
@@ -1466,6 +1532,14 @@
 <li>At which thread count do gains flatten?</li>
 <li>Does performance decrease at higher thread counts?</li>
 <li>What overhead factors explain the trend (thread creation, scheduling, context switching, core limits)?</li>
+</ul>
+<hr />
+<h2 id="observed-outcome">Observed Outcome<a class="headerlink" href="#observed-outcome" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>2</code> threads showed overhead and performed worse than the baseline.</li>
+<li><code>4</code> threads provided only a modest improvement.</li>
+<li><code>6</code> and <code>8</code> threads produced the strongest performance gains.</li>
+<li><code>8</code> threads had the best average runtime overall, while <code>6</code> threads remained very close and slightly more stable in some runs.</li>
 </ul>
 
 
