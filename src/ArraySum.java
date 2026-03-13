@@ -80,6 +80,7 @@ public class ArraySum {
         double speedup = 1.0; // Speedup for one thread is always 1.
         double improvement = 0.0; // Improvement for one thread is always 0.
 
+        System.out.println();
         // Print the table header.
         System.out.printf("%-8s %-20s %-10s %-15s%n",
                 "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
@@ -115,5 +116,7 @@ public class ArraySum {
         System.out.println("Number of cores: 8");
         System.out.println("RAM: 8 GB");
         System.out.println("Operating system: macOS Tahoe 26.3.1");
+        System.out.println("Java version: OpenJDK 25 LTS (Temurin)");
+        System.out.println();
     }
 }
