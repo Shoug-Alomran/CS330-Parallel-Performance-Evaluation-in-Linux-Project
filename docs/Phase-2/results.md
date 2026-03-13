@@ -22,7 +22,7 @@ Use the following tables to record official benchmark outcomes.
 
 ---
 
-## Raw Trial Table (Recommended)
+## Raw Trial Table
 
 | Threads | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average (ms) |
 |---|---:|---:|---:|---:|---:|---:|
@@ -34,7 +34,7 @@ Use the following tables to record official benchmark outcomes.
 
 ---
 
-## Machine Specifications (Required)
+## Machine Specifications
 
 | Item | Value |
 |---|---|
