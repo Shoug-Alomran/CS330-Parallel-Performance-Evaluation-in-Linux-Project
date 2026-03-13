@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class ArraySum {
-    static int SIZE = 1_000_000;
+    static int SIZE = 1000000;
     static int RUNS = 5;
 
     static int[] createArray(int size) {
@@ -26,17 +26,23 @@ public class ArraySum {
         return sum;
     }
 
-    static long parallelSum(int[] arr, int threadCount) throws InterruptedException {
-        Summer[] workers = new Summer[threadCount];
+    static long sum(int[] arr, int threadCount) throws InterruptedException {
+        Summer[] sums = new Summer[threadCount];
         Thread[] threads = new Thread[threadCount];
-        int size = arr.length / threadCount;
+        int part = arr.length / threadCount;
 
         for (int i = 0; i < threadCount; i++) {
-            int start = i * size;
-            int end = (i == threadCount - 1) ? arr.length : start + size;
+            int start = i * part;
+            int end;
 
-            workers[i] = new Summer(arr, start, end);
-            threads[i] = new Thread(workers[i]);
+            if (i == threadCount - 1) {
+                end = arr.length;
+            } else {
+                end = start + part;
+            }
+
+            sums[i] = new Summer(arr, start, end);
+            threads[i] = new Thread(sums[i]);
             threads[i].start();
         }
 
@@ -44,28 +50,10 @@ public class ArraySum {
 
         for (int i = 0; i < threadCount; i++) {
             threads[i].join();
-            total += workers[i].getSum();
+            total = total + sums[i].getSum();
         }
 
         return total;
-    }
-
-    static double averageTime(int[] arr, int threadCount, long correctSum) throws InterruptedException {
-        double totalTime = 0;
-
-        for (int i = 0; i < RUNS; i++) {
-            long start = System.nanoTime();
-            long result = parallelSum(arr, threadCount);
-            long end = System.nanoTime();
-
-            if (result != correctSum) {
-                System.out.println("Error: wrong result with " + threadCount + " threads.");
-            }
-
-            totalTime += (end - start) / 1_000_000.0;
-        }
-
-        return totalTime / RUNS;
     }
 
     public static void main(String[] args) throws Exception {
@@ -76,7 +64,21 @@ public class ArraySum {
         long correctSum = sumRange(arr, 0, arr.length);
 
         for (int i = 0; i < threadCounts.length; i++) {
-            times[i] = averageTime(arr, threadCounts[i], correctSum);
+            double totalTime = 0.0;
+
+            for (int j = 0; j < RUNS; j++) {
+                long start = System.nanoTime();
+                long result = sum(arr, threadCounts[i]);
+                long end = System.nanoTime();
+
+                if (result != correctSum) {
+                    System.out.println("Error: wrong result with " + threadCounts[i] + " threads.");
+                }
+
+                totalTime = totalTime + ((end - start) / 1000000.0);
+            }
+
+            times[i] = totalTime / RUNS;
         }
 
         double baseline = times[0];
@@ -95,7 +97,7 @@ public class ArraySum {
             double improvement = ((baseline - times[i]) / baseline) * 100;
 
             System.out.printf("%-10d %-20.3f %-12.3f %-15.2f%n",
-                    threadCounts[i], times[i], speedup, improvement);
+                threadCounts[i], times[i], speedup, improvement);
         }
 
         System.out.println();
