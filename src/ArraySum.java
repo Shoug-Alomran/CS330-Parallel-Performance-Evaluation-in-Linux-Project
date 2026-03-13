@@ -1,108 +1,107 @@
 import java.util.Random;
 
 public class ArraySum {
-    private static final int ARRAY_SIZE = 1_000_000;
-    private static final int[] THREAD_COUNTS = {1, 2, 4, 6, 8};
-    private static final int RUNS_PER_TEST = 5;
+    static int SIZE = 1_000_000;
+    static int RUNS = 5;
 
     static int[] createArray(int size) {
         Random rand = new Random();
         int[] arr = new int[size];
+
         for (int i = 0; i < size; i++) {
             arr[i] = rand.nextInt(100);
         }
+
         return arr;
     }
 
-    public static long sumRange(int[] arr, int min, int max) {
+    static long sumRange(int[] arr, int min, int max) {
         long sum = 0;
+
         for (int i = min; i < max; i++) {
             long value = arr[i];
             sum += value * value * value;
         }
-        return sum;
-    }
 
-    static long singleThreadSum(int[] arr) {
-        return sumRange(arr, 0, arr.length);
+        return sum;
     }
 
     static long parallelSum(int[] arr, int threadCount) throws InterruptedException {
         Summer[] workers = new Summer[threadCount];
         Thread[] threads = new Thread[threadCount];
-        int chunk = arr.length / threadCount;
+        int size = arr.length / threadCount;
 
         for (int i = 0; i < threadCount; i++) {
-            int start = i * chunk;
-            int end = (i == threadCount - 1) ? arr.length : start + chunk;
+            int start = i * size;
+            int end = (i == threadCount - 1) ? arr.length : start + size;
+
             workers[i] = new Summer(arr, start, end);
             threads[i] = new Thread(workers[i]);
             threads[i].start();
         }
 
         long total = 0;
+
         for (int i = 0; i < threadCount; i++) {
             threads[i].join();
             total += workers[i].getSum();
         }
+
         return total;
     }
 
-    static double averageTimeMs(int[] arr, int threadCount, long expected) throws InterruptedException {
-        double totalMs = 0.0;
+    static double averageTime(int[] arr, int threadCount, long correctSum) throws InterruptedException {
+        double totalTime = 0;
 
-        for (int run = 1; run <= RUNS_PER_TEST; run++) {
+        for (int i = 0; i < RUNS; i++) {
             long start = System.nanoTime();
-            long result = (threadCount == 1) ? singleThreadSum(arr) : parallelSum(arr, threadCount);
+            long result = parallelSum(arr, threadCount);
             long end = System.nanoTime();
 
-            if (result != expected) {
-                throw new IllegalStateException(
-                    "Incorrect result for " + threadCount + " threads on run " + run
-                );
+            if (result != correctSum) {
+                System.out.println("Error: wrong result with " + threadCount + " threads.");
             }
 
-            totalMs += (end - start) / 1_000_000.0;
+            totalTime += (end - start) / 1_000_000.0;
         }
 
-        return totalMs / RUNS_PER_TEST;
+        return totalTime / RUNS;
     }
 
     public static void main(String[] args) throws Exception {
-        int[] data = createArray(ARRAY_SIZE);
-        long expected = singleThreadSum(data);
-        double[] averages = new double[THREAD_COUNTS.length];
+        int[] arr = createArray(SIZE);
+        int[] threadCounts = {1, 2, 4, 6, 8};
+        double[] times = new double[threadCounts.length];
 
-        System.out.println("Phase 2: Sum of cubes using multithreading");
-        System.out.println("Array size: " + ARRAY_SIZE);
-        System.out.println("Array values: integers from 0 to 99");
-        System.out.println("Runs per configuration: " + RUNS_PER_TEST);
-        System.out.println();
+        long correctSum = sumRange(arr, 0, arr.length);
 
-        for (int i = 0; i < THREAD_COUNTS.length; i++) {
-            int threadCount = THREAD_COUNTS[i];
-            averages[i] = averageTimeMs(data, threadCount, expected);
+        for (int i = 0; i < threadCounts.length; i++) {
+            times[i] = averageTime(arr, threadCounts[i], correctSum);
         }
 
-        double baseline = averages[0];
+        double baseline = times[0];
 
-        System.out.printf("%-8s %-20s %-12s %-16s%n",
-            "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
+        System.out.println("Sum of Cubes Performance Test");
+        System.out.println("Array size: " + SIZE);
+        System.out.println("Array values: integers less than 100");
+        System.out.println("Average of " + RUNS + " runs");
+        System.out.println();
 
-        for (int i = 0; i < THREAD_COUNTS.length; i++) {
-            int threadCount = THREAD_COUNTS[i];
-            double time = averages[i];
-            double speedup = baseline / time;
-            double improvement = ((baseline - time) / baseline) * 100.0;
+        System.out.printf("%-10s %-20s %-12s %-15s%n",
+                "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
 
-            System.out.printf("%-8d %-20.3f %-12.3f %-16.2f%n",
-                threadCount, time, speedup, improvement);
+        for (int i = 0; i < threadCounts.length; i++) {
+            double speedup = baseline / times[i];
+            double improvement = ((baseline - times[i]) / baseline) * 100;
+
+            System.out.printf("%-10d %-20.3f %-12.3f %-15.2f%n",
+                    threadCounts[i], times[i], speedup, improvement);
         }
 
         System.out.println();
-        System.out.println("Machine information:");
-        System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
-        System.out.println("OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-        System.out.println("Java: " + System.getProperty("java.version"));
+        System.out.println("Machine Specifications:");
+        System.out.println("Processor cores: " + Runtime.getRuntime().availableProcessors());
+        System.out.println("Operating system: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+        System.out.println("Java version: " + System.getProperty("java.version"));
     }
 }
