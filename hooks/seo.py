@@ -43,6 +43,7 @@ def _write_robots(site_dir: Path, site_url: str, disallow_rules: list[str]) -> N
 
 
 def _write_redirect_stub(target: Path, absolute_url: str) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(
         "\n".join(
             [
