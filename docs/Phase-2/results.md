@@ -38,12 +38,12 @@ Use the following tables to record official benchmark outcomes.
 
 | Item | Value |
 |---|---|
-| Processor Model |  |
-| Physical Cores |  |
-| Logical Cores (Threads) |  |
-| RAM |  |
-| Operating System |  |
-| Java Version |  |
+| Processor Model | Apple M2 |
+| Physical Cores | 8 (4 performance + 4 efficiency) |
+| Logical Cores (Threads) | 8 |
+| RAM | 8 GB |
+| Operating System | macOS |
+| Java Version | OpenJDK 25 LTS (Temurin 25+36, build 25+36-LTS) |
 
 ---
 
