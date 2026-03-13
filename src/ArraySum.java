@@ -59,45 +59,43 @@ public class ArraySum {
     public static void main(String[] args) throws Exception {
         int[] arr = createArray(SIZE);
         int[] threadCounts = {1, 2, 4, 6, 8};
-        double[] times = new double[threadCounts.length];
-
         long correctSum = sumRange(arr, 0, arr.length);
-
-        for (int i = 0; i < threadCounts.length; i++) {
-            double totalTime = 0.0;
-
-            for (int j = 0; j < RUNS; j++) {
-                long start = System.nanoTime();
-                long result = sum(arr, threadCounts[i]);
-                long end = System.nanoTime();
-
-                if (result != correctSum) {
-                    System.out.println("Error: wrong result with " + threadCounts[i] + " threads.");
-                }
-
-                totalTime = totalTime + ((end - start) / 1000000.0);
-            }
-
-            times[i] = totalTime / RUNS;
-        }
-
-        double baseline = times[0];
+        double baseline = 0;
 
         System.out.println("Sum of Cubes Performance Test");
         System.out.println("Array size: " + SIZE);
         System.out.println("Array values: integers less than 100");
         System.out.println("Average of " + RUNS + " runs");
         System.out.println();
-
-        System.out.printf("%-10s %-20s %-12s %-15s%n",
-                "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
+        System.out.println("Threads\tExecution Time (ms)\tSpeedup\t\t% Improvement");
 
         for (int i = 0; i < threadCounts.length; i++) {
-            double speedup = baseline / times[i];
-            double improvement = ((baseline - times[i]) / baseline) * 100;
+            int threadCount = threadCounts[i];
+            double totalTime = 0;
 
-            System.out.printf("%-10d %-20.3f %-12.3f %-15.2f%n",
-                threadCounts[i], times[i], speedup, improvement);
+            for (int j = 0; j < RUNS; j++) {
+                long start = System.nanoTime();
+                long result = sum(arr, threadCount);
+                long end = System.nanoTime();
+
+                if (result != correctSum) {
+                    System.out.println("Error: wrong result with " + threadCount + " threads.");
+                }
+
+                totalTime = totalTime + ((end - start) / 1000000.0);
+            }
+
+            double averageTime = totalTime / RUNS;
+
+            if (i == 0) {
+                baseline = averageTime;
+            }
+
+            double speedup = baseline / averageTime;
+            double improvement = ((baseline - averageTime) / baseline) * 100;
+
+            System.out.printf("%d\t%.3f\t\t\t%.3f\t\t%.2f%n",
+                threadCount, averageTime, speedup, improvement);
         }
 
         System.out.println();
