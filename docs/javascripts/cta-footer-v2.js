@@ -3,6 +3,7 @@
   const MAIN_WEBSITE = "https://shoug-tech.com/";
   const NAV_PREF_KEY = "cs330_nav_collapsed";
   const TOC_PREF_KEY = "cs330_toc_collapsed";
+  const TABLET_NAV_ID = "tablet-nav-shell";
 
   function getBase() {
     try {
@@ -36,12 +37,20 @@
     return window.matchMedia("(min-width: 60em)").matches;
   }
 
+  function tabletViewport() {
+    return window.matchMedia("(min-width: 60em) and (max-width: 76.234375em)").matches;
+  }
+
   function getPrimarySidebar() {
     return document.querySelector(".md-sidebar--primary[data-md-type='navigation']");
   }
 
   function getTocSidebar() {
     return document.querySelector(".md-sidebar--secondary[data-md-type='toc']");
+  }
+
+  function getTabletNavShell() {
+    return document.getElementById(TABLET_NAV_ID);
   }
 
   function getDrawerToggle() {
@@ -51,6 +60,54 @@
   function closeDrawer() {
     const drawer = getDrawerToggle();
     if (drawer) drawer.checked = false;
+  }
+
+  function ensureTabletNavShell() {
+    const mainInner = document.querySelector(".md-main__inner");
+    const content = document.querySelector(".md-content");
+    if (!mainInner || !content) return null;
+
+    let shell = getTabletNavShell();
+    if (!shell) {
+      shell = document.createElement("aside");
+      shell.id = TABLET_NAV_ID;
+      shell.className = "tablet-nav-shell";
+      shell.innerHTML = '<div class="tablet-nav-shell__scrollwrap"><div class="tablet-nav-shell__inner"></div></div>';
+      mainInner.insertBefore(shell, content);
+    }
+
+    return shell;
+  }
+
+  function syncTabletNavigation() {
+    const sidebar = getPrimarySidebar();
+    if (!sidebar) return;
+
+    const originalInner = sidebar.querySelector(".md-sidebar__inner");
+    const nav = document.querySelector(".md-nav--primary");
+    if (!originalInner || !nav) return;
+
+    if (tabletViewport()) {
+      const shell = ensureTabletNavShell();
+      const shellInner = shell && shell.querySelector(".tablet-nav-shell__inner");
+      if (!shell || !shellInner) return;
+
+      if (nav.parentElement !== shellInner) {
+        shellInner.appendChild(nav);
+      }
+      sidebar.setAttribute("hidden", "");
+      return;
+    }
+
+    const shell = getTabletNavShell();
+    if (nav.parentElement !== originalInner) {
+      originalInner.appendChild(nav);
+    }
+    if (shell) shell.remove();
+  }
+
+  function getNavPanel() {
+    return tabletViewport() ? getTabletNavShell() : getPrimarySidebar();
   }
 
   function updateNavToggleButtonState() {
@@ -72,15 +129,16 @@
   }
 
   function setNavCollapsed(collapsed) {
-    const sidebar = getPrimarySidebar();
-    if (!sidebar) return;
+    syncTabletNavigation();
+    const panel = getNavPanel();
+    if (!panel) return;
 
     if (collapsibleViewport() && collapsed) {
       closeDrawer();
-      sidebar.setAttribute("hidden", "");
+      panel.setAttribute("hidden", "");
       document.body.classList.add("nav-collapsed");
     } else {
-      if (collapsibleViewport()) sidebar.removeAttribute("hidden");
+      if (collapsibleViewport()) panel.removeAttribute("hidden");
       document.body.classList.remove("nav-collapsed");
     }
 
@@ -234,6 +292,7 @@
 
   function run() {
     if (collapsibleViewport()) closeDrawer();
+    syncTabletNavigation();
 
     addHeaderCTA();
     addNavCollapseToggle();
@@ -255,7 +314,8 @@
   }
 
   function handleResize() {
-    const sidebar = getPrimarySidebar();
+    syncTabletNavigation();
+    const sidebar = getNavPanel();
     const tocSidebar = getTocSidebar();
     if (!sidebar) return;
     if (collapsibleViewport()) closeDrawer();
