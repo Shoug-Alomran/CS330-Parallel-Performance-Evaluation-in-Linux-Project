@@ -44,6 +44,15 @@
     return document.querySelector(".md-sidebar--secondary[data-md-type='toc']");
   }
 
+  function getDrawerToggle() {
+    return document.querySelector("[data-md-toggle='drawer']");
+  }
+
+  function closeDrawer() {
+    const drawer = getDrawerToggle();
+    if (drawer) drawer.checked = false;
+  }
+
   function updateNavToggleButtonState() {
     const btn = document.querySelector("button.nav-collapse-toggle");
     const collapsed = document.body.classList.contains("nav-collapsed");
@@ -67,6 +76,7 @@
     if (!sidebar) return;
 
     if (collapsibleViewport() && collapsed) {
+      closeDrawer();
       sidebar.setAttribute("hidden", "");
       document.body.classList.add("nav-collapsed");
     } else {
@@ -223,6 +233,8 @@
   }
 
   function run() {
+    if (collapsibleViewport()) closeDrawer();
+
     addHeaderCTA();
     addNavCollapseToggle();
     addTocCollapseToggle();
@@ -246,6 +258,7 @@
     const sidebar = getPrimarySidebar();
     const tocSidebar = getTocSidebar();
     if (!sidebar) return;
+    if (collapsibleViewport()) closeDrawer();
     if (!collapsibleViewport()) {
       sidebar.removeAttribute("hidden");
       if (tocSidebar) tocSidebar.removeAttribute("hidden");

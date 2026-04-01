@@ -505,12 +505,17 @@ html .md-typeset__table table,
 
 /* Prevent nav/content overlap on tablet/laptop widths */
 @media screen and (min-width: 60em) and (max-width: 76.234375em) {
+  .md-header__button[for="__drawer"],
+  .md-overlay {
+    display: none !important;
+  }
+
   .md-main__inner {
     align-items: flex-start;
     gap: 0.8rem;
   }
 
-  .md-sidebar--primary {
+  .md-sidebar--primary:not([hidden]) {
     background: transparent;
     box-shadow: none !important;
     display: block;
@@ -540,7 +545,7 @@ html .md-typeset__table table,
     transform: none !important;
   }
 
-  .md-sidebar--secondary {
+  .md-sidebar--secondary:not([hidden]) {
     display: block;
     flex: 0 0 13rem;
     height: auto;
@@ -548,10 +553,6 @@ html .md-typeset__table table,
     max-height: calc(100vh - 5.4rem);
     position: sticky;
     top: 4.8rem;
-  }
-
-  .md-sidebar--secondary:not([hidden]) {
-    display: block;
   }
 
   .md-sidebar--primary .md-sidebar__scrollwrap {
