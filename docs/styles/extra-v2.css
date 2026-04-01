@@ -556,11 +556,15 @@ html .md-typeset__table table,
   }
 
   .md-sidebar--primary .md-sidebar__scrollwrap {
+    bottom: auto;
+    left: auto;
     margin: 0 0.2rem;
     max-height: calc(100vh - 5.4rem);
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
+    right: auto;
+    top: auto;
   }
 
   .md-sidebar--secondary .md-sidebar__scrollwrap {
@@ -568,6 +572,18 @@ html .md-typeset__table table,
     max-height: calc(100vh - 5.4rem);
     overflow-y: auto;
     position: relative;
+  }
+
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-sidebar--secondary .md-sidebar__inner {
+    padding: 0 !important;
+    width: 100%;
+  }
+
+  .md-sidebar--primary .md-nav,
+  .md-sidebar--secondary .md-nav {
+    max-width: none;
+    width: 100%;
   }
 
   .md-content {
