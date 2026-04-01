@@ -629,16 +629,19 @@ html .md-typeset__table table,
   }
 
   .tablet-nav-shell .md-nav__toggle ~ .md-nav {
-    display: none;
+    display: none !important;
+    height: auto;
+    margin: 0;
     opacity: 1;
+    padding: 0;
     transform: none;
     transition: none;
     visibility: visible;
   }
 
-  .tablet-nav-shell .md-nav__toggle:checked ~ .md-nav,
+  .tablet-nav-shell .md-nav__item--nested > .md-nav__toggle:checked ~ .md-nav,
   .tablet-nav-shell .md-nav__item--section > .md-nav {
-    display: block;
+    display: block !important;
   }
 
   .tablet-nav-shell .md-nav__item--nested > .md-nav > .md-nav__title {
@@ -655,6 +658,21 @@ html .md-typeset__table table,
 
   .tablet-nav-shell .md-nav__item {
     padding: 0;
+  }
+
+  .tablet-nav-shell .md-nav__link,
+  .tablet-nav-shell .md-nav__container {
+    margin-top: 0.15rem;
+  }
+
+  .tablet-nav-shell .md-nav__item--nested > .md-nav__link,
+  .tablet-nav-shell .md-nav__item--nested > .md-nav__container,
+  .tablet-nav-shell .md-nav__item--section > .md-nav__link {
+    margin-bottom: 0;
+  }
+
+  .tablet-nav-shell .md-nav[data-md-level="1"] {
+    grid-template-rows: auto;
   }
 
   .tablet-nav-shell .md-nav,
