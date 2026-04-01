@@ -32,8 +32,8 @@
     headerInner.appendChild(cta);
   }
 
-  function desktopViewport() {
-    return window.matchMedia("(min-width: 76.25em)").matches;
+  function collapsibleViewport() {
+    return window.matchMedia("(min-width: 60em)").matches;
   }
 
   function getPrimarySidebar() {
@@ -66,11 +66,11 @@
     const sidebar = getPrimarySidebar();
     if (!sidebar) return;
 
-    if (desktopViewport() && collapsed) {
+    if (collapsibleViewport() && collapsed) {
       sidebar.setAttribute("hidden", "");
       document.body.classList.add("nav-collapsed");
     } else {
-      if (desktopViewport()) sidebar.removeAttribute("hidden");
+      if (collapsibleViewport()) sidebar.removeAttribute("hidden");
       document.body.classList.remove("nav-collapsed");
     }
 
@@ -83,11 +83,11 @@
   function setTocCollapsed(collapsed) {
     const sidebar = getTocSidebar();
 
-    if (sidebar && desktopViewport() && collapsed) {
+    if (sidebar && collapsibleViewport() && collapsed) {
       sidebar.setAttribute("hidden", "");
       document.body.classList.add("toc-collapsed");
     } else {
-      if (sidebar && desktopViewport()) sidebar.removeAttribute("hidden");
+      if (sidebar && collapsibleViewport()) sidebar.removeAttribute("hidden");
       document.body.classList.remove("toc-collapsed");
     }
 
@@ -246,7 +246,7 @@
     const sidebar = getPrimarySidebar();
     const tocSidebar = getTocSidebar();
     if (!sidebar) return;
-    if (!desktopViewport()) {
+    if (!collapsibleViewport()) {
       sidebar.removeAttribute("hidden");
       if (tocSidebar) tocSidebar.removeAttribute("hidden");
       document.body.classList.remove("nav-collapsed");
