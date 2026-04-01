@@ -600,11 +600,61 @@ html .md-typeset__table table,
     display: none;
   }
 
+  .tablet-nav-shell .md-nav--lifted > .md-nav__title {
+    display: none;
+  }
+
+  .tablet-nav-shell .md-nav--lifted > .md-nav__list > .md-nav__item {
+    display: block;
+    margin: 0;
+  }
+
+  .tablet-nav-shell .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    box-shadow: none;
+    margin-top: 0.1rem;
+    position: static;
+    top: auto;
+    z-index: auto;
+  }
+
+  .tablet-nav-shell .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link:not(.md-nav__container) {
+    pointer-events: auto;
+  }
+
   .tablet-nav-shell .md-nav--primary > .md-nav__title ~ .md-nav__list,
   .tablet-nav-shell .md-nav--primary .md-nav__title ~ .md-nav__list {
     background: transparent;
     box-shadow: none;
     overflow: visible;
+  }
+
+  .tablet-nav-shell .md-nav__toggle ~ .md-nav {
+    display: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    visibility: visible;
+  }
+
+  .tablet-nav-shell .md-nav__toggle:checked ~ .md-nav,
+  .tablet-nav-shell .md-nav__item--section > .md-nav {
+    display: block;
+  }
+
+  .tablet-nav-shell .md-nav__item--nested > .md-nav > .md-nav__title {
+    display: none;
+  }
+
+  .tablet-nav-shell .md-nav__item--section {
+    margin: 0.65rem 0;
+  }
+
+  .tablet-nav-shell .md-nav__item--section > .md-nav {
+    margin-left: 0;
+  }
+
+  .tablet-nav-shell .md-nav__item {
+    padding: 0;
   }
 
   .tablet-nav-shell .md-nav,
