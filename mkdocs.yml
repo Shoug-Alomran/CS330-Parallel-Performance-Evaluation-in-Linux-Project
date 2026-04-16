@@ -7,6 +7,7 @@ theme:
   name: material
   custom_dir: overrides
   favicon: CS330-logo.png
+  logo: CS330-logo.png
 
   features:
     - navigation.tabs
@@ -32,8 +33,6 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
-  icon:
-    logo: material/console-network
   font:
     text: IBM Plex Sans
     code: IBM Plex Mono
