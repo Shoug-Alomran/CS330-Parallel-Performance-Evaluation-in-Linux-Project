@@ -5,37 +5,9 @@
 
 Phase 2 evaluates the impact of Java multithreading on execution time for computing the **sum of cubes of array elements**.
 
-This section is aligned with the instructor requirements released on **February 28, 2026**.
+The benchmark was executed on an **Apple M2 MacBook Air** using **OpenJDK 25 LTS (Temurin)** and the official thread counts `1`, `2`, `4`, `6`, and `8`.
 
 </div>
-</div>
-
----
-
-## Required Thread Configurations
-
-<div class="grid cards" markdown>
-
--   :material-numeric-1-circle: **Single Thread Baseline**
-
-    ---
-    Measure reference runtime using `1` thread.
-
--   :material-numeric-2-circle: **Low Parallelism**
-
-    ---
-    Run with `2` and `4` threads to evaluate early scaling.
-
--   :material-numeric-6-circle: **High Parallelism**
-
-    ---
-    Run with `6` and `8` threads to detect overhead and saturation.
-
--   :material-chart-line: **Performance Metrics**
-
-    ---
-    Record execution time, speedup, and percentage improvement.
-
 </div>
 
 ---
@@ -76,8 +48,64 @@ This section is aligned with the instructor requirements released on **February 
 
 ---
 
+## Required Thread Configurations
+
+<div class="grid cards" markdown>
+
+-   :material-numeric-1-circle: **Single Thread Baseline**
+
+    ---
+    Baseline average: **3.754 ms** using `1` thread.
+
+-   :material-numeric-2-circle: **Low Parallelism**
+
+    ---
+    `2` threads slowed down to **4.335 ms**, while `4` threads improved to **3.111 ms**.
+
+-   :material-numeric-6-circle: **High Parallelism**
+
+    ---
+    `6` threads averaged **0.698 ms** and `8` threads averaged **0.649 ms**.
+
+-   :material-chart-line: **Performance Metrics**
+
+    ---
+    Recorded metrics: execution time, speedup, and percentage improvement.
+
+</div>
+
+---
+
 ## Requirement Source
 
 The detailed requirement summary is available here:
 
 - [Project Requirements](../Project-Overview/requirements.md)
+
+---
+
+## Benchmark Summary
+
+<div class="grid cards" markdown>
+
+-   :material-speedometer: **Best Average Result**
+
+    ---
+    `8` threads achieved the fastest average runtime: **0.649 ms**.
+
+-   :material-chart-bell-curve: **Strong Scaling Region**
+
+    ---
+    The largest improvement appeared at `6` and `8` threads, where runtime dropped below **0.7 ms**.
+
+-   :material-alert-outline: **Early Overhead**
+
+    ---
+    `2` threads performed worse than the single-thread baseline, indicating overhead on this workload size.
+
+-   :material-counter: **Dataset Size**
+
+    ---
+    Each configuration was measured across **12 recorded runs**.
+
+</div>

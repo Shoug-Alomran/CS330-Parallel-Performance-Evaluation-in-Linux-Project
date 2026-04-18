@@ -34,7 +34,50 @@ Use the following tables to record official benchmark outcomes.
 
 ---
 
-## Machine Specifications (Required)
+## Run Evidence
+
+??? note "Excel Summary Screenshot"
+    ![Excel benchmark summary](result-pictures/excel-run.png)
+
+??? note "Run 1"
+    ![Run 1 output](result-pictures/run-1.png)
+
+??? note "Run 2"
+    ![Run 2 output](result-pictures/run-2.png)
+
+??? note "Run 3"
+    ![Run 3 output](result-pictures/run-3.png)
+
+??? note "Run 4"
+    ![Run 4 output](result-pictures/run-4.png)
+
+??? note "Run 5"
+    ![Run 5 output](result-pictures/run-5.png)
+
+??? note "Run 6"
+    ![Run 6 output](result-pictures/run-6.png)
+
+??? note "Run 7"
+    ![Run 7 output](result-pictures/run-7.png)
+
+??? note "Run 8"
+    ![Run 8 output](result-pictures/run-8.png)
+
+??? note "Run 9"
+    ![Run 9 output](result-pictures/run-9.png)
+
+??? note "Run 10"
+    ![Run 10 output](result-pictures/run-10.png)
+
+??? note "Run 11"
+    ![Run 11 output](result-pictures/run-11.png)
+
+??? note "Run 12"
+    ![Run 12 output](result-pictures/run-12.png)
+
+---
+
+## Machine Specifications
 
 | Item | Value |
 |---|---|
@@ -42,8 +85,8 @@ Use the following tables to record official benchmark outcomes.
 | Physical Cores | 8 (4 performance + 4 efficiency) |
 | Logical Cores (Threads) | 8 |
 | RAM | 8 GB |
-| Operating System | macOS |
-| Java Version | OpenJDK 25 LTS (Temurin 25+36, build 25+36-LTS) |
+| Operating System | macOS Tahoe 26.3.1 |
+| Java Version | OpenJDK 25 LTS (Temurin) |
 
 ---
 
@@ -57,6 +100,7 @@ Use the following tables to record official benchmark outcomes.
 
 ## Interpretation Notes
 
-- Identify the best-performing thread count.
-- Identify the first point where added threads stop helping.
-- Explain any slowdown at higher thread counts.
+- Best-performing thread count: **8 threads** with an average runtime of **0.649 ms**.
+- First clear improvement beyond baseline appears at **4 threads**, but the major gain begins at **6 threads**.
+- `2` threads performed worse than `1` thread, which suggests that thread-management overhead outweighed any parallel benefit for that configuration.
+- `8` threads produced the best mean result, but the raw runs show some variability, so synchronization cost, scheduling behavior, and mixed performance/efficiency cores likely influenced the spread.

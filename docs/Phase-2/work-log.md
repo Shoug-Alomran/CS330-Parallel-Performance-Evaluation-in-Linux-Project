@@ -14,14 +14,14 @@ Task tracking for implementation, benchmarking, analysis, and final packaging.
 
 | Work Item | Owner | Status | Notes |
 |---|---|---|---|
-| Verify original Java program behavior |  | In progress | Baseline checks |
-| Implement sum-of-cubes modification |  | In progress | Values < 100 |
-| Add support for thread counts 1,2,4,6,8 |  | In progress | Runtime args/config |
-| Collect benchmark trials (5 runs each) |  | Pending | Single machine only |
-| Compute averages, speedup, and % improvement |  | Pending | Based on baseline T(1) |
-| Prepare graphs and identify performance drop point |  | Pending | Time + speedup charts |
-| Final report assembly (<=1000 words analysis) |  | Pending | Include machine specs |
-| ZIP packaging for LMS submission |  | Pending | Source + report artifacts |
+| Verify original Java program behavior | Team | Completed | Baseline behavior checked before final measurements |
+| Implement sum-of-cubes modification | Team | Completed | Values kept below 100 |
+| Add support for thread counts 1,2,4,6,8 | Team | Completed | Official thread set verified |
+| Collect benchmark trials (12 runs each) | Shoug | Completed | Recorded on Apple M2 / macOS Tahoe 26.3.1 |
+| Compute averages, speedup, and % improvement | Shoug | Completed | Final averages entered into Phase 2 results table |
+| Prepare graphs and identify performance drop point | Team | In progress | Data supports time and speedup charts |
+| Final report assembly (<=1000 words analysis) | Team | In progress | Report text updated with actual findings |
+| ZIP packaging for LMS submission | Team | Pending | Final assets and charts still need packaging |
 
 ---
 
@@ -29,5 +29,5 @@ Task tracking for implementation, benchmarking, analysis, and final packaging.
 
 - `M1` Code modification complete
 - `M2` Benchmark dataset complete
-- `M3` Analysis and graphs complete
-- `M4` Final ZIP ready for submission
+- `M3` Report draft updated with measured data
+- `M4` Charts and final ZIP ready for submission
