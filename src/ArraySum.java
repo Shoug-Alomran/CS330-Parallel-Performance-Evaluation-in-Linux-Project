@@ -23,7 +23,7 @@ public class ArraySum {
         return sum;
     }
 
-    // Sum the cubes using one thread only.
+    // 1-thread configuration: this is the baseline run with no extra worker threads.
     static long singleSum(int[] arr) {
         long sum = 0;
 
@@ -35,43 +35,71 @@ public class ArraySum {
         return sum;
     }
 
-    // Sum the cubes using multiple threads.
+    // Multi-threaded configurations: this same method is used for the 2-, 4-, 6-, and 8-thread runs.
     static long parallelSum(int[] arr, int threadCount) throws InterruptedException {
+        // threadCount tells us which configuration is being tested:
+        // 2 -> create 2 threads
+        // 4 -> create 4 threads
+        // 6 -> create 6 threads
+        // 8 -> create 8 threads
         Summer[] sums = new Summer[threadCount];
         Thread[] threads = new Thread[threadCount];
         int part = arr.length / threadCount;
 
         for (int i = 0; i < threadCount; i++) {
+            // For the current configuration, i identifies the specific thread being created.
+            // Example:
+            // - if threadCount = 2, then i = 0 and 1
+            // - if threadCount = 4, then i = 0, 1, 2, and 3
+            // - if threadCount = 6, then i = 0 through 5
+            // - if threadCount = 8, then i = 0 through 7
             int start = i * part;
             int end;
 
-            if (i == threadCount - 1) { // Check if this is the last thread.
+            if (i == threadCount - 1) { // The last thread takes any remaining elements.
                 end = arr.length;
             } else {
                 end = start + part; // Other threads handle only their fixed chunk.
             }
 
-            sums[i] = new Summer(arr, start, end); // Create the worker object.
-            threads[i] = new Thread(sums[i]);
+            sums[i] = new Summer(arr, start, end); // Create worker i for this range.
+            threads[i] = new Thread(sums[i]); // Create the actual Java thread for worker i.
             threads[i].start();
         }
 
         long total = 0; // Variable to store the final total.
 
-        for (int i = 0; i < threadCount; i++) { // Wait for all threads to finish.
-            threads[i].join(); // Wait for this thread.
-            total = total + sums[i].getSum(); // Add this thread's partial sum.
+        for (int i = 0; i < threadCount; i++) { // Wait for every thread in the current configuration.
+            threads[i].join(); // Wait for thread i to finish.
+            total = total + sums[i].getSum(); // Add thread i's partial sum.
         }
 
         return total; // Return the final sum.
+    }
+
+    static void printHeader() {
+        System.out.println();
+        System.out.printf("%-8s %-20s %-10s %-15s%n",
+                "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
+    }
+
+    static void printMachineSpecifications() {
+        System.out.println();
+        System.out.println("Machine Specifications:");
+        System.out.println("Processor model: Apple M2");
+        System.out.println("Number of cores: 8");
+        System.out.println("RAM: 8 GB");
+        System.out.println("Operating system: macOS Tahoe 26.3.1");
+        System.out.println("Java version: OpenJDK 25 LTS (Temurin)");
+        System.out.println();
     }
 
     public static void main(String[] args) throws Exception {
         int size = 1000000;
         int[] data = createArray(size);
 
-        // Use nanoTime because currentTimeMillis is too coarse for very fast runs and
-        // can show 0 ms.
+        // 1-thread configuration: measure the baseline first so every other configuration can be compared to it.
+        // Use nanoTime because currentTimeMillis is too coarse for very fast runs and can show 0 ms.
         long StartTime = System.nanoTime();
         long expectedResult = singleSum(data);
         long EndTime = System.nanoTime();
@@ -80,16 +108,15 @@ public class ArraySum {
         double speedup = 1.0; // Speedup for one thread is always 1.
         double improvement = 0.0; // Improvement for one thread is always 0.
 
-        System.out.println();
-        // Print the table header.
-        System.out.printf("%-8s %-20s %-10s %-15s%n",
-                "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
+        printHeader();
         System.out.printf("%-8d %-20.3f %-10.2f %-15.2f%n",
                 1, timeTakenInMillis, speedup, improvement);
 
-        int[] threadTests = { 2, 4, 6, 8 }; // Thread counts required
+        int[] threadTests = { 2, 4, 6, 8 }; // Required multithreaded configurations.
 
         for (int i = 0; i < threadTests.length; i++) {
+            // CurrentThreadCount is the configuration being tested on this loop iteration:
+            // 2, then 4, then 6, then 8 threads.
             int CurrentThreadCount = threadTests[i];
             long start = System.nanoTime();
             long result = parallelSum(data, CurrentThreadCount);
@@ -109,14 +136,6 @@ public class ArraySum {
             }
         }
 
-        System.out.println();
-        // Print the machine specs title.
-        System.out.println("Machine Specifications:");
-        System.out.println("Processor model: Apple M2");
-        System.out.println("Number of cores: 8");
-        System.out.println("RAM: 8 GB");
-        System.out.println("Operating system: macOS Tahoe 26.3.1");
-        System.out.println("Java version: OpenJDK 25 LTS (Temurin)");
-        System.out.println();
+        printMachineSpecifications();
     }
 }
