@@ -54,7 +54,8 @@ experiment and explains what the measurements mean.
 
 ### Average Execution Time vs Number of Threads
 
-![Execution time vs number of threads](graphs/execution-time-vs.-number-of-threads.JPG)
+??? abstract "Execution Time Graph"
+    ![Execution time vs number of threads](graphs/execution-time-vs.-number-of-threads.JPG)
 
 This graph shows the direct runtime trend. The main takeaway is that runtime
 did not decrease smoothly from `1` to `8` threads. Instead, the program became
@@ -63,7 +64,8 @@ benefits at `6` and `8`.
 
 ### Speedup vs Number of Threads
 
-![Speedup vs number of threads](graphs/speedup-vs.-number-of-threads.JPG)
+??? abstract "Speedup Graph"
+    ![Speedup vs number of threads](graphs/speedup-vs.-number-of-threads.JPG)
 
 This graph compares each configuration against the single-thread baseline. A
 speedup below `1.0` means the parallel version is worse than the baseline,
@@ -72,7 +74,8 @@ which is exactly what happened with `2` threads. The strongest gains appear at
 
 ### Percentage Improvement vs Number of Threads
 
-![Percentage improvement vs number of threads](graphs/percentage-improvement-vs.-number-of-threads.JPG)
+??? abstract "Percentage Improvement Graph"
+    ![Percentage improvement vs number of threads](graphs/percentage-improvement-vs.-number-of-threads.JPG)
 
 This graph expresses the same pattern as a percentage. It highlights that the
 performance benefit was not minor once the program reached higher thread counts:

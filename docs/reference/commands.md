@@ -211,9 +211,14 @@ for environment setup, compilation, execution, monitoring, and system management
 
 ## Git Version Control
 
+### Project Repository
+
+- Official GitHub repository:
+  [CS330-Parallel-Performance-Evaluation-in-Linux-Project](https://github.com/Shoug-Alomran/CS330-Parallel-Performance-Evaluation-in-Linux-Project)
+
 ??? example "Basic Git Workflow"
     ```bash
-    git clone https://github.com/username/repo.git
+    git clone https://github.com/Shoug-Alomran/CS330-Parallel-Performance-Evaluation-in-Linux-Project.git
     git status
     git add .
     git commit -m "Description of changes"

@@ -1433,19 +1433,28 @@ experiment and explains what the measurements mean.</p>
 <hr />
 <h2 id="graphs">Graphs<a class="headerlink" href="#graphs" title="Permanent link">&para;</a></h2>
 <h3 id="average-execution-time-vs-number-of-threads">Average Execution Time vs Number of Threads<a class="headerlink" href="#average-execution-time-vs-number-of-threads" title="Permanent link">&para;</a></h3>
+<details class="abstract">
+<summary>Execution Time Graph</summary>
 <p><img alt="Execution time vs number of threads" src="../graphs/execution-time-vs.-number-of-threads.JPG" /></p>
+</details>
 <p>This graph shows the direct runtime trend. The main takeaway is that runtime
 did not decrease smoothly from <code>1</code> to <code>8</code> threads. Instead, the program became
 slower at <code>2</code> threads, improved slightly at <code>4</code>, and only then showed strong
 benefits at <code>6</code> and <code>8</code>.</p>
 <h3 id="speedup-vs-number-of-threads">Speedup vs Number of Threads<a class="headerlink" href="#speedup-vs-number-of-threads" title="Permanent link">&para;</a></h3>
+<details class="abstract">
+<summary>Speedup Graph</summary>
 <p><img alt="Speedup vs number of threads" src="../graphs/speedup-vs.-number-of-threads.JPG" /></p>
+</details>
 <p>This graph compares each configuration against the single-thread baseline. A
 speedup below <code>1.0</code> means the parallel version is worse than the baseline,
 which is exactly what happened with <code>2</code> threads. The strongest gains appear at
 <code>6</code> and <code>8</code> threads, where the measured speedup exceeded <code>5x</code>.</p>
 <h3 id="percentage-improvement-vs-number-of-threads">Percentage Improvement vs Number of Threads<a class="headerlink" href="#percentage-improvement-vs-number-of-threads" title="Permanent link">&para;</a></h3>
+<details class="abstract">
+<summary>Percentage Improvement Graph</summary>
 <p><img alt="Percentage improvement vs number of threads" src="../graphs/percentage-improvement-vs.-number-of-threads.JPG" /></p>
+</details>
 <p>This graph expresses the same pattern as a percentage. It highlights that the
 performance benefit was not minor once the program reached higher thread counts:
 the improvement exceeded <strong>80%</strong> for both <code>6</code> and <code>8</code> threads.</p>
