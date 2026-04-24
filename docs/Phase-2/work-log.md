@@ -19,7 +19,7 @@ Phase 2 plan dashboard.
 | Layan | Graphs & Performance Analysis Owner | Create graphs, identify performance decrease point, and write short interpretation | Completed |
 | Danah | Code Modification Owner | Modify Java code, verify correctness, comment code, and freeze final version | Completed |
 | Shoug | Measurement & System Owner | Run official benchmarks, record raw times, compute averages, and capture machine specs | Completed |
-| Rana | Report & Integration Owner | Integrate tables and graphs, write report, organize submission folder, and create ZIP | In progress |
+| Rana | Report & Integration Owner | Integrate tables and graphs, write report, organize submission folder, and create ZIP | Completed |
 
 ---
 
@@ -50,11 +50,11 @@ Phase 2 plan dashboard.
 | Draft report structure | Rana | Completed | Structure aligned to objective, methodology, setup, results, discussion, conclusion |
 | Insert tables, graphs, and machine specs | Rana | Completed | Report updated with final figures and benchmark context |
 | Write explanation of thread division, synchronization, and scalability | Rana | Completed | Report text expanded in markdown and HTML report |
-| Ensure report stays within formal requirements | Rana | In progress | Final wording still subject to export/submission check |
-| Organize submission folder | Rana | Pending | Final packaging structure still needs confirmation |
-| Verify all files open correctly | Rana | Pending | Best done immediately before final submission |
-| Create final ZIP | Rana | Pending | Waiting on final packaging pass |
-| Perform final validation check | Rana | Pending | Final submission checklist still open |
+| Ensure report stays within formal requirements | Rana | Completed | Final report wording and structure finalized |
+| Organize submission folder | Rana | Completed | Submission assets organized into the final structure |
+| Verify all files open correctly | Rana | Completed | Final files reviewed and verified |
+| Create final ZIP | Rana | Completed | Final submission package completed |
+| Perform final validation check | Rana | Completed | Final Phase 2 submission check completed |
 
 ---
 
@@ -117,7 +117,8 @@ Deliverables: raw timing dataset, averaged timing table, and machine specificati
 2. Inserted tables, graphs, and machine specifications into the reporting workflow.
 3. Wrote the explanatory discussion for thread division logic, synchronization, scalability behavior, and performance decrease.
 4. Expanded the HTML report so the implementation and analysis are easier to understand.
-5. Continued preparing the final submission structure and packaging.
+5. Organized the final submission structure and completed packaging.
+6. Verified all final files and completed the final validation pass.
 
 Deliverable: final report package and submission ZIP.
 
@@ -157,4 +158,4 @@ This means:
 | `M1` | Code modification complete | Completed |
 | `M2` | Official benchmark dataset complete | Completed |
 | `M3` | Tables, graphs, and report content integrated | Completed |
-| `M4` | Final submission folder and ZIP packaging | In progress |
+| `M4` | Final submission folder and ZIP packaging | Completed |
