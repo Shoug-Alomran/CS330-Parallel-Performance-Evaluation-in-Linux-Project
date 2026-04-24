@@ -11,6 +11,50 @@ on the concepts that appear in Phase I and Phase II.
 
 ---
 
+## Glossary Guide
+
+<div class="grid cards" markdown>
+
+-   :material-source-repository: **Project Reference**
+
+    ---
+    Quick access to the official GitHub repository used throughout the report,
+    code appendix, and documentation.
+
+-   :material-atom-variant: **Core Parallel Terms**
+
+    ---
+    Concepts such as speedup, synchronization, overhead, scalability, and
+    data parallelism that apply across the whole project.
+
+-   :material-source-fork: **Phase I Concepts**
+
+    ---
+    Process-based execution terms such as `fork()`, `wait()`, child process,
+    matrix multiplication, and virtual machine setup.
+
+-   :material-call-split: **Phase II Concepts**
+
+    ---
+    Thread-based execution terms such as array partitioning, worker thread,
+    `Runnable`, partial sum, and thread configuration.
+
+-   :material-chart-line: **Measurement Terms**
+
+    ---
+    Reporting vocabulary used in the benchmark analysis, including average
+    execution time, percentage improvement, reproducibility, and raw timing data.
+
+-   :material-book-open-page-variant: **How To Use This Page**
+
+    ---
+    Start with the section that matches your question, then use the definitions
+    to interpret the reports, results tables, graphs, and source code.
+
+</div>
+
+---
+
 ## Project Reference
 
 - Official GitHub repository:
