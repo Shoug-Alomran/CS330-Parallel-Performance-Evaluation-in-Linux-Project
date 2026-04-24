@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS330 Phase II: Multithreaded Java Performance Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0d1b2a;
+            --primary: #1b263b;
+            --primary-light: #415a77;
+            --secondary: #778da9;
+            --accent: #4cc9f0;
+            --accent-alt: #4361ee;
+            --light-bg: #e0e1dd;
+            --card-bg: #ffffff;
+            --dark-text: #0d1b2a;
+            --light-text: #ffffff;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #d62839;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --gradient-accent: linear-gradient(90deg, #4361ee, #4cc9f0);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        p,
+        ul,
+        ol {
+            margin: 0 0 16px 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 22px;
+        }
+
+        h3 {
+            margin: 20px 0 12px;
+            color: var(--primary);
+        }
+
+        .full-width-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 40px);
+        }
+
+        header {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            padding: 60px 0 40px;
+            box-shadow: 0 6px 25px rgba(13, 27, 42, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-main h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 15px;
+            font-weight: 800;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+
+        .header-subtitle {
+            font-size: clamp(1rem, 2.6vw, 1.35rem);
+            opacity: 0.92;
+            margin-bottom: 25px;
+            max-width: 850px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-item i {
+            color: var(--accent);
+            font-size: 1.15rem;
+        }
+
+        .team-display {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .team-display h3 {
+            font-size: 1.35rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .member-avatar {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px 0;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--accent-alt);
+        }
+
+        .nav-tab.active {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2.35fr 1fr;
+            gap: 40px;
+        }
+
+        .main-column,
+        .sidebar,
+        .section,
+        .card,
+        .viz-card,
+        .team-display,
+        .sidebar-section {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: clamp(20px, 4vw, 40px);
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            scroll-margin-top: 100px;
+        }
+
+        .active-section {
+            outline: 2px solid rgba(67, 97, 238, 0.18);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent);
+            gap: 20px;
+        }
+
+        .section-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-accent);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            color: var(--primary);
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .section-subtitle {
+            color: var(--secondary);
+            font-size: 1.05rem;
+            margin-top: 5px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 24px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 24px;
+            border-left: 5px solid var(--accent-alt);
+            height: 100%;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent-alt);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(67, 97, 238, 0.1));
+            border-radius: 15px;
+            padding: 28px;
+            margin: 28px 0;
+            border-left: 5px solid var(--accent);
+        }
+
+        .highlight-title {
+            font-size: 1.45rem;
+            color: var(--primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 28px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 820px;
+        }
+
+        th {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 18px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 16px 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .badge-good {
+            background: rgba(76, 175, 80, 0.15);
+            color: #2e7d32;
+        }
+
+        .badge-warning {
+            background: rgba(255, 152, 0, 0.18);
+            color: #ef6c00;
+        }
+
+        .badge-danger {
+            background: rgba(214, 40, 57, 0.12);
+            color: #b00020;
+        }
+
+        .badge-info {
+            background: rgba(33, 150, 243, 0.15);
+            color: #1565c0;
+        }
+
+        .viz-container,
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        .viz-card,
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .viz-title {
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .gallery-item img,
+        .large-image {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .gallery-item img {
+            height: 210px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 0;
+        }
+
+        .gallery-caption,
+        .image-caption {
+            padding: 14px 16px;
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
+        .image-container {
+            margin: 25px 0;
+        }
+
+        .code-container {
+            margin: 25px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-header {
+            background: #111827;
+            color: #f9fafb;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .code-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .code-content {
+            background: #0b1220;
+            color: #e5e7eb;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            white-space: pre;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-container {
+            margin-bottom: 18px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-accent);
+            border-radius: 999px;
+        }
+
+        .key-findings {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+        }
+
+        .key-findings li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .key-findings i {
+            margin-top: 3px;
+            color: var(--accent-alt);
+        }
+
+        footer {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 35px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 12px;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.92);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 14px;
+        }
+
+        .modal-caption {
+            margin: 18px auto 0;
+            max-width: 900px;
+            color: #f3f4f6;
+            text-align: center;
+            padding: 0 16px 30px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 18px;
+            right: 30px;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 980px) {
+            .header-content,
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-tab {
+                padding: 10px 14px;
+                font-size: 0.92rem;
+            }
+
+            table {
+                min-width: 720px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Expanded figure">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <header class="full-width-container">
+        <div class="content-container">
+            <div class="header-content">
+                <div class="header-main">
+                    <h1>CS330 Phase II Report</h1>
+                    <div class="header-subtitle">
+                        Multithreaded performance analysis for a Java program that computes the sum of cubes of array
+                        elements using worker threads, range partitioning, correctness checks, and repeated timing runs.
+                    </div>
+
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-book"></i>
+                            <span>CS330 Introduction to Operating Systems</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-microchip"></i>
+                            <span>Thread counts: 1, 2, 4, 6, 8</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Java benchmark on Apple M2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-display">
+                    <h3><i class="fas fa-users"></i> Report Focus</h3>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-avatar">J</div>
+                            <div>
+                                <strong>Java Threads</strong><br>
+                                Worker-thread implementation and range splitting
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">D</div>
+                            <div>
+                                <strong>Data & Graphs</strong><br>
+                                12-run dataset and visual performance trends
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">R</div>
+                            <div>
+                                <strong>Readable Reporting</strong><br>
+                                Explanation of what changed, what happened, and why
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-tabs full-width-container">
+        <div class="content-container">
+            <div class="nav-container">
+                <button class="nav-tab active" data-target="overview">
+                    <i class="fas fa-home"></i> Overview
+                </button>
+                <button class="nav-tab" data-target="environment">
+                    <i class="fas fa-desktop"></i> Environment
+                </button>
+                <button class="nav-tab" data-target="methodology">
+                    <i class="fas fa-flask"></i> Methodology
+                </button>
+                <button class="nav-tab" data-target="results">
+                    <i class="fas fa-chart-line"></i> Results
+                </button>
+                <button class="nav-tab" data-target="analysis">
+                    <i class="fas fa-search"></i> Analysis
+                </button>
+                <button class="nav-tab" data-target="conclusion">
+                    <i class="fas fa-flag-checkered"></i> Conclusion
+                </button>
+                <button class="nav-tab" data-target="appendix">
+                    <i class="fas fa-paperclip"></i> Appendix
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content content-container">
+        <div class="content-grid">
+            <div class="main-column">
+                <section id="overview" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-info-circle"></i></div>
+                        <div>
+                            <h2 class="section-title">Project Overview</h2>
+                            <div class="section-subtitle">Phase II moves from process-based parallelism to Java
+                                multithreading</div>
+                        </div>
+                    </div>
+
+                    <p>
+                        Phase II extends the project beyond the Phase I C program. Instead of evaluating
+                        <code>fork()</code>-based processes, this phase studies a Java implementation that uses multiple
+                        threads to compute the <strong>sum of cubes of array elements</strong>. The goal is not only to
+                        collect timing data, but also to understand why some thread counts help while others do not.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3 class="highlight-title"><i class="fas fa-bullseye"></i> Phase II Objectives</h3>
+                        <div class="card-grid">
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-cube"></i> Change the Workload</h4>
+                                <p>Replace the simple sum with a more expensive cube-and-sum operation so each array
+                                    element contributes more computation.</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-code-branch"></i> Use Worker Threads</h4>
+                                <p>Split the array into non-overlapping ranges and assign one range to each thread.</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-stopwatch"></i> Compare Configurations</h4>
+                                <p>Measure runtime for the required thread counts: 1, 2, 4, 6, and 8.</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title"><i class="fas fa-book-open"></i> Explain the Results</h4>
+                                <p>Interpret the graphs and raw runs in plain language so the benchmark is easy to
+                                    understand.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>What Changed From Phase I</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-exchange-alt"></i> Parallel Model</h4>
+                            <p>Phase I used separate processes in C. Phase II uses threads in Java, which are generally
+                                lighter to create and coordinate than full processes.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-language"></i> Programming Language</h4>
+                            <p>The implementation moved to Java, so thread creation, joining, and worker logic are
+                                expressed with classes and run methods.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-calculator"></i> Measured Work</h4>
+                            <p>The benchmark now focuses on a numeric array workload instead of matrix multiplication,
+                                making it easier to observe thread-splitting behavior directly.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="environment" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-desktop"></i></div>
+                        <div>
+                            <h2 class="section-title">Experimental Environment</h2>
+                            <div class="section-subtitle">Hardware, software, and benchmark conditions</div>
+                        </div>
+                    </div>
+
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-microchip"></i> Hardware</h4>
+                            <ul>
+                                <li><strong>Processor:</strong> Apple M2</li>
+                                <li><strong>Cores:</strong> 8 total (4 performance + 4 efficiency)</li>
+                                <li><strong>Memory:</strong> 8 GB RAM</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-laptop"></i> Software</h4>
+                            <ul>
+                                <li><strong>Operating System:</strong> macOS Tahoe 26.3.1</li>
+                                <li><strong>Java:</strong> OpenJDK 25 LTS (Temurin)</li>
+                                <li><strong>Timing API:</strong> <code>System.nanoTime()</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-vial"></i> Measurement Policy</h4>
+                            <ul>
+                                <li><strong>Runs per configuration:</strong> 12</li>
+                                <li><strong>Thread counts:</strong> 1, 2, 4, 6, 8</li>
+                                <li><strong>Comparison method:</strong> average runtime, speedup, improvement</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Why This Environment Matters</h3>
+                    <p>
+                        The Apple M2 includes a hybrid CPU layout with performance and efficiency cores. That detail is
+                        useful when interpreting the benchmark because thread scheduling may not behave exactly like a
+                        uniform 8-core desktop processor. The machine is still well suited for this experiment because
+                        it supports the full required thread range and produces stable enough results to compare
+                        configurations.
+                    </p>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Value</th>
+                                    <th>Why It Matters</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>Apple M2, 8 cores</td>
+                                    <td>Defines the maximum tested thread count and influences scheduling behavior</td>
+                                </tr>
+                                <tr>
+                                    <td>Java Runtime</td>
+                                    <td>OpenJDK 25 LTS</td>
+                                    <td>Provides thread support and high-resolution timing</td>
+                                </tr>
+                                <tr>
+                                    <td>Timing Unit</td>
+                                    <td>Milliseconds from nanoTime</td>
+                                    <td>Gives fine enough precision for sub-millisecond differences</td>
+                                </tr>
+                                <tr>
+                                    <td>Trial Count</td>
+                                    <td>12 runs each</td>
+                                    <td>Reduces the chance that one unusual run changes the conclusion</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="methodology" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-flask"></i></div>
+                        <div>
+                            <h2 class="section-title">Experimental Methodology</h2>
+                            <div class="section-subtitle">How the Java code works and how the benchmark was executed
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Plain-Language Program Description</h3>
+                    <p>
+                        The Phase II program first creates an integer array filled with random values. It then computes
+                        the same overall answer in two different ways:
+                    </p>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-person"></i> Sequential Baseline</h4>
+                            <p>One thread processes the whole array from start to finish. This gives the reference time
+                                and the correct final answer.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-people-arrows"></i> Parallel Version</h4>
+                            <p>Multiple worker threads each process one portion of the array, then the partial sums are
+                                combined after all workers finish.</p>
+                        </div>
+                    </div>
+
+                    <h3>How Work Was Split</h3>
+                    <p>
+                        The array is divided using contiguous ranges. The program computes a chunk size based on
+                        <code>arr.length / threadCount</code>, then assigns:
+                    </p>
+                    <ul>
+                        <li>a start index for each worker</li>
+                        <li>an end index for each worker</li>
+                        <li>all remaining elements to the last worker if the division is uneven</li>
+                    </ul>
+                    <p>
+                        This matters because it prevents overlap between threads and ensures that every array element is
+                        processed exactly once.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3 class="highlight-title"><i class="fas fa-list-ol"></i> Benchmark Procedure</h3>
+                        <ol style="padding-left: 20px;">
+                            <li>Create the input array.</li>
+                            <li>Run the single-thread version to establish the baseline and correct result.</li>
+                            <li>Run the multithreaded version with 2, 4, 6, and 8 threads.</li>
+                            <li>Join all threads and combine partial sums.</li>
+                            <li>Verify that the threaded result matches the baseline result.</li>
+                            <li>Repeat each configuration 12 times and compute the average.</li>
+                        </ol>
+                    </div>
+
+                    <h3>Repository Code Used In The Report</h3>
+                    <p>
+                        The HTML report uses the Java files in the repository <code>src</code> folder as the basis for
+                        explanation. The main benchmark harness appears in <code>ArraySum.java</code>, and the worker
+                        abstraction appears in <code>Summer.java</code>. These files clearly show the thread creation,
+                        range partitioning, and partial-sum collection strategy used for Phase II.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3 class="highlight-title"><i class="fas fa-circle-info"></i> Important Note About The Code Snippets</h3>
+                        <p>
+                            The repository files shown here are the actual source files currently stored in
+                            <code>src</code>. They demonstrate the thread structure and workload-splitting design very
+                            clearly. The Phase II experiment described in the report applies the same multithreading
+                            pattern to the required <strong>sum-of-cubes</strong> benchmark with input values kept
+                            below 100, which is why the performance discussion focuses on cubes even though the minimal
+                            harness snippet below shows the simpler summation skeleton.
+                        </p>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fas fa-file-code"></i> src/ArraySum.java
+                            </div>
+                            <div>Benchmark harness</div>
+                        </div>
+                        <div class="code-content">
+<pre>import java.util.Random;
+
+public class ArraySumMinimal {
+
+    // Main thread: build the input array once so every benchmark run works on comparable data.
+    static int[] createArray(int size) {
+        Random rand = new Random();
+        int[] arr = new int[size];
+        for (int i = 0; i &lt; size; i++) {
+            arr[i] = rand.nextInt(50);
+        }
+        return arr;
+    }
+
+    // Main thread: run the sequential baseline for correctness checking and timing comparison.
+    static int singleSum(int[] arr) {
+        int sum = 0;
+        for (int v : arr) sum += v;
+        return sum;
+    }
+
+    // Worker thread class: each Worker object becomes one Java thread for one slice of the array.
+    static class Worker extends Thread {
+        int[] arr;
+        int start, end;
+        int partialSum = 0;
+
+        Worker(int[] arr, int start, int end) {
+            this.arr = arr;
+            this.start = start;
+            this.end = end;
+        }
+
+        public void run() {
+            // Worker thread code: this runs inside the started worker thread.
+            // It only processes the indices assigned to this worker.
+            for (int i = start; i &lt; end; i++) {
+                partialSum += arr[i];
+            }
+        }
+    }
+
+    // Main thread: start all workers, wait for them, then combine their partial results.
+    static int parallelSum(int[] arr, int threadCount) throws InterruptedException {
+        Worker[] workers = new Worker[threadCount];
+        int chunk = arr.length / threadCount;
+
+        for (int i = 0; i &lt; threadCount; i++) {
+            // Main thread: prepare worker i and assign worker i its array range.
+            int start = i * chunk;
+            // The last worker takes any leftover elements.
+            int end = (i == threadCount - 1) ? arr.length : start + chunk;
+            workers[i] = new Worker(arr, start, end);
+            // Main thread: start worker i so its run() method executes on a separate thread.
+            workers[i].start();
+        }
+
+        int total = 0;
+        for (Worker w : workers) {
+            // Main thread: wait for each worker thread before reading its partial sum.
+            w.join();
+            total += w.partialSum;
+        }
+        return total;
+    }
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fas fa-file-code"></i> src/Summer.java
+                            </div>
+                            <div>Worker runnable</div>
+                        </div>
+                        <div class="code-content">
+<pre>public class Summer implements Runnable {
+    // Worker thread data: shared input array plus the bounds assigned to this runnable.
+    private int[] a;
+    private int min, max;
+    private int sum;
+
+    public Summer(int[] a, int min, int max) {
+        this.a = a;
+        this.min = min;
+        this.max = max;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void run() {
+        // Worker thread code: delegate the computation for this worker's slice to ArraySum.sumRange().
+        this.sum = ArraySum.sumRange(a, min, max);
+    }
+}</pre>
+                        </div>
+                    </div>
+
+                    <h3>What These Classes Tell Us</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-boxes"></i> Array Creation</h4>
+                            <p>The repository harness begins by generating a large input array with random integer
+                                values. For the reported experiment, the same pattern was used while keeping the input
+                                values below 100 to match the Phase II requirements.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-cut"></i> Range Partitioning</h4>
+                            <p>Each worker receives a start and end index. This is the core parallel design choice: the
+                                total work is decomposed by data range rather than by function.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-link"></i> Synchronization</h4>
+                            <p>The main thread waits for every worker with <code>join()</code> before adding partial
+                                results. This guarantees correctness but adds coordination cost.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-check-double"></i> Correctness Check</h4>
+                            <p>The threaded output is compared with the sequential result so the timing data reflects a
+                                correct computation, not a faster but incorrect one.</p>
+                        </div>
+                    </div>
+
+                    <h3>How The Reported Phase II Version Differs From The Minimal Skeleton</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-superscript"></i> Cube Computation</h4>
+                            <p>Instead of adding each value directly, the benchmarked version adds the cube of each
+                                element. That increases the arithmetic work per element and makes the comparison more
+                                meaningful.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-filter"></i> Bounded Input Values</h4>
+                            <p>The final experiment keeps values below 100. This matches the project requirement and
+                                keeps the workload controlled across repeated runs.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-gauge-high"></i> Reporting Metrics</h4>
+                            <p>The measured output was then converted into average execution time, speedup, and
+                                percentage improvement so each thread count could be compared fairly.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="results" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-chart-line"></i></div>
+                        <div>
+                            <h2 class="section-title">Experimental Results</h2>
+                            <div class="section-subtitle">Averages, graphs, and run-by-run evidence</div>
+                        </div>
+                    </div>
+
+                    <p>
+                        The following table summarizes the official averages from 12 recorded runs per configuration.
+                        Speedup is measured relative to the 1-thread baseline, and percentage improvement expresses the
+                        same trend in a more intuitive way.
+                    </p>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Threads</th>
+                                    <th>Avg Execution Time (ms)</th>
+                                    <th>Speedup</th>
+                                    <th>% Improvement</th>
+                                    <th>Quick Reading</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>3.754</strong></td>
+                                    <td>1.00</td>
+                                    <td>0.00</td>
+                                    <td><span class="badge badge-info">Baseline</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>4.335</strong></td>
+                                    <td>0.87</td>
+                                    <td>-15.48</td>
+                                    <td><span class="badge badge-danger">Slower than baseline</span></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><strong>3.111</strong></td>
+                                    <td>1.21</td>
+                                    <td>17.14</td>
+                                    <td><span class="badge badge-warning">Small improvement</span></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><strong>0.698</strong></td>
+                                    <td>5.38</td>
+                                    <td>81.41</td>
+                                    <td><span class="badge badge-good">Strong speedup</span></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><strong>0.649</strong></td>
+                                    <td>5.79</td>
+                                    <td>82.72</td>
+                                    <td><span class="badge badge-good">Best measured result</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="viz-container">
+                        <div class="viz-card">
+                            <h4 class="viz-title"><i class="fas fa-chart-area"></i> Execution Time Trend</h4>
+                            <div class="image-container">
+                                <img src="graphs/execution-time-vs.-number-of-threads.JPG"
+                                    alt="Execution time vs number of threads" class="large-image"
+                                    onclick="openModal(this, 'Figure 1: Average execution time versus number of threads')">
+                                <div class="image-caption">Figure 1: Execution time drops sharply only after the
+                                    benchmark reaches higher thread counts.</div>
+                            </div>
+                            <p>
+                                This graph answers the most direct question: how long did each configuration take? The
+                                important pattern is that scaling was not smooth. The program got worse at 2 threads,
+                                slightly better at 4 threads, then dramatically better at 6 and 8 threads.
+                            </p>
+                        </div>
+
+                        <div class="viz-card">
+                            <h4 class="viz-title"><i class="fas fa-bolt"></i> Speedup Relative to Baseline</h4>
+                            <div class="image-container">
+                                <img src="graphs/speedup-vs.-number-of-threads.JPG" alt="Speedup vs number of threads"
+                                    class="large-image"
+                                    onclick="openModal(this, 'Figure 2: Speedup compared with the 1-thread baseline')">
+                                <div class="image-caption">Figure 2: 2 threads underperformed, while 6 and 8 threads
+                                    exceeded 5x speedup.</div>
+                            </div>
+                            <p>
+                                Speedup makes the comparison easier to interpret. Values below 1.0 mean the threaded
+                                version was slower than the sequential version. That happened at 2 threads, which shows
+                                that parallelism alone does not guarantee improvement.
+                            </p>
+                        </div>
+
+                        <div class="viz-card">
+                            <h4 class="viz-title"><i class="fas fa-percent"></i> Percentage Improvement</h4>
+                            <div class="image-container">
+                                <img src="graphs/percentage-improvement-vs.-number-of-threads.JPG"
+                                    alt="Percentage improvement vs number of threads" class="large-image"
+                                    onclick="openModal(this, 'Figure 3: Percentage improvement relative to the baseline')">
+                                <div class="image-caption">Figure 3: Improvement becomes clearly meaningful only at 6
+                                    and 8 threads.</div>
+                            </div>
+                            <p>
+                                The percentage view is useful for presentation because it shows just how large the
+                                higher-thread gains were. Both 6 and 8 threads improved runtime by more than 80%
+                                relative to the 1-thread configuration.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Raw Trial Data</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Threads</th>
+                                    <th>Run 1</th>
+                                    <th>Run 2</th>
+                                    <th>Run 3</th>
+                                    <th>Run 4</th>
+                                    <th>Run 5</th>
+                                    <th>Run 6</th>
+                                    <th>Run 7</th>
+                                    <th>Run 8</th>
+                                    <th>Run 9</th>
+                                    <th>Run 10</th>
+                                    <th>Run 11</th>
+                                    <th>Run 12</th>
+                                    <th>Average</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>3.921</td>
+                                    <td>3.671</td>
+                                    <td>3.813</td>
+                                    <td>3.690</td>
+                                    <td>3.759</td>
+                                    <td>3.702</td>
+                                    <td>3.704</td>
+                                    <td>3.740</td>
+                                    <td>3.724</td>
+                                    <td>3.924</td>
+                                    <td>3.725</td>
+                                    <td>3.680</td>
+                                    <td><strong>3.754</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>4.560</td>
+                                    <td>4.207</td>
+                                    <td>4.273</td>
+                                    <td>4.252</td>
+                                    <td>4.244</td>
+                                    <td>4.217</td>
+                                    <td>4.362</td>
+                                    <td>4.771</td>
+                                    <td>4.240</td>
+                                    <td>4.205</td>
+                                    <td>4.347</td>
+                                    <td>4.348</td>
+                                    <td><strong>4.335</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3.022</td>
+                                    <td>3.077</td>
+                                    <td>3.171</td>
+                                    <td>3.116</td>
+                                    <td>3.139</td>
+                                    <td>3.113</td>
+                                    <td>3.071</td>
+                                    <td>2.823</td>
+                                    <td>3.446</td>
+                                    <td>3.139</td>
+                                    <td>3.119</td>
+                                    <td>3.094</td>
+                                    <td><strong>3.111</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>0.747</td>
+                                    <td>0.634</td>
+                                    <td>0.685</td>
+                                    <td>0.678</td>
+                                    <td>0.592</td>
+                                    <td>0.708</td>
+                                    <td>0.848</td>
+                                    <td>0.616</td>
+                                    <td>0.631</td>
+                                    <td>0.758</td>
+                                    <td>0.772</td>
+                                    <td>0.707</td>
+                                    <td><strong>0.698</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>0.537</td>
+                                    <td>0.788</td>
+                                    <td>0.588</td>
+                                    <td>0.773</td>
+                                    <td>0.611</td>
+                                    <td>1.013</td>
+                                    <td>0.567</td>
+                                    <td>0.571</td>
+                                    <td>0.650</td>
+                                    <td>0.639</td>
+                                    <td>0.515</td>
+                                    <td>0.533</td>
+                                    <td><strong>0.649</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Evidence Screenshots</h3>
+                    <div class="image-gallery">
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Excel summary sheet used to aggregate the benchmark results')">
+                            <img src="result-pictures/excel-run.png" alt="Excel benchmark summary">
+                            <div class="gallery-caption">Excel summary used to calculate averages and graph inputs</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Representative terminal output from one of the benchmark runs')">
+                            <img src="result-pictures/run-1.png" alt="Run 1 output">
+                            <div class="gallery-caption">Representative benchmark output screenshot</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Additional run output showing repeated measurement evidence')">
+                            <img src="result-pictures/run-6.png" alt="Run 6 output">
+                            <div class="gallery-caption">Additional raw-run evidence</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="analysis" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-search"></i></div>
+                        <div>
+                            <h2 class="section-title">Analysis & Discussion</h2>
+                            <div class="section-subtitle">Why the benchmark behaved this way</div>
+                        </div>
+                    </div>
+
+                    <h3>Main Result</h3>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-lightbulb"></i> Biggest takeaway</h4>
+                        <p>
+                            Multithreading did improve performance for this workload, but only after the thread count
+                            was high enough to overcome overhead. The strongest measured results came from 6 and 8
+                            threads, while 2 threads was actually slower than the baseline.
+                        </p>
+                    </div>
+
+                    <h3>Why 2 Threads Was Slower</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-gears"></i> Thread Creation Cost</h4>
+                            <p>Creating and starting threads is cheaper than creating full processes, but it still
+                                costs time. For a relatively short benchmark, that overhead can dominate.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-handshake"></i> Coordination Cost</h4>
+                            <p>The main thread must wait for all workers to finish and then combine their partial sums.
+                                That extra coordination can cancel out the benefit of splitting the work.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-weight-hanging"></i> Too Little Work Per Thread</h4>
+                            <p>When only two threads are used, each thread still has a large chunk, but the benchmark
+                                does not yet gain enough parallel benefit to offset management overhead.</p>
+                        </div>
+                    </div>
+
+                    <h3>Why 6 And 8 Threads Helped So Much</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-layer-group"></i> Better Work Distribution</h4>
+                            <p>At higher thread counts, more workers can run portions of the array in parallel, so the
+                                total useful work is spread more effectively.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-microchip"></i> Hardware Utilization</h4>
+                            <p>The Apple M2 has 8 cores available, so testing 6 and 8 threads gave the runtime a
+                                better chance to use the available hardware resources.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-stopwatch-20"></i> Overhead Finally Paid Off</h4>
+                            <p>Once enough useful computation is happening at once, the fixed cost of thread creation
+                                and joining becomes a smaller part of the total time.</p>
+                        </div>
+                    </div>
+
+                    <h3>Why 8 Threads Was Best But Not Perfectly Stable</h3>
+                    <p>
+                        Although 8 threads produced the lowest average runtime, its raw runs still show variation. One
+                        run exceeded 1.0 ms. This does not invalidate the result; it simply shows that very short
+                        timing measurements are sensitive to normal system effects such as scheduler decisions, JVM
+                        behavior, background activity, and heterogeneous cores.
+                    </p>
+
+                    <h3>Relationship To Operating Systems Concepts</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-sitemap"></i> Data Parallelism</h4>
+                            <p>The array is split into chunks, and the same operation is applied to each chunk. This is
+                                a direct example of data parallelism.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-clock"></i> Scheduling</h4>
+                            <p>The operating system decides when each Java thread runs. This is why real benchmark
+                                results include some run-to-run variability.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-scale-balanced"></i> Parallel Overhead</h4>
+                            <p>Parallel execution helps only when the extra work of creating, managing, and waiting for
+                                threads is smaller than the time saved by concurrent execution.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="conclusion" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-flag-checkered"></i></div>
+                        <div>
+                            <h2 class="section-title">Conclusion</h2>
+                            <div class="section-subtitle">What Phase II demonstrated</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-check-circle"></i> Summary</h4>
+                        <p>
+                            Phase II successfully implemented and evaluated a Java multithreaded benchmark for the sum
+                            of cubes problem. The experiment showed that thread-based parallelism can produce major
+                            speedup, but the benefit is highly dependent on thread count and workload size.
+                        </p>
+                    </div>
+
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-trophy"></i> Best Configuration</h4>
+                            <ul>
+                                <li><strong>8 threads</strong> had the fastest average runtime</li>
+                                <li>Average time: <strong>0.649 ms</strong></li>
+                                <li>Improvement over baseline: <strong>82.72%</strong></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-thumbs-up"></i> Strong Alternative</h4>
+                            <ul>
+                                <li><strong>6 threads</strong> also performed extremely well</li>
+                                <li>Average time: <strong>0.698 ms</strong></li>
+                                <li>Speedup: <strong>5.38x</strong></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title"><i class="fas fa-triangle-exclamation"></i> Important Caution</h4>
+                            <ul>
+                                <li>More threads do not automatically mean better performance</li>
+                                <li><strong>2 threads</strong> was slower than the single-thread baseline</li>
+                                <li>Parallel overhead must always be considered</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Future Work</h3>
+                    <p>
+                        A natural next step would be to test larger array sizes and possibly more complex arithmetic per
+                        element. That would help identify the crossover point where low thread counts start to become
+                        beneficial as well. It would also be useful to compare this thread-based Java approach directly
+                        against the Phase I process-based C approach under similarly scaled workloads.
+                    </p>
+                </section>
+
+                <section id="appendix" class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-paperclip"></i></div>
+                        <div>
+                            <h2 class="section-title">Appendix</h2>
+                            <div class="section-subtitle">Supporting code and benchmark evidence</div>
+                        </div>
+                    </div>
+
+                    <h3>Why The HTML Appendix Includes Code</h3>
+                    <p>
+                        The PDF report referenced the GitHub repository to save space. This HTML version is more
+                        explanatory, so it includes the relevant code directly to help the reader connect the benchmark
+                        results to the implementation decisions behind them.
+                    </p>
+
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-title"><i class="fas fa-file-code"></i> src/program.c</div>
+                            <div>Phase I reference source in the repository</div>
+                        </div>
+                        <div class="code-content">
+<pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;time.h&gt;
+
+#define N 600
+#define PROCS 4
+
+double A[N][N], B[N][N], C[N][N];
+
+void initialize_matrices() {
+    for (int i = 0; i &lt; N; i++)
+        for (int j = 0; j &lt; N; j++) {
+            A[i][j] = rand() % 10;
+            B[i][j] = rand() % 10;
+            C[i][j] = 0;
+        }
+}
+
+void multiply(int start, int end) {
+    for (int i = start; i &lt; end; i++)
+        for (int j = 0; j &lt; N; j++)
+            for (int k = 0; k &lt; N; k++)
+                C[i][j] += A[i][k] * B[k][j];
+}
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="image-gallery">
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 4: Full Excel summary screenshot used during analysis')">
+                            <img src="result-pictures/excel-run.png" alt="Excel summary screenshot">
+                            <div class="gallery-caption">Full Excel summary screenshot</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 5: Benchmark run evidence showing recorded output')">
+                            <img src="result-pictures/run-10.png" alt="Run 10 output">
+                            <div class="gallery-caption">Benchmark run evidence</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 6: Additional benchmark evidence from a different run')">
+                            <img src="result-pictures/run-12.png" alt="Run 12 output">
+                            <div class="gallery-caption">Additional benchmark evidence</div>
+                        </div>
+                    </div>
+
+                    <h3>Appendix Completeness</h3>
+                    <p>
+                        Together, the appendix and the main report include the repository source references, benchmark
+                        tables, graph images, and run screenshots needed to understand what was implemented, how it was
+                        measured, and why the final conclusion favors the higher thread-count configurations.
+                    </p>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-clipboard-list"></i> Project Status</h3>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Phase II Completion</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Code Modification</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Benchmark Runs</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Analysis & Graphs</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-key"></i> Key Findings</h3>
+                    <ul class="key-findings">
+                        <li>
+                            <i class="fas fa-trophy"></i>
+                            <div><strong>8 threads won:</strong> fastest average runtime at 0.649 ms</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-bolt"></i>
+                            <div><strong>6 threads also scaled well:</strong> 5.38x speedup</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <div><strong>2 threads regressed:</strong> overhead outweighed benefit</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-repeat"></i>
+                            <div><strong>12 runs mattered:</strong> averages reduce the impact of timing noise</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-chart-pie"></i> Quick Stats</h3>
+                    <div class="card">
+                        <h4 class="card-title"><i class="fas fa-calculator"></i> Benchmark Snapshot</h4>
+                        <ul>
+                            <li><strong>Total data points:</strong> 60 runtime values</li>
+                            <li><strong>Configurations:</strong> 5 thread counts</li>
+                            <li><strong>Fastest average:</strong> 0.649 ms (8 threads)</li>
+                            <li><strong>Slowest average:</strong> 4.335 ms (2 threads)</li>
+                            <li><strong>Biggest insight:</strong> scaling begins at higher thread counts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-file-pdf"></i> Report Info</h3>
+                    <div class="card">
+                        <h4 class="card-title"><i class="fas fa-circle-info"></i> Deliverable Summary</h4>
+                        <ul>
+                            <li><strong>Format:</strong> PDF plus standalone HTML</li>
+                            <li><strong>Measured metric:</strong> execution time</li>
+                            <li><strong>Derived metrics:</strong> speedup and % improvement</li>
+                            <li><strong>Evidence:</strong> graphs, screenshots, raw data, source code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="full-width-container">
+        <div class="content-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CS330 Course Project</h3>
+                    <p>Phase II analyzes Java multithreading for the sum-of-cubes benchmark and explains how thread
+                        overhead and hardware utilization affected performance.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Academic Context</h3>
+                    <p>College of Computer and Information Sciences</p>
+                    <p>Introduction to Operating Systems</p>
+                    <p>Academic Year 2025-2026</p>
+                </div>
+                <div class="footer-section">
+                    <h3>What This Version Adds</h3>
+                    <p>This HTML version includes fuller explanations, graphs, and code excerpts that were omitted from
+                        the PDF to save space.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CS330 Project Team | Phase II Report</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const sections = document.querySelectorAll('.section');
+
+            function setActiveTab(targetId) {
+                tabs.forEach(tab => {
+                    tab.classList.toggle('active', tab.getAttribute('data-target') === targetId);
+                });
+
+                sections.forEach(section => {
+                    section.classList.toggle('active-section', section.id === targetId);
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        setActiveTab(targetId);
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                const visible = entries
+                    .filter(entry => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+                if (visible) {
+                    setActiveTab(visible.target.id);
+                }
+            }, {
+                root: null,
+                rootMargin: '-20% 0px -55% 0px',
+                threshold: [0.1, 0.25, 0.5]
+            });
+
+            sections.forEach(section => observer.observe(section));
+            if (sections.length > 0) {
+                setActiveTab(sections[0].id);
+            }
+        });
+
+        function openModal(imageElement, captionText) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            modal.style.display = 'block';
+            modalImg.src = imageElement.src;
+            modalCaption.textContent = captionText || imageElement.alt || '';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

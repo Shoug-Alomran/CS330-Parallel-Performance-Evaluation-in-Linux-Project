@@ -1,46 +1,112 @@
 <div class="home-hero" markdown>
 <div class="home-hero__text" markdown>
 
-# Phase 2 · Multithreaded Performance Optimization
+# Phase II · Multithreaded Performance Optimization
 
-Phase 2 evaluates the impact of Java multithreading on execution time for computing the **sum of cubes of array elements**.
+Phase II extends the project from process-based parallelism in C to
+thread-based parallelism in Java.
 
-The benchmark was executed on an **Apple M2 MacBook Air** using **OpenJDK 25 LTS (Temurin)** and the official thread counts `1`, `2`, `4`, `6`, and `8`.
+This phase focuses on modifying the program, benchmarking multiple thread
+counts, and explaining how and why performance changes across configurations.
 
 </div>
 </div>
 
 ---
 
-## Phase 2 Navigation
+## Phase II Objectives
 
 <div class="grid cards" markdown>
 
--   :material-clipboard-text-outline: **Experimental Plan**
+-   :material-language-java: **Java Implementation**
+
+    ---
+    Build and explain a Java program that computes the **sum of cubes of array
+    elements**.
+
+-   :material-call-split: **Thread-Based Parallelism**
+
+    ---
+    Split the array across multiple worker threads and combine their partial
+    results into one final sum.
+
+-   :material-timer-outline: **Performance Measurement**
+
+    ---
+    Measure runtime for the required configurations: `1`, `2`, `4`, `6`, and
+    `8` threads.
+
+-   :material-chart-box-outline: **Scaling Analysis**
+
+    ---
+    Compare execution time, speedup, and percentage improvement against the
+    single-thread baseline.
+
+-   :material-file-document-outline: **Explanatory Reporting**
+
+    ---
+    Document not just the final numbers, but also what the code does and why
+    the results behaved that way.
+
+</div>
+
+---
+
+## Scope Of Work
+
+<div class="grid cards" markdown>
+
+-   :material-code-braces: **Targeted Program Changes**
+
+    ---
+    The work centers on adapting the Java code for the required cube
+    computation and benchmarking different thread counts.
+
+-   :material-sitemap: **Controlled Work Distribution**
+
+    ---
+    The array is divided into contiguous ranges so each thread handles a
+    separate portion of the input data.
+
+-   :material-check-circle: **Correctness Verification**
+
+    ---
+    The threaded result is checked against a sequential baseline to confirm
+    that performance measurements are still based on correct output.
+
+</div>
+
+---
+
+## Phase II Deliverables
+
+<div class="grid cards" markdown>
+
+-   :material-format-list-bulleted: **Experimental Plan**
 
     ---
     Controlled setup, timing method, and repeat policy.
 
     [Open Plan](plan.md)
 
--   :material-table: **Results Template**
+-   :material-table: **Structured Results**
 
     ---
-    Ready-to-fill tables for timing, speedup, and machine specifications.
+    Final averages, raw runs, graphs, and interpretation.
 
     [Open Results](results.md)
 
--   :material-file-document-outline: **Analysis Report**
+-   :material-file-document-outline: **Standalone Report**
 
     ---
-    Structured report outline mapped to submission requirements.
+    Full HTML and PDF report with methodology, analysis, and code appendix.
 
     [Open Report](report.md)
 
 -   :material-account-group: **Work Log**
 
     ---
-    Team responsibilities and progress checkpoints.
+    Team responsibilities and completion tracking.
 
     [Open Work Log](work-log.md)
 
@@ -48,64 +114,13 @@ The benchmark was executed on an **Apple M2 MacBook Air** using **OpenJDK 25 LTS
 
 ---
 
-## Required Thread Configurations
+## Phase II Outcome
 
-<div class="grid cards" markdown>
+By completing Phase II, the project demonstrates:
 
--   :material-numeric-1-circle: **Single Thread Baseline**
+- A working Java multithreaded benchmark
+- Measured scaling behavior across five thread configurations
+- A clear comparison between overhead-limited and speedup-producing cases
 
-    ---
-    Baseline average: **3.754 ms** using `1` thread.
-
--   :material-numeric-2-circle: **Low Parallelism**
-
-    ---
-    `2` threads slowed down to **4.335 ms**, while `4` threads improved to **3.111 ms**.
-
--   :material-numeric-6-circle: **High Parallelism**
-
-    ---
-    `6` threads averaged **0.698 ms** and `8` threads averaged **0.649 ms**.
-
--   :material-chart-line: **Performance Metrics**
-
-    ---
-    Recorded metrics: execution time, speedup, and percentage improvement.
-
-</div>
-
----
-
-## Requirement Source
-
-The detailed requirement summary is available here:
-
-- [Project Requirements](../Project-Overview/requirements.md)
-
----
-
-## Benchmark Summary
-
-<div class="grid cards" markdown>
-
--   :material-speedometer: **Best Average Result**
-
-    ---
-    `8` threads achieved the fastest average runtime: **0.649 ms**.
-
--   :material-chart-bell-curve: **Strong Scaling Region**
-
-    ---
-    The largest improvement appeared at `6` and `8` threads, where runtime dropped below **0.7 ms**.
-
--   :material-alert-outline: **Early Overhead**
-
-    ---
-    `2` threads performed worse than the single-thread baseline, indicating overhead on this workload size.
-
--   :material-counter: **Dataset Size**
-
-    ---
-    Each configuration was measured across **12 recorded runs**.
-
-</div>
+These results build on Phase I by moving from process-based parallelism to a
+thread-based implementation with a more detailed performance analysis.
