@@ -163,6 +163,11 @@
             border-radius: 10px;
         }
 
+        .team-member:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
         .member-avatar {
             width: 44px;
             height: 44px;
@@ -173,6 +178,15 @@
             justify-content: center;
             font-weight: bold;
             font-size: 1.1rem;
+        }
+
+        .member-name {
+            font-weight: 700;
+        }
+
+        .member-id {
+            opacity: 0.9;
+            font-size: 0.95rem;
         }
 
         .nav-tabs {
@@ -649,56 +663,62 @@
 
                     <div class="course-meta">
                         <div class="meta-item">
-                            <i class="fas fa-book"></i>
-                            <span>CS330 Introduction to Operating Systems</span>
+                            <i class="fas fa-user-tie"></i>
+                            <span><strong>Instructor:</strong> Dr. Souad Larabi</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Term:</strong> 252</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span><strong>Weight:</strong> 5% of Course Grade</span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-microchip"></i>
-                            <span>Thread counts: 1, 2, 4, 6, 8</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-laptop-code"></i>
-                            <span>Java benchmark on Apple M2</span>
+                            <span><strong>Focus:</strong> Java multithreading + sum of cubes</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="team-display">
-                    <h3><i class="fas fa-users"></i> Contributors</h3>
+                    <h3><i class="fas fa-users"></i> Project Team</h3>
                     <div class="team-grid">
                         <div class="team-member">
-                            <div class="member-avatar">D</div>
+                            <div class="member-avatar">SA</div>
                             <div>
-                                <strong>Danah</strong><br>
-                                Code modification and validation
+                                <div class="member-name">Shoug Fawaz Abdullah Alomran</div>
+                                <div class="member-id">ID: 223410392</div>
                             </div>
                         </div>
                         <div class="team-member">
-                            <div class="member-avatar">S</div>
+                            <div class="member-avatar">LB</div>
                             <div>
-                                <strong>Shoug</strong><br>
-                                Benchmark execution and machine specifications
+                                <div class="member-name">Layan Hesham Rashed Bindayel</div>
+                                <div class="member-id">ID: 223410104</div>
                             </div>
                         </div>
                         <div class="team-member">
-                            <div class="member-avatar">A</div>
+                            <div class="member-avatar">AA</div>
                             <div>
-                                <strong>Aryam</strong><br>
-                                Metrics, calculations, and formatted tables
+                                <div class="member-name">Aryam Yahya Almansour</div>
+                                <div class="member-id">ID: 223410070</div>
                             </div>
                         </div>
                         <div class="team-member">
-                            <div class="member-avatar">L</div>
+                            <div class="member-avatar">DA</div>
                             <div>
-                                <strong>Layan</strong><br>
-                                Graph creation and performance interpretation
+                                <div class="member-name">Danah Abdulaziz Abdulmohsen Altwaijri</div>
+                                <div class="member-id">ID: 223410151</div>
                             </div>
                         </div>
-                        <div class="team-member">
-                            <div class="member-avatar">R</div>
-                            <div>
-                                <strong>Rana</strong><br>
-                                Report writing, integration, and final packaging
+                        <div>
+                            <div class="team-member">
+                                <div class="member-avatar">RA</div>
+                                <div>
+                                    <div class="member-name">Rana Abdulmalik Hamad Alfaris</div>
+                                    <div class="member-id">ID: 223410567</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -714,7 +734,7 @@
                     <i class="fas fa-home"></i> Overview
                 </button>
                 <button class="nav-tab" data-target="environment">
-                    <i class="fas fa-desktop"></i> Environment
+                    <i class="fas fa-desktop"></i> Environment Setup
                 </button>
                 <button class="nav-tab" data-target="methodology">
                     <i class="fas fa-flask"></i> Methodology
