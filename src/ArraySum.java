@@ -35,7 +35,7 @@ public class ArraySum {
         return sum;
     }
 
-    // Multi-threaded configurations: this same method is used for the 2-, 4-, 6-, and 8-thread runs.
+    // Multi-threaded configurations: this same method is used for the 2, 4, 6, and 8 thread runs.
     static long parallelSum(int[] arr, int threadCount) throws InterruptedException {
         // threadCount tells us which configuration is being tested:
         // 2 -> create 2 threads
