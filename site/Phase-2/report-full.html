@@ -239,6 +239,7 @@
         .layout-controls {
             display: flex;
             justify-content: flex-end;
+            gap: 10px;
             margin-bottom: 16px;
         }
 
@@ -257,6 +258,24 @@
         }
 
         .sidebar-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle {
+            border: 1px solid rgba(67, 97, 238, 0.25);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            padding: 10px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(13, 27, 42, 0.12);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
             transform: translateY(-1px);
         }
 
@@ -655,13 +674,61 @@
             cursor: pointer;
         }
 
+        body.theme-dark {
+            --primary-dark: #dbeafe;
+            --primary: #bfdbfe;
+            --primary-light: #93c5fd;
+            --secondary: #94a3b8;
+            --accent: #60a5fa;
+            --accent-alt: #38bdf8;
+            --light-bg: #111827;
+            --card-bg: #0f172a;
+            --dark-text: #e2e8f0;
+            --light-text: #f8fafc;
+            --card-shadow: 0 14px 32px rgba(2, 6, 23, 0.55);
+            --gradient-primary: linear-gradient(135deg, #020617, #0f172a);
+            --gradient-accent: linear-gradient(90deg, #2563eb, #06b6d4);
+            background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+        }
+
+        body.theme-dark .nav-tabs {
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        }
+
+        body.theme-dark .section,
+        body.theme-dark .sidebar-section,
+        body.theme-dark .viz-card,
+        body.theme-dark .gallery-item {
+            border-color: rgba(148, 163, 184, 0.15);
+        }
+
+        body.theme-dark .code-header {
+            background: #020617;
+        }
+
+        body.theme-dark tr:nth-child(even) {
+            background-color: rgba(30, 41, 59, 0.55);
+        }
+
+        body.theme-dark td {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        body.theme-dark .theme-toggle {
+            background: rgba(15, 23, 42, 0.95);
+            color: #f8fafc;
+            border-color: rgba(96, 165, 250, 0.45);
+            box-shadow: 0 8px 18px rgba(2, 6, 23, 0.45);
+        }
+
         @media (max-width: 980px) {
             .header-content,
             .content-grid {
                 grid-template-columns: 1fr;
             }
 
-            .layout-controls {
+            .sidebar-toggle {
                 display: none;
             }
         }
@@ -810,6 +877,10 @@
             <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-expanded="true">
                 <i class="fas fa-chevron-left"></i>
                 <span class="sidebar-toggle-label">Hide Sidebar</span>
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
+                <i class="fas fa-moon"></i>
+                <span class="theme-toggle-label">Dark Mode</span>
             </button>
         </div>
         <div id="contentGrid" class="content-grid">
@@ -1866,6 +1937,9 @@ int main() {
             const sidebarToggle = document.getElementById('sidebarToggle');
             const sidebarToggleLabel = sidebarToggle ? sidebarToggle.querySelector('.sidebar-toggle-label') : null;
             const sidebarStorageKey = 'phase2-report-sidebar-collapsed';
+            const themeToggle = document.getElementById('themeToggle');
+            const themeToggleLabel = themeToggle ? themeToggle.querySelector('.theme-toggle-label') : null;
+            const themeStorageKey = 'phase2-report-theme';
 
             function setSidebarState(collapsed) {
                 if (!contentGrid || !sidebarToggle || !sidebarToggleLabel) {
@@ -1883,6 +1957,28 @@ int main() {
 
                 try {
                     localStorage.setItem(sidebarStorageKey, collapsed ? '1' : '0');
+                } catch (error) {
+                    // Ignore storage failures (private mode or restricted storage).
+                }
+            }
+
+            function setThemeState(theme) {
+                if (!themeToggle || !themeToggleLabel) {
+                    return;
+                }
+
+                const isDark = theme === 'dark';
+                document.body.classList.toggle('theme-dark', isDark);
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                themeToggleLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+
+                const icon = themeToggle.querySelector('i');
+                if (icon) {
+                    icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                }
+
+                try {
+                    localStorage.setItem(themeStorageKey, isDark ? 'dark' : 'light');
                 } catch (error) {
                     // Ignore storage failures (private mode or restricted storage).
                 }
@@ -1941,6 +2037,25 @@ int main() {
                 sidebarToggle.addEventListener('click', function () {
                     const collapsed = contentGrid.classList.contains('sidebar-collapsed');
                     setSidebarState(!collapsed);
+                });
+            }
+
+            if (themeToggle) {
+                let startTheme = 'light';
+                try {
+                    const savedTheme = localStorage.getItem(themeStorageKey);
+                    if (savedTheme === 'dark' || savedTheme === 'light') {
+                        startTheme = savedTheme;
+                    }
+                } catch (error) {
+                    startTheme = 'light';
+                }
+
+                setThemeState(startTheme);
+
+                themeToggle.addEventListener('click', function () {
+                    const isDark = document.body.classList.contains('theme-dark');
+                    setThemeState(isDark ? 'light' : 'dark');
                 });
             }
         });
