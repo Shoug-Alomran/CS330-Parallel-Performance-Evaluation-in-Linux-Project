@@ -57,7 +57,22 @@
     
     
     
-  </head>
+  <style id="code-comment-color-style">
+/* Distinct comment color for both highlighted and plain code blocks */
+.code-comment-inline,
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cp,
+.highlight .cs,
+.highlight .ch,
+.highlight .cpf {
+    color: #22c55e !important;
+    font-style: italic;
+}
+</style>
+
+</head>
   
   
     
@@ -1676,5 +1691,94 @@ Phase 2 plan dashboard.</p>
         <script src="../../javascripts/seo.js"></script>
       
     
-  </body>
+  <script id="code-comment-color-script">
+(function () {
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    function wrapComment(text) {
+        return '<span class="code-comment-inline">' + escapeHtml(text) + '</span>';
+    }
+
+    function highlightPlainCode(text) {
+        const lines = text.split('\n');
+        let inBlockComment = false;
+
+        return lines.map((line) => {
+            let i = 0;
+            let out = '';
+
+            while (i < line.length) {
+                if (inBlockComment) {
+                    const end = line.indexOf('*/', i);
+                    if (end === -1) {
+                        out += wrapComment(line.slice(i));
+                        i = line.length;
+                    } else {
+                        out += wrapComment(line.slice(i, end + 2));
+                        i = end + 2;
+                        inBlockComment = false;
+                    }
+                    continue;
+                }
+
+                const lineComment = line.indexOf('//', i);
+                const blockComment = line.indexOf('/*', i);
+
+                if (lineComment === -1 && blockComment === -1) {
+                    out += escapeHtml(line.slice(i));
+                    break;
+                }
+
+                let nextIndex;
+                let type;
+                if (lineComment !== -1 && (blockComment === -1 || lineComment < blockComment)) {
+                    nextIndex = lineComment;
+                    type = 'line';
+                } else {
+                    nextIndex = blockComment;
+                    type = 'block';
+                }
+
+                out += escapeHtml(line.slice(i, nextIndex));
+
+                if (type === 'line') {
+                    out += wrapComment(line.slice(nextIndex));
+                    break;
+                }
+
+                const end = line.indexOf('*/', nextIndex + 2);
+                if (end === -1) {
+                    out += wrapComment(line.slice(nextIndex));
+                    inBlockComment = true;
+                    break;
+                }
+
+                out += wrapComment(line.slice(nextIndex, end + 2));
+                i = end + 2;
+            }
+
+            return out;
+        }).join('\n');
+    }
+
+    document.querySelectorAll('pre').forEach((pre) => {
+        if (pre.querySelector('span')) {
+            return;
+        }
+        if (pre.dataset.commentsStyled === '1') {
+            return;
+        }
+
+        pre.innerHTML = highlightPlainCode(pre.textContent);
+        pre.dataset.commentsStyled = '1';
+    });
+})();
+</script>
+
+</body>
 </html>
