@@ -640,8 +640,6 @@
             }
         }
     </style>
-  <link rel="canonical" href="https://operating-systems.shoug-tech.com/Phase-2/report-full.html">
-  <meta name="robots" content="noindex,follow">
 </head>
 
 <body>
@@ -965,12 +963,9 @@
                     <div class="highlight-box">
                         <h3 class="highlight-title"><i class="fas fa-circle-info"></i> Important Note About The Code Snippets</h3>
                         <p>
-                            The repository files shown here are the actual source files currently stored in
-                            <code>src</code>. They demonstrate the thread structure and workload-splitting design very
-                            clearly. The Phase II experiment described in the report applies the same multithreading
-                            pattern to the required <strong>sum-of-cubes</strong> benchmark with input values kept
-                            below 100, which is why the performance discussion focuses on cubes even though the minimal
-                            harness snippet below shows the simpler summation skeleton.
+                            The snippets below are copied from the current repository files in <code>src</code> and
+                            kept aligned with the implementation used in this report. They include the same
+                            sum-of-cubes logic, thread configuration loop, correctness check, and machine-spec output.
                         </p>
                     </div>
 
@@ -1032,13 +1027,18 @@ public class ArraySum {
 
         for (int i = 0; i &lt; threadCount; i++) {
             // For the current configuration, i identifies the specific thread being created.
+            // Example:
+            // - if threadCount = 2, then i = 0 and 1
+            // - if threadCount = 4, then i = 0, 1, 2, and 3
+            // - if threadCount = 6, then i = 0 through 5
+            // - if threadCount = 8, then i = 0 through 7
             int start = i * part;
             int end;
 
             if (i == threadCount - 1) { // The last thread takes any remaining elements.
                 end = arr.length;
             } else {
-                end = start + part;
+                end = start + part; // Other threads handle only their fixed chunk.
             }
 
             sums[i] = new Summer(arr, start, end); // Create worker i for this range.
@@ -1046,16 +1046,79 @@ public class ArraySum {
             threads[i].start();
         }
 
-        long total = 0;
+        long total = 0; // Variable to store the final total.
 
         for (int i = 0; i &lt; threadCount; i++) { // Wait for every thread in the current configuration.
             threads[i].join(); // Wait for thread i to finish.
             total = total + sums[i].getSum(); // Add thread i's partial sum.
         }
 
-        return total;
+        return total; // Return the final sum.
     }
-}</pre>
+
+    static void printHeader() {
+        System.out.println();
+        System.out.printf("%-8s %-20s %-10s %-15s%n",
+                "Threads", "Execution Time (ms)", "Speedup", "% Improvement");
+    }
+
+    static void printMachineSpecifications() {
+        System.out.println();
+        System.out.println("Machine Specifications:");
+        System.out.println("Processor model: Apple M2");
+        System.out.println("Number of cores: 8");
+        System.out.println("RAM: 8 GB");
+        System.out.println("Operating system: macOS Tahoe 26.3.1");
+        System.out.println("Java version: OpenJDK 25 LTS (Temurin)");
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws Exception {
+        int size = 1000000;
+        int[] data = createArray(size);
+
+        // 1-thread configuration: measure the baseline first so every other configuration can be compared to it.
+        // Use nanoTime because currentTimeMillis is too coarse for very fast runs and can show 0 ms.
+        long StartTime = System.nanoTime();
+        long expectedResult = singleSum(data);
+        long EndTime = System.nanoTime();
+
+        double timeTakenInMillis = (EndTime - StartTime) / 1000000.0;
+        double speedup = 1.0; // Speedup for one thread is always 1.
+        double improvement = 0.0; // Improvement for one thread is always 0.
+
+        printHeader();
+        System.out.printf("%-8d %-20.3f %-10.2f %-15.2f%n",
+                1, timeTakenInMillis, speedup, improvement);
+
+        int[] threadTests = { 2, 4, 6, 8 }; // Required multithreaded configurations.
+
+        for (int i = 0; i &lt; threadTests.length; i++) {
+            // CurrentThreadCount is the configuration being tested on this loop iteration:
+            // 2, then 4, then 6, then 8 threads.
+            int CurrentThreadCount = threadTests[i];
+            long start = System.nanoTime();
+            long result = parallelSum(data, CurrentThreadCount);
+            long end = System.nanoTime();
+
+            double time = (end - start) / 1000000.0; // Convert the parallel time to milliseconds.
+            speedup = timeTakenInMillis / time;
+            improvement = ((timeTakenInMillis - time) / timeTakenInMillis) * 100;
+
+            // Print one result row.
+            System.out.printf("%-8d %-20.3f %-10.2f %-15.2f%n",
+                    CurrentThreadCount, time, speedup, improvement);
+
+            // Check whether the result matches the single-thread answer.
+            if (result != expectedResult) {
+                System.out.println("ERROR: incorrect result!");
+            }
+        }
+
+        printMachineSpecifications();
+    }
+}
+</pre>
                         </div>
                     </div>
 
@@ -1067,27 +1130,30 @@ public class ArraySum {
                             <div>Worker runnable</div>
                         </div>
                         <div class="code-content">
-<pre>public class Summer implements Runnable {
-    // Worker thread data: shared input array plus the bounds assigned to this runnable.
-    private int[] a;
-    private int min, max;
-    private int sum;
+<pre>// Worker class used for multithreading.
+public class Summer implements Runnable {
+	private final int[] a;
+	private final int min, max;
+	private long sum;
+	
+	public Summer(int[] a, int min, int max) {
+		this.a = a;
+		this.min = min;
+		this.max = max;
+	}
 
-    public Summer(int[] a, int min, int max) {
-        this.a = a;
-        this.min = min;
-        this.max = max;
-    }
+	// Return the partial sum after the thread finishes.
+	public long getSum() {
+		return sum;
+	}
 
-    public int getSum() {
-        return sum;
-    }
-
-    public void run() {
-        // Worker thread code: delegate the computation for this worker's slice to ArraySum.sumRange().
-        this.sum = ArraySum.sumRange(a, min, max);
-    }
-}</pre>
+	// Code that runs when the thread starts.
+	@Override
+	public void run() {
+		this.sum = ArraySum.sumRange(a, min, max);
+	}
+}
+</pre>
                         </div>
                     </div>
 
@@ -1123,7 +1189,7 @@ public class ArraySum {
                         </div>
                     </div>
 
-                    <h3>How The Reported Phase II Version Differs From The Minimal Skeleton</h3>
+                    <h3>How This Implementation Meets Phase II Requirements</h3>
                     <div class="card-grid">
                         <div class="card">
                             <h4 class="card-title"><i class="fas fa-superscript"></i> Cube Computation</h4>
@@ -1548,8 +1614,8 @@ public class ArraySum {
 #include &lt;sys/wait.h&gt;
 #include &lt;time.h&gt;
 
-#define N 600
-#define PROCS 4
+#define N 600     // Matrix size (can be varied)
+#define PROCS 4   // Number of child processes
 
 double A[N][N], B[N][N], C[N][N];
 
@@ -1567,6 +1633,34 @@ void multiply(int start, int end) {
         for (int j = 0; j &lt; N; j++)
             for (int k = 0; k &lt; N; k++)
                 C[i][j] += A[i][k] * B[k][j];
+}
+
+int main() {
+    srand(time(NULL));
+    initialize_matrices();
+
+    clock_t start_time = clock();
+
+    int rows_per_proc = N / PROCS;
+
+    for (int p = 0; p &lt; PROCS; p++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            int start = p * rows_per_proc;
+            int end = (p == PROCS - 1) ? N : start + rows_per_proc;
+            multiply(start, end);
+            exit(0);
+        }
+    }
+
+    for (int p = 0; p &lt; PROCS; p++)
+        wait(NULL);
+
+    clock_t end_time = clock();
+    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    printf("Execution Time: %.3f seconds\n", time_taken);
+    return 0;
 }
 </pre>
                         </div>
