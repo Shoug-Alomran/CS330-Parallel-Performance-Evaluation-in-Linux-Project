@@ -236,10 +236,43 @@
             padding: 60px 0;
         }
 
+        .layout-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-toggle {
+            border: none;
+            border-radius: 999px;
+            background: var(--gradient-accent);
+            color: #fff;
+            padding: 10px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(67, 97, 238, 0.28);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-toggle:hover {
+            transform: translateY(-1px);
+        }
+
         .content-grid {
             display: grid;
             grid-template-columns: 2.35fr 1fr;
             gap: 40px;
+            align-items: start;
+        }
+
+        .content-grid.sidebar-collapsed {
+            grid-template-columns: 1fr;
+        }
+
+        .content-grid.sidebar-collapsed .sidebar {
+            display: none;
         }
 
         .main-column,
@@ -627,6 +660,10 @@
             .content-grid {
                 grid-template-columns: 1fr;
             }
+
+            .layout-controls {
+                display: none;
+            }
         }
 
         @media (max-width: 680px) {
@@ -769,7 +806,13 @@
     </div>
 
     <div class="main-content content-container">
-        <div class="content-grid">
+        <div class="layout-controls">
+            <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-expanded="true">
+                <i class="fas fa-chevron-left"></i>
+                <span class="sidebar-toggle-label">Hide Sidebar</span>
+            </button>
+        </div>
+        <div id="contentGrid" class="content-grid">
             <div class="main-column">
                 <section id="overview" class="section">
                     <div class="section-header">
@@ -1819,6 +1862,31 @@ int main() {
         document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelectorAll('.nav-tab');
             const sections = document.querySelectorAll('.section');
+            const contentGrid = document.getElementById('contentGrid');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarToggleLabel = sidebarToggle ? sidebarToggle.querySelector('.sidebar-toggle-label') : null;
+            const sidebarStorageKey = 'phase2-report-sidebar-collapsed';
+
+            function setSidebarState(collapsed) {
+                if (!contentGrid || !sidebarToggle || !sidebarToggleLabel) {
+                    return;
+                }
+
+                contentGrid.classList.toggle('sidebar-collapsed', collapsed);
+                sidebarToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                sidebarToggleLabel.textContent = collapsed ? 'Show Sidebar' : 'Hide Sidebar';
+
+                const icon = sidebarToggle.querySelector('i');
+                if (icon) {
+                    icon.className = collapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+                }
+
+                try {
+                    localStorage.setItem(sidebarStorageKey, collapsed ? '1' : '0');
+                } catch (error) {
+                    // Ignore storage failures (private mode or restricted storage).
+                }
+            }
 
             function setActiveTab(targetId) {
                 tabs.forEach(tab => {
@@ -1858,6 +1926,22 @@ int main() {
             sections.forEach(section => observer.observe(section));
             if (sections.length > 0) {
                 setActiveTab(sections[0].id);
+            }
+
+            if (contentGrid && sidebarToggle) {
+                let startCollapsed = false;
+                try {
+                    startCollapsed = localStorage.getItem(sidebarStorageKey) === '1';
+                } catch (error) {
+                    startCollapsed = false;
+                }
+
+                setSidebarState(startCollapsed);
+
+                sidebarToggle.addEventListener('click', function () {
+                    const collapsed = contentGrid.classList.contains('sidebar-collapsed');
+                    setSidebarState(!collapsed);
+                });
             }
         });
 
