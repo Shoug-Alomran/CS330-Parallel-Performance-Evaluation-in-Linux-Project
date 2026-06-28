@@ -94,10 +94,13 @@ validation:
 
 extra_css:
   - styles/extra-v2.css
+  - styles/team-profiles.css
 
 extra_javascript:
   - javascripts/cta-footer-v2.js
   - javascripts/seo.js
+  - javascripts/team-profiles-data.js
+  - javascripts/team-profiles.js
 
 extra:
   generator: false

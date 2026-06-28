@@ -1,0 +1,264 @@
+/* Interactive member-profile feature */
+
+.member-card--clickable {
+  cursor: pointer;
+}
+
+.member-card--clickable:hover {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--os-accent) 45%, transparent), var(--os-shadow);
+}
+
+.member-card--clickable:focus-visible {
+  outline: 2px solid var(--os-accent);
+  outline-offset: 3px;
+}
+
+body.member-profile-open {
+  overflow: hidden;
+}
+
+.member-profile {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.member-profile[hidden] {
+  display: none;
+}
+
+.member-profile__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 12, 22, 0.6);
+  backdrop-filter: blur(2px);
+  animation: member-profile-fade-in 0.18s ease;
+}
+
+.member-profile__panel {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 100%);
+  max-height: min(88vh, 760px);
+  overflow-y: auto;
+  border: 1px solid color-mix(in oklab, var(--os-border) 60%, var(--os-accent));
+  background:
+    radial-gradient(180px 80px at 92% 10%, rgba(88, 235, 184, 0.14), transparent 70%),
+    linear-gradient(180deg, color-mix(in oklab, var(--os-surface-2) 92%, transparent), var(--os-surface));
+  border-radius: 14px;
+  box-shadow: var(--os-shadow);
+  color: var(--os-text);
+  padding: 1.6rem 1.5rem 1.5rem;
+  animation: member-profile-pop-in 0.2s ease;
+}
+
+@keyframes member-profile-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes member-profile-pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-profile__overlay,
+  .member-profile__panel {
+    animation: none !important;
+  }
+}
+
+.member-profile__dots {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.member-profile__dots span {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.member-profile__dots span:nth-child(1) { background: var(--os-danger); }
+.member-profile__dots span:nth-child(2) { background: var(--os-warning); }
+.member-profile__dots span:nth-child(3) { background: var(--os-accent-2); }
+
+.member-profile__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--os-border) 60%, var(--os-accent));
+  background: color-mix(in oklab, var(--os-surface) 88%, transparent);
+  color: var(--os-text);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.member-profile__close:hover {
+  background: rgba(8, 143, 93, 0.16);
+  border-color: var(--os-accent);
+}
+
+.member-profile__close:focus-visible {
+  outline: 2px solid var(--os-accent);
+  outline-offset: 2px;
+}
+
+.member-profile__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-right: 2.4rem;
+}
+
+.member-profile__avatar {
+  flex: 0 0 auto;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--os-accent), var(--os-accent-2));
+  color: #032415;
+}
+
+.member-profile__name {
+  margin: 0 !important;
+  font-size: 1.3rem !important;
+  color: var(--os-text);
+}
+
+.member-profile__role {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--os-accent) 80%, var(--os-text));
+  font-weight: 700;
+}
+
+.member-profile__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+}
+
+.member-profile__meta > div {
+  border: 1px solid var(--os-border);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--os-surface) 94%, transparent);
+  padding: 0.55rem 0.65rem;
+}
+
+.member-profile__meta dt {
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--os-muted);
+  margin: 0 0 0.2rem;
+}
+
+.member-profile__meta dd {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--os-text);
+}
+
+.member-profile__section {
+  margin: 1.1rem 0;
+}
+
+.member-profile__section h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--os-text) 82%, var(--os-accent));
+}
+
+.member-profile__section p {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--os-text);
+}
+
+.member-profile__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.83rem;
+}
+
+.member-profile__list li {
+  margin: 0.2rem 0;
+}
+
+.member-profile__placeholder {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--os-muted);
+  border: 1px dashed color-mix(in oklab, var(--os-border) 70%, var(--os-accent));
+  border-radius: 8px;
+  padding: 0.3rem 0.55rem;
+}
+
+.member-profile__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.member-profile__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--os-accent) 45%, var(--os-border));
+  color: color-mix(in oklab, var(--os-accent) 80%, var(--os-text)) !important;
+  text-decoration: none !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: 0.2s ease;
+}
+
+.member-profile__link:hover {
+  background: rgba(8, 143, 93, 0.14);
+  border-color: var(--os-accent);
+  color: var(--os-accent-2) !important;
+}
+
+@media (max-width: 760px) {
+  .member-profile {
+    padding: 0;
+  }
+
+  .member-profile__panel {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .member-profile__meta {
+    grid-template-columns: 1fr;
+  }
+}
