@@ -50,14 +50,14 @@ This site organizes all project work across two phases: Linux process-based benc
     ---
     Virtual machine configuration, Linux environment setup, program compilation, and controlled performance experiments.
 
-    [Explore Phase I](Phase-1/index.md)
+    [Explore Phase I](phase-1/index.md)
 
 -   :material-numeric-2-circle: **Phase II — Extension & Analysis**
 
     ---
     Multithreaded performance optimization based on the official Phase 2 requirements (1, 2, 4, 6, 8 threads).
 
-    [Explore Phase II](Phase-2/index.md)
+    [Explore Phase II](phase-2/index.md)
 
 </div>
 
@@ -72,21 +72,21 @@ This site organizes all project work across two phases: Linux process-based benc
     ---
     Full setup, experiment design, timing results, and analysis from the process-based implementation.
 
-    [Open Phase I Report](Phase-1/report.md)
+    [Open Phase I Report](phase-1/report.md)
 
 -   :material-file-document-check: **Phase II Work Package**
 
     ---
     Requirements, implementation plan, measurement template, and analysis framework for multithreading.
 
-    [Open Phase II Overview](Phase-2/index.md)
+    [Open Phase II Overview](phase-2/index.md)
 
 -   :material-source-repository: **Project Repository**
 
     ---
     Source code, documentation, and reproducible project structure.
 
-    [View Repository Structure](Project-Overview/repo-structure.md)
+    [View Repository Structure](project-overview/repo-structure.md)
 
 </div>
 
@@ -105,7 +105,7 @@ This site organizes all project work across two phases: Linux process-based benc
     Dana Altuwaijri  
     Rana Alfaris  
 
-    [View Team Details](Project-Overview/team.md)
+    [View Team Details](project-overview/team.md)
 
 </div>
 
@@ -120,21 +120,21 @@ This site organizes all project work across two phases: Linux process-based benc
     ---
     Objectives, scope, and structure.
 
-    [Go to Overview](Project-Overview/overview.md)
+    [Go to Overview](project-overview/overview.md)
 
 -   :material-clipboard-check-outline: **Requirements**
 
     ---
     Technical and academic requirements.
 
-    [View Requirements](Project-Overview/requirements.md)
+    [View Requirements](project-overview/requirements.md)
 
 -   :material-monitor: **Phase I Setup**
 
     ---
     Virtual machine and Linux configuration guide.
 
-    [VM & Linux Setup](Phase-1/setup.md)
+    [VM & Linux Setup](phase-1/setup.md)
 
 -   :material-console: **Commands Reference**
 

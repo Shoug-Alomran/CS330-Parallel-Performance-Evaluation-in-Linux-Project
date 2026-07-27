@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS330 Phase I: Comprehensive Performance Analysis</title>
+    <link rel="icon" type="image/png" href="../CS330-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -83,6 +84,82 @@
             grid-template-columns: 2fr 1fr;
             gap: 40px;
             align-items: center;
+        }
+
+        .site-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            animation: bannerDropIn 0.7s ease both;
+        }
+
+        .site-banner img {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            animation: logoFloat 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .site-banner img:hover {
+            transform: scale(1.12) rotate(-6deg);
+        }
+
+        .site-banner span {
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        @keyframes bannerDropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .site-banner,
+            .site-banner img,
+            .reveal {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
 
         .header-main h1 {
@@ -1073,7 +1150,7 @@
 }
 </style>
 
-  <link rel="canonical" href="https://operating-systems.shoug-tech.com/Phase-1/report-full.html">
+  <link rel="canonical" href="https://operating-systems.shoug-tech.com/phase-1/report-full.html">
   <meta name="robots" content="noindex,follow">
 </head>
 
@@ -1092,6 +1169,10 @@
         <div class="content-container">
             <div class="header-content">
                 <div class="header-main">
+                    <div class="site-banner">
+                        <img src="../CS330-logo.png" alt="CS330 project logo">
+                        <span>CS330 · Operating Systems</span>
+                    </div>
                     <h1>CS330: Operating Systems Project Phase I</h1>
                     <div class="header-subtitle">
                         Process-Based Parallelism in Matrix Multiplication (fork) and Performance Measurement
@@ -1328,46 +1409,46 @@
 
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this, 'Step 1: Creating a new VM in UTM')">
-                            <img src="../Installing Ubuntu/1. Creating a VM with UTM.png" alt="Creating a VM with UTM">
+                            <img src="installing-ubuntu/vm-creation-with-utm.png" alt="Creating a VM with UTM">
                             <div class="gallery-caption">Step 1: Creating a new VM in UTM</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 2: Selecting virtualization mode')">
-                            <img src="../Installing Ubuntu/2. Virtualize.png" alt="Selecting virtualization mode">
+                            <img src="installing-ubuntu/virtualize-option.png" alt="Selecting virtualization mode">
                             <div class="gallery-caption">Step 2: Selecting virtualization mode</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 3: Selecting Linux as the guest OS')">
-                            <img src="../Installing Ubuntu/3. Linux.png" alt="Selecting Linux OS">
+                            <img src="installing-ubuntu/linux-os-selection.png" alt="Selecting Linux OS">
                             <div class="gallery-caption">Step 3: Selecting Linux as the guest OS</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 4: Allocating memory and CPU cores')">
-                            <img src="../Installing Ubuntu/4. Memory+Cores.png" alt="Memory and CPU allocation">
+                            <img src="installing-ubuntu/memory-and-cores-configuration.png" alt="Memory and CPU allocation">
                             <div class="gallery-caption">Step 4: Allocating memory and CPU cores</div>
                         </div>
                         <div class="gallery-item"
                             onclick="openModal(this, 'Step 5: Using Apple Virtualization framework')">
-                            <img src="../Installing Ubuntu/5. Apple Virtualization.png"
+                            <img src="installing-ubuntu/apple-virtualization.png"
                                 alt="Apple virtualization framework">
                             <div class="gallery-caption">Step 5: Using Apple Virtualization framework</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 6: Starting Ubuntu installation')">
-                            <img src="../Installing Ubuntu/6. Ubuntu.png" alt="Ubuntu installation">
+                            <img src="installing-ubuntu/ubuntu-selection.png" alt="Ubuntu installation">
                             <div class="gallery-caption">Step 6: Starting Ubuntu installation</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 7: Configuring VM storage size')">
-                            <img src="../Installing Ubuntu/7. Storage.png" alt="Storage configuration">
+                            <img src="installing-ubuntu/storage-allocation.png" alt="Storage configuration">
                             <div class="gallery-caption">Step 7: Configuring VM storage size</div>
                         </div>
                         <div class="gallery-item"
                             onclick="openModal(this, 'Step 8: Installation progress (kernel/packages)')">
-                            <img src="../Installing Ubuntu/10. Installing Kernal.png" alt="Kernel installation">
+                            <img src="installing-ubuntu/installing-kernel.png" alt="Kernel installation">
                             <div class="gallery-caption">Step 8: Installation progress (kernel/packages)</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 9: Successful login and update')">
-                            <img src="../Installing Ubuntu/11. Log in + update.png" alt="Login and updates">
+                            <img src="installing-ubuntu/login-and-update.png" alt="Login and updates">
                             <div class="gallery-caption">Step 9: Successful login and update</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Step 10: Ubuntu VM working successfully')">
-                            <img src="../Installing Ubuntu/12. Working VM.png" alt="Working virtual machine">
+                            <img src="installing-ubuntu/working-vm.png" alt="Working virtual machine">
                             <div class="gallery-caption">Step 10: Ubuntu VM working successfully</div>
                         </div>
                     </div>
@@ -1403,7 +1484,7 @@
                     </div>
 
                     <div class="image-container">
-                        <img src="../Installing Ubuntu/16. System Specifications.png" alt="System Specifications"
+                        <img src="installing-ubuntu/system-specifications.png" alt="System Specifications"
                             class="large-image"
                             onclick="openModal(this, 'Figure 1: System specifications verification inside Ubuntu')">
                         <div class="image-caption">Figure 1: System specifications verification inside Ubuntu</div>
@@ -1614,7 +1695,7 @@ int main() {
                     </div>
 
                     <div class="image-container">
-                        <img src="../Installing Ubuntu/15. Terminal Output.png" alt="Terminal Output"
+                        <img src="installing-ubuntu/terminal-output.png" alt="Terminal Output"
                             class="large-image"
                             onclick="openModal(this, 'Figure 2: Program compilation and execution output in terminal')">
                         <div class="image-caption">Figure 2: Program compilation and execution output in terminal</div>
@@ -1696,7 +1777,7 @@ int main() {
                             </h4>
 
                             <div class="image-container" style="text-align:center; padding:20px;">
-                                <img src="../Installing Ubuntu/AllProcesses.png" alt="Execution time comparison graph"
+                                <img src="installing-ubuntu/all-processes.png" alt="Execution time comparison graph"
                                     style="max-width:100%; height:auto; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
 
                                 <p style="margin-top:15px; font-size:0.95rem; color:var(--text-light);">
@@ -1886,7 +1967,7 @@ int main() {
                     </div>
 
                     <div class="image-container">
-                        <img src="../Installing Ubuntu/14. Head of the file (to make sure it's saved).png"
+                        <img src="installing-ubuntu/file-head-verification.png"
                             alt="File header verification" class="large-image"
                             onclick="openModal(this, 'Figure 3: File header verification to ensure code was properly saved')">
                         <div class="image-caption">Figure 3: File header verification to ensure code was properly saved
@@ -1972,19 +2053,19 @@ int main() {
                     <h3>Additional System Screenshots</h3>
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this, 'Fully operational Ubuntu virtual machine')">
-                            <img src="../Installing Ubuntu/12. Working VM.png" alt="Working VM">
+                            <img src="installing-ubuntu/working-vm.png" alt="Working VM">
                             <div class="gallery-caption">Fully operational Ubuntu virtual machine</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Successful login and system update')">
-                            <img src="../Installing Ubuntu/11. Log in + update.png" alt="Login and updates">
+                            <img src="installing-ubuntu/login-and-update.png" alt="Login and updates">
                             <div class="gallery-caption">Successful login and system update</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'VM disk storage configuration')">
-                            <img src="../Installing Ubuntu/9. Storage Configuration.png" alt="Storage configuration">
+                            <img src="installing-ubuntu/storage-configuration.png" alt="Storage configuration">
                             <div class="gallery-caption">VM disk storage configuration</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this, 'Apple virtualization framework selection')">
-                            <img src="../Installing Ubuntu/5. Apple Virtualization.png" alt="Apple virtualization">
+                            <img src="installing-ubuntu/apple-virtualization.png" alt="Apple virtualization">
                             <div class="gallery-caption">Apple virtualization framework selection</div>
                         </div>
                     </div>
@@ -2249,7 +2330,7 @@ int main() {
 
         // Image Modal/Lightbox functionality
         let currentImageIndex = 0;
-        const images = document.querySelectorAll('img[src*="Installing Ubuntu"], .gallery-item img');
+        const images = document.querySelectorAll('img[src*="installing-ubuntu"], .gallery-item img');
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         const captionText = document.getElementById("modalCaption");
@@ -2458,6 +2539,40 @@ int main() {
         pre.dataset.commentsStyled = '1';
     });
 })();
+</script>
+
+<script>
+    (function () {
+        var targets = document.querySelectorAll(
+            '.card, .viz-card, .section > h2, .section > h3, table, .team-member'
+        );
+        targets.forEach(function (el) {
+            el.classList.add('reveal');
+        });
+
+        if (!('IntersectionObserver' in window)) {
+            targets.forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+            return;
+        }
+
+        var io = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12 }
+        );
+
+        targets.forEach(function (el) {
+            io.observe(el);
+        });
+    })();
 </script>
 
 </body>

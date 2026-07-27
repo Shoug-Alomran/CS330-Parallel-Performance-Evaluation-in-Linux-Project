@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS 330 Project Plan Dashboard</title>
+    <link rel="icon" type="image/png" href="../CS330-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -94,6 +95,73 @@
 
         .header h1 i {
             font-size: 32px;
+        }
+
+        .site-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: bannerDropIn 0.7s ease both;
+        }
+
+        .site-banner img {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            box-shadow: 0 4px 14px var(--shadow);
+            animation: logoFloat 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .site-banner img:hover {
+            transform: scale(1.12) rotate(-6deg);
+        }
+
+        @keyframes bannerDropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .site-banner,
+            .site-banner img,
+            .reveal {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
 
         .controls {
@@ -669,7 +737,7 @@
 }
 </style>
 
-  <link rel="canonical" href="https://operating-systems.shoug-tech.com/Project-Overview/phase-1-plan.html">
+  <link rel="canonical" href="https://operating-systems.shoug-tech.com/project-overview/phase-1-plan.html">
   <meta name="robots" content="noindex,follow">
 </head>
 
@@ -677,7 +745,10 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1><i class="fas fa-project-diagram"></i> CS 330 Project Plan Dashboard</h1>
+            <div class="site-banner">
+                <img src="../CS330-logo.png" alt="CS330 project logo">
+                <h1><i class="fas fa-project-diagram"></i> CS 330 Project Plan Dashboard</h1>
+            </div>
             <div class="controls">
                 <div class="search-container">
                     <i class="fas fa-search"></i>
@@ -2531,6 +2602,40 @@
         pre.dataset.commentsStyled = '1';
     });
 })();
+</script>
+
+<script>
+    (function () {
+        var targets = document.querySelectorAll(
+            '.content-card, .note-card, table, .tab-header'
+        );
+        targets.forEach(function (el) {
+            el.classList.add('reveal');
+        });
+
+        if (!('IntersectionObserver' in window)) {
+            targets.forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+            return;
+        }
+
+        var io = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12 }
+        );
+
+        targets.forEach(function (el) {
+            io.observe(el);
+        });
+    })();
 </script>
 
 </body>

@@ -25,10 +25,10 @@ Apple’s native virtualization framework.
 ### Virtual Machine Creation
 
 ??? note "Creating a VM with UTM"
-    ![Creating a VM with UTM](../Installing%20Ubuntu/1.%20Creating%20a%20VM%20with%20UTM.png)
+    ![Creating a VM with UTM](installing-ubuntu/vm-creation-with-utm.png)
 
 ??? note "Virtualize"
-    ![Virtualize](../Installing%20Ubuntu/2.%20Virtualize.png)
+    ![Virtualize](installing-ubuntu/virtualize-option.png)
 
 ---
 
@@ -38,7 +38,7 @@ Apple’s native virtualization framework.
 - Architecture: **ARM64 (aarch64)**
 
 ??? note "Linux"
-    ![Linux](../Installing%20Ubuntu/3.%20Linux.png)
+    ![Linux](installing-ubuntu/linux-os-selection.png)
 
 ---
 
@@ -51,13 +51,13 @@ The VM was configured with:
 - Adequate storage capacity for OS, source code, and output files
 
 ??? note "Memory and Cores"
-    ![Memory and Cores](../Installing%20Ubuntu/4.%20Memory+Cores.png)
+    ![Memory and Cores](installing-ubuntu/memory-and-cores-configuration.png)
 
 ??? note "Storage"
-    ![Storage](../Installing%20Ubuntu/7.%20Storage.png)
+    ![Storage](installing-ubuntu/storage-allocation.png)
 
 ??? note "Storage Configuration"
-    ![Storage Configuration](../Installing%20Ubuntu/9.%20Storage%20Configuration.png)
+    ![Storage Configuration](installing-ubuntu/storage-configuration.png)
 
 ---
 
@@ -79,7 +79,7 @@ These confirmed:
 * Ubuntu version
 
 ??? note "System Specifications"
-    ![System Specifications](../Installing%20Ubuntu/16.%20System%20Specifications.png)
+    ![System Specifications](installing-ubuntu/system-specifications.png)
 
 ---
 
@@ -117,10 +117,10 @@ gcc -Wall matrix_fork.c -o matrix_fork
 The `-Wall` flag enables compiler warnings to promote safer and cleaner code.
 
 ??? note "Apple Virtualization"
-    ![Apple Virtualization](../Installing%20Ubuntu/5.%20Apple%20Virtualization.png)
+    ![Apple Virtualization](installing-ubuntu/apple-virtualization.png)
 
 ??? note "Ubuntu"
-    ![Ubuntu](../Installing%20Ubuntu/6.%20Ubuntu.png)
+    ![Ubuntu](installing-ubuntu/ubuntu-selection.png)
 
 ---
 

@@ -161,8 +161,8 @@
         <div class="custom-footer__right">
           <div class="footer-col">
             <div class="footer-col__title">About</div>
-            <a class="footer-link" href="${url("Project-Overview/overview/")}">Project Overview</a>
-            <a class="footer-link" href="${url("Project-Overview/requirements/")}">Requirements</a>
+            <a class="footer-link" href="${url("project-overview/overview/")}">Project Overview</a>
+            <a class="footer-link" href="${url("project-overview/requirements/")}">Requirements</a>
           </div>
 
           <div class="footer-col">
@@ -178,8 +178,8 @@
 
           <div class="footer-col">
             <div class="footer-col__title">Reports</div>
-            <a class="footer-link" href="${url("Phase-1/report/")}">Phase 1 Report</a>
-            <a class="footer-link" href="${url("Phase-2/report/")}">Phase 2 Report</a>
+            <a class="footer-link" href="${url("phase-1/report/")}">Phase 1 Report</a>
+            <a class="footer-link" href="${url("phase-2/report/")}">Phase 2 Report</a>
           </div>
 
           <div class="footer-col">

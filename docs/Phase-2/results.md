@@ -55,7 +55,7 @@ experiment and explains what the measurements mean.
 ### Average Execution Time vs Number of Threads
 
 ??? abstract "Execution Time Graph"
-    ![Execution time vs number of threads](graphs/execution-time-vs.-number-of-threads.JPG)
+    ![Execution time vs number of threads](graphs/execution-time-vs-number-of-threads.jpg)
 
 This graph shows the direct runtime trend. The main takeaway is that runtime
 did not decrease smoothly from `1` to `8` threads. Instead, the program became
@@ -65,7 +65,7 @@ benefits at `6` and `8`.
 ### Speedup vs Number of Threads
 
 ??? abstract "Speedup Graph"
-    ![Speedup vs number of threads](graphs/speedup-vs.-number-of-threads.JPG)
+    ![Speedup vs number of threads](graphs/speedup-vs-number-of-threads.jpg)
 
 This graph compares each configuration against the single-thread baseline. A
 speedup below `1.0` means the parallel version is worse than the baseline,
@@ -75,7 +75,7 @@ which is exactly what happened with `2` threads. The strongest gains appear at
 ### Percentage Improvement vs Number of Threads
 
 ??? abstract "Percentage Improvement Graph"
-    ![Percentage improvement vs number of threads](graphs/percentage-improvement-vs.-number-of-threads.JPG)
+    ![Percentage improvement vs number of threads](graphs/percentage-improvement-vs-number-of-threads.jpg)
 
 This graph expresses the same pattern as a percentage. It highlights that the
 performance benefit was not minor once the program reached higher thread counts:
@@ -111,43 +111,43 @@ fully describe the configuration. The average provides a fairer comparison.
 ## Run Evidence
 
 ??? note "Excel Summary Screenshot"
-    ![Excel benchmark summary](result-pictures/excel-run.png)
+    ![Excel benchmark summary](result-pictures/excel-benchmark-summary.png)
 
 ??? note "Run 1"
-    ![Run 1 output](result-pictures/run-1.png)
+    ![Run 1 output](result-pictures/benchmark-run-1-output.png)
 
 ??? note "Run 2"
-    ![Run 2 output](result-pictures/run-2.png)
+    ![Run 2 output](result-pictures/benchmark-run-2-output.png)
 
 ??? note "Run 3"
-    ![Run 3 output](result-pictures/run-3.png)
+    ![Run 3 output](result-pictures/benchmark-run-3-output.png)
 
 ??? note "Run 4"
-    ![Run 4 output](result-pictures/run-4.png)
+    ![Run 4 output](result-pictures/benchmark-run-4-output.png)
 
 ??? note "Run 5"
-    ![Run 5 output](result-pictures/run-5.png)
+    ![Run 5 output](result-pictures/benchmark-run-5-output.png)
 
 ??? note "Run 6"
-    ![Run 6 output](result-pictures/run-6.png)
+    ![Run 6 output](result-pictures/benchmark-run-6-output.png)
 
 ??? note "Run 7"
-    ![Run 7 output](result-pictures/run-7.png)
+    ![Run 7 output](result-pictures/benchmark-run-7-output.png)
 
 ??? note "Run 8"
-    ![Run 8 output](result-pictures/run-8.png)
+    ![Run 8 output](result-pictures/benchmark-run-8-output.png)
 
 ??? note "Run 9"
-    ![Run 9 output](result-pictures/run-9.png)
+    ![Run 9 output](result-pictures/benchmark-run-9-output.png)
 
 ??? note "Run 10"
-    ![Run 10 output](result-pictures/run-10.png)
+    ![Run 10 output](result-pictures/benchmark-run-10-output.png)
 
 ??? note "Run 11"
-    ![Run 11 output](result-pictures/run-11.png)
+    ![Run 11 output](result-pictures/benchmark-run-11-output.png)
 
 ??? note "Run 12"
-    ![Run 12 output](result-pictures/run-12.png)
+    ![Run 12 output](result-pictures/benchmark-run-12-output.png)
 
 ---
 

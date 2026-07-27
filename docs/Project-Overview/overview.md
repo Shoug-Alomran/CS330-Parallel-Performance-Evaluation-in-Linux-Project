@@ -7,8 +7,8 @@ This project provides hands-on experimentation with Linux process creation and p
 
 You will compile and execute system-level programs, vary configuration parameters, measure execution time, and analyze performance behavior across different parallel configurations.
 
-[Go to Phase I](../Phase-1/index.md){ .md-button .md-button--primary }
-[Go to Phase II](../Phase-2/index.md){ .md-button }
+[Go to Phase I](../phase-1/index.md){ .md-button .md-button--primary }
+[Go to Phase II](../phase-2/index.md){ .md-button }
 
 </div>
 </div>
@@ -75,14 +75,14 @@ All experiments are conducted in controlled environments to ensure reproducibili
     ---
     Set up Linux, compile the C program, vary matrix size and number of processes, and collect execution-time measurements.
 
-    [Phase I Overview](../Phase-1/index.md)
+    [Phase I Overview](../phase-1/index.md)
 
 -   :material-numeric-2-circle: **Phase II · Multithreaded Performance Evaluation**
 
     ---
     Implement configurable thread counts, perform controlled benchmarks on a single machine, compute speedup, and analyze scalability limits.
 
-    [Phase II Overview](../Phase-2/index.md)
+    [Phase II Overview](../phase-2/index.md)
 
 </div>
 

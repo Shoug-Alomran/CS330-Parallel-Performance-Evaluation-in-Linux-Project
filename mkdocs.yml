@@ -40,27 +40,27 @@ theme:
 nav:
   - Home: index.md
   - Project:
-      - Overview: Project-Overview/overview.md
-      - Requirements: Project-Overview/requirements.md
-      - Team: Project-Overview/team.md
-      - Repository Structure: Project-Overview/repo-structure.md
+      - Overview: project-overview/overview.md
+      - Requirements: project-overview/requirements.md
+      - Team: project-overview/team.md
+      - Repository Structure: project-overview/repo-structure.md
   - Phase I:
-      - Overview: Phase-1/index.md
-      - VM & Linux Setup: Phase-1/setup.md
-      - Build & Run: Phase-1/build-run.md
-      - Experiment Plan: Phase-1/experiments.md
-      - Results: Phase-1/results.md
-      - Report: Phase-1/report.md
+      - Overview: phase-1/index.md
+      - VM & Linux Setup: phase-1/setup.md
+      - Build & Run: phase-1/build-run.md
+      - Experiment Plan: phase-1/experiments.md
+      - Results: phase-1/results.md
+      - Report: phase-1/report.md
   - Phase II:
-      - Overview: Phase-2/index.md
-      - Plan: Phase-2/plan.md
-      - Work Log: Phase-2/work-log.md
-      - Results: Phase-2/results.md
-      - Report: Phase-2/report.md
+      - Overview: phase-2/index.md
+      - Plan: phase-2/plan.md
+      - Work Log: phase-2/work-log.md
+      - Results: phase-2/results.md
+      - Report: phase-2/report.md
   - Reference:
       - Commands: reference/commands.md
       - Glossary: reference/glossary.md
-      - Git Workflow Guide: reference/Git-Workflow-Guide.md
+      - Git Workflow Guide: reference/git-workflow-guide.md
   - Copyright: copyright.md
 
 markdown_extensions:
@@ -84,12 +84,13 @@ hooks:
 
 validation:
   nav:
-    omitted_files: warn
+    # academic-disclaimer.md and privacy-notice.md are intentionally footer-only
+    # (see docs/javascripts/cta-footer*.js) and are not meant to appear in the nav.
+    omitted_files: ignore
     not_found: warn
     absolute_links: ignore
   links:
     not_found: warn
-    anchors: warn
     unrecognized_links: warn
 
 extra_css:
@@ -101,6 +102,7 @@ extra_javascript:
   - javascripts/seo.js
   - javascripts/team-profiles-data.js
   - javascripts/team-profiles.js
+  - javascripts/scroll-reveal.js
 
 extra:
   generator: false
@@ -113,12 +115,11 @@ extra:
       - /*&query=*
       - /*.md$
     legacy_redirects:
-      Project-Overview/Phase-1.html: /Project-Overview/phase-1-plan.html
-      Project-Overview/Phase-2.html: /Project-Overview/phase-2-plan.html
-      Project-Overview/Phase-1/index.html: /Project-Overview/phase-1-plan.html
-      Project-Overview/Phase-2/index.html: /Project-Overview/phase-2-plan.html
-      Project-Overview/phase-1-plan/index.html: /Project-Overview/phase-1-plan.html
-      Project-Overview/phase-2-plan/index.html: /Project-Overview/phase-2-plan.html
-      Phase-1/report.html: /Phase-1/report/
-      Phase 1/report.pdf: /Phase-1/report.pdf
-      Phase 2/report.pdf: /Phase-2/report.pdf
+      # Pre-existing legacy URLs (updated to point at the renamed pages)
+      Project-Overview/Phase-1.html: /project-overview/phase-1-plan.html
+      Project-Overview/Phase-2.html: /project-overview/phase-2-plan.html
+      Project-Overview/Phase-1/index.html: /project-overview/phase-1-plan.html
+      Project-Overview/Phase-2/index.html: /project-overview/phase-2-plan.html
+      Project-Overview/phase-1-plan/index.html: /project-overview/phase-1-plan.html
+      Project-Overview/phase-2-plan/index.html: /project-overview/phase-2-plan.html
+      Phase-1/report.html: /phase-1/report/

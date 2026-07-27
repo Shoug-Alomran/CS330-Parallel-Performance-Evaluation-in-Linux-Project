@@ -4,14 +4,14 @@
  *
  * Keys are normalized member names (lowercase, trimmed) so they match
  * the bold name already printed on each member card in
- * docs/Project-Overview/team.md.
+ * docs/project-overview/team.md.
  *
  * Any field left as "" or [] will render as a clearly labeled
  * placeholder in the profile panel instead of being invented.
  *
  * contributions/responsibilities below are sourced from this repo's own
- * docs/Phase-2/work-log.md (Ownership Summary + Step-By-Step Log) and the
- * named role tabs in docs/Project-Overview/phase-1-plan.html.
+ * docs/phase-2/work-log.md (Ownership Summary + Step-By-Step Log) and the
+ * named role tabs in docs/project-overview/phase-1-plan.html.
  */
 (function () {
   function normalize(name) {

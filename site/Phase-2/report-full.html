@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS330 Phase II: Multithreaded Java Performance Analysis</title>
+    <link rel="icon" type="image/png" href="../CS330-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -98,6 +99,82 @@
             grid-template-columns: 2fr 1fr;
             gap: 40px;
             align-items: center;
+        }
+
+        .site-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            animation: bannerDropIn 0.7s ease both;
+        }
+
+        .site-banner img {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            animation: logoFloat 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .site-banner img:hover {
+            transform: scale(1.12) rotate(-6deg);
+        }
+
+        .site-banner span {
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        @keyframes bannerDropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .site-banner,
+            .site-banner img,
+            .reveal {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
 
         .header-main h1 {
@@ -759,7 +836,7 @@
 }
 </style>
 
-  <link rel="canonical" href="https://operating-systems.shoug-tech.com/Phase-2/report-full.html">
+  <link rel="canonical" href="https://operating-systems.shoug-tech.com/phase-2/report-full.html">
   <meta name="robots" content="noindex,follow">
 </head>
 
@@ -774,6 +851,10 @@
         <div class="content-container">
             <div class="header-content">
                 <div class="header-main">
+                    <div class="site-banner">
+                        <img src="../CS330-logo.png" alt="CS330 project logo">
+                        <span>CS330 · Operating Systems</span>
+                    </div>
                     <h1>CS330 Phase II Report</h1>
                     <div class="header-subtitle">
                         Multithreaded performance analysis for a Java program that computes the sum of cubes of array
@@ -1411,7 +1492,7 @@ public class Summer implements Runnable {
                         <div class="viz-card">
                             <h4 class="viz-title"><i class="fas fa-chart-area"></i> Execution Time Trend</h4>
                             <div class="image-container">
-                                <img src="graphs/execution-time-vs.-number-of-threads.JPG"
+                                <img src="graphs/execution-time-vs-number-of-threads.jpg"
                                     alt="Execution time vs number of threads" class="large-image"
                                     onclick="openModal(this, 'Figure 1: Average execution time versus number of threads')">
                                 <div class="image-caption">Figure 1: Execution time drops sharply only after the
@@ -1427,7 +1508,7 @@ public class Summer implements Runnable {
                         <div class="viz-card">
                             <h4 class="viz-title"><i class="fas fa-bolt"></i> Speedup Relative to Baseline</h4>
                             <div class="image-container">
-                                <img src="graphs/speedup-vs.-number-of-threads.JPG" alt="Speedup vs number of threads"
+                                <img src="graphs/speedup-vs-number-of-threads.jpg" alt="Speedup vs number of threads"
                                     class="large-image"
                                     onclick="openModal(this, 'Figure 2: Speedup compared with the 1-thread baseline')">
                                 <div class="image-caption">Figure 2: 2 threads underperformed, while 6 and 8 threads
@@ -1443,7 +1524,7 @@ public class Summer implements Runnable {
                         <div class="viz-card">
                             <h4 class="viz-title"><i class="fas fa-percent"></i> Percentage Improvement</h4>
                             <div class="image-container">
-                                <img src="graphs/percentage-improvement-vs.-number-of-threads.JPG"
+                                <img src="graphs/percentage-improvement-vs-number-of-threads.jpg"
                                     alt="Percentage improvement vs number of threads" class="large-image"
                                     onclick="openModal(this, 'Figure 3: Percentage improvement relative to the baseline')">
                                 <div class="image-caption">Figure 3: Improvement becomes clearly meaningful only at 6
@@ -1566,15 +1647,15 @@ public class Summer implements Runnable {
                     <h3>Evidence Screenshots</h3>
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Excel summary sheet used to aggregate the benchmark results')">
-                            <img src="result-pictures/excel-run.png" alt="Excel benchmark summary">
+                            <img src="result-pictures/excel-benchmark-summary.png" alt="Excel benchmark summary">
                             <div class="gallery-caption">Excel summary used to calculate averages and graph inputs</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Representative terminal output from one of the benchmark runs')">
-                            <img src="result-pictures/run-1.png" alt="Run 1 output">
+                            <img src="result-pictures/benchmark-run-1-output.png" alt="Run 1 output">
                             <div class="gallery-caption">Representative benchmark output screenshot</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Additional run output showing repeated measurement evidence')">
-                            <img src="result-pictures/run-6.png" alt="Run 6 output">
+                            <img src="result-pictures/benchmark-run-6-output.png" alt="Run 6 output">
                             <div class="gallery-caption">Additional raw-run evidence</div>
                         </div>
                     </div>
@@ -1799,15 +1880,15 @@ int main() {
 
                     <div class="image-gallery">
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 4: Full Excel summary screenshot used during analysis')">
-                            <img src="result-pictures/excel-run.png" alt="Excel summary screenshot">
+                            <img src="result-pictures/excel-benchmark-summary.png" alt="Excel summary screenshot">
                             <div class="gallery-caption">Full Excel summary screenshot</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 5: Benchmark run evidence showing recorded output')">
-                            <img src="result-pictures/run-10.png" alt="Run 10 output">
+                            <img src="result-pictures/benchmark-run-10-output.png" alt="Run 10 output">
                             <div class="gallery-caption">Benchmark run evidence</div>
                         </div>
                         <div class="gallery-item" onclick="openModal(this.querySelector('img'), 'Figure 6: Additional benchmark evidence from a different run')">
-                            <img src="result-pictures/run-12.png" alt="Run 12 output">
+                            <img src="result-pictures/benchmark-run-12-output.png" alt="Run 12 output">
                             <div class="gallery-caption">Additional benchmark evidence</div>
                         </div>
                     </div>
@@ -2169,6 +2250,40 @@ int main() {
         pre.dataset.commentsStyled = '1';
     });
 })();
+</script>
+
+<script>
+    (function () {
+        var targets = document.querySelectorAll(
+            '.card, .viz-card, .section > h2, .section > h3, table, .team-member'
+        );
+        targets.forEach(function (el) {
+            el.classList.add('reveal');
+        });
+
+        if (!('IntersectionObserver' in window)) {
+            targets.forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+            return;
+        }
+
+        var io = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12 }
+        );
+
+        targets.forEach(function (el) {
+            io.observe(el);
+        });
+    })();
 </script>
 
 </body>

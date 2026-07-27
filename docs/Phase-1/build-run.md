@@ -43,10 +43,10 @@ parallel matrix multiplication program used in this project.
 ## Screenshots (Verification)
 
 ??? note "Code in nano editor"
-    ![Code in nano editor](../Installing%20Ubuntu/13.%20Code%20in%20nano%20editor.png)
+    ![Code in nano editor](installing-ubuntu/nano-editor-code.png)
 
 ??? note "Head of the file (verification)"
-    ![Head of the file](../Installing%20Ubuntu/14.%20Head%20of%20the%20file%20(to%20make%20sure%20it's%20saved).png)
+    ![Head of the file](installing-ubuntu/file-head-verification.png)
 
 ---
 
@@ -160,7 +160,7 @@ Execution Time: 0.001 seconds
 ```
 
 ??? note "Terminal Output Screenshot"
-    ![Execution Time](../Installing%20Ubuntu/15.%20Terminal%20Output.png)
+    ![Execution Time](installing-ubuntu/terminal-output.png)
 
 ---
 

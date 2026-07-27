@@ -9,8 +9,8 @@ of the website.
 
 Use the button below if you want to open the report as a separate full page.
 
-[Open Full HTML Report](report-full.html){ .md-button .md-button--primary }
-[Open PDF Version](report.pdf){ .md-button }
+<a href="../report-full.html" class="md-button md-button--primary">Open Full HTML Report</a>
+<a href="../report.pdf" class="md-button">Open PDF Version</a>
 
 </div>
 </div>
@@ -88,16 +88,16 @@ In Phase I, we successfully:
 * Larger problem sizes may be required to observe clear benefits
 
 ??? note "Working VM"
-    ![Working VM](../Installing%20Ubuntu/12.%20Working%20VM.png)
+    ![Working VM](installing-ubuntu/working-vm.png)
 
 ??? note "Installing Kernel"
-    ![Installing Kernel](../Installing%20Ubuntu/10.%20Installing%20Kernal.png)
+    ![Installing Kernel](installing-ubuntu/installing-kernel.png)
 
 ??? note "Log in and update"
-    ![Log in and update](../Installing%20Ubuntu/11.%20Log%20in%20+%20update.png)
+    ![Log in and update](installing-ubuntu/login-and-update.png)
 
 ??? note "Passing Memory Tests"
-    ![Passing Memory Tests](../Installing%20Ubuntu/8.%20Passing%20Memory%20Tests.png)
+    ![Passing Memory Tests](installing-ubuntu/memory-tests-passing.png)
 
 ---
 
@@ -131,4 +131,4 @@ In Phase I, we successfully:
 
 ## Downloadable Version
 
-[Open the PDF report](./report.pdf){ .md-button }
+<a href="../report.pdf" class="md-button">Open the PDF report</a>

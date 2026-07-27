@@ -19,6 +19,12 @@
     return `${base}${path.startsWith("/") ? "" : "/"}${path}`;
   }
 
+  function isHomePage() {
+    const base = getBase();
+    const path = window.location.pathname;
+    return path === `${base}/` || path === `${base}/index.html` || path === base;
+  }
+
   function addHeaderCTA() {
     const headerInner = document.querySelector(".md-header__inner");
     if (!headerInner) return;
@@ -128,7 +134,7 @@
     btn.setAttribute("title", collapsed ? "Expand table of contents" : "Collapse table of contents");
   }
 
-  function setNavCollapsed(collapsed) {
+  function setNavCollapsed(collapsed, persist) {
     syncTabletNavigation();
     const panel = getNavPanel();
     if (!panel) return;
@@ -142,13 +148,15 @@
       document.body.classList.remove("nav-collapsed");
     }
 
-    try {
-      localStorage.setItem(NAV_PREF_KEY, collapsed ? "1" : "0");
-    } catch (e) { }
+    if (persist !== false) {
+      try {
+        localStorage.setItem(NAV_PREF_KEY, collapsed ? "1" : "0");
+      } catch (e) { }
+    }
     updateNavToggleButtonState();
   }
 
-  function setTocCollapsed(collapsed) {
+  function setTocCollapsed(collapsed, persist) {
     const sidebar = getTocSidebar();
 
     if (sidebar && collapsibleViewport() && collapsed) {
@@ -159,9 +167,11 @@
       document.body.classList.remove("toc-collapsed");
     }
 
-    try {
-      localStorage.setItem(TOC_PREF_KEY, collapsed ? "1" : "0");
-    } catch (e) { }
+    if (persist !== false) {
+      try {
+        localStorage.setItem(TOC_PREF_KEY, collapsed ? "1" : "0");
+      } catch (e) { }
+    }
     updateTocToggleButtonState();
   }
 
@@ -229,8 +239,8 @@
         <div class="custom-footer__right">
           <div class="footer-col">
             <div class="footer-col__title">About</div>
-            <a class="footer-link" href="${url("Project-Overview/overview/")}">Project Overview</a>
-            <a class="footer-link" href="${url("Project-Overview/requirements/")}">Requirements</a>
+            <a class="footer-link" href="${url("project-overview/overview/")}">Project Overview</a>
+            <a class="footer-link" href="${url("project-overview/requirements/")}">Requirements</a>
           </div>
 
           <div class="footer-col">
@@ -246,8 +256,8 @@
 
           <div class="footer-col">
             <div class="footer-col__title">Reports</div>
-            <a class="footer-link" href="${url("Phase-1/report/")}">Phase 1 Report</a>
-            <a class="footer-link" href="${url("Phase-2/report/")}">Phase 2 Report</a>
+            <a class="footer-link" href="${url("phase-1/report/")}">Phase 1 Report</a>
+            <a class="footer-link" href="${url("phase-2/report/")}">Phase 2 Report</a>
           </div>
 
           <div class="footer-col">
@@ -290,6 +300,30 @@
     highlight.parentNode.appendChild(wrapper);
   }
 
+  function readPref(key, defaultValue) {
+    try {
+      const stored = localStorage.getItem(key);
+      if (stored === null) return defaultValue;
+      return stored === "1";
+    } catch (e) {
+      return defaultValue;
+    }
+  }
+
+  function applyLayoutDefaults() {
+    if (isHomePage()) {
+      // The home page always opens with the nav collapsed and the TOC
+      // expanded, regardless of whatever was saved from other pages. This
+      // is a one-time visual default, so it isn't written back to storage.
+      setNavCollapsed(true, false);
+      setTocCollapsed(false, false);
+      return;
+    }
+
+    setNavCollapsed(readPref(NAV_PREF_KEY, false));
+    setTocCollapsed(readPref(TOC_PREF_KEY, false));
+  }
+
   function run() {
     if (collapsibleViewport()) closeDrawer();
     syncTabletNavigation();
@@ -300,17 +334,7 @@
     addFooterBlock();
     replaceFooterGenerator();
 
-    let collapsed = false;
-    try {
-      collapsed = localStorage.getItem(NAV_PREF_KEY) === "1";
-    } catch (e) { }
-    setNavCollapsed(collapsed);
-
-    let tocCollapsed = false;
-    try {
-      tocCollapsed = localStorage.getItem(TOC_PREF_KEY) === "1";
-    } catch (e) { }
-    setTocCollapsed(tocCollapsed);
+    applyLayoutDefaults();
   }
 
   function handleResize() {
@@ -328,17 +352,7 @@
       updateTocToggleButtonState();
       return;
     }
-    let collapsed = false;
-    try {
-      collapsed = localStorage.getItem(NAV_PREF_KEY) === "1";
-    } catch (e) { }
-    setNavCollapsed(collapsed);
-
-    let tocCollapsed = false;
-    try {
-      tocCollapsed = localStorage.getItem(TOC_PREF_KEY) === "1";
-    } catch (e) { }
-    setTocCollapsed(tocCollapsed);
+    applyLayoutDefaults();
   }
 
   if (typeof document$ !== "undefined" && document$.subscribe) {

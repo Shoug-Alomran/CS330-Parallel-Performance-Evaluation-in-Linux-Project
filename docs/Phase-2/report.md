@@ -9,8 +9,8 @@ of the website.
 
 Use the button below if you want to open the report as a separate full page.
 
-[Open Full HTML Report](report-full.html){ .md-button .md-button--primary }
-[Open PDF Version](report.pdf){ .md-button }
+<a href="../report-full.html" class="md-button md-button--primary">Open Full HTML Report</a>
+<a href="../report.pdf" class="md-button">Open PDF Version</a>
 
 </div>
 </div>
@@ -59,4 +59,4 @@ includes:
 
 ## Downloadable Version
 
-[Open the PDF report](./report.pdf){ .md-button }
+<a href="../report.pdf" class="md-button">Open the PDF report</a>
