@@ -116,10 +116,10 @@ extra:
       - /*.md$
     legacy_redirects:
       # Pre-existing legacy URLs (updated to point at the renamed pages)
-      Project-Overview/Phase-1.html: /project-overview/phase-1-plan.html
-      Project-Overview/Phase-2.html: /project-overview/phase-2-plan.html
-      Project-Overview/Phase-1/index.html: /project-overview/phase-1-plan.html
-      Project-Overview/Phase-2/index.html: /project-overview/phase-2-plan.html
-      Project-Overview/phase-1-plan/index.html: /project-overview/phase-1-plan.html
-      Project-Overview/phase-2-plan/index.html: /project-overview/phase-2-plan.html
+      Project-Overview/Phase-1.html: /phase-1/
+      Project-Overview/Phase-2.html: /phase-2/
+      Project-Overview/Phase-1/index.html: /phase-1/
+      Project-Overview/Phase-2/index.html: /phase-2/
+      Project-Overview/phase-1-plan/index.html: /phase-1/
+      Project-Overview/phase-2-plan/index.html: /phase-2/
       Phase-1/report.html: /phase-1/report/
